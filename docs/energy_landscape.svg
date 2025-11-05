@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="428pt"
+   height="387pt"
+   viewBox="0 0 428 387"
+   version="1.1"
+   id="svg32"
+   sodipodi:docname="energy_landscape.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:export-filename="energy_landscape.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview34"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="pt"
+     showgrid="false"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="231.93102"
+     inkscape:cy="376.88791"
+     inkscape:window-width="2556"
+     inkscape:window-height="1545"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg32" />
+  <metadata
+     id="metadata2">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:date>2025-10-12T17:16:16.757275</dc:date>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Matplotlib v3.10.6, https://matplotlib.org/</dc:title>
+          </cc:Agent>
+        </dc:creator>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6">
+    <rect
+       x="354.11133"
+       y="110.19336"
+       width="60.650391"
+       height="19.023438"
+       id="rect19312" />
+    <marker
+       style="overflow:visible"
+       id="marker16678"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow1"
+       markerWidth="3.8535328"
+       markerHeight="6.7071066"
+       viewBox="0 0 3.8535327 6.7071068"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         id="path16676"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow1"
+       markerWidth="3.8535328"
+       markerHeight="6.7071066"
+       viewBox="0 0 3.8535327 6.7071068"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         id="path5057"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc" />
+    </marker>
+    <style
+       type="text/css"
+       id="style4">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+  </defs>
+  <g
+     id="figure_1"
+     transform="matrix(0.56702021,0,0,1,49.20147,3.3546411)">
+    <g
+       id="patch_1">
+      <path
+         d="M 0,360 H 576 V 0 H 0 Z"
+         style="fill:#ffffff"
+         id="path8" />
+    </g>
+    <g
+       id="axes_1">
+      <g
+         id="patch_2">
+        <path
+           d="m 10.8,350.79099 h 554.4 v -338.4 H 10.8 Z"
+           style="fill:#ffffff"
+           id="path11" />
+      </g>
+      <g
+         id="matplotlib.axis_1" />
+      <g
+         id="matplotlib.axis_2" />
+      <g
+         id="line2d_1">
+        <path
+           d="m 36,26.181818 3.654914,22.823088 3.654913,21.403286 3.528883,19.36344 3.528882,18.127928 3.402851,16.34998 3.40285,15.27787 3.402851,14.24261 3.276819,12.77055 3.276819,11.87616 3.150788,10.60527 3.150788,9.83506 3.024756,8.7423 3.024756,8.08125 3.024756,7.44357 2.898725,6.55637 2.898725,6.01188 2.772693,5.25917 2.772693,4.79602 2.772693,4.34964 2.646662,3.7507 2.646663,3.3732 2.64666,3.00968 2.52063,2.54099 2.52063,2.23549 2.52063,1.94157 2.52063,1.65905 2.52063,1.38777 2.52063,1.12759 2.52063,0.87832 2.52063,0.63981 2.52063,0.4119 2.52063,0.19442 2.64666,-0.0187 2.64666,-0.23542 2.7727,-0.46658 2.89872,-0.71454 3.02476,-0.9772 3.15079,-1.2522 3.40285,-1.60046 3.52888,-1.90885 3.78094,-2.29968 4.15904,-2.8002 4.53714,-3.33573 5.04126,-3.99522 5.79745,-4.89342 7.05776,-6.26557 11.21681,-10.30402 12.35108,-11.25895 7.30983,-6.36059 6.17555,-5.08547 5.54538,-4.2834 5.16729,-3.70998 4.7892,-3.167 4.53714,-2.73728 4.28507,-2.33327 4.15904,-2.01696 4.03301,-1.71166 3.90697,-1.41978 3.78095,-1.14321 3.78094,-0.90998 3.65492,-0.65291 3.65491,-0.42584 3.52888,-0.19253 3.52888,0.0247 3.52889,0.24378 3.52888,0.46399 3.52888,0.68475 3.52888,0.90543 3.65492,1.16966 3.65491,1.40414 3.78095,1.69697 3.78094,1.9423 3.90698,2.26044 4.03301,2.59782 4.15904,2.95304 4.28507,3.32426 4.4111,3.70919 4.53714,4.10493 4.78919,4.63379 5.04126,5.18829 5.41936,5.90178 5.92348,6.79193 6.55364,7.86644 7.68792,9.5944 10.58664,13.60671 16.25807,20.8896 7.18379,8.84673 5.92349,6.95094 5.16729,5.72715 4.66316,4.83948 4.28508,4.12531 3.90697,3.45601 3.65492,2.9393 3.40285,2.45645 3.15078,2.01319 3.02476,1.67857 2.89872,1.35929 2.7727,1.05772 2.64666,0.77595 2.52063,0.51574 2.52063,0.2873 2.3946,0.0517 2.3946,-0.17328 2.26857,-0.38015 2.26856,-0.59852 2.26857,-0.82508 2.26857,-1.0599 2.26856,-1.30313 2.26857,-1.55483 2.26857,-1.81515 2.3946,-2.20802 2.39459,-2.51814 2.3946,-2.83875 2.52063,-3.34622 2.52063,-3.72582 2.52063,-4.11813 2.64666,-4.76039 2.64667,-5.22223 2.77269,-5.98296 2.77269,-6.52448 2.7727,-7.08406 2.89872,-8.02427 2.89873,-8.67708 3.02475,-9.77361 3.02476,-10.53255 3.15079,-11.80549 3.15078,-12.68495 3.15079,-13.59352 3.27682,-15.13281 3.27682,-16.18111 3.40285,-17.94962 3.40285,-19.15565 L 540,120.03638 v 0"
+           clip-path="url(#p83f18ae503)"
+           style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:square"
+           id="path16" />
+      </g>
+      <g
+         id="patch_3">
+        <path
+           d="M 10.8,349.2 V 10.8"
+           style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:miter"
+           id="path19" />
+      </g>
+      <g
+         id="patch_4">
+        <path
+           d="M 10.8,349.2 H 565.2"
+           style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:square;stroke-linejoin:miter"
+           id="path22" />
+      </g>
+    </g>
+  </g>
+  <defs
+     id="defs30">
+    <clipPath
+       id="p83f18ae503">
+      <rect
+         x="10.8"
+         y="10.8"
+         width="554.40002"
+         height="338.39999"
+         id="rect27" />
+    </clipPath>
+  </defs>
+  <text
+     xml:space="preserve"
+     style="font-size:9px;fill:#000000;stroke-width:0.75"
+     x="36.589405"
+     y="180.40002"
+     id="text3887"><tspan
+       sodipodi:role="line"
+       id="tspan3885"
+       style="stroke-width:0.75"
+       x="36.589405"
+       y="180.40002" /></text>
+  <text
+     xml:space="preserve"
+     style="font-size:9px;fill:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round"
+     x="-238.29594"
+     y="40.828865"
+     id="text308"
+     transform="rotate(-89.976642)"><tspan
+       sodipodi:role="line"
+       id="tspan306"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.75"
+       x="-238.29594"
+       y="40.828865">Potential Energy</tspan><tspan
+       sodipodi:role="line"
+       style="stroke-width:0.75"
+       x="-238.29594"
+       y="53.567741"
+       id="tspan310" /></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round"
+     x="82.032341"
+     y="290.85922"
+     id="text1073"><tspan
+       sodipodi:role="line"
+       id="tspan1071"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.75"
+       x="82.032341"
+       y="290.85922">Local Minimum</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round"
+     x="209.59483"
+     y="373.2532"
+     id="text1073-7"><tspan
+       sodipodi:role="line"
+       id="tspan1071-4"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.75"
+       x="209.59483"
+       y="373.2532">State</tspan><tspan
+       sodipodi:role="line"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.75"
+       x="209.59483"
+       y="390.7532"
+       id="tspan1206" /></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round"
+     x="324.95602"
+     y="342.22769"
+     id="text1073-2"><tspan
+       sodipodi:role="line"
+       id="tspan1071-1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.75"
+       x="324.95602"
+       y="342.22769">Global Minimum</tspan></text>
+  <path
+     style="fill:none;fill-opacity:1;stroke:#ff0101;stroke-width:1.454;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1)"
+     d="M 125.70305,262.80026 C 220.19976,5.3223537 306.53309,317.79623 306.53309,317.79623"
+     id="path4104" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:none;fill-opacity:1;stroke:#ff0101;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+     x="162.62769"
+     y="151.1899"
+     id="text7836"><tspan
+       sodipodi:role="line"
+       id="tspan7834"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ff0000;fill-opacity:1;stroke-width:0.75;stroke-dasharray:none"
+       x="162.62769"
+       y="151.1899">Thermal Jump </tspan></text>
+  <path
+     style="fill:none;fill-opacity:1;stroke:#2a01ff;stroke-width:1.454;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:11.632, 1.454;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker16678)"
+     d="m 130.74609,265.25244 166.68165,57.09375"
+     id="path14720" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:none;fill-opacity:1;stroke:#2a01ff;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     x="156.82683"
+     y="325.5264"
+     id="text16840"><tspan
+       sodipodi:role="line"
+       id="tspan16838"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#2a00ff;fill-opacity:1;stroke-width:0.75;stroke-dasharray:none"
+       x="156.82683"
+       y="325.5264">Quantum Tunneling</tspan><tspan
+       sodipodi:role="line"
+       style="stroke-width:0.75;stroke-dasharray:none"
+       x="156.82683"
+       y="343.0264"
+       id="tspan17604" /></text>
+  <text
+     xml:space="preserve"
+     transform="scale(0.75)"
+     id="text19310"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect19312);display:inline;fill:#2a00ff;fill-opacity:1;stroke:#2a01ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+</svg>
