@@ -61,7 +61,7 @@ $$
 - Method B (Baseline): Apply a greedy Nearest Neighbor search to the exact same GAE embeddings from Phase 2.
 - Evaluation: Compare the accuracy of both methods against a manually-created "ground truth" (F1-Score).
 
-#### Code Structure:gnn_qubo_alignment/
+#### Code Structure:
 
 ```
 ├── main.py               # Run the full pipeline.
