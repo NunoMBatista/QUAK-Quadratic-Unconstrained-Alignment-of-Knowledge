@@ -33,26 +33,24 @@ A global optimization approach (QUBO) can find a more accurate and structurally-
   - This will make it learn the unique structure and role of each entity within its own graph.
 - Output: Two sets of entity embeddings. NOTE: These two embedding spaces are not aligned with each other.
 
-**3. QUBO Formulation (Global Optimization)**
+3. QUBO Formulation (Global Optimization)
 
 - Formulate the alignment task as a QUBO ($H_{total}=H_{node}+H_{structure}+H_{constraint}$). This finds the best "pattern match" between the two unaligned spaces.
-
-  - $H_{node}$ (Linear): A weak hint. The similarity between the GAE entity embeddings from Phase 2.
-  - $H_{structure}$ (Quadratic): The global pattern matcher. The similarity between the SciBERT relation embeddings (e.g., sim("builds", "produces")). This rewards preserving structural relationships.
-  - $H_{constraint}$ (Quadratic): A penalty to enforce a strict one-to-one mapping.
+- $H_{node}$ (Linear): A weak hint. The similarity between the GAE entity embeddings from Phase 2.
+- $H_{structure}$ (Quadratic): The global pattern matcher. The similarity between the SciBERT relation embeddings (e.g., sim("builds", "produces")). This rewards preserving structural relationships.
+- $H_{constraint}$ (Quadratic): A penalty to enforce a flexible "at-most-one" mapping. This is a critical design choice that allows entities to remain unaligned if no good match is found.
 
 $$
-H_{total} = \underbrace{\sum_{i,a}{-S(i, a) \cdot x_{i,a}}}_{H_{node}} + \underbrace{\sum_{i,j,a,b}{-w_{ij,ab} \cdot x_{i,a} \cdot x_{j,b}}}_{H_{structure}} + \underbrace{\sum_{i} P_{1}\left( 1-\sum_{a=1}^M x_{i,a} \right)^2}_{Constraint\ 1} + \underbrace{\sum_{a} P_{2}\left( 1- \sum _{i=1}^N x_{i,a} \right)^2}_{Constraint\ 2}
+H_{total} = \underbrace{\sum_{i,a}{-S(i, a) \cdot x_{i,a}}}_{H_{node}} + \underbrace{\sum_{i,j,a,b}{-w_{ij,ab} \cdot x_{i,a} \cdot x_{j,b}}}_{H_{structure}} + \underbrace{\sum_{i} P_{1} \sum_{a=1}^M \sum_{b=a+1}^M x_{i,a} x_{i,b}}_{Constraint\ 1} + \underbrace{\sum_{a} P_{2} \sum_{i=1}^N \sum_{j=i+1}^N x_{i,a} x_{j,a}}_{Constraint\ 2}
 $$
 
 - Where:
-
-  - $x_{i,a}$: A binary variable (1 or 0) that is 1 if we align entity i from KG1 with entity a from KG2.
-  - $S(i,a)$: The similarity score between entity i and a, derived from the GAE embeddings.
+  - $x_{i,a}$: A binary variable (1 or 0) that is 1 if we align entity $i$ from KG1 with entity $a$ from KG2.
+  - $S(i,a)$: The similarity score between entity $i$ and $a$, derived from the GAE embeddings.
   - $w_{ij,ab}$: The structural similarity weight, derived from the SciBERT relation embeddings.
-  - $P_1,P_2$: Large positive penalty constants to enforce the constraints.
-  - Constraint 1: Enforces that each entity i in KG1 maps to exactly one entity in KG2.
-  - Constraint 2: Enforces that each entity a in KG2 is mapped to by exactly one entity from KG1.
+  - $P_1, P_2$: Large positive penalty constants to enforce the constraints.
+  - Constraint 1: Enforces that each entity $i$ in KG1 maps to at most one entity in KG2. If $i$ matches zero entities, the penalty is 0. If it matches one, the penalty is 0. If it matches two or more, the penalty is high.
+  - Constraint 2: Enforces that each entity $a$ in KG2 is mapped to by at most one entity from KG1. This allows entities to remain unaligned, making the formulation more robust to realistic KGs that do not have perfect 1-to-1 overlap.
 - Output: A single Q matrix representing the entire optimization problem.
 
 **4. Solve & Benchmark**
