@@ -1,4 +1,5 @@
 from pathlib import Path
+from rdflib import Namespace
 
 # the project root is two directories above the config file
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -7,10 +8,10 @@ PROJECT_ROOT = Path(__file__).parent.parent
 # protege files
 PROTEGE_DIR = PROJECT_ROOT / 'protege'
 # specific ontology file
-ONTOLOGY_FILE = PROTEGE_DIR / 'ontology.ttl'
+ONTOLOGY_PATH = PROTEGE_DIR / 'ontology.ttl'
 
 
-# pipeline outputs
+# --- pipeline outputs ---
 OUTPUT_DIR = PROJECT_ROOT / 'output'
 ONTOLOGY_DIR = OUTPUT_DIR / 'ontologies'
 
@@ -18,6 +19,14 @@ ONTOLOGY_DIR = OUTPUT_DIR / 'ontologies'
 ARTICLES_DIR = OUTPUT_DIR / 'articles'
 RAW_WIKI_DIR = ARTICLES_DIR / 'wiki'
 RAW_ARXIV_DIR = ARTICLES_DIR / 'arxiv'
+
+# unpruned KG outputs
+KG_DIR = OUTPUT_DIR / 'KGs'
+KG_WIKI_UNPRUNED_PATH = KG_DIR / 'kg_wiki_unpruned.ttl'
+KG_ARXIV_UNPRUNED_PATH = KG_DIR / 'kg_arxiv_unpruned.ttl'
+KG_WIKI_FINAL = KG_DIR / 'kg_wiki_final.ttl'
+KG_ARXIV_FINAL = KG_DIR / 'kg_arxiv_final.ttl'
+
 
 # --- visualization settings ---
 
@@ -38,16 +47,23 @@ GRAPH_PHYSICS = """
     }
 """
 
+# --- NLP configuration ---
+
+NLP_MODEL = "en_core_sci_scibert"
+NLP_PIPELINE = "src/kg_construction/nlp_pipeline.py"
+
 
 # --- entities and domain configuration ---
 
 # 1. The query for Wikipedia and arXiv
 
 # this defines if the data fetchers will search for the best matches or follow a pre-defined list of articles
-QUERY_MODE = 'fetch' # can be either 'search' or 'fetch'
+QUERY_MODE = 'search' # can be either 'search' or 'fetch'
 
 # used for the search mode
 DOMAIN_QUERY = "Quantum Computing"
+# how many articles to fetch in the search mode
+NUM_ARTICLES = 2 
 
 # these are both used for the fetch query mode
 WIKI_PAGE_TITLES = ["Quantum computing", "Shor's algorithm", "Peter Shor", "Entanglement"]
@@ -80,3 +96,11 @@ ENTITY_MAP_ARXIV = {
     "D-Wave": "QuantumHardware",             # -> Aligns with 'D-Wave Systems'
     "Lov Grover": "Person"   # <-- UNALIGNED ENTITY
 }
+
+
+# --- knowledge graph configuration ---
+
+NS_RAW = Namespace("http://example.org/raw/")
+REL_GENERIC = NS_RAW.is_related_to
+
+MAX_UNPRUNED_TRIPLES = 100

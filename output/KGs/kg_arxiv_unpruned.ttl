@@ -1,0 +1,36 @@
+@prefix ns1: <http://example.org/raw/> .
+
+ns1:classical ns1:is_related_to ns1:Internet,
+        ns1:computing,
+        ns1:quantum,
+        ns1:quantum_Internet .
+
+ns1:distributed ns1:is_related_to ns1:Internet,
+        ns1:computing,
+        ns1:quantum,
+        ns1:quantum_Internet .
+
+ns1:Internet ns1:is_related_to ns1:classical,
+        ns1:computing,
+        ns1:distributed,
+        ns1:quantum,
+        ns1:quantum_Internet .
+
+ns1:computing ns1:is_related_to ns1:Internet,
+        ns1:classical,
+        ns1:distributed,
+        ns1:quantum,
+        ns1:quantum_Internet .
+
+ns1:quantum ns1:is_related_to ns1:Internet,
+        ns1:classical,
+        ns1:computing,
+        ns1:distributed,
+        ns1:quantum_Internet .
+
+ns1:quantum_Internet ns1:is_related_to ns1:Internet,
+        ns1:classical,
+        ns1:computing,
+        ns1:distributed,
+        ns1:quantum .
+

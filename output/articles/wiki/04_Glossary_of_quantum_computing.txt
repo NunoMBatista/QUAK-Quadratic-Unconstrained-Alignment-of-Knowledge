@@ -1,0 +1,940 @@
+Source: Wikipedia
+Title: Glossary of quantum computing
+URL: https://en.wikipedia.org/wiki/Glossary_of_quantum_computing
+Query: Quantum Computing
+---
+This glossary of quantum computing is a list of definitions of terms and concepts used in quantum computing, its sub-disciplines, and related fields.
+
+Bacon–Shor code
+is a Subsystem error correcting code. In a Subsystem code, information is encoded in a subsystem of a Hilbert space. Subsystem codes lend to simplified error correcting procedures unlike codes which encode information in the subspace of a Hilbert space.  This simplicity led to the first demonstration of fault tolerant circuits on a quantum computer. 
+
+BQP
+In computational complexity theory, bounded-error quantum polynomial time (BQP) is the class of decision problems solvable by a quantum computer in polynomial time, with an error probability of at most 1/3 for all instances. It is the quantum analogue to the complexity class BPP.  A decision problem is a member of  BQP if there exists a quantum algorithm (an algorithm that runs on a quantum computer) that solves the decision problem with high probability and is guaranteed to run in polynomial time. A run of the algorithm will correctly solve the decision problem with  a probability of at least 2/3.
+
+Classical shadow
+is a protocol for predicting functions of a quantum state using only a logarithmic number of measurements. Given an unknown state 
+  
+    
+      
+        ρ
+      
+    
+    {\displaystyle \rho }
+  
+, a tomographically complete set of gates 
+  
+    
+      
+        U
+      
+    
+    {\displaystyle U}
+  
+ (e.g Clifford gates), a set of 
+  
+    
+      
+        M
+      
+    
+    {\displaystyle M}
+  
+ observables 
+  
+    
+      
+        {
+        
+          O
+          
+            i
+          
+        
+        }
+      
+    
+    {\displaystyle \{O_{i}\}}
+  
+ and a quantum channel 
+  
+    
+      
+        M
+      
+    
+    {\displaystyle M}
+  
+ (defined by randomly sampling from 
+  
+    
+      
+        U
+      
+    
+    {\displaystyle U}
+  
+, applying it to 
+  
+    
+      
+        ρ
+      
+    
+    {\displaystyle \rho }
+  
+ and measuring the resulting state); predict the expectation values 
+  
+    
+      
+        tr
+        ⁡
+        (
+        
+          O
+          
+            i
+          
+        
+        ρ
+        )
+      
+    
+    {\displaystyle \operatorname {tr} (O_{i}\rho )}
+  
+. A list of classical shadows 
+  
+    
+      
+        S
+      
+    
+    {\displaystyle S}
+  
+ is created using 
+  
+    
+      
+        ρ
+      
+    
+    {\displaystyle \rho }
+  
+, 
+  
+    
+      
+        U
+      
+    
+    {\displaystyle U}
+  
+ and 
+  
+    
+      
+        M
+      
+    
+    {\displaystyle M}
+  
+ by running a Shadow generation algorithm. When predicting the properties of 
+  
+    
+      
+        ρ
+      
+    
+    {\displaystyle \rho }
+  
+, a Median-of-means estimation algorithm is used to deal with the outliers in 
+  
+    
+      
+        S
+      
+    
+    {\displaystyle S}
+  
+. Classical shadow is useful for direct fidelity estimation, entanglement verification, estimating correlation functions, and predicting entanglement entropy.
+
+Cloud-based quantum computing
+is the invocation of quantum emulators, simulators or processors through the cloud. Increasingly, cloud services are being looked on as the method for providing access to quantum processing. Quantum computers achieve their massive computing power by initiating quantum physics into processing power and when users are allowed access to these quantum-powered computers through the internet it is known as quantum computing within the cloud.
+
+Cross-entropy benchmarking
+(also referred to as XEB), is quantum benchmarking protocol which can be used to demonstrate quantum supremacy. In XEB, a random quantum circuit is executed on a quantum computer multiple times in order to collect a set of 
+  
+    
+      
+        k
+      
+    
+    {\displaystyle k}
+  
+ samples in the form of bitstrings 
+  
+    
+      
+        {
+        
+          x
+          
+            1
+          
+        
+        ,
+        …
+        ,
+        
+          x
+          
+            k
+          
+        
+        }
+      
+    
+    {\displaystyle \{x_{1},\dots ,x_{k}\}}
+  
+. The bitstrings are then used to calculate the cross-entropy benchmark fidelity (
+  
+    
+      
+        
+          F
+          
+            
+              X
+              E
+              B
+            
+          
+        
+      
+    
+    {\displaystyle F_{\rm {XEB}}}
+  
+) via a classical computer, given by 
+
+  
+    
+      
+        
+          F
+          
+            
+              X
+              E
+              B
+            
+          
+        
+        =
+        
+          2
+          
+            n
+          
+        
+        ⟨
+        P
+        (
+        
+          x
+          
+            i
+          
+        
+        )
+        
+          ⟩
+          
+            k
+          
+        
+        −
+        1
+        =
+        
+          
+            
+              2
+              
+                n
+              
+            
+            k
+          
+        
+        
+          (
+          
+            
+              ∑
+              
+                i
+                =
+                1
+              
+              
+                k
+              
+            
+            
+              |
+            
+            ⟨
+            
+              0
+              
+                n
+              
+            
+            
+              |
+            
+            C
+            
+              |
+            
+            
+              x
+              
+                i
+              
+            
+            ⟩
+            
+              
+                |
+              
+              
+                2
+              
+            
+          
+          )
+        
+        −
+        1
+      
+    
+    {\displaystyle F_{\rm {XEB}}=2^{n}\langle P(x_{i})\rangle _{k}-1={\frac {2^{n}}{k}}\left(\sum _{i=1}^{k}|\langle 0^{n}|C|x_{i}\rangle |^{2}\right)-1}
+  
+,
+where 
+  
+    
+      
+        n
+      
+    
+    {\displaystyle n}
+  
+ is the number of qubits in the circuit and 
+  
+    
+      
+        P
+        (
+        
+          x
+          
+            i
+          
+        
+        )
+      
+    
+    {\displaystyle P(x_{i})}
+  
+ is the probability of a bitstring 
+  
+    
+      
+        
+          
+            x
+            
+              i
+            
+          
+        
+      
+    
+    {\displaystyle {x_{i}}}
+  
+ for an ideal quantum circuit 
+  
+    
+      
+        C
+      
+    
+    {\displaystyle C}
+  
+.  If 
+  
+    
+      
+        
+          F
+          
+            X
+            E
+            B
+          
+        
+        =
+        1
+      
+    
+    {\displaystyle F_{XEB}=1}
+  
+, the samples were collected from a noiseless quantum computer. If 
+  
+    
+      
+        
+          F
+          
+            
+              X
+              E
+              B
+            
+          
+        
+        =
+        0
+      
+    
+    {\displaystyle F_{\rm {XEB}}=0}
+  
+, then the samples could have been obtained via random guessing. This means that if a quantum computer did generate those samples, then the quantum computer is too noisy and thus has no chance of performing beyond-classical computations. Since it takes an exponential amount of resources to classically simulate a quantum circuit, there comes a point when the biggest supercomputer that runs the best classical algorithm for simulating quantum circuits can't compute the XEB. Crossing this point is known as achieving quantum supremacy; and after entering the quantum supremacy regime, XEB can only be estimated.
+
+Eastin–Knill theorem
+
+is a no-go theorem that states: "No quantum error correcting code can have a continuous symmetry which acts transversely on physical qubits". In other words, no quantum error correcting code can transversely implement a universal gate set. Since quantum computers are inherently noisy, quantum error correcting codes are used to correct errors that affect information due to decoherence.  Decoding error corrected data in order to perform gates on the qubits makes it prone to errors.  Fault tolerant quantum computation avoids this by performing gates on encoded data. Transversal gates, which perform a gate between two "logical" qubits each of which is encoded in N "physical qubits" by pairing up the physical qubits of each encoded qubit ("code block"), and performing independent gates on each pair, can be used to perform fault tolerant but not universal quantum computation because they guarantee that errors don't spread uncontrollably through the computation.  This is because transversal gates ensure that each qubit in a code block is acted on by at most a single physical gate and each code block is corrected independently when an error occurs. Due to the Eastin–Knill theorem, a universal set like {H, S, CNOT, T } gates can't be implemented transversally. For example, the T gate can't be implemented transversely in the Steane code. This calls for ways of circumventing Eastin–Knill in order to perform fault tolerant quantum computation. In addition to investigating fault tolerant quantum computation, the Eastin–Knill theorem is also useful for studying quantum gravity via the AdS/CFT correspondence and in condensed matter physics via quantum reference frame or many-body theory.
+
+Five-qubit error correcting code
+is the smallest quantum error correcting code that can protect a logical qubit from any arbitrary single qubit error. In this code, 5 physical qubits are used to encode the logical qubit. With 
+  
+    
+      
+        X
+      
+    
+    {\displaystyle X}
+  
+ and 
+  
+    
+      
+        Z
+      
+    
+    {\displaystyle Z}
+  
+ being Pauli matrices and 
+  
+    
+      
+        I
+      
+    
+    {\displaystyle I}
+  
+ the Identity matrix, this code's generators are 
+  
+    
+      
+        ⟨
+        X
+        Z
+        Z
+        X
+        I
+        ,
+        I
+        X
+        Z
+        Z
+        X
+        ,
+        X
+        I
+        X
+        Z
+        Z
+        ,
+        Z
+        X
+        I
+        X
+        Z
+        ⟩
+      
+    
+    {\displaystyle \langle XZZXI,IXZZX,XIXZZ,ZXIXZ\rangle }
+  
+. Its logical operators are 
+  
+    
+      
+        
+          
+            
+              X
+              ¯
+            
+          
+        
+        =
+        X
+        X
+        X
+        X
+        X
+      
+    
+    {\displaystyle {\bar {X}}=XXXXX}
+  
+ and  
+  
+    
+      
+        
+          
+            
+              Z
+              ¯
+            
+          
+        
+        =
+        Z
+        Z
+        Z
+        Z
+        Z
+      
+    
+    {\displaystyle {\bar {Z}}=ZZZZZ}
+  
+.  Once the logical qubit is encoded, errors on the physical qubits can be detected via stabilizer measurements. A lookup table that maps the results of the stabilizer measurements to the types and locations of the errors gives the control system of the quantum computer enough information to correct errors.
+
+Hadamard test (quantum computation)
+
+ is a method used to create a random variable whose expected value is the expected real part 
+  
+    
+      
+        
+          R
+          e
+        
+        ⟨
+        ψ
+        
+          |
+        
+        U
+        
+          |
+        
+        ψ
+        ⟩
+      
+    
+    {\displaystyle \mathrm {Re} \langle \psi |U|\psi \rangle }
+  
+, where 
+  
+    
+      
+        
+          |
+        
+        ψ
+        ⟩
+      
+    
+    {\displaystyle |\psi \rangle }
+  
+ is a quantum state and 
+  
+    
+      
+        U
+      
+    
+    {\displaystyle U}
+  
+ is a unitary gate acting on the space of 
+  
+    
+      
+        
+          |
+        
+        ψ
+        ⟩
+      
+    
+    {\displaystyle |\psi \rangle }
+  
+. The Hadamard test produces a random variable whose image is in 
+  
+    
+      
+        {
+        ±
+        1
+        }
+      
+    
+    {\displaystyle \{\pm 1\}}
+  
+ and whose expected value is exactly 
+  
+    
+      
+        
+          R
+          e
+        
+        ⟨
+        ψ
+        
+          |
+        
+        U
+        
+          |
+        
+        ψ
+        ⟩
+      
+    
+    {\displaystyle \mathrm {Re} \langle \psi |U|\psi \rangle }
+  
+. It is possible to modify the circuit to produce a random variable whose expected value is 
+  
+    
+      
+        
+          I
+          m
+        
+        ⟨
+        ψ
+        
+          |
+        
+        U
+        
+          |
+        
+        ψ
+        ⟩
+      
+    
+    {\displaystyle \mathrm {Im} \langle \psi |U|\psi \rangle }
+  
+.
+
+Magic state distillation
+
+is a process that takes in multiple noisy quantum states and outputs a smaller number of more reliable quantum states. It is considered by many experts to be one of the leading proposals for achieving fault tolerant quantum computation. Magic state distillation has also been used to argue   that quantum contextuality may be the "magic ingredient" responsible for the power of quantum computers.  
+
+Mølmer–Sørensen gate
+
+(or MS gate), is a two qubit gate used in trapped ion quantum computing. It was proposed by Klaus Mølmer and Anders Sørensen.  Their proposal also extends to gates on more than two qubits.
+
+Quantum algorithm
+is an algorithm which runs on a realistic model of quantum computation, the most commonly used model being the quantum circuit model of computation. A classical (or non-quantum) algorithm is a finite sequence of instructions, or a step-by-step procedure for solving a problem, where each step or instruction can be performed on a classical computer. Similarly, a quantum algorithm is a step-by-step procedure, where each of the steps can be performed on a quantum computer. Although all classical algorithms can also be performed on a quantum computer,  the term quantum algorithm is usually used for those algorithms which seem inherently quantum, or use some essential feature of quantum computation such as quantum superposition or quantum entanglement.
+
+Quantum computing
+is a type of computation whose operations can harness the phenomena of quantum mechanics, such as superposition, interference, and entanglement. Devices that perform quantum computations are known as quantum computers. Though current quantum computers are too small to outperform usual (classical) computers for practical applications, larger realizations are believed to be capable of solving certain computational problems, such as integer factorization (which underlies RSA encryption), substantially faster than classical computers. The study of quantum computing is a subfield of quantum information science.
+
+Quantum volume
+is a metric that measures the capabilities and error rates of a quantum computer. It expresses the maximum size of square quantum circuits that can be implemented successfully by the computer. The form of the circuits is independent from the quantum computer architecture, but compiler can transform and optimize it to take advantage of the computer's features. Thus, quantum volumes for different architectures can be compared.
+
+Quantum error correction
+(QEC), is used in quantum computing to protect quantum information from errors due to decoherence and other quantum noise. Quantum error correction is theorised as essential to achieve fault-tolerant quantum computation that can reduce the effects of noise on stored quantum information, faulty quantum gates, faulty quantum preparation, and faulty measurements.
+
+Quantum image processing
+(QIMP), is using quantum computing or quantum information processing to create and work with quantum images.
+
+Due to some of the properties inherent to quantum computation, notably entanglement and parallelism, it is hoped that QIMP technologies will offer capabilities and performances that surpass their traditional equivalents, in terms of computing speed, security, and minimum storage requirements.
+
+Quantum programming
+is the process of assembling sequences of instructions, called quantum programs, that are capable of running on a quantum computer. Quantum programming languages help express quantum algorithms using high-level constructs. The field is deeply rooted in the open-source philosophy and as a result most of the quantum software discussed in this article is freely available as open-source software.
+
+Quantum simulator
+ Quantum simulators permit the study of quantum system in a programmable fashion. In this instance, simulators are special purpose devices designed to provide insight about specific physics problems. Quantum simulators may be contrasted with generally programmable "digital" quantum computers, which would be capable of solving a wider class of quantum problems.
+
+Quantum state discrimination
+In quantum information science, quantum state discrimination refers to the task of inferring the quantum state that produced the observed measurement probabilities.
+
+More precisely, in its standard formulation, the problem involves performing some POVM 
+  
+    
+      
+        (
+        
+          E
+          
+            i
+          
+        
+        
+          )
+          
+            i
+          
+        
+      
+    
+    {\displaystyle (E_{i})_{i}}
+  
+ on a given unknown state 
+  
+    
+      
+        ρ
+      
+    
+    {\displaystyle \rho }
+  
+, under the promise that the state received is an element of a collection of states 
+  
+    
+      
+        {
+        
+          σ
+          
+            i
+          
+        
+        
+          }
+          
+            i
+          
+        
+      
+    
+    {\displaystyle \{\sigma _{i}\}_{i}}
+  
+, with 
+  
+    
+      
+        
+          σ
+          
+            i
+          
+        
+      
+    
+    {\displaystyle \sigma _{i}}
+  
+ occurring with probability 
+  
+    
+      
+        
+          p
+          
+            i
+          
+        
+      
+    
+    {\displaystyle p_{i}}
+  
+, that is, 
+  
+    
+      
+        ρ
+        =
+        
+          ∑
+          
+            i
+          
+        
+        
+          p
+          
+            i
+          
+        
+        
+          σ
+          
+            i
+          
+        
+      
+    
+    {\displaystyle \rho =\sum _{i}p_{i}\sigma _{i}}
+  
+. The task is then to find the probability of the POVM 
+  
+    
+      
+        (
+        
+          E
+          
+            i
+          
+        
+        
+          )
+          
+            i
+          
+        
+      
+    
+    {\displaystyle (E_{i})_{i}}
+  
+ correctly guessing which state was received. Since the probability of the POVM returning the 
+  
+    
+      
+        i
+      
+    
+    {\displaystyle i}
+  
+-th outcome when the given state was 
+  
+    
+      
+        
+          σ
+          
+            j
+          
+        
+      
+    
+    {\displaystyle \sigma _{j}}
+  
+ has the form 
+  
+    
+      
+        
+          Prob
+        
+        (
+        i
+        
+          |
+        
+        j
+        )
+        =
+        tr
+        ⁡
+        (
+        
+          E
+          
+            i
+          
+        
+        
+          σ
+          
+            j
+          
+        
+        )
+      
+    
+    {\displaystyle {\text{Prob}}(i|j)=\operatorname {tr} (E_{i}\sigma _{j})}
+  
+, it follows that the probability of successfully determining the correct state is 
+  
+    
+      
+        
+          P
+          
+            
+              s
+              u
+              c
+              c
+              e
+              s
+              s
+            
+          
+        
+        =
+        
+          ∑
+          
+            i
+          
+        
+        
+          p
+          
+            i
+          
+        
+        tr
+        ⁡
+        (
+        
+          σ
+          
+            i
+          
+        
+        
+          E
+          
+            i
+          
+        
+        )
+      
+    
+    {\displaystyle P_{\rm {success}}=\sum _{i}p_{i}\operatorname {tr} (\sigma _{i}E_{i})}
+  
+.
+
+ 
+Quantum supremacy
+or quantum advantage, is the goal of demonstrating that a programmable quantum device can solve a problem that no classical computer can solve in any feasible amount of time (irrespective of the usefulness of the problem). Conceptually, quantum supremacy involves both the engineering task of building a powerful quantum computer and the computational-complexity-theoretic task of finding a problem that can be solved by that quantum computer and has a superpolynomial speedup over the best known or possible classical algorithm for that task. The term was coined by John Preskill in 2012, but the concept of a quantum computational advantage, specifically for simulating quantum systems, dates back to Yuri Manin's (1980) and Richard Feynman's (1981) proposals of quantum computing. Examples of proposals to demonstrate quantum supremacy include the boson sampling proposal of Aaronson and Arkhipov, D-Wave's specialized frustrated cluster loop problems, and sampling the output of random quantum circuits.
+
+Quantum Turing machine
+(QTM), or universal quantum computer, is an abstract machine used to model the effects of a quantum computer.  It provides a simple model that captures all of the power of quantum computation—that is, any quantum algorithm can be expressed formally as a particular quantum Turing machine. However, the computationally equivalent quantum circuit is a more common model.
+
+Qubit
+A qubit () or quantum bit is a basic unit of quantum information—the quantum version of the classic binary bit physically realized with a two-state device. A qubit is a two-state (or two-level) quantum-mechanical system, one of the simplest quantum systems displaying the peculiarity of quantum mechanics.  Examples include the spin of the electron in which the two levels can be taken as spin up and spin down; or the polarization of a single photon in which the two states can be taken to be the vertical polarization and the horizontal polarization. In a classical system, a bit would have to be in one state or the other. However, quantum mechanics allows the qubit to be in a coherent superposition of both states simultaneously, a property that is fundamental to quantum mechanics and quantum computing.
+
+Quil (instruction set architecture)
+ is a quantum instruction set architecture that first introduced a shared quantum/classical memory model. It was introduced by Robert Smith, Michael Curtis, and William Zeng in A Practical Quantum Instruction Set Architecture.  Many quantum algorithms (including quantum teleportation, quantum error correction, simulation, and optimization algorithms) require a shared memory architecture. Quil is being developed for the superconducting quantum processors developed by Rigetti Computing through the Forest quantum programming API.  A Python library called pyQuil was introduced to develop Quil programs with higher level constructs. A Quil backend is also supported by other quantum programming environments.
+
+Qutrit
+(or quantum trit), is a unit of quantum information that is realized by a 3-level quantum system, that may be in a superposition of three mutually orthogonal quantum states.
+
+The qutrit is analogous to the classical radix-3 trit, just as the qubit, a quantum system described by a superposition of two orthogonal states, is analogous to the classical radix-2 bit.
+
+There is ongoing work to develop quantum computers using qutrits and qubits with multiple states.
+
+Solovay–Kitaev theorem
+In quantum information and computation, the Solovay–Kitaev theorem says, roughly, that if a set of single-qubit quantum gates generates a dense subset of SU(2) then that set is guaranteed to fill SU(2) quickly, which means any desired gate can be approximated by a fairly short sequence of gates from the generating set. Robert M. Solovay initially announced the result on an email list in 1995, and Alexei Kitaev independently gave an outline of its proof in 1997. Solovay also gave a talk on his result at MSRI in 2000 but it was interrupted by a fire alarm. Christopher M. Dawson and Michael Nielsen call the theorem one of the most important fundamental results in the field of quantum computation.

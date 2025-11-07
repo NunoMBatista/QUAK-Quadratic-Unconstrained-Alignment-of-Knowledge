@@ -6,6 +6,7 @@ import wikipedia
 
 from src.config import (
     DOMAIN_QUERY,
+    NUM_ARTICLES,
     QUERY_MODE,
     RAW_ARXIV_DIR,
     RAW_WIKI_DIR,
@@ -38,7 +39,7 @@ def _extract_arxiv_id(entry_id: str) -> str:
     return entry_id.rsplit("/", 1)[-1]
 
 
-def fetch_wiki_data(query, num_articles=5):
+def fetch_wiki_data(num_articles=5):
     """
     fetch a list of Wikipedia page summaries based on a query.
     
@@ -46,15 +47,27 @@ def fetch_wiki_data(query, num_articles=5):
     just fetch some predetermined ones. To define its behavior, go into
     config.py and read the section regarding to "entities and domain 
     configuration".
+    
+    Parameters
+    ----------
+    query : str
+        The search query for Wikipedia.
+    num_articles : int
+        The number of articles to fetch.
+        
+    Returns
+    -------
+    list of str
+        A list of Wikipedia article summaries.
     """
     
-    print(f"-> fetching {num_articles} Wikipedia articles for query: '{query}'")
+    print(f"-> fetching {num_articles} Wikipedia articles for query: '{DOMAIN_QUERY}'")
     
     # search for page titles
     if QUERY_MODE == "fetch":
         page_titles = WIKI_PAGE_TITLES[:num_articles]
     else:
-        page_titles = wikipedia.search(query, results=num_articles)
+        page_titles = wikipedia.search(DOMAIN_QUERY, results=num_articles)
     
     # get the summary for each page
     summaries = []
@@ -72,7 +85,7 @@ def fetch_wiki_data(query, num_articles=5):
             "Source: Wikipedia\n"
             f"Title: {page.title}\n"
             f"URL: {page.url}\n"
-            f"Query: {query}\n"
+            f"Query: {DOMAIN_QUERY if QUERY_MODE == 'search' else 'fetch mode'}\n"
             "---\n"
             f"{summary}\n"
         )
@@ -84,7 +97,7 @@ def fetch_wiki_data(query, num_articles=5):
     return summaries
 
 
-def fetch_arxiv_data(query, num_articles=5):
+def fetch_arxiv_data():
     """
     fetch a list of arXiv paper abstracts based on a query.
     
@@ -92,17 +105,30 @@ def fetch_arxiv_data(query, num_articles=5):
     just fetch some predetermined ones. To define its behavior, go into
     config.py and read the section regarding to "entities and domain 
     configuration".
+    
+    Parameters
+    ----------
+    query : str
+        The search query for arXiv.
+    num_articles : int
+        The number of articles to fetch.
+
+    Returns
+    -------
+    list of str
+        A list of arXiv paper abstracts.
+        
     """
     
-    print(f"-> fetching {num_articles} arXiv abstracts for query: '{query}'")
     
     # search for papers
     if QUERY_MODE == "fetch":
-        search = arxiv.Search(id_list=ARXIV_PAPER_IDS[:num_articles])
+        search = arxiv.Search(id_list=ARXIV_PAPER_IDS[:NUM_ARTICLES])
     else:
+        print(f"-> fetching {NUM_ARTICLES} arXiv abstracts for query: '{DOMAIN_QUERY}'")
         search = arxiv.Search(
-            query=query,
-            max_results=num_articles,
+            query=DOMAIN_QUERY,
+            max_results=NUM_ARTICLES,
             sort_by=arxiv.SortCriterion.Relevance
         )
     
@@ -111,7 +137,7 @@ def fetch_arxiv_data(query, num_articles=5):
     # get the abstracts for each paper
     abstracts = []
     for index, result in enumerate(arxiv_client.results(search), start=1):
-        summary = result.summary.replace("\n", " ")  # Clean newlines for downstream use
+        summary = result.summary.replace("\n", " ")  # clean newlines for downstream use
         title = result.title.strip()
         arxiv_id = _extract_arxiv_id(result.entry_id)
 
@@ -124,7 +150,7 @@ def fetch_arxiv_data(query, num_articles=5):
             "Source: arXiv\n"
             f"ArXiv ID: {arxiv_id}\n"
             f"Title: {title}\n"
-            f"Query: {query}\n"
+            f"Query: {DOMAIN_QUERY if QUERY_MODE == 'search' else 'fetch mode'}\n"
             "---\n"
             f"{summary}\n"
         )
@@ -141,5 +167,5 @@ if __name__ == "__main__":
     # test the file directly by running python3 -m src.kg_construction.fetch_data
     
     print("--- Testing Wikipedia Fetcher ---")
-    rawwiki = fetch_wiki_data(DOMAIN_QUERY, num_articles=2)
-    raw_arxiv = fetch_arxiv_data(DOMAIN_QUERY, num_articles=2)
+    rawwiki = fetch_wiki_data()
+    raw_arxiv = fetch_arxiv_data()

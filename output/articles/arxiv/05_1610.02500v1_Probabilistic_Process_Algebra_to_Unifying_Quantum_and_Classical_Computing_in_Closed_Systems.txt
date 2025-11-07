@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 1610.02500v1
+Title: Probabilistic Process Algebra to Unifying Quantum and Classical Computing in Closed Systems
+Query: Quantum Computing
+---
+We have unified quantum and classical computing in open quantum systems called qACP which is a quantum generalization of process algebra ACP. But, an axiomatization for quantum and classical processes with an assumption of closed quantum systems is still missing. For closed quantum systems, unitary operator, quantum measurement and quantum entanglement are three basic components for quantum computing. This leads to probability unavoidable. Along the solution of qACP to unify quantum and classical computing in open quantum systems, we unify quantum and classical computing with an assumption of closed systems under the framework of ACP-like probabilistic process algebra. This unification make it can be used widely in verification for quantum and classical computing mixed systems, such as most quantum communication protocols.

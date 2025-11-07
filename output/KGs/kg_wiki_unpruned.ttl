@@ -1,0 +1,118 @@
+@prefix ns1: <http://example.org/raw/> .
+
+ns1:evolve ns1:is_related_to ns1:Quantum_computers .
+
+ns1:possibilities ns1:is_related_to ns1:Quantum_computers .
+
+ns1:quantum_systems ns1:is_related_to ns1:Quantum_computers .
+
+ns1:sampling ns1:is_related_to ns1:Quantum_computers .
+
+ns1:simultaneously ns1:is_related_to ns1:Quantum_computers .
+
+ns1:Quantum_computers ns1:is_related_to ns1:evolve,
+        ns1:possibilities,
+        ns1:quantum_systems,
+        ns1:sampling,
+        ns1:simultaneously .
+
+ns1:computation ns1:is_related_to ns1:entangled,
+        ns1:features,
+        ns1:non-deterministic,
+        ns1:outcomes,
+        ns1:quantum_computer,
+        ns1:quantum_measurements,
+        ns1:quantum_mechanical_phenomena,
+        ns1:states,
+        ns1:theoretical_computer .
+
+ns1:entangled ns1:is_related_to ns1:computation,
+        ns1:features,
+        ns1:non-deterministic,
+        ns1:outcomes,
+        ns1:quantum_computer,
+        ns1:quantum_measurements,
+        ns1:quantum_mechanical_phenomena,
+        ns1:states,
+        ns1:theoretical_computer .
+
+ns1:features ns1:is_related_to ns1:computation,
+        ns1:entangled,
+        ns1:non-deterministic,
+        ns1:outcomes,
+        ns1:quantum_computer,
+        ns1:quantum_measurements,
+        ns1:quantum_mechanical_phenomena,
+        ns1:states,
+        ns1:theoretical_computer .
+
+ns1:non-deterministic ns1:is_related_to ns1:computation,
+        ns1:entangled,
+        ns1:features,
+        ns1:outcomes,
+        ns1:quantum_computer,
+        ns1:quantum_measurements,
+        ns1:quantum_mechanical_phenomena,
+        ns1:states,
+        ns1:theoretical_computer .
+
+ns1:outcomes ns1:is_related_to ns1:computation,
+        ns1:entangled,
+        ns1:features,
+        ns1:non-deterministic,
+        ns1:quantum_computer,
+        ns1:quantum_measurements,
+        ns1:quantum_mechanical_phenomena,
+        ns1:states,
+        ns1:theoretical_computer .
+
+ns1:quantum_computer ns1:is_related_to ns1:computation,
+        ns1:entangled,
+        ns1:features,
+        ns1:non-deterministic,
+        ns1:outcomes,
+        ns1:quantum_measurements,
+        ns1:quantum_mechanical_phenomena,
+        ns1:states,
+        ns1:theoretical_computer .
+
+ns1:quantum_measurements ns1:is_related_to ns1:computation,
+        ns1:entangled,
+        ns1:features,
+        ns1:non-deterministic,
+        ns1:outcomes,
+        ns1:quantum_computer,
+        ns1:quantum_mechanical_phenomena,
+        ns1:states,
+        ns1:theoretical_computer .
+
+ns1:quantum_mechanical_phenomena ns1:is_related_to ns1:computation,
+        ns1:entangled,
+        ns1:features,
+        ns1:non-deterministic,
+        ns1:outcomes,
+        ns1:quantum_computer,
+        ns1:quantum_measurements,
+        ns1:states,
+        ns1:theoretical_computer .
+
+ns1:states ns1:is_related_to ns1:computation,
+        ns1:entangled,
+        ns1:features,
+        ns1:non-deterministic,
+        ns1:outcomes,
+        ns1:quantum_computer,
+        ns1:quantum_measurements,
+        ns1:quantum_mechanical_phenomena,
+        ns1:theoretical_computer .
+
+ns1:theoretical_computer ns1:is_related_to ns1:computation,
+        ns1:entangled,
+        ns1:features,
+        ns1:non-deterministic,
+        ns1:outcomes,
+        ns1:quantum_computer,
+        ns1:quantum_measurements,
+        ns1:quantum_mechanical_phenomena,
+        ns1:states .
+

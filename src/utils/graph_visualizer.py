@@ -8,12 +8,11 @@ python3 -m src.utils.graph_visualizer
 from pathlib import Path
 from rdflib import Graph
 from pyvis.network import Network
-from src.config import ONTOLOGY_FILE, ONTOLOGY_DIR, GRAPH_PHYSICS
+from src.config import ONTOLOGY_PATH, ONTOLOGY_DIR, GRAPH_PHYSICS
 
 # --- quick configuration ---
 
 # /protege/ontology.ttl
-INPUT_FILE = Path(__file__).parent.parent.parent / 'protege' / 'ontology.ttl'
 
 # create output directory if it does not exist
 ONTOLOGY_DIR.mkdir(exist_ok=True, parents=True) # /output/ontologies
@@ -100,4 +99,4 @@ def visualize_ttl(ttl_path, output_html_path):
 
 
 if __name__ == "__main__":
-    visualize_ttl(INPUT_FILE, OUTPUT_FILE)
+    visualize_ttl(ONTOLOGY_PATH, OUTPUT_FILE)
