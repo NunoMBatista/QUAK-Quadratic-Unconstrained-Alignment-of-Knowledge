@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: List of companies involved in quantum computing, communication or sensing
+URL: https://en.wikipedia.org/wiki/List_of_companies_involved_in_quantum_computing,_communication_or_sensing
+Query: fetch mode
+---
+This article lists the companies worldwide engaged in the development of quantum computing, quantum communication and quantum sensing. Quantum computing and communication are two sub-fields of quantum information science, which describes and theorizes information science in terms of quantum physics. While the fundamental unit of classical information is the bit, the basic unit of quantum information is the qubit. Quantum sensing is the third main sub-field of quantum technologies and it focus consists in taking advantage of the quantum states sensitivity to the surrounding environment to perform atomic scale measurements.
+
+

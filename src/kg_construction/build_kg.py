@@ -150,8 +150,9 @@ def build_unpruned_kgs():
     """
     
     print("\n--- STEP 1: FETCH THE DATA ---")
-    wiki_data = fetch_wiki_data()
-    arxiv_data = fetch_arxiv_data()
+    wiki_data, _wiki_titles = fetch_wiki_data()
+    arxiv_data, _arxiv_ids = fetch_arxiv_data()
+    
     
     print("\n--- STEP 2: RUN THE NLP PIPELINE ---")
     nlp_pipeline = NLPPipeline()

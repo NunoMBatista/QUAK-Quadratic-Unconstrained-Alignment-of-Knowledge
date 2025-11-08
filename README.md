@@ -33,7 +33,7 @@ A global optimization approach (QUBO) can find a more accurate and structurally-
   - This will make it learn the unique structure and role of each entity within its own graph.
 - Output: Two sets of entity embeddings. NOTE: These two embedding spaces are not aligned with each other.
 
-3. QUBO Formulation (Global Optimization)
+**3. QUBO Formulation (Global Optimization)**
 
 - Formulate the alignment task as a QUBO ($H_{total}=H_{node}+H_{structure}+H_{constraint}$). This finds the best "pattern match" between the two unaligned spaces.
 - $H_{node}$ (Linear): A weak hint. The similarity between the GAE entity embeddings from Phase 2.
@@ -41,7 +41,7 @@ A global optimization approach (QUBO) can find a more accurate and structurally-
 - $H_{constraint}$ (Quadratic): A penalty to enforce a flexible "at-most-one" mapping. This is a critical design choice that allows entities to remain unaligned if no good match is found.
 
 $$
-H_{total} = \underbrace{\sum_{i,a}{-S(i, a) \cdot x_{i,a}}}_{H_{node}} + \underbrace{\sum_{i,j,a,b}{-w_{ij,ab} \cdot x_{i,a} \cdot x_{j,b}}}_{H_{structure}} + \underbrace{\sum_{i} P_{1} \sum_{a=1}^M \sum_{b=a+1}^M x_{i,a} x_{i,b}}_{Constraint\ 1} + \underbrace{\sum_{a} P_{2} \sum_{i=1}^N \sum_{j=i+1}^N x_{i,a} x_{j,a}}_{Constraint\ 2}
+H_{total} = \underbrace{\sum_{i,a}{-S(i, a) \cdot x_{i,a}}}_{H_{\text{node}}} + \underbrace{\sum_{i,j,a,b}{-w_{ij,ab} \cdot x_{i,a} \cdot x_{j,b}}}_{H_{\text{structure}}} + \underbrace{\sum_{i} P_{1} \sum_{a=1}^M \sum_{b=a+1}^M x_{i,a} x_{i,b}}_{\text{Constraint}\ 1} + \underbrace{\sum_{a} P_{2} \sum_{i=1}^N \sum_{j=i+1}^N x_{i,a} x_{j,a}}_{\text{Constraint}\ 2}
 $$
 
 - Where:

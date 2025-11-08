@@ -93,8 +93,8 @@ def visualize_ttl(ttl_path, output_html_path):
         net.add_node(o_label, label=o_label, title=str(o))
         net.add_edge(s_label, o_label, label=p_label, title=str(p))
 
-    # Save and show the interactive HTML file
-    net.show(str(output_html_path), notebook=False)
+    # save interactive html file without launching a browser
+    net.write_html(str(output_html_path))
     print(f"saved graph visualization to: {Path(output_html_path).resolve()}")
 
 

@@ -22,6 +22,9 @@ class GraphAutoencoder(torch.nn.Module):
         
         # Second layer: hidden features -> output embedding
         self.conv2 = GCNConv(hidden_channels, out_channels)
+
+        # Light regularization to reduce collapse
+        self.dropout = torch.nn.Dropout(p=0.2)
         
         # --- The Decoder ---
         # The InnerProductDecoder simply takes the embeddings (vectors)
@@ -37,6 +40,7 @@ class GraphAutoencoder(torch.nn.Module):
         # Pass through the first GCN layer, apply ReLU activation
         x = self.conv1(x, edge_index)
         x = F.relu(x)
+        x = self.dropout(x)
         
         # Pass through the second GCN layer to get the final embeddings
         # We don't apply an activation here; this is the final "latent space"

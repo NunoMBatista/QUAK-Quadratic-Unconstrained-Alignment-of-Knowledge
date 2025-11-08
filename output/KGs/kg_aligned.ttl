@@ -2,9 +2,15 @@
 
 ont:Internet a ont:Algorithm .
 
-ont:computations a ont:Algorithm .
+ont:features a ont:QuantumConcept .
 
 ont:nodes a ont:Person .
+
+ont:computations a ont:Algorithm ;
+    ont:alignedWith ont:possibilities .
+
+ont:possibilities a ont:QuantumConcept ;
+    ont:alignedWith ont:computations .
 
 ont:classical a ont:QuantumHardware ;
     ont:implements ont:distributed,

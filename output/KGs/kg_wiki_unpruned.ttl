@@ -1,10 +1,6 @@
 @prefix ns1: <http://example.org/raw/> .
 
-ns1:Physically_engineering ns1:is_related_to ns1:high-quality_qubits .
-
-ns1:high-quality_qubits ns1:is_related_to ns1:Physically_engineering .
-
-ns1:real-world_applications ns1:is_related_to ns1:Quantum_computers .
+ns1:physical_simulations ns1:is_related_to ns1:large-scale .
 
 ns1:computers ns1:is_related_to ns1:deterministic_rules,
         ns1:ordinary .
@@ -15,21 +11,23 @@ ns1:deterministic_rules ns1:is_related_to ns1:computers,
 ns1:ordinary ns1:is_related_to ns1:computers,
         ns1:deterministic_rules .
 
+ns1:physicists ns1:is_related_to ns1:large-scale,
+        ns1:quantum_computer .
+
+ns1:public-key_cryptographic_schemes ns1:is_related_to ns1:large-scale,
+        ns1:quantum_computer .
+
+ns1:calculations ns1:is_related_to ns1:classical_computer,
+        ns1:exponentially_faster,
+        ns1:quantum_computer .
+
 ns1:classical_computer ns1:is_related_to ns1:calculations,
         ns1:exponentially_faster,
         ns1:quantum_computer .
 
-ns1:experimental ns1:is_related_to ns1:hardware,
-        ns1:quantum_computation,
-        ns1:specialized_tasks .
-
 ns1:exponentially_faster ns1:is_related_to ns1:calculations,
         ns1:classical_computer,
         ns1:quantum_computer .
-
-ns1:hardware ns1:is_related_to ns1:experimental,
-        ns1:quantum_computation,
-        ns1:specialized_tasks .
 
 ns1:mechanical_device ns1:is_related_to ns1:multiple,
         ns1:replicated,
@@ -39,98 +37,18 @@ ns1:multiple ns1:is_related_to ns1:mechanical_device,
         ns1:replicated,
         ns1:time_cost .
 
-ns1:quantum_computation ns1:is_related_to ns1:experimental,
-        ns1:hardware,
-        ns1:specialized_tasks .
-
 ns1:replicated ns1:is_related_to ns1:mechanical_device,
         ns1:multiple,
         ns1:time_cost .
-
-ns1:specialized_tasks ns1:is_related_to ns1:experimental,
-        ns1:hardware,
-        ns1:quantum_computation .
 
 ns1:time_cost ns1:is_related_to ns1:mechanical_device,
         ns1:multiple,
         ns1:replicated .
 
-ns1:amplification ns1:is_related_to ns1:design,
-        ns1:procedures,
-        ns1:quantum_algorithms,
-        ns1:quantum_computer .
-
-ns1:binary ns1:is_related_to ns1:linear_combination,
-        ns1:quantum_superposition,
-        ns1:qubit,
-        ns1:states .
-
-ns1:design ns1:is_related_to ns1:amplification,
-        ns1:procedures,
-        ns1:quantum_algorithms,
-        ns1:quantum_computer .
-
 ns1:large-scale ns1:is_related_to ns1:physical_simulations,
         ns1:physicists,
         ns1:public-key_cryptographic_schemes,
         ns1:quantum_computer .
-
-ns1:linear_combination ns1:is_related_to ns1:binary,
-        ns1:quantum_superposition,
-        ns1:qubit,
-        ns1:states .
-
-ns1:measuring ns1:is_related_to ns1:probabilistic_rule,
-        ns1:qubit,
-        ns1:result,
-        ns1:states .
-
-ns1:physical_simulations ns1:is_related_to ns1:large-scale,
-        ns1:physicists,
-        ns1:public-key_cryptographic_schemes,
-        ns1:quantum_computer .
-
-ns1:physicists ns1:is_related_to ns1:large-scale,
-        ns1:physical_simulations,
-        ns1:public-key_cryptographic_schemes,
-        ns1:quantum_computer .
-
-ns1:probabilistic_rule ns1:is_related_to ns1:measuring,
-        ns1:qubit,
-        ns1:result,
-        ns1:states .
-
-ns1:procedures ns1:is_related_to ns1:amplification,
-        ns1:design,
-        ns1:quantum_algorithms,
-        ns1:quantum_computer .
-
-ns1:public-key_cryptographic_schemes ns1:is_related_to ns1:large-scale,
-        ns1:physical_simulations,
-        ns1:physicists,
-        ns1:quantum_computer .
-
-ns1:quantum_algorithms ns1:is_related_to ns1:amplification,
-        ns1:design,
-        ns1:procedures,
-        ns1:quantum_computer .
-
-ns1:quantum_superposition ns1:is_related_to ns1:binary,
-        ns1:linear_combination,
-        ns1:qubit,
-        ns1:states .
-
-ns1:Intel ns1:is_related_to ns1:Research,
-        ns1:companies,
-        ns1:computing,
-        ns1:quantum,
-        ns1:superconducting .
-
-ns1:Rigetti ns1:is_related_to ns1:Research,
-        ns1:companies,
-        ns1:computing,
-        ns1:quantum,
-        ns1:superconducting .
 
 ns1:classically ns1:is_related_to ns1:energy,
         ns1:exponentially,
@@ -150,36 +68,6 @@ ns1:exponentially ns1:is_related_to ns1:classically,
         ns1:simulated,
         ns1:time .
 
-ns1:function ns1:is_related_to ns1:computing,
-        ns1:information,
-        ns1:quantum_bit,
-        ns1:quantum_computing,
-        ns1:qubit .
-
-ns1:information ns1:is_related_to ns1:computing,
-        ns1:function,
-        ns1:quantum_bit,
-        ns1:quantum_computing,
-        ns1:qubit .
-
-ns1:measurement ns1:is_related_to ns1:probability,
-        ns1:quantum_computer,
-        ns1:qubit,
-        ns1:result,
-        ns1:wave_interference .
-
-ns1:probability ns1:is_related_to ns1:measurement,
-        ns1:quantum_computer,
-        ns1:qubit,
-        ns1:result,
-        ns1:wave_interference .
-
-ns1:quantum_bit ns1:is_related_to ns1:computing,
-        ns1:function,
-        ns1:information,
-        ns1:quantum_computing,
-        ns1:qubit .
-
 ns1:simulated ns1:is_related_to ns1:classically,
         ns1:energy,
         ns1:exponentially,
@@ -192,105 +80,13 @@ ns1:time ns1:is_related_to ns1:classically,
         ns1:quantum_computer,
         ns1:simulated .
 
-ns1:wave_interference ns1:is_related_to ns1:measurement,
-        ns1:probability,
-        ns1:quantum_computer,
-        ns1:qubit,
-        ns1:result .
-
-ns1:BBN ns1:is_related_to ns1:Google,
-        ns1:Research,
-        ns1:companies,
-        ns1:computing,
-        ns1:quantum,
-        ns1:superconducting .
-
-ns1:IBM ns1:is_related_to ns1:Google,
-        ns1:Research,
-        ns1:companies,
-        ns1:computing,
-        ns1:quantum,
-        ns1:superconducting .
-
-ns1:IMEC ns1:is_related_to ns1:Google,
-        ns1:Research,
-        ns1:companies,
-        ns1:computing,
-        ns1:quantum,
-        ns1:superconducting .
-
-ns1:Technologies ns1:is_related_to ns1:Google,
-        ns1:Research,
-        ns1:companies,
-        ns1:computing,
-        ns1:quantum,
-        ns1:superconducting .
-
-ns1:environment ns1:is_related_to ns1:calculations,
-        ns1:isolated,
-        ns1:noise,
-        ns1:physical_qubit,
-        ns1:quantum_decoherence,
-        ns1:suffers .
-
-ns1:isolated ns1:is_related_to ns1:calculations,
-        ns1:environment,
-        ns1:noise,
-        ns1:physical_qubit,
-        ns1:quantum_decoherence,
-        ns1:suffers .
-
-ns1:noise ns1:is_related_to ns1:calculations,
-        ns1:environment,
-        ns1:isolated,
-        ns1:physical_qubit,
-        ns1:quantum_decoherence,
-        ns1:suffers .
-
-ns1:physical_qubit ns1:is_related_to ns1:calculations,
-        ns1:environment,
-        ns1:isolated,
-        ns1:noise,
-        ns1:quantum_decoherence,
-        ns1:suffers .
-
-ns1:quantum_decoherence ns1:is_related_to ns1:calculations,
-        ns1:environment,
-        ns1:isolated,
-        ns1:noise,
-        ns1:physical_qubit,
-        ns1:suffers .
-
-ns1:suffers ns1:is_related_to ns1:calculations,
-        ns1:environment,
-        ns1:isolated,
-        ns1:noise,
-        ns1:physical_qubit,
-        ns1:quantum_decoherence .
-
-ns1:National_governments ns1:is_related_to ns1:coherence_times,
-        ns1:error_rates,
-        ns1:experimental_research,
-        ns1:heavily,
-        ns1:lower,
-        ns1:qubits,
-        ns1:scalable .
-
-ns1:atomic_particle ns1:is_related_to ns1:confine,
-        ns1:electrical_current,
-        ns1:electrical_resistance,
-        ns1:electromagnetic_fields,
-        ns1:ion_traps,
-        ns1:isolate,
-        ns1:superconductors .
-
-ns1:coherence_times ns1:is_related_to ns1:National_governments,
-        ns1:error_rates,
-        ns1:experimental_research,
-        ns1:heavily,
-        ns1:lower,
-        ns1:qubits,
-        ns1:scalable .
+ns1:Quantum_computers ns1:is_related_to ns1:computational,
+        ns1:constraints,
+        ns1:evolve,
+        ns1:possibilities,
+        ns1:quantum_systems,
+        ns1:sampling,
+        ns1:simultaneously .
 
 ns1:computational ns1:is_related_to ns1:Quantum_computers,
         ns1:constraints,
@@ -300,14 +96,6 @@ ns1:computational ns1:is_related_to ns1:Quantum_computers,
         ns1:sampling,
         ns1:simultaneously .
 
-ns1:confine ns1:is_related_to ns1:atomic_particle,
-        ns1:electrical_current,
-        ns1:electrical_resistance,
-        ns1:electromagnetic_fields,
-        ns1:ion_traps,
-        ns1:isolate,
-        ns1:superconductors .
-
 ns1:constraints ns1:is_related_to ns1:Quantum_computers,
         ns1:computational,
         ns1:evolve,
@@ -316,38 +104,6 @@ ns1:constraints ns1:is_related_to ns1:Quantum_computers,
         ns1:sampling,
         ns1:simultaneously .
 
-ns1:electrical_current ns1:is_related_to ns1:atomic_particle,
-        ns1:confine,
-        ns1:electrical_resistance,
-        ns1:electromagnetic_fields,
-        ns1:ion_traps,
-        ns1:isolate,
-        ns1:superconductors .
-
-ns1:electrical_resistance ns1:is_related_to ns1:atomic_particle,
-        ns1:confine,
-        ns1:electrical_current,
-        ns1:electromagnetic_fields,
-        ns1:ion_traps,
-        ns1:isolate,
-        ns1:superconductors .
-
-ns1:electromagnetic_fields ns1:is_related_to ns1:atomic_particle,
-        ns1:confine,
-        ns1:electrical_current,
-        ns1:electrical_resistance,
-        ns1:ion_traps,
-        ns1:isolate,
-        ns1:superconductors .
-
-ns1:error_rates ns1:is_related_to ns1:National_governments,
-        ns1:coherence_times,
-        ns1:experimental_research,
-        ns1:heavily,
-        ns1:lower,
-        ns1:qubits,
-        ns1:scalable .
-
 ns1:evolve ns1:is_related_to ns1:Quantum_computers,
         ns1:computational,
         ns1:constraints,
@@ -355,46 +111,6 @@ ns1:evolve ns1:is_related_to ns1:Quantum_computers,
         ns1:quantum_systems,
         ns1:sampling,
         ns1:simultaneously .
-
-ns1:experimental_research ns1:is_related_to ns1:National_governments,
-        ns1:coherence_times,
-        ns1:error_rates,
-        ns1:heavily,
-        ns1:lower,
-        ns1:qubits,
-        ns1:scalable .
-
-ns1:heavily ns1:is_related_to ns1:National_governments,
-        ns1:coherence_times,
-        ns1:error_rates,
-        ns1:experimental_research,
-        ns1:lower,
-        ns1:qubits,
-        ns1:scalable .
-
-ns1:ion_traps ns1:is_related_to ns1:atomic_particle,
-        ns1:confine,
-        ns1:electrical_current,
-        ns1:electrical_resistance,
-        ns1:electromagnetic_fields,
-        ns1:isolate,
-        ns1:superconductors .
-
-ns1:isolate ns1:is_related_to ns1:atomic_particle,
-        ns1:confine,
-        ns1:electrical_current,
-        ns1:electrical_resistance,
-        ns1:electromagnetic_fields,
-        ns1:ion_traps,
-        ns1:superconductors .
-
-ns1:lower ns1:is_related_to ns1:National_governments,
-        ns1:coherence_times,
-        ns1:error_rates,
-        ns1:experimental_research,
-        ns1:heavily,
-        ns1:qubits,
-        ns1:scalable .
 
 ns1:possibilities ns1:is_related_to ns1:Quantum_computers,
         ns1:computational,
@@ -420,14 +136,6 @@ ns1:sampling ns1:is_related_to ns1:Quantum_computers,
         ns1:quantum_systems,
         ns1:simultaneously .
 
-ns1:scalable ns1:is_related_to ns1:National_governments,
-        ns1:coherence_times,
-        ns1:error_rates,
-        ns1:experimental_research,
-        ns1:heavily,
-        ns1:lower,
-        ns1:qubits .
-
 ns1:simultaneously ns1:is_related_to ns1:Quantum_computers,
         ns1:computational,
         ns1:constraints,
@@ -435,41 +143,6 @@ ns1:simultaneously ns1:is_related_to ns1:Quantum_computers,
         ns1:possibilities,
         ns1:quantum_systems,
         ns1:sampling .
-
-ns1:superconductors ns1:is_related_to ns1:atomic_particle,
-        ns1:confine,
-        ns1:electrical_current,
-        ns1:electrical_resistance,
-        ns1:electromagnetic_fields,
-        ns1:ion_traps,
-        ns1:isolate .
-
-ns1:Quantum_computers ns1:is_related_to ns1:computational,
-        ns1:constraints,
-        ns1:evolve,
-        ns1:possibilities,
-        ns1:quantum_systems,
-        ns1:real-world_applications,
-        ns1:sampling,
-        ns1:simultaneously .
-
-ns1:Researchers ns1:is_related_to ns1:classical_computers,
-        ns1:correct,
-        ns1:milestone,
-        ns1:outperform,
-        ns1:quantum_advantage,
-        ns1:quantum_devices,
-        ns1:quantum_supremacy,
-        ns1:tasks .
-
-ns1:classical_computers ns1:is_related_to ns1:Researchers,
-        ns1:correct,
-        ns1:milestone,
-        ns1:outperform,
-        ns1:quantum_advantage,
-        ns1:quantum_devices,
-        ns1:quantum_supremacy,
-        ns1:tasks .
 
 ns1:computation ns1:is_related_to ns1:entangled,
         ns1:features,
@@ -480,24 +153,6 @@ ns1:computation ns1:is_related_to ns1:entangled,
         ns1:states,
         ns1:theoretical_computer .
 
-ns1:correct ns1:is_related_to ns1:Researchers,
-        ns1:classical_computers,
-        ns1:milestone,
-        ns1:outperform,
-        ns1:quantum_advantage,
-        ns1:quantum_devices,
-        ns1:quantum_supremacy,
-        ns1:tasks .
-
-ns1:displaystyle_grangle ns1:is_related_to ns1:,
-        ns1:erangle,
-        ns1:excited_state,
-        ns1:ground_state,
-        ns1:logic_states,
-        ns1:qubits,
-        ns1:superconducting,
-        ns1:text .
-
 ns1:entangled ns1:is_related_to ns1:computation,
         ns1:features,
         ns1:non-deterministic,
@@ -507,24 +162,6 @@ ns1:entangled ns1:is_related_to ns1:computation,
         ns1:states,
         ns1:theoretical_computer .
 
-ns1:erangle ns1:is_related_to ns1:,
-        ns1:displaystyle_grangle,
-        ns1:excited_state,
-        ns1:ground_state,
-        ns1:logic_states,
-        ns1:qubits,
-        ns1:superconducting,
-        ns1:text .
-
-ns1:excited_state ns1:is_related_to ns1:,
-        ns1:displaystyle_grangle,
-        ns1:erangle,
-        ns1:ground_state,
-        ns1:logic_states,
-        ns1:qubits,
-        ns1:superconducting,
-        ns1:text .
-
 ns1:features ns1:is_related_to ns1:computation,
         ns1:entangled,
         ns1:non-deterministic,
@@ -533,33 +170,6 @@ ns1:features ns1:is_related_to ns1:computation,
         ns1:quantum_measurements,
         ns1:states,
         ns1:theoretical_computer .
-
-ns1:ground_state ns1:is_related_to ns1:,
-        ns1:displaystyle_grangle,
-        ns1:erangle,
-        ns1:excited_state,
-        ns1:logic_states,
-        ns1:qubits,
-        ns1:superconducting,
-        ns1:text .
-
-ns1:logic_states ns1:is_related_to ns1:,
-        ns1:displaystyle_grangle,
-        ns1:erangle,
-        ns1:excited_state,
-        ns1:ground_state,
-        ns1:qubits,
-        ns1:superconducting,
-        ns1:text .
-
-ns1:milestone ns1:is_related_to ns1:Researchers,
-        ns1:classical_computers,
-        ns1:correct,
-        ns1:outperform,
-        ns1:quantum_advantage,
-        ns1:quantum_devices,
-        ns1:quantum_supremacy,
-        ns1:tasks .
 
 ns1:non-deterministic ns1:is_related_to ns1:computation,
         ns1:entangled,
@@ -579,33 +189,6 @@ ns1:outcomes ns1:is_related_to ns1:computation,
         ns1:states,
         ns1:theoretical_computer .
 
-ns1:outperform ns1:is_related_to ns1:Researchers,
-        ns1:classical_computers,
-        ns1:correct,
-        ns1:milestone,
-        ns1:quantum_advantage,
-        ns1:quantum_devices,
-        ns1:quantum_supremacy,
-        ns1:tasks .
-
-ns1:quantum_advantage ns1:is_related_to ns1:Researchers,
-        ns1:classical_computers,
-        ns1:correct,
-        ns1:milestone,
-        ns1:outperform,
-        ns1:quantum_devices,
-        ns1:quantum_supremacy,
-        ns1:tasks .
-
-ns1:quantum_devices ns1:is_related_to ns1:Researchers,
-        ns1:classical_computers,
-        ns1:correct,
-        ns1:milestone,
-        ns1:outperform,
-        ns1:quantum_advantage,
-        ns1:quantum_supremacy,
-        ns1:tasks .
-
 ns1:quantum_measurements ns1:is_related_to ns1:computation,
         ns1:entangled,
         ns1:features,
@@ -615,41 +198,14 @@ ns1:quantum_measurements ns1:is_related_to ns1:computation,
         ns1:states,
         ns1:theoretical_computer .
 
-ns1:quantum_supremacy ns1:is_related_to ns1:Researchers,
-        ns1:classical_computers,
-        ns1:correct,
-        ns1:milestone,
-        ns1:outperform,
-        ns1:quantum_advantage,
-        ns1:quantum_devices,
-        ns1:tasks .
-
-ns1:result ns1:is_related_to ns1:measurement,
-        ns1:measuring,
-        ns1:probabilistic_rule,
-        ns1:probability,
+ns1:states ns1:is_related_to ns1:computation,
+        ns1:entangled,
+        ns1:features,
+        ns1:non-deterministic,
+        ns1:outcomes,
         ns1:quantum_computer,
-        ns1:qubit,
-        ns1:states,
-        ns1:wave_interference .
-
-ns1:tasks ns1:is_related_to ns1:Researchers,
-        ns1:classical_computers,
-        ns1:correct,
-        ns1:milestone,
-        ns1:outperform,
-        ns1:quantum_advantage,
-        ns1:quantum_devices,
-        ns1:quantum_supremacy .
-
-ns1:text ns1:is_related_to ns1:,
-        ns1:displaystyle_grangle,
-        ns1:erangle,
-        ns1:excited_state,
-        ns1:ground_state,
-        ns1:logic_states,
-        ns1:qubits,
-        ns1:superconducting .
+        ns1:quantum_measurements,
+        ns1:theoretical_computer .
 
 ns1:theoretical_computer ns1:is_related_to ns1:computation,
         ns1:entangled,
@@ -660,325 +216,23 @@ ns1:theoretical_computer ns1:is_related_to ns1:computation,
         ns1:quantum_measurements,
         ns1:states .
 
-ns1: ns1:is_related_to ns1:,
-        ns1:displaystyle_grangle,
-        ns1:erangle,
-        ns1:excited_state,
-        ns1:ground_state,
-        ns1:logic_states,
-        ns1:qubits,
-        ns1:superconducting,
-        ns1:text .
-
-ns1:Google ns1:is_related_to ns1:BBN,
-        ns1:IBM,
-        ns1:IMEC,
-        ns1:Research,
-        ns1:Technologies,
-        ns1:companies,
-        ns1:computing,
-        ns1:quantum,
-        ns1:superconducting .
-
-ns1:calculations ns1:is_related_to ns1:classical_computer,
-        ns1:environment,
-        ns1:exponentially_faster,
-        ns1:isolated,
-        ns1:noise,
-        ns1:physical_qubit,
-        ns1:quantum_computer,
-        ns1:quantum_decoherence,
-        ns1:suffers .
-
-ns1:Superconducting ns1:is_related_to ns1:artificial_atoms,
-        ns1:branch,
-        ns1:electronic_circuits,
-        ns1:implements,
-        ns1:physics,
-        ns1:quantum,
-        ns1:quantum_computing,
-        ns1:quantum_dots,
-        ns1:qubits,
-        ns1:solid_state .
-
-ns1:Research ns1:is_related_to ns1:BBN,
-        ns1:Google,
-        ns1:IBM,
-        ns1:IMEC,
-        ns1:Intel,
-        ns1:Rigetti,
-        ns1:Technologies,
-        ns1:companies,
-        ns1:computing,
-        ns1:quantum,
-        ns1:superconducting .
-
-ns1:artificial_atoms ns1:is_related_to ns1:Superconducting,
-        ns1:branch,
-        ns1:electronic_circuits,
-        ns1:implements,
-        ns1:physics,
-        ns1:quantum,
-        ns1:quantum_computing,
-        ns1:quantum_dots,
-        ns1:qubits,
-        ns1:solid_state,
-        ns1:superconducting .
-
-ns1:branch ns1:is_related_to ns1:Superconducting,
-        ns1:artificial_atoms,
-        ns1:electronic_circuits,
-        ns1:implements,
-        ns1:physics,
-        ns1:quantum,
-        ns1:quantum_computing,
-        ns1:quantum_dots,
-        ns1:qubits,
-        ns1:solid_state,
-        ns1:superconducting .
-
-ns1:companies ns1:is_related_to ns1:BBN,
-        ns1:Google,
-        ns1:IBM,
-        ns1:IMEC,
-        ns1:Intel,
-        ns1:Research,
-        ns1:Rigetti,
-        ns1:Technologies,
-        ns1:computing,
-        ns1:quantum,
-        ns1:superconducting .
-
-ns1:electronic_circuits ns1:is_related_to ns1:Superconducting,
-        ns1:artificial_atoms,
-        ns1:branch,
-        ns1:implements,
-        ns1:physics,
-        ns1:quantum,
-        ns1:quantum_computing,
-        ns1:quantum_dots,
-        ns1:qubits,
-        ns1:solid_state,
-        ns1:superconducting .
-
-ns1:implements ns1:is_related_to ns1:Superconducting,
-        ns1:artificial_atoms,
-        ns1:branch,
-        ns1:electronic_circuits,
-        ns1:physics,
-        ns1:quantum,
-        ns1:quantum_computing,
-        ns1:quantum_dots,
-        ns1:qubits,
-        ns1:solid_state,
-        ns1:superconducting .
-
-ns1:physics ns1:is_related_to ns1:Superconducting,
-        ns1:artificial_atoms,
-        ns1:branch,
-        ns1:electronic_circuits,
-        ns1:implements,
-        ns1:quantum,
-        ns1:quantum_computing,
-        ns1:quantum_dots,
-        ns1:qubits,
-        ns1:solid_state,
-        ns1:superconducting .
-
-ns1:quantum_dots ns1:is_related_to ns1:Superconducting,
-        ns1:artificial_atoms,
-        ns1:branch,
-        ns1:electronic_circuits,
-        ns1:implements,
-        ns1:physics,
-        ns1:quantum,
-        ns1:quantum_computing,
-        ns1:qubits,
-        ns1:solid_state,
-        ns1:superconducting .
-
-ns1:solid_state ns1:is_related_to ns1:Superconducting,
-        ns1:artificial_atoms,
-        ns1:branch,
-        ns1:electronic_circuits,
-        ns1:implements,
-        ns1:physics,
-        ns1:quantum,
-        ns1:quantum_computing,
-        ns1:quantum_dots,
-        ns1:qubits,
-        ns1:superconducting .
-
-ns1:states ns1:is_related_to ns1:binary,
-        ns1:computation,
-        ns1:entangled,
-        ns1:features,
-        ns1:linear_combination,
-        ns1:measuring,
-        ns1:non-deterministic,
-        ns1:outcomes,
-        ns1:probabilistic_rule,
-        ns1:quantum_computer,
-        ns1:quantum_measurements,
-        ns1:quantum_superposition,
-        ns1:qubit,
-        ns1:result,
-        ns1:theoretical_computer .
-
-ns1:computing ns1:is_related_to ns1:BBN,
-        ns1:Google,
-        ns1:IBM,
-        ns1:IMEC,
-        ns1:Intel,
-        ns1:Research,
-        ns1:Rigetti,
-        ns1:Technologies,
-        ns1:companies,
-        ns1:function,
-        ns1:information,
-        ns1:quantum,
-        ns1:quantum_bit,
-        ns1:quantum_computing,
-        ns1:qubit,
-        ns1:superconducting .
-
-ns1:quantum_computing ns1:is_related_to ns1:Superconducting,
-        ns1:artificial_atoms,
-        ns1:branch,
-        ns1:computing,
-        ns1:electronic_circuits,
-        ns1:function,
-        ns1:implements,
-        ns1:information,
-        ns1:physics,
-        ns1:quantum,
-        ns1:quantum_bit,
-        ns1:quantum_dots,
-        ns1:qubit,
-        ns1:qubits,
-        ns1:solid_state,
-        ns1:superconducting .
-
-ns1:qubit ns1:is_related_to ns1:binary,
-        ns1:computing,
-        ns1:function,
-        ns1:information,
-        ns1:linear_combination,
-        ns1:measurement,
-        ns1:measuring,
-        ns1:probabilistic_rule,
-        ns1:probability,
-        ns1:quantum_bit,
-        ns1:quantum_computer,
-        ns1:quantum_computing,
-        ns1:quantum_superposition,
-        ns1:result,
-        ns1:states,
-        ns1:wave_interference .
-
-ns1:quantum ns1:is_related_to ns1:BBN,
-        ns1:Google,
-        ns1:IBM,
-        ns1:IMEC,
-        ns1:Intel,
-        ns1:Research,
-        ns1:Rigetti,
-        ns1:Superconducting,
-        ns1:Technologies,
-        ns1:artificial_atoms,
-        ns1:branch,
-        ns1:companies,
-        ns1:computing,
-        ns1:electronic_circuits,
-        ns1:implements,
-        ns1:physics,
-        ns1:quantum_computing,
-        ns1:quantum_dots,
-        ns1:qubits,
-        ns1:solid_state,
-        ns1:superconducting .
-
-ns1:qubits ns1:is_related_to ns1:,
-        ns1:National_governments,
-        ns1:Superconducting,
-        ns1:artificial_atoms,
-        ns1:branch,
-        ns1:coherence_times,
-        ns1:displaystyle_grangle,
-        ns1:electronic_circuits,
-        ns1:erangle,
-        ns1:error_rates,
-        ns1:excited_state,
-        ns1:experimental_research,
-        ns1:ground_state,
-        ns1:heavily,
-        ns1:implements,
-        ns1:logic_states,
-        ns1:lower,
-        ns1:physics,
-        ns1:quantum,
-        ns1:quantum_computing,
-        ns1:quantum_dots,
-        ns1:scalable,
-        ns1:solid_state,
-        ns1:superconducting,
-        ns1:text .
-
-ns1:superconducting ns1:is_related_to ns1:,
-        ns1:BBN,
-        ns1:Google,
-        ns1:IBM,
-        ns1:IMEC,
-        ns1:Intel,
-        ns1:Research,
-        ns1:Rigetti,
-        ns1:Technologies,
-        ns1:artificial_atoms,
-        ns1:branch,
-        ns1:companies,
-        ns1:computing,
-        ns1:displaystyle_grangle,
-        ns1:electronic_circuits,
-        ns1:erangle,
-        ns1:excited_state,
-        ns1:ground_state,
-        ns1:implements,
-        ns1:logic_states,
-        ns1:physics,
-        ns1:quantum,
-        ns1:quantum_computing,
-        ns1:quantum_dots,
-        ns1:qubits,
-        ns1:solid_state,
-        ns1:text .
-
-ns1:quantum_computer ns1:is_related_to ns1:amplification,
-        ns1:calculations,
+ns1:quantum_computer ns1:is_related_to ns1:calculations,
         ns1:classical_computer,
         ns1:classically,
         ns1:computation,
-        ns1:design,
         ns1:energy,
         ns1:entangled,
         ns1:exponentially,
         ns1:exponentially_faster,
         ns1:features,
         ns1:large-scale,
-        ns1:measurement,
         ns1:non-deterministic,
         ns1:outcomes,
-        ns1:physical_simulations,
         ns1:physicists,
-        ns1:probability,
-        ns1:procedures,
         ns1:public-key_cryptographic_schemes,
-        ns1:quantum_algorithms,
         ns1:quantum_measurements,
-        ns1:qubit,
-        ns1:result,
         ns1:simulated,
         ns1:states,
         ns1:theoretical_computer,
-        ns1:time,
-        ns1:wave_interference .
+        ns1:time .
 

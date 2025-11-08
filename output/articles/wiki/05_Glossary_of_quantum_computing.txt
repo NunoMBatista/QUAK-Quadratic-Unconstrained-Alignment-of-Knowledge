@@ -1,7 +1,7 @@
 Source: Wikipedia
 Title: Glossary of quantum computing
 URL: https://en.wikipedia.org/wiki/Glossary_of_quantum_computing
-Query: Quantum Computing
+Query: fetch mode
 ---
 This glossary of quantum computing is a list of definitions of terms and concepts used in quantum computing, its sub-disciplines, and related fields.
 

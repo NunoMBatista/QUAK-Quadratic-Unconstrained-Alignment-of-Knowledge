@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+from typing import List, Optional, Tuple
 
 import arxiv
 import wikipedia
@@ -39,7 +40,41 @@ def _extract_arxiv_id(entry_id: str) -> str:
     return entry_id.rsplit("/", 1)[-1]
 
 
-def fetch_wiki_data():
+def _load_cached_records(directory: Path, key_prefix: str) -> List[Tuple[str, str]]:
+    """Return cached (key, body) pairs parsed from saved article files."""
+    if not directory.exists():
+        return []
+
+    records: List[Tuple[str, str]] = []
+    for path in sorted(directory.glob("*.txt")):
+        text = path.read_text(encoding="utf-8")
+        header, sep, body = text.partition("---\n")
+        key = None
+        for line in header.splitlines():
+            if line.startswith(key_prefix):
+                key = line[len(key_prefix) :].strip()
+                break
+        if key is None:
+            continue
+        content = body.strip() if sep else text.strip()
+        records.append((key, content))
+    return records
+
+
+def _next_file_index(directory: Path) -> int:
+    """Determine the next numeric prefix for a saved document."""
+    if not directory.exists():
+        return 1
+    max_idx = 0
+    for path in directory.glob("*.txt"):
+        stem = path.stem
+        prefix = stem.split("_", 1)[0]
+        if prefix.isdigit():
+            max_idx = max(max_idx, int(prefix))
+    return max_idx + 1
+
+
+def fetch_wiki_data() -> Tuple[List[str], List[str]]:
     """
     fetch a list of Wikipedia page summaries based on a query.
     
@@ -57,47 +92,69 @@ def fetch_wiki_data():
         
     Returns
     -------
-    list of str
-        A list of Wikipedia article summaries.
+    tuple[list[str], list[str]]
+        Summaries and their associated Wikipedia page titles.
     """
 
-    print(f"-> fetching {NUM_ARTICLES} Wikipedia articles for query: '{DOMAIN_QUERY}'")
+    cached_entries = _load_cached_records(RAW_WIKI_DIR, "Title: ")
+    cached_map = {title: summary for title, summary in cached_entries}
 
-    # search for page titles
+    expected_titles: Optional[List[str]] = None
     if QUERY_MODE == "fetch":
-        page_titles = WIKI_PAGE_TITLES[:NUM_ARTICLES]
+        expected_titles = WIKI_PAGE_TITLES[:NUM_ARTICLES]
+
+    missing_titles: List[str] = []
+    if expected_titles is not None:
+        missing_titles = [title for title in expected_titles if title not in cached_map]
+
+    should_fetch = QUERY_MODE == "search" or bool(missing_titles)
+
+    fetched_titles: List[str] = []
+    if should_fetch:
+        if QUERY_MODE == "search":
+            base_titles = wikipedia.search(DOMAIN_QUERY, results=NUM_ARTICLES)
+            print(f"-> fetching {len(base_titles)} Wikipedia articles for query: '{DOMAIN_QUERY}'")
+        else:
+            base_titles = missing_titles
+            print(f"-> fetching {len(base_titles)} missing Wikipedia articles defined in configuration")
+
+        next_index = _next_file_index(RAW_WIKI_DIR)
+        for raw_title in base_titles:
+            page = wikipedia.page(raw_title, auto_suggest=False)
+            summary = page.summary
+            fetched_titles.append(page.title)
+            cached_map[page.title] = summary
+            cached_entries.append((page.title, summary))
+
+            safe_title = _sanitize_filename(page.title, f"article_{next_index}")
+            filename = f"{next_index:02d}_{safe_title}.txt"
+            file_content = (
+                "Source: Wikipedia\n"
+                f"Title: {page.title}\n"
+                f"URL: {page.url}\n"
+                f"Query: {DOMAIN_QUERY if QUERY_MODE == 'search' else 'fetch mode'}\n"
+                "---\n"
+                f"{summary}\n"
+            )
+
+            _save_document(RAW_WIKI_DIR, filename, file_content)
+            print(f"    -> saved '{page.title}'")
+            next_index += 1
     else:
-        page_titles = wikipedia.search(DOMAIN_QUERY, results=NUM_ARTICLES)
+        print("-> all requested Wikipedia articles already cached; reusing local files")
 
-    # get the summary for each page
-    summaries = []
-    saved_count = 0
-    for title in page_titles:
-        page = wikipedia.page(title, auto_suggest=False)
+    if expected_titles is not None:
+        titles = [title for title in expected_titles if title in cached_map]
+    else:
+        titles = fetched_titles if fetched_titles else [title for title, _ in cached_entries][:NUM_ARTICLES]
 
-        summary = page.summary
-        summaries.append(summary)
-        saved_count += 1
+    summaries = [cached_map[title] for title in titles]
 
-        safe_title = _sanitize_filename(page.title, f"article_{saved_count}")
-        filename = f"{saved_count:02d}_{safe_title}.txt"
-        file_content = (
-            "Source: Wikipedia\n"
-            f"Title: {page.title}\n"
-            f"URL: {page.url}\n"
-            f"Query: {DOMAIN_QUERY if QUERY_MODE == 'search' else 'fetch mode'}\n"
-            "---\n"
-            f"{summary}\n"
-        )
-
-        saved_path = _save_document(RAW_WIKI_DIR, filename, file_content)
-        print(f"    -> saved '{page.title}'")
-        
-    print(f"\n    -> found {len(summaries)} Wikipedia summaries.")
-    return summaries
+    print(f"    -> returning {len(summaries)} Wikipedia summaries.")
+    return summaries, titles
 
 
-def fetch_arxiv_data():
+def fetch_arxiv_data() -> Tuple[List[str], List[str]]:
     """
     fetch a list of arXiv paper abstracts based on a query.
     
@@ -115,51 +172,75 @@ def fetch_arxiv_data():
 
     Returns
     -------
-    list of str
-        A list of arXiv paper abstracts.
+    tuple[list[str], list[str]]
+        Abstracts and their associated arXiv identifiers.
         
     """
-    
-    
-    # search for papers
+    cached_entries = _load_cached_records(RAW_ARXIV_DIR, "ArXiv ID: ")
+    cached_map = {paper_id: summary for paper_id, summary in cached_entries}
+
+    expected_ids: Optional[List[str]] = None
     if QUERY_MODE == "fetch":
-        search = arxiv.Search(id_list=ARXIV_PAPER_IDS[:NUM_ARTICLES])
+        expected_ids = ARXIV_PAPER_IDS[:NUM_ARTICLES]
+
+    missing_ids: List[str] = []
+    if expected_ids is not None:
+        missing_ids = [paper_id for paper_id in expected_ids if paper_id not in cached_map]
+
+    should_fetch = QUERY_MODE == "search" or bool(missing_ids)
+
+    fetched_ids: List[str] = []
+    if should_fetch:
+        if QUERY_MODE == "search":
+            print(f"-> fetching {NUM_ARTICLES} arXiv abstracts for query: '{DOMAIN_QUERY}'")
+            search = arxiv.Search(
+                query=DOMAIN_QUERY,
+                max_results=NUM_ARTICLES,
+                sort_by=arxiv.SortCriterion.Relevance,
+            )
+        else:
+            print(f"-> fetching {len(missing_ids)} missing arXiv abstracts defined in configuration")
+            search = arxiv.Search(id_list=missing_ids)
+
+        arxiv_client = arxiv.Client()
+
+        next_index = _next_file_index(RAW_ARXIV_DIR)
+        for result in arxiv_client.results(search):
+            summary = result.summary.replace("\n", " ")
+            title = result.title.strip()
+            arxiv_id = _extract_arxiv_id(result.entry_id)
+
+            fetched_ids.append(arxiv_id)
+            cached_map[arxiv_id] = summary
+            cached_entries.append((arxiv_id, summary))
+
+            safe_id = _sanitize_filename(arxiv_id, "arxiv")
+            safe_title = _sanitize_filename(title, f"paper_{next_index}")
+            filename = f"{next_index:02d}_{safe_id}_{safe_title}.txt"
+            file_content = (
+                "Source: arXiv\n"
+                f"ArXiv ID: {arxiv_id}\n"
+                f"Title: {title}\n"
+                f"Query: {DOMAIN_QUERY if QUERY_MODE == 'search' else 'fetch mode'}\n"
+                "---\n"
+                f"{summary}\n"
+            )
+
+            _save_document(RAW_ARXIV_DIR, filename, file_content)
+            print(f"    -> saved '{title}' ({arxiv_id})")
+            next_index += 1
     else:
-        print(f"-> fetching {NUM_ARTICLES} arXiv abstracts for query: '{DOMAIN_QUERY}'")
-        search = arxiv.Search(
-            query=DOMAIN_QUERY,
-            max_results=NUM_ARTICLES,
-            sort_by=arxiv.SortCriterion.Relevance
-        )
-    
-    arxiv_client = arxiv.Client()
-    
-    # get the abstracts for each paper
-    abstracts = []
-    for index, result in enumerate(arxiv_client.results(search), start=1):
-        summary = result.summary.replace("\n", " ")  # clean newlines for downstream use
-        title = result.title.strip()
-        arxiv_id = _extract_arxiv_id(result.entry_id)
+        print("-> all requested arXiv abstracts already cached; reusing local files")
 
-        abstracts.append(summary)
+    if expected_ids is not None:
+        arxiv_ids = [paper_id for paper_id in expected_ids if paper_id in cached_map]
+    else:
+        arxiv_ids = fetched_ids if fetched_ids else [paper_id for paper_id, _ in cached_entries][:NUM_ARTICLES]
 
-        safe_id = _sanitize_filename(arxiv_id, "arxiv")
-        safe_title = _sanitize_filename(title, f"paper_{index}")
-        filename = f"{index:02d}_{safe_id}_{safe_title}.txt"
-        file_content = (
-            "Source: arXiv\n"
-            f"ArXiv ID: {arxiv_id}\n"
-            f"Title: {title}\n"
-            f"Query: {DOMAIN_QUERY if QUERY_MODE == 'search' else 'fetch mode'}\n"
-            "---\n"
-            f"{summary}\n"
-        )
+    abstracts = [cached_map[paper_id] for paper_id in arxiv_ids]
 
-        saved_path = _save_document(RAW_ARXIV_DIR, filename, file_content)
-        print(f"    -> saved '{title}' ({arxiv_id})")
-        
-    print(f"\n    -> found {len(abstracts)} arXiv abstracts.")
-    return abstracts
+    print(f"    -> returning {len(abstracts)} arXiv abstracts.")
+    return abstracts, arxiv_ids
 
 
 
@@ -167,5 +248,5 @@ if __name__ == "__main__":
     # test the file directly by running python3 -m src.kg_construction.fetch_data
     
     print("--- Testing Wikipedia Fetcher ---")
-    rawwiki = fetch_wiki_data()
-    raw_arxiv = fetch_arxiv_data()
+    raw_wiki, raw_wiki_titles = fetch_wiki_data()
+    raw_arxiv, raw_arxiv_ids = fetch_arxiv_data()

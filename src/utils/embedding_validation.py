@@ -2,6 +2,7 @@ import torch
 import numpy as np
 from rdflib import Graph, URIRef
 from torch_geometric.nn.models import InnerProductDecoder
+from torch_geometric.utils import to_undirected, coalesce, negative_sampling
 from pathlib import Path
 from src.config import *
 
@@ -73,69 +74,79 @@ def validate_entity_embeddings():
     
     print(f"Loaded {num_nodes} node embeddings (vector shape: {embeddings.shape[1]}).")
     
-    # --- Run the Decoder ---
-    # We will get the "reconstructed adjacency matrix"
-    # This matrix contains the decoder's prediction for *every possible pair*
-    
-    # 1. Initialize the same decoder used in the GAE
-    decoder = InnerProductDecoder()
-    
-    # 2. Get the full matrix of scores (logits)
-    # This is (Z @ Z.T)
-    # full_adj_logits = decoder(embeddings) CALLING THE DECODER DIRECTLY DOESN'T WORK BECAUSE IT EXPECTS EDGE INDEX
-    full_adj_logits = torch.matmul(embeddings, embeddings.t())
+    device = embeddings.device
 
-    
-    # 3. Apply sigmoid to get probabilities (0.0 to 1.0)
-    full_adj_probs = torch.sigmoid(full_adj_logits)
-
-    # --- Compare to Ground Truth ---
+    # --- Build edge indices from the ground-truth graph ---
     print(f"\nLoading ground truth graph: {KG_GROUND_TRUTH_PATH}")
     g = Graph()
     g.parse(str(KG_GROUND_TRUTH_PATH), format="turtle")
-    
-    # Find all "true" links in the graph
-    true_links = set()
-    for s, p, o in g:
-        # We only care about links between entities (not 'rdf:type' etc.)
+
+    sources = []
+    targets = []
+    for s, _, o in g:
         if (s in node_map) and (o in node_map):
             s_idx = node_map[s]
             o_idx = node_map[o]
-            # Add links in both directions for an undirected graph
-            true_links.add(tuple(sorted((s_idx, o_idx))))
+            if s_idx == o_idx:
+                continue  # skip self-loops for evaluation
+            sources.append(s_idx)
+            targets.append(o_idx)
 
-    print(f"Found {len(true_links)} true links in the graph.")
+    if not sources:
+        print("No evaluateable links found in the ground-truth graph.")
+        return
 
-    # --- Print Validation Results ---
-    print("\n--- Decoder Output Analysis ---")
-    
-    print("\nPredictions for TRUE links (scores should be HIGH, close to 1.0):")
-    if not true_links:
-        print("  (No true links found to validate)")
-    for s_idx, o_idx in true_links:
-        score = full_adj_probs[s_idx, o_idx].item()
-        s_name = index_to_node[s_idx]
-        o_name = index_to_node[o_idx]
-        print(f"  - ({s_name}, {o_name}): {score:.4f}")
+    raw_edge_index = torch.tensor([sources, targets], dtype=torch.long, device=device)
+    pos_edge_index = coalesce(
+        to_undirected(raw_edge_index, num_nodes=num_nodes),
+        num_nodes=num_nodes
+    )
 
-    print("\nPredictions for FALSE links (scores should be LOW, close to 0.0):")
-    checked = 0
-    # Check a few random pairs that are NOT in true_links
-    for i in range(num_nodes):
-        for j in range(i + 1, num_nodes): # Only check upper triangle
-            if tuple(sorted((i, j))) not in true_links:
-                if checked >= 5: # Limit to 5 examples
-                    break
-                
-                score = full_adj_probs[i, j].item()
-                i_name = index_to_node[i]
-                j_name = index_to_node[j]
-                print(f"  - ({i_name}, {j_name}): {score:.4f}")
-                checked += 1
-    
-    if checked == 0:
-        print("  (No false links found to validate - graph might be fully connected)")
-        
+    # --- Run the Decoder in the same regime as training ---
+    decoder = InnerProductDecoder().to(device)
+
+    pos_logits = decoder(embeddings, pos_edge_index)
+    pos_probs = torch.sigmoid(pos_logits)
+
+    neg_edge_index = negative_sampling(
+        pos_edge_index,
+        num_nodes=num_nodes,
+        num_neg_samples=pos_edge_index.size(1)
+    ).to(device)
+    neg_logits = decoder(embeddings, neg_edge_index)
+    neg_probs = torch.sigmoid(neg_logits)
+
+    print(f"Found {pos_edge_index.size(1)} positive evaluation edges.")
+    print("\n--- Decoder Output Analysis (edge-level) ---")
+    print(f"Positive mean: {pos_probs.mean().item():.4f} ± {pos_probs.std().item():.4f}")
+    print(f"Negative mean: {neg_probs.mean().item():.4f} ± {neg_probs.std().item():.4f}")
+
+    # Display top/bottom positives
+    topk = torch.topk(pos_probs, k=min(10, pos_probs.numel()))
+    print("\nTop positive edges:")
+    for prob, idx in zip(topk.values.cpu().tolist(), topk.indices.cpu().tolist()):
+        u = pos_edge_index[0, idx].item()
+        v = pos_edge_index[1, idx].item()
+        print(f"  - ({index_to_node[u]}, {index_to_node[v]}): {prob:.4f}")
+
+    bottomk = torch.topk(-pos_probs, k=min(10, pos_probs.numel()))
+    print("\nWeakest positive edges:")
+    for neg_prob, idx in zip(bottomk.values.cpu().tolist(), bottomk.indices.cpu().tolist()):
+        prob = -neg_prob
+        u = pos_edge_index[0, idx].item()
+        v = pos_edge_index[1, idx].item()
+        print(f"  - ({index_to_node[u]}, {index_to_node[v]}): {prob:.4f}")
+
+    # Sample a handful of negatives for inspection
+    print("\nSampled negative edges:")
+    sample_size = min(10, neg_probs.numel())
+    perm = torch.randperm(neg_probs.numel(), device=device)[:sample_size].cpu().tolist()
+    for idx in perm:
+        u = neg_edge_index[0, idx].item()
+        v = neg_edge_index[1, idx].item()
+        prob = neg_probs[idx].item()
+        print(f"  - ({index_to_node[u]}, {index_to_node[v]}): {prob:.4f}")
+
     print("---------------------------------------------------\n")
 
 

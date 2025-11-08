@@ -1,7 +1,7 @@
 Source: Wikipedia
 Title: Superconducting quantum computing
 URL: https://en.wikipedia.org/wiki/Superconducting_quantum_computing
-Query: Quantum Computing
+Query: fetch mode
 ---
 Superconducting quantum computing is a branch of solid state  physics and quantum computing that implements superconducting electronic circuits using superconducting qubits as artificial atoms, or quantum dots. For superconducting qubits, the two logic states are the ground state and the excited state, denoted 
   
