@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 0804.3401v1
+Title: Quantum Computational Complexity
+Query: Quantum Computing
+---
+This article surveys quantum computational complexity, with a focus on three fundamental notions: polynomial-time quantum computations, the efficient verification of quantum proofs, and quantum interactive proof systems. Properties of quantum complexity classes based on these notions, such as BQP, QMA, and QIP, are presented. Other topics in quantum complexity, including quantum advice, space-bounded quantum computation, and bounded-depth quantum circuits, are also discussed.

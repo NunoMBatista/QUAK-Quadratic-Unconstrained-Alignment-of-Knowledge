@@ -1,36 +1,876 @@
 @prefix ns1: <http://example.org/raw/> .
 
-ns1:classical ns1:is_related_to ns1:Internet,
-        ns1:computing,
-        ns1:quantum,
-        ns1:quantum_Internet .
+ns1:geometrical_model ns1:is_related_to ns1:quantum_circuit_model,
+        ns1:quantum_computation .
 
-ns1:distributed ns1:is_related_to ns1:Internet,
-        ns1:computing,
-        ns1:quantum,
-        ns1:quantum_Internet .
+ns1:quantum_circuit_model ns1:is_related_to ns1:geometrical_model,
+        ns1:quantum_computation .
 
-ns1:Internet ns1:is_related_to ns1:classical,
-        ns1:computing,
-        ns1:distributed,
-        ns1:quantum,
-        ns1:quantum_Internet .
+ns1:analysis ns1:is_related_to ns1:quantum_algorithms,
+        ns1:quantum_simulation,
+        ns1:statistical_framework .
 
-ns1:computing ns1:is_related_to ns1:Internet,
-        ns1:classical,
-        ns1:distributed,
-        ns1:quantum,
-        ns1:quantum_Internet .
+ns1:communication ns1:is_related_to ns1:computation,
+        ns1:cryptography,
+        ns1:technological_innovations .
 
-ns1:quantum ns1:is_related_to ns1:Internet,
-        ns1:classical,
+ns1:computation ns1:is_related_to ns1:communication,
+        ns1:cryptography,
+        ns1:technological_innovations .
+
+ns1:computational_statistics ns1:is_related_to ns1:quantum_computation,
+        ns1:quantum_simulation,
+        ns1:statistics .
+
+ns1:cryptography ns1:is_related_to ns1:communication,
+        ns1:computation,
+        ns1:technological_innovations .
+
+ns1:statistical_framework ns1:is_related_to ns1:analysis,
+        ns1:quantum_algorithms,
+        ns1:quantum_simulation .
+
+ns1:statistics ns1:is_related_to ns1:computational_statistics,
+        ns1:quantum_computation,
+        ns1:quantum_simulation .
+
+ns1:technological_innovations ns1:is_related_to ns1:communication,
+        ns1:computation,
+        ns1:cryptography .
+
+ns1:Consequently ns1:is_related_to ns1:Monte_Carlo_techniques,
+        ns1:quantum_algorithms,
+        ns1:quantum_simulation,
+        ns1:random .
+
+ns1:Monte_Carlo_techniques ns1:is_related_to ns1:Consequently,
+        ns1:quantum_algorithms,
+        ns1:quantum_simulation,
+        ns1:random .
+
+ns1:conventional ns1:is_related_to ns1:quantities,
+        ns1:quantum_computers,
+        ns1:quantum_computing_devices,
+        ns1:unconventional .
+
+ns1:proposal ns1:is_related_to ns1:quantum,
+        ns1:quantum_computer,
+        ns1:realizing,
+        ns1:result .
+
+ns1:quantities ns1:is_related_to ns1:conventional,
+        ns1:quantum_computers,
+        ns1:quantum_computing_devices,
+        ns1:unconventional .
+
+ns1:quantum_computer ns1:is_related_to ns1:proposal,
+        ns1:quantum,
+        ns1:realizing,
+        ns1:result .
+
+ns1:quantum_computing_devices ns1:is_related_to ns1:conventional,
+        ns1:quantities,
+        ns1:quantum_computers,
+        ns1:unconventional .
+
+ns1:random ns1:is_related_to ns1:Consequently,
+        ns1:Monte_Carlo_techniques,
+        ns1:quantum_algorithms,
+        ns1:quantum_simulation .
+
+ns1:realizing ns1:is_related_to ns1:proposal,
+        ns1:quantum,
+        ns1:quantum_computer,
+        ns1:result .
+
+ns1:result ns1:is_related_to ns1:proposal,
+        ns1:quantum,
+        ns1:quantum_computer,
+        ns1:realizing .
+
+ns1:ACP ns1:is_related_to ns1:classical,
         ns1:computing,
-        ns1:distributed,
-        ns1:quantum_Internet .
+        ns1:open,
+        ns1:quantum,
+        ns1:unified .
+
+ns1:Quantum_computation ns1:is_related_to ns1:computer_science,
+        ns1:engineering,
+        ns1:mathematics,
+        ns1:physical_sciences,
+        ns1:quantum_information .
+
+ns1:algorithms ns1:is_related_to ns1:classic,
+        ns1:concepts,
+        ns1:quantum_algorithms,
+        ns1:quantum_computation,
+        ns1:quantum_simulation .
+
+ns1:classic ns1:is_related_to ns1:algorithms,
+        ns1:concepts,
+        ns1:quantum_algorithms,
+        ns1:quantum_computation,
+        ns1:quantum_simulation .
+
+ns1:computer_science ns1:is_related_to ns1:Quantum_computation,
+        ns1:engineering,
+        ns1:mathematics,
+        ns1:physical_sciences,
+        ns1:quantum_information .
+
+ns1:concepts ns1:is_related_to ns1:algorithms,
+        ns1:classic,
+        ns1:quantum_algorithms,
+        ns1:quantum_computation,
+        ns1:quantum_simulation .
+
+ns1:engineering ns1:is_related_to ns1:Quantum_computation,
+        ns1:computer_science,
+        ns1:mathematics,
+        ns1:physical_sciences,
+        ns1:quantum_information .
+
+ns1:mathematics ns1:is_related_to ns1:Quantum_computation,
+        ns1:computer_science,
+        ns1:engineering,
+        ns1:physical_sciences,
+        ns1:quantum_information .
+
+ns1:physical_sciences ns1:is_related_to ns1:Quantum_computation,
+        ns1:computer_science,
+        ns1:engineering,
+        ns1:mathematics,
+        ns1:quantum_information .
+
+ns1:process_algebra ns1:is_related_to ns1:classical,
+        ns1:computing,
+        ns1:open,
+        ns1:quantum,
+        ns1:unified .
 
 ns1:quantum_Internet ns1:is_related_to ns1:Internet,
         ns1:classical,
         ns1:computing,
         ns1:distributed,
         ns1:quantum .
+
+<http://example.org/raw/Connes'> ns1:is_related_to ns1:finite,
+        ns1:geometric_evolution_process,
+        ns1:noncommutative_geometry,
+        ns1:quantum,
+        ns1:quantum_systems,
+        ns1:reformulating .
+
+ns1:finite ns1:is_related_to <http://example.org/raw/Connes'>,
+        ns1:geometric_evolution_process,
+        ns1:noncommutative_geometry,
+        ns1:quantum,
+        ns1:quantum_systems,
+        ns1:reformulating .
+
+ns1:geometric_evolution_process ns1:is_related_to <http://example.org/raw/Connes'>,
+        ns1:finite,
+        ns1:noncommutative_geometry,
+        ns1:quantum,
+        ns1:quantum_systems,
+        ns1:reformulating .
+
+ns1:noncommutative_geometry ns1:is_related_to <http://example.org/raw/Connes'>,
+        ns1:finite,
+        ns1:geometric_evolution_process,
+        ns1:quantum,
+        ns1:quantum_systems,
+        ns1:reformulating .
+
+ns1:qACP ns1:is_related_to ns1:classical,
+        ns1:computing,
+        ns1:open,
+        ns1:quantum,
+        ns1:quantum_systems,
+        ns1:unified .
+
+ns1:quantum_generalization ns1:is_related_to ns1:classical,
+        ns1:computing,
+        ns1:open,
+        ns1:quantum,
+        ns1:quantum_systems,
+        ns1:unified .
+
+ns1:reformulating ns1:is_related_to <http://example.org/raw/Connes'>,
+        ns1:finite,
+        ns1:geometric_evolution_process,
+        ns1:noncommutative_geometry,
+        ns1:quantum,
+        ns1:quantum_systems .
+
+ns1:computers ns1:is_related_to ns1:fermionic,
+        ns1:investigates,
+        ns1:nonlinear,
+        ns1:quantum_computation_devices,
+        ns1:quantum_computers,
+        ns1:quantum_mechanics,
+        ns1:unconventional .
+
+ns1:connections ns1:is_related_to ns1:formulation,
+        ns1:gauge,
+        ns1:noncommutative_connections,
+        ns1:quantum_operations,
+        ns1:quantum_states,
+        ns1:transformations,
+        ns1:unitary .
+
+ns1:fermionic ns1:is_related_to ns1:computers,
+        ns1:investigates,
+        ns1:nonlinear,
+        ns1:quantum_computation_devices,
+        ns1:quantum_computers,
+        ns1:quantum_mechanics,
+        ns1:unconventional .
+
+ns1:formulation ns1:is_related_to ns1:connections,
+        ns1:gauge,
+        ns1:noncommutative_connections,
+        ns1:quantum_operations,
+        ns1:quantum_states,
+        ns1:transformations,
+        ns1:unitary .
+
+ns1:gauge ns1:is_related_to ns1:connections,
+        ns1:formulation,
+        ns1:noncommutative_connections,
+        ns1:quantum_operations,
+        ns1:quantum_states,
+        ns1:transformations,
+        ns1:unitary .
+
+ns1:investigates ns1:is_related_to ns1:computers,
+        ns1:fermionic,
+        ns1:nonlinear,
+        ns1:quantum_computation_devices,
+        ns1:quantum_computers,
+        ns1:quantum_mechanics,
+        ns1:unconventional .
+
+ns1:noncommutative_connections ns1:is_related_to ns1:connections,
+        ns1:formulation,
+        ns1:gauge,
+        ns1:quantum_operations,
+        ns1:quantum_states,
+        ns1:transformations,
+        ns1:unitary .
+
+ns1:nonlinear ns1:is_related_to ns1:computers,
+        ns1:fermionic,
+        ns1:investigates,
+        ns1:quantum_computation_devices,
+        ns1:quantum_computers,
+        ns1:quantum_mechanics,
+        ns1:unconventional .
+
+ns1:quantum_computation_devices ns1:is_related_to ns1:computers,
+        ns1:fermionic,
+        ns1:investigates,
+        ns1:nonlinear,
+        ns1:quantum_computers,
+        ns1:quantum_mechanics,
+        ns1:unconventional .
+
+ns1:quantum_mechanics ns1:is_related_to ns1:computers,
+        ns1:fermionic,
+        ns1:investigates,
+        ns1:nonlinear,
+        ns1:quantum_computation_devices,
+        ns1:quantum_computers,
+        ns1:unconventional .
+
+ns1:quantum_operations ns1:is_related_to ns1:connections,
+        ns1:formulation,
+        ns1:gauge,
+        ns1:noncommutative_connections,
+        ns1:quantum_states,
+        ns1:transformations,
+        ns1:unitary .
+
+ns1:quantum_states ns1:is_related_to ns1:connections,
+        ns1:formulation,
+        ns1:gauge,
+        ns1:noncommutative_connections,
+        ns1:quantum_operations,
+        ns1:transformations,
+        ns1:unitary .
+
+ns1:transformations ns1:is_related_to ns1:connections,
+        ns1:formulation,
+        ns1:gauge,
+        ns1:noncommutative_connections,
+        ns1:quantum_operations,
+        ns1:quantum_states,
+        ns1:unitary .
+
+ns1:unitary ns1:is_related_to ns1:connections,
+        ns1:formulation,
+        ns1:gauge,
+        ns1:noncommutative_connections,
+        ns1:quantum_operations,
+        ns1:quantum_states,
+        ns1:transformations .
+
+ns1:fundamentally ns1:is_related_to ns1:quantum_computation,
+        ns1:quantum_information,
+        ns1:quantum_physics,
+        ns1:quantum_simulation,
+        ns1:randomness,
+        ns1:stochastic,
+        ns1:theory,
+        ns1:uncertainty .
+
+ns1:quantum_physics ns1:is_related_to ns1:fundamentally,
+        ns1:quantum_computation,
+        ns1:quantum_information,
+        ns1:quantum_simulation,
+        ns1:randomness,
+        ns1:stochastic,
+        ns1:theory,
+        ns1:uncertainty .
+
+ns1:randomness ns1:is_related_to ns1:fundamentally,
+        ns1:quantum_computation,
+        ns1:quantum_information,
+        ns1:quantum_physics,
+        ns1:quantum_simulation,
+        ns1:stochastic,
+        ns1:theory,
+        ns1:uncertainty .
+
+ns1:stochastic ns1:is_related_to ns1:fundamentally,
+        ns1:quantum_computation,
+        ns1:quantum_information,
+        ns1:quantum_physics,
+        ns1:quantum_simulation,
+        ns1:randomness,
+        ns1:theory,
+        ns1:uncertainty .
+
+ns1:theory ns1:is_related_to ns1:fundamentally,
+        ns1:quantum_computation,
+        ns1:quantum_information,
+        ns1:quantum_physics,
+        ns1:quantum_simulation,
+        ns1:randomness,
+        ns1:stochastic,
+        ns1:uncertainty .
+
+ns1:uncertainty ns1:is_related_to ns1:fundamentally,
+        ns1:quantum_computation,
+        ns1:quantum_information,
+        ns1:quantum_physics,
+        ns1:quantum_simulation,
+        ns1:randomness,
+        ns1:stochastic,
+        ns1:theory .
+
+ns1:open ns1:is_related_to ns1:ACP,
+        ns1:classical,
+        ns1:computing,
+        ns1:process_algebra,
+        ns1:qACP,
+        ns1:quantum,
+        ns1:quantum_generalization,
+        ns1:quantum_systems,
+        ns1:unified .
+
+ns1:unified ns1:is_related_to ns1:ACP,
+        ns1:classical,
+        ns1:computing,
+        ns1:open,
+        ns1:process_algebra,
+        ns1:qACP,
+        ns1:quantum,
+        ns1:quantum_generalization,
+        ns1:quantum_systems .
+
+ns1:Markov_chain_simulation ns1:is_related_to ns1:Monte_Carlo_integration,
+        ns1:classical_computers,
+        ns1:evaluation,
+        ns1:exponentially,
+        ns1:genuine_random_numbers,
+        ns1:median,
+        ns1:pseudo-random_numbers,
+        ns1:quadratically,
+        ns1:quantum_computers,
+        ns1:speed .
+
+ns1:Monte_Carlo_integration ns1:is_related_to ns1:Markov_chain_simulation,
+        ns1:classical_computers,
+        ns1:evaluation,
+        ns1:exponentially,
+        ns1:genuine_random_numbers,
+        ns1:median,
+        ns1:pseudo-random_numbers,
+        ns1:quadratically,
+        ns1:quantum_computers,
+        ns1:speed .
+
+ns1:classical_computers ns1:is_related_to ns1:Markov_chain_simulation,
+        ns1:Monte_Carlo_integration,
+        ns1:evaluation,
+        ns1:exponentially,
+        ns1:genuine_random_numbers,
+        ns1:median,
+        ns1:pseudo-random_numbers,
+        ns1:quadratically,
+        ns1:quantum_computers,
+        ns1:speed .
+
+ns1:evaluation ns1:is_related_to ns1:Markov_chain_simulation,
+        ns1:Monte_Carlo_integration,
+        ns1:classical_computers,
+        ns1:exponentially,
+        ns1:genuine_random_numbers,
+        ns1:median,
+        ns1:pseudo-random_numbers,
+        ns1:quadratically,
+        ns1:quantum_computers,
+        ns1:speed .
+
+ns1:exponentially ns1:is_related_to ns1:Markov_chain_simulation,
+        ns1:Monte_Carlo_integration,
+        ns1:classical_computers,
+        ns1:evaluation,
+        ns1:genuine_random_numbers,
+        ns1:median,
+        ns1:pseudo-random_numbers,
+        ns1:quadratically,
+        ns1:quantum_computers,
+        ns1:speed .
+
+ns1:genuine_random_numbers ns1:is_related_to ns1:Markov_chain_simulation,
+        ns1:Monte_Carlo_integration,
+        ns1:classical_computers,
+        ns1:evaluation,
+        ns1:exponentially,
+        ns1:median,
+        ns1:pseudo-random_numbers,
+        ns1:quadratically,
+        ns1:quantum_computers,
+        ns1:speed .
+
+ns1:median ns1:is_related_to ns1:Markov_chain_simulation,
+        ns1:Monte_Carlo_integration,
+        ns1:classical_computers,
+        ns1:evaluation,
+        ns1:exponentially,
+        ns1:genuine_random_numbers,
+        ns1:pseudo-random_numbers,
+        ns1:quadratically,
+        ns1:quantum_computers,
+        ns1:speed .
+
+ns1:pseudo-random_numbers ns1:is_related_to ns1:Markov_chain_simulation,
+        ns1:Monte_Carlo_integration,
+        ns1:classical_computers,
+        ns1:evaluation,
+        ns1:exponentially,
+        ns1:genuine_random_numbers,
+        ns1:median,
+        ns1:quadratically,
+        ns1:quantum_computers,
+        ns1:speed .
+
+ns1:quadratically ns1:is_related_to ns1:Markov_chain_simulation,
+        ns1:Monte_Carlo_integration,
+        ns1:classical_computers,
+        ns1:evaluation,
+        ns1:exponentially,
+        ns1:genuine_random_numbers,
+        ns1:median,
+        ns1:pseudo-random_numbers,
+        ns1:quantum_computers,
+        ns1:speed .
+
+ns1:quantum_algorithms ns1:is_related_to ns1:Consequently,
+        ns1:Monte_Carlo_techniques,
+        ns1:algorithms,
+        ns1:analysis,
+        ns1:classic,
+        ns1:concepts,
+        ns1:quantum_computation,
+        ns1:quantum_simulation,
+        ns1:random,
+        ns1:statistical_framework .
+
+ns1:speed ns1:is_related_to ns1:Markov_chain_simulation,
+        ns1:Monte_Carlo_integration,
+        ns1:classical_computers,
+        ns1:evaluation,
+        ns1:exponentially,
+        ns1:genuine_random_numbers,
+        ns1:median,
+        ns1:pseudo-random_numbers,
+        ns1:quadratically,
+        ns1:quantum_computers .
+
+ns1:unconventional ns1:is_related_to ns1:computers,
+        ns1:conventional,
+        ns1:fermionic,
+        ns1:investigates,
+        ns1:nonlinear,
+        ns1:quantities,
+        ns1:quantum_computation_devices,
+        ns1:quantum_computers,
+        ns1:quantum_computing_devices,
+        ns1:quantum_mechanics .
+
+ns1:classical ns1:is_related_to ns1:ACP,
+        ns1:Internet,
+        ns1:computing,
+        ns1:distributed,
+        ns1:open,
+        ns1:process_algebra,
+        ns1:qACP,
+        ns1:quantum,
+        ns1:quantum_Internet,
+        ns1:quantum_generalization,
+        ns1:quantum_systems,
+        ns1:unified .
+
+ns1:quantum_systems ns1:is_related_to <http://example.org/raw/Connes'>,
+        ns1:classical,
+        ns1:computing,
+        ns1:finite,
+        ns1:geometric_evolution_process,
+        ns1:noncommutative_geometry,
+        ns1:open,
+        ns1:qACP,
+        ns1:quantum,
+        ns1:quantum_generalization,
+        ns1:reformulating,
+        ns1:unified .
+
+ns1:Internet-scale_distances ns1:is_related_to ns1:Internet,
+        ns1:computations,
+        ns1:computing,
+        ns1:distributed,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:study,
+        ns1:verifiable_blind .
+
+ns1:computations ns1:is_related_to ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:computing,
+        ns1:distributed,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:study,
+        ns1:verifiable_blind .
+
+ns1:nodes ns1:is_related_to ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:computations,
+        ns1:computing,
+        ns1:distributed,
+        ns1:non-local_gates,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:study,
+        ns1:verifiable_blind .
+
+ns1:non-local_gates ns1:is_related_to ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:computations,
+        ns1:computing,
+        ns1:distributed,
+        ns1:nodes,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:study,
+        ns1:verifiable_blind .
+
+ns1:private_computing ns1:is_related_to ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:computations,
+        ns1:computing,
+        ns1:distributed,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:quantum,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:study,
+        ns1:verifiable_blind .
+
+ns1:quantum_applications ns1:is_related_to ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:computations,
+        ns1:computing,
+        ns1:distributed,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_cloud,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:study,
+        ns1:verifiable_blind .
+
+ns1:quantum_cloud ns1:is_related_to ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:computations,
+        ns1:computing,
+        ns1:distributed,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_applications,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:study,
+        ns1:verifiable_blind .
+
+ns1:quantum_protocols ns1:is_related_to ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:computations,
+        ns1:computing,
+        ns1:distributed,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_information,
+        ns1:study,
+        ns1:verifiable_blind .
+
+ns1:study ns1:is_related_to ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:computations,
+        ns1:computing,
+        ns1:distributed,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:verifiable_blind .
+
+ns1:verifiable_blind ns1:is_related_to ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:computations,
+        ns1:computing,
+        ns1:distributed,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:study .
+
+ns1:Internet ns1:is_related_to ns1:Internet-scale_distances,
+        ns1:classical,
+        ns1:computations,
+        ns1:computing,
+        ns1:distributed,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_Internet,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:study,
+        ns1:verifiable_blind .
+
+ns1:distributed ns1:is_related_to ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:classical,
+        ns1:computations,
+        ns1:computing,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_Internet,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:study,
+        ns1:verifiable_blind .
+
+ns1:quantum_computation ns1:is_related_to ns1:algorithms,
+        ns1:classic,
+        ns1:computational_statistics,
+        ns1:concepts,
+        ns1:fundamentally,
+        ns1:geometrical_model,
+        ns1:quantum_algorithms,
+        ns1:quantum_circuit_model,
+        ns1:quantum_information,
+        ns1:quantum_physics,
+        ns1:quantum_simulation,
+        ns1:randomness,
+        ns1:statistics,
+        ns1:stochastic,
+        ns1:theory,
+        ns1:uncertainty .
+
+ns1:quantum_simulation ns1:is_related_to ns1:Consequently,
+        ns1:Monte_Carlo_techniques,
+        ns1:algorithms,
+        ns1:analysis,
+        ns1:classic,
+        ns1:computational_statistics,
+        ns1:concepts,
+        ns1:fundamentally,
+        ns1:quantum_algorithms,
+        ns1:quantum_computation,
+        ns1:quantum_information,
+        ns1:quantum_physics,
+        ns1:random,
+        ns1:randomness,
+        ns1:statistical_framework,
+        ns1:statistics,
+        ns1:stochastic,
+        ns1:theory,
+        ns1:uncertainty .
+
+ns1:quantum_computers ns1:is_related_to ns1:Markov_chain_simulation,
+        ns1:Monte_Carlo_integration,
+        ns1:classical_computers,
+        ns1:computers,
+        ns1:conventional,
+        ns1:evaluation,
+        ns1:exponentially,
+        ns1:fermionic,
+        ns1:genuine_random_numbers,
+        ns1:investigates,
+        ns1:median,
+        ns1:nonlinear,
+        ns1:pseudo-random_numbers,
+        ns1:quadratically,
+        ns1:quantities,
+        ns1:quantum_computation_devices,
+        ns1:quantum_computing_devices,
+        ns1:quantum_mechanics,
+        ns1:speed,
+        ns1:unconventional .
+
+ns1:computing ns1:is_related_to ns1:ACP,
+        ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:classical,
+        ns1:computations,
+        ns1:distributed,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:open,
+        ns1:private_computing,
+        ns1:process_algebra,
+        ns1:qACP,
+        ns1:quantum,
+        ns1:quantum_Internet,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_generalization,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:quantum_systems,
+        ns1:study,
+        ns1:unified,
+        ns1:verifiable_blind .
+
+ns1:quantum_information ns1:is_related_to ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:Quantum_computation,
+        ns1:computations,
+        ns1:computer_science,
+        ns1:computing,
+        ns1:distributed,
+        ns1:engineering,
+        ns1:fundamentally,
+        ns1:mathematics,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:physical_sciences,
+        ns1:private_computing,
+        ns1:quantum,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_computation,
+        ns1:quantum_physics,
+        ns1:quantum_protocols,
+        ns1:quantum_simulation,
+        ns1:randomness,
+        ns1:stochastic,
+        ns1:study,
+        ns1:theory,
+        ns1:uncertainty,
+        ns1:verifiable_blind .
+
+ns1:quantum ns1:is_related_to ns1:ACP,
+        <http://example.org/raw/Connes'>,
+        ns1:Internet,
+        ns1:Internet-scale_distances,
+        ns1:classical,
+        ns1:computations,
+        ns1:computing,
+        ns1:distributed,
+        ns1:finite,
+        ns1:geometric_evolution_process,
+        ns1:nodes,
+        ns1:non-local_gates,
+        ns1:noncommutative_geometry,
+        ns1:open,
+        ns1:private_computing,
+        ns1:process_algebra,
+        ns1:proposal,
+        ns1:qACP,
+        ns1:quantum_Internet,
+        ns1:quantum_applications,
+        ns1:quantum_cloud,
+        ns1:quantum_computer,
+        ns1:quantum_generalization,
+        ns1:quantum_information,
+        ns1:quantum_protocols,
+        ns1:quantum_systems,
+        ns1:realizing,
+        ns1:reformulating,
+        ns1:result,
+        ns1:study,
+        ns1:unified,
+        ns1:verifiable_blind .
 

@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: Silicon Quantum Computing
+URL: https://en.wikipedia.org/wiki/Silicon_Quantum_Computing
+Query: Quantum Computing
+---
+Silicon Quantum Computing Pty Ltd (SQC) is a Sydney, Australia-based quantum computing company.
+The company develops quantum computers and analogue quantum devices using phosphorus atoms manufactured within silicon using scanning tunnelling microscopes, an approach within the field of spin qubits.
+Distinct from other companies within the spin qubits modality, SQC uses the nuclear spin of phosphorus atoms placed within isotopically pure Si-28 wafers for quantum computation. Atoms used as qubits have demonstrated favourable performance indicators such as long coherence times and biased noise.

@@ -39,7 +39,7 @@ def _extract_arxiv_id(entry_id: str) -> str:
     return entry_id.rsplit("/", 1)[-1]
 
 
-def fetch_wiki_data(num_articles=5):
+def fetch_wiki_data():
     """
     fetch a list of Wikipedia page summaries based on a query.
     
@@ -60,15 +60,15 @@ def fetch_wiki_data(num_articles=5):
     list of str
         A list of Wikipedia article summaries.
     """
-    
-    print(f"-> fetching {num_articles} Wikipedia articles for query: '{DOMAIN_QUERY}'")
-    
+
+    print(f"-> fetching {NUM_ARTICLES} Wikipedia articles for query: '{DOMAIN_QUERY}'")
+
     # search for page titles
     if QUERY_MODE == "fetch":
-        page_titles = WIKI_PAGE_TITLES[:num_articles]
+        page_titles = WIKI_PAGE_TITLES[:NUM_ARTICLES]
     else:
-        page_titles = wikipedia.search(DOMAIN_QUERY, results=num_articles)
-    
+        page_titles = wikipedia.search(DOMAIN_QUERY, results=NUM_ARTICLES)
+
     # get the summary for each page
     summaries = []
     saved_count = 0

@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: quant-ph/0201082v1
+Title: Quantum Computers and Quantum Computer Languages: Quantum Assembly Language and Quantum C Language
+Query: Quantum Computing
+---
+We show a representation of Quantum Computers defines Quantum Turing Machines with associated Quantum Grammars. We then create examples of Quantum Grammars. Lastly we develop an algebraic approach to high level Quantum Languages using Quantum Assembly language and Quantum C language as examples.

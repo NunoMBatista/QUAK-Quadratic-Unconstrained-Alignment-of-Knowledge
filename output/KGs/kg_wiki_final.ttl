@@ -1,0 +1,12 @@
+@prefix ont: <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#> .
+
+ont:possibilities a ont:QuantumConcept .
+
+ont:quantum a ont:QuantumAlgorithm .
+
+ont:computation a ont:QuantumConcept ;
+    ont:usesConcept ont:features .
+
+ont:features a ont:QuantumConcept ;
+    ont:usesConcept ont:computation .
+
