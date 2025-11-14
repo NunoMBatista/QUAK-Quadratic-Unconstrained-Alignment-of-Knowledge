@@ -1,0 +1,7 @@
+Source: Wikipedia
+Title: Multiverse Computing
+URL: https://en.wikipedia.org/wiki/Multiverse_Computing
+Query: Quantum Computing
+---
+Multiverse Computing is a quantum AI software company headquartered in San Sebastián, Spain, with offices in Paris, Munich, London, Milan, Toronto and San Francisco. The company leads in AI model compression and quantum software. 
+The AI model compression platform, CompactifAI, delivers ultra-efficient AI models by applying advanced tensor network techniques, enabling seamless deployment of LLMs and other systems with lower cost and energy use without sacrificing performance.

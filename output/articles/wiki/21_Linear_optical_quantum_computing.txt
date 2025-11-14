@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: Linear optical quantum computing
+URL: https://en.wikipedia.org/wiki/Linear_optical_quantum_computing
+Query: Quantum Computing
+---
+Linear optical quantum computing or linear optics quantum computation (LOQC), also photonic quantum computing (PQC), is a paradigm of quantum computation, allowing (under certain conditions, described below) universal quantum computation. LOQC uses photons as information carriers, mainly uses linear optical elements, or optical instruments (including reciprocal mirrors and waveplates) to process quantum information, and uses photon detectors and quantum memories to detect and store quantum information.
+
+

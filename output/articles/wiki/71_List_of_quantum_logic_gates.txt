@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: List of quantum logic gates
+URL: https://en.wikipedia.org/wiki/List_of_quantum_logic_gates
+Query: Quantum Computing
+---
+In gate-based quantum computing, various sets of quantum logic gates are commonly used to express quantum operations. The following tables list several unitary quantum logic gates, together with their common name, how they are represented, and some of their properties. Controlled or conjugate transpose (adjoint) versions of some of these gates may not be listed.
+
+

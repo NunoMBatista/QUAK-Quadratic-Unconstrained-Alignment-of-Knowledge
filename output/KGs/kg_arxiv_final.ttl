@@ -1,20 +1,22 @@
 @prefix ont: <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#> .
+@prefix raw: <http://unpruned.local/> .
 
-ont:Internet a ont:Algorithm .
+ont:Quantum a ont:QuantumConcept .
 
-ont:computations a ont:Algorithm .
+ont:Quantum_algorithms a ont:QuantumAlgorithm .
 
-ont:nodes a ont:Person .
+ont:Quantum_computers a ont:QuantumHardware .
 
-ont:classical a ont:QuantumHardware ;
-    ont:implements ont:distributed,
-        ont:quantum .
+ont:Quantum_computing_devices a ont:QuantumHardware .
 
-ont:distributed a ont:QuantumConcept ;
-    ont:usesConcept ont:classical,
-        ont:quantum .
+ont:Quantum_simulation a ont:QuantumConcept .
 
-ont:quantum a ont:QuantumConcept ;
-    ont:usesConcept ont:classical,
-        ont:distributed .
+ont:Representation a ont:QuantumConcept ;
+    raw:define ont:Quantum_Turing_Machines .
+
+ont:Theory a ont:QuantumConcept .
+
+ont:Unitary_operator a ont:QuantumConcept .
+
+ont:Quantum_Turing_Machines a ont:QuantumAlgorithm .
 

@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: Alán Aspuru-Guzik
+URL: https://en.wikipedia.org/wiki/Al%C3%A1n_Aspuru-Guzik
+Query: Quantum Computing
+---
+Alán Aspuru-Guzik is a professor of chemistry, computer science, chemical engineering and materials science at the University of Toronto. He is also Senior Director of Quantum Chemistry, NVIDIA.  His research group, the matter lab, studies quantum chemistry, AI for chemical and materials discovery, quantum computing and self-driving chemical. He is the co-founder of Kebotix, a company focused on automated chemical and material discovery.  He previously cofounded  Zapata Computing, which temporarily closed in 2024 , and has since been undergoing restructuring .
+
+

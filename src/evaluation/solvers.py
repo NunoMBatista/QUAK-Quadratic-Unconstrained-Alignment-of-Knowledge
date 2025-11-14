@@ -219,7 +219,40 @@ def solve_alignment_with_annealer(
 	sampler: Optional[SimulatedAnnealingSampler] = None,
 	visualize: bool = True,
 ) -> AlignmentResult:
-	"""solve the alignment qubo via dwave's simulated annealing."""
+	"""
+ 	solve the alignment qubo via dwave's simulated annealing.
+ 
+	Parameters
+	----------
+	similarity_threshold : Optional[float]
+		Minimum cosine similarity to consider a node pair.
+	node_weight : float
+		Weight for node similarity terms in the QUBO.
+	structural_weight : float
+		Weight for structural consistency terms in the QUBO.
+	wiki_penalty : float
+		Penalty for multiple wiki nodes aligned to the same arxiv node.
+	arxiv_penalty : float
+		Penalty for multiple arxiv nodes aligned to the same wiki node.
+	max_structural_pairs : Optional[int]
+		Optional cap on the number of structural terms (for quick sanity checks).
+	num_reads : int	
+		Number of reads for the simulated annealing sampler.
+	beta_range : Optional[Tuple[float, float]]
+		Optional beta range for the simulated annealing sampler.
+	seed : Optional[int]	
+		Random seed for the simulated annealing sampler.
+	sampler : Optional[SimulatedAnnealingSampler]
+		Custom sampler instance to use instead of the default.
+	visualize : bool
+		Whether to generate an HTML visualization of the aligned KG.
+
+	Returns
+	-------
+	AlignmentResult
+		The result of the alignment process.
+ 
+ 	"""
 
 	qubo_data, node_info = _build_alignment_problem(
 		similarity_threshold,
@@ -297,20 +330,38 @@ def solve_alignment_with_nearest_neighbor(
 	used_arxiv: set[int] = set()
 	alignments: List[Alignment] = []
 
-	for score, wiki_idx, arxiv_idx in candidates:
-		if wiki_idx in used_wiki or arxiv_idx in used_arxiv:
-			continue
-		used_wiki.add(wiki_idx)
-		used_arxiv.add(arxiv_idx)
-		alignments.append(
-			Alignment(
-				wiki_index=wiki_idx,
-				arxiv_index=arxiv_idx,
-				wiki_uri=wiki_nodes[wiki_idx],
-				arxiv_uri=arxiv_nodes[arxiv_idx],
-				similarity=score,
+	def _assign(pair_list: List[Tuple[float, int, int]], *, ignore_threshold: bool = False) -> None:
+		for score, wiki_idx, arxiv_idx in pair_list:
+			if wiki_idx in used_wiki or arxiv_idx in used_arxiv:
+				continue
+			if not ignore_threshold and threshold is not None and score < threshold:
+				continue
+			used_wiki.add(wiki_idx)
+			used_arxiv.add(arxiv_idx)
+			alignments.append(
+				Alignment(
+					wiki_index=wiki_idx,
+					arxiv_index=arxiv_idx,
+					wiki_uri=wiki_nodes[wiki_idx],
+					arxiv_uri=arxiv_nodes[arxiv_idx],
+					similarity=score,
+				)
 			)
-		)
+
+	_assign(candidates)
+
+	if threshold is not None:
+		remaining_wiki = [idx for idx in range(num_wiki) if idx not in used_wiki]
+		remaining_arxiv = [idx for idx in range(num_arxiv) if idx not in used_arxiv]
+		if remaining_wiki and remaining_arxiv:
+			fallback_pairs = []
+			for wiki_idx in remaining_wiki:
+				for arxiv_idx in range(num_arxiv):
+					if arxiv_idx in used_arxiv:
+						continue
+					fallback_pairs.append((float(similarity[wiki_idx, arxiv_idx]), wiki_idx, arxiv_idx))
+			fallback_pairs.sort(key=lambda item: item[0], reverse=True)
+			_assign(fallback_pairs, ignore_threshold=True)
 
 	alignments.sort(key=lambda item: item.similarity, reverse=True)
 

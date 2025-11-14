@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: IonQ
+URL: https://en.wikipedia.org/wiki/IonQ
+Query: Quantum Computing
+---
+IonQ, Inc. is an American quantum computing hardware and software company headquartered in College Park, Maryland. The company develops general-purpose trapped ion quantum computers and accompanying software to generate, optimize, and execute quantum circuits.
+
+

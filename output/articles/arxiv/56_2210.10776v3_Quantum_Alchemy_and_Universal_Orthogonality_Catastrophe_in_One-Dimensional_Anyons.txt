@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2210.10776v3
+Title: Quantum Alchemy and Universal Orthogonality Catastrophe in One-Dimensional Anyons
+Query: Quantum Computing
+---
+Many-particle quantum systems with intermediate anyonic exchange statistics are supported in one spatial dimension. In this context, the anyon-anyon mapping is recast as a continuous transformation that generates shifts of the statistical parameter $κ$. We characterize the geometry of quantum states associated with different values of $κ$, i.e., different quantum statistics. While states in the bosonic and fermionic subspaces are always orthogonal, overlaps between anyonic states are generally finite and exhibit a universal form of the orthogonality catastrophe governed by a fundamental statistical factor, independent of the microscopic Hamiltonian. We characterize this decay using quantum speed limits on the flow of $κ$, illustrate our results with a model of hard-core anyons, and discuss possible experiments in quantum simulation.

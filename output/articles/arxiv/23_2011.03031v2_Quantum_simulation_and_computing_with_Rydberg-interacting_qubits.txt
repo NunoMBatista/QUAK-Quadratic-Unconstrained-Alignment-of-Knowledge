@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2011.03031v2
+Title: Quantum simulation and computing with Rydberg-interacting qubits
+Query: Quantum Computing
+---
+Arrays of optically trapped atoms excited to Rydberg states have recently emerged as a competitive physical platform for quantum simulation and computing, where high-fidelity state preparation and readout, quantum logic gates and controlled quantum dynamics of more than 100 qubits have all been demonstrated. These systems are now approaching the point where reliable quantum computations with hundreds of qubits and realistically thousands of multiqubit gates with low error rates should be within reach for the first time. In this article we give an overview of the Rydberg quantum toolbox, emphasizing the high degree of flexibility for encoding qubits, performing quantum operations and engineering quantum many-body Hamiltonians. We then review the state-of-the-art concerning high-fidelity quantum operations and logic gates as well as quantum simulations in many-body regimes. Finally, we discuss computing schemes that are particularly suited to the Rydberg platform and some of the remaining challenges on the road to general purpose quantum simulators and quantum computers.

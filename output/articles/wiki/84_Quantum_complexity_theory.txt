@@ -1,0 +1,9 @@
+Source: Wikipedia
+Title: Quantum complexity theory
+URL: https://en.wikipedia.org/wiki/Quantum_complexity_theory
+Query: Quantum Computing
+---
+Quantum complexity theory is the subfield of computational complexity theory that deals with complexity classes defined using quantum computers, a computational model based on quantum mechanics. It studies the hardness of computational problems in relation to these complexity classes, as well as the relationship between quantum complexity classes and classical (i.e., non-quantum) complexity classes.
+Two important quantum complexity classes are BQP and QMA.
+
+

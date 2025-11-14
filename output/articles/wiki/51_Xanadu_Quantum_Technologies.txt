@@ -1,0 +1,6 @@
+Source: Wikipedia
+Title: Xanadu Quantum Technologies
+URL: https://en.wikipedia.org/wiki/Xanadu_Quantum_Technologies
+Query: Quantum Computing
+---
+Xanadu Quantum Technologies is a Canadian quantum computing hardware and software company headquartered in Toronto, Ontario. The company develops cloud accessible photonic quantum computers and develops open-source software for quantum machine learning and simulating quantum photonic devices.

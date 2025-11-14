@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: Concurrence (quantum computing)
+URL: https://en.wikipedia.org/wiki/Concurrence_(quantum_computing)
+Query: Quantum Computing
+---
+In quantum information science, the concurrence is a state invariant involving qubits.
+
+

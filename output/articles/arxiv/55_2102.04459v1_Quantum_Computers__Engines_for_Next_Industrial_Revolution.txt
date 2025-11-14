@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2102.04459v1
+Title: Quantum Computers: Engines for Next Industrial Revolution
+Query: Quantum Computing
+---
+Although the current information revolution is still unfolding, the next industrial revolution is already rearing its head. A second quantum revolution based on quantum technology will power this new industrial revolution with quantum computers as its engines. The development of quantum computing will turn quantum theory into quantum technology, hence release the power of quantum phenomena, and exponentially accelerate the progress of science and technology. Building a large-scale quantum computing is at the juncture of science and engineering. Even if large-scale quantum computers become reality, they cannot make the conventional computers obsolete soon. Building a large-scale quantum computer is a daunting complex engineering problem to integrate ultra-low temperature with room temperature and micro-world with macro-world. We have built hundreds of physical qubits already but are still working on logical and topological qubits. Since physical qubits cannot tolerate errors, they cannot be used to perform long precise calculations to solve practically useful problems yet.

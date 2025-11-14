@@ -1,0 +1,6 @@
+Source: Wikipedia
+Title: Reversible computing
+URL: https://en.wikipedia.org/wiki/Reversible_computing
+Query: Quantum Computing
+---
+Reversible computing is any model of computation where every step of the process is time-reversible. This means that, given the output of a computation, it is possible to perfectly reconstruct the input. In systems that progress deterministically from one state to another, a key requirement for reversibility is a one-to-one correspondence between each state and its successor. Reversible computing is considered an unconventional approach to computation and is closely linked to quantum computing, where the principles of quantum mechanics inherently ensure reversibility (as long as quantum states are not measured or "collapsed").

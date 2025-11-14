@@ -112,8 +112,12 @@ def load_structural_weights(wiki_lookup, arxiv_lookup):
     rel_vectors = {_normalize(name): rel_embeddings[name] for name in rel_embeddings.files}  # map labels
 
     def rel_sim(label_a, label_b):
-        vec_a = rel_vectors.get(label_a)  # fetch relation vector a
-        vec_b = rel_vectors.get(label_b)  # fetch relation vector b
+        vec_a = rel_vectors.get(label_a)
+        if vec_a is None:
+            vec_a = rel_vectors.get(label_a.replace(" ", "_"))
+        vec_b = rel_vectors.get(label_b)
+        if vec_b is None:
+            vec_b = rel_vectors.get(label_b.replace(" ", "_"))
         if vec_a is None or vec_b is None:  # skip unseen labels
             return None
         norm_a = np.linalg.norm(vec_a)  # magnitude of a

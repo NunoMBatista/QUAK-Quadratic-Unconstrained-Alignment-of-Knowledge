@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: quant-ph/0401019v3
+Title: Quantum computing
+Query: Quantum Computing
+---
+This article gives an elementary introduction to quantum computing. It is a draft for a book chapter of the "Handbook of Nature-Inspired and Innovative Computing", Eds. A. Zomaya, G.J. Milburn, J. Dongarra, D. Bader, R. Brent, M. Eshaghian-Wilner, F. Seredynski (Springer, Berlin Heidelberg New York, 2006).

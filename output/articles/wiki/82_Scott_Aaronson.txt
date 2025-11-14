@@ -1,0 +1,6 @@
+Source: Wikipedia
+Title: Scott Aaronson
+URL: https://en.wikipedia.org/wiki/Scott_Aaronson
+Query: Quantum Computing
+---
+Scott Joel Aaronson (born May 21, 1981) is an American theoretical computer scientist and   Schlumberger Centennial Chair of Computer Science at the University of Texas at Austin. His primary areas of research are computational complexity theory and quantum computing.

@@ -17,6 +17,12 @@ ONTOLOGY_PATH = PROTEGE_DIR / 'ontology.ttl'
 OUTPUT_DIR = PROJECT_ROOT / 'output'
 ONTOLOGY_DIR = OUTPUT_DIR / 'ontologies'
 
+ENTITIES_DIR = OUTPUT_DIR / 'entities'
+WIKI_ENTITIES_DIR = ENTITIES_DIR / 'wiki_entities'
+ARXIV_ENTITIES_DIR = ENTITIES_DIR / 'arxiv_entities'
+WIKI_ENTITIES_FILE = WIKI_ENTITIES_DIR / 'entities.txt'
+ARXIV_ENTITIES_FILE = ARXIV_ENTITIES_DIR / 'entities.txt'
+
 # raw data outputs
 ARTICLES_DIR = OUTPUT_DIR / 'articles'
 RAW_WIKI_DIR = ARTICLES_DIR / 'wiki'
@@ -59,12 +65,16 @@ QUERY_MODE = 'fetch' # can be either 'search' or 'fetch'
 DOMAIN_QUERY = "Quantum Computing"
 
 # how many articles to fetch in the search mode
-NUM_ARTICLES = 10
+NUM_ARTICLES = 100
 
 # these are both used for the fetch query mode
-WIKI_PAGE_TITLES = ['Quantum computing', 'Superconducting quantum computing', 'Timeline of quantum computing and communication', 'Trapped-ion quantum computer', 'Glossary of quantum computing', 'List of companies involved in quantum computing, communication or sensing', 'Rigetti Computing', 'Institute for Quantum Computing', 'Silicon Quantum Computing', 'Post-quantum cryptography']
-ARXIV_PAPER_IDS = ['2208.00733v1', 'quant-ph/0003151v1', '1311.4939v1', '1210.0736v1', '1610.02500v1', '2410.00917v1', '2210.02886v1', '0804.3401v1', 'quant-ph/0201082v1', '2410.00916v1']
+#WIKI_PAGE_TITLES = ['Quantum computing', 'Superconducting quantum computing', 'Timeline of quantum computing and communication', 'Trapped-ion quantum computer', 'Glossary of quantum computing', 'List of companies involved in quantum computing, communication or sensing', 'Rigetti Computing', 'Institute for Quantum Computing', 'Silicon Quantum Computing', 'Post-quantum cryptography']
+#ARXIV_PAPER_IDS = ['2208.00733v1', 'quant-ph/0003151v1', '1311.4939v1', '1210.0736v1', '1610.02500v1', '2410.00917v1', '2210.02886v1', '0804.3401v1', 'quant-ph/0201082v1', '2410.00916v1']
+WIKI_PAGE_TITLES = ['Knowledge graph', 'Named-entity recognition', 'Relation extraction', 'Entity linking', 'Ontology matching', 'Open information extraction', 'Natural language processing', 'Resource Description Framework', 'DBpedia', 'Word embedding']
+ARXIV_PAPER_IDS = ['2510.20345v1', '2306.02051v3', '2010.11075v1', '2307.11772v3', '2407.17745v1', '2502.09956v2', '2003.02320v1', '2112.01989v1', '1705.03645v1', '2309.16396v3']
 
+#WIKI_PAGE_TITLES = ['Quantum computing', 'Superconducting quantum computing', 'Timeline of quantum computing and communication', 'Trapped-ion quantum computer', 'Glossary of quantum computing', 'Rigetti Computing', 'Silicon Quantum Computing', 'Quantum error correction', 'List of companies involved in quantum computing, communication or sensing', 'Institute for Quantum Computing', 'Linear optical quantum computing', "India's quantum computer", 'Post-quantum cryptography', 'Adiabatic quantum computation', 'Quantum logic gate', 'QuEra Computing Inc.', 'Topological quantum computer', 'Quantum algorithm', 'List of quantum processors', 'Quantum information science', 'Quantinuum', 'Qubit', 'List of quantum computing journals', 'Noisy intermediate-scale quantum computing', 'One-way quantum computer', 'Quantum supremacy', 'Mike Lazaridis', "Shor's algorithm", 'Elham Kashefi', "Grover's algorithm", 'D-Wave Systems', 'Quantum computing scaling laws', 'Multiverse Computing', 'Unconventional computing', 'Computing', 'Quantum memory', 'Cloud-based quantum computing', 'Willow processor', 'Reservoir computing', 'Reversible computing', 'Xanadu Quantum Technologies', 'Quantum circuit', 'Key size', 'IonQ', 'PsiQuantum', 'Nuclear magnetic resonance quantum computer', 'Quantum Artificial Intelligence Lab', 'Quantum decoherence', 'Microsoft Azure Quantum', 'Quantum Computing Since Democritus', 'Quantum engineering', 'Quantum Computation and Quantum Information', 'Jay Gambetta', 'Quantum programming', 'Krysta Svore', 'Applications of quantum mechanics', 'Qiskit', 'Quantum network', 'Atom Computing', 'Neuromorphic computing', 'List of quantum logic gates', 'Quantum Computing: A Gentle Introduction', 'Quantum annealing', 'Guillaume Verdon', 'Ancilla bit', 'Quantum machine learning', 'Raymond Laflamme', 'Threshold theorem', 'Sergio Boixo', 'IQM Quantum Computers', 'Amaravati Quantum Valley', 'Scott Aaronson', 'National Quantum Initiative Act', 'Quantum complexity theory', 'Observer effect (physics)', 'Juani Bermejo Vega', 'Quantum geometry', 'QC Ware', 'Harvest now, decrypt later', 'National Quantum Computing Centre', 'Concurrence (quantum computing)', 'Nagendra Nagaraja', 'IBM Quantum Platform', 'Quantum superposition', 'John M. Martinis', 'Alice & Bob (company)', 'Alán Aspuru-Guzik', 'Bob Coecke', 'Quantum Fourier transform', 'Majorana 1', 'Harry Buhrman', 'Technology Innovation Institute', 'Optical computing', 'Chetan Nayak', 'Microsoft Research', 'Román Orús', 'Quantum Turing machine', 'Quantum Supremacy', 'Ilyas Khan', 'Quantum neural network']
+#ARXIV_PAPER_IDS = ['2211.02350v1', '2403.02240v5', '2506.15909v1', '2312.06975v1', '2302.12119v1', 'quant-ph/9701001v1', '1801.00862v3', 'quant-ph/0402010v1', 'quant-ph/0501046v1', '1804.03719v3', '2408.03613v1', '2103.07934v2', '2011.03031v2', '2212.12078v2', 'quant-ph/9505018v1', '1506.09091v3', '2403.04006v3', 'quant-ph/9505016v1', '1109.5549v1', '1811.09849v1', '1612.08091v2', '2105.04649v3', '2111.00117v3', '1401.6658v1', '1106.5712v1', '2312.07840v1', '2306.07342v4', '2307.02593v2', '2308.00583v2', '2108.07027v1', '2312.03653v1', '2112.04501v3', 'quant-ph/9804038v1', '2207.01964v4', '2003.11810v4', '2102.04452v1', '1501.00011v1', '2212.10990v1', 'quant-ph/0402090v1', '2311.05605v5', '2008.06812v2', 'quant-ph/0211158v1', '2009.13865v5', '2401.04271v4', '2102.04459v1', '2210.10776v3', '2106.07077v1', '2208.02645v2', '2308.14239v2', '2209.05469v3', 'quant-ph/0207059v1', '2403.12691v2', '1611.00664v2', '1807.07112v3', '2104.00572v3', '1508.03695v1', '2311.08445v3', '2001.09161v4', '1101.4722v3', '2405.09115v1', 'quant-ph/0008112v1', '2307.14308v1', '2005.03791v2', '1905.02666v5', '2107.08049v1', '2203.17181v1', '2303.05533v3', '2308.11740v1', '2207.01005v3', '1906.04410v2', '2110.12318v3', '1309.7650v3', 'quant-ph/0504100v1', '2009.06551v3', 'quant-ph/9802007v1', '2101.05560v1', '2507.17712v1', '2310.08437v2', '2209.11322v3', '2208.10342v2', 'quant-ph/0401019v3', '2412.05997v3', 'quant-ph/0411074v1', '2405.00304v3', '2207.10592v2', 'quant-ph/9809038v1', '2207.00021v3', '1804.03159v2', '2501.11119v1', '2112.14193v3', '2306.14948v2', '2302.02454v4', '1509.09180v4', '2110.10587v3', '2103.04502v2', '1705.00365v2', '1708.09757v2', '1204.2907v1', '2112.00984v1', '2311.13644v2']
 # ===================== ONTOLOGY SETTINGS =====================
 
 RELATION_LABELS = ["developedBy", "usesConcept", "implements"]
@@ -72,36 +82,39 @@ RELATION_LABELS = ["developedBy", "usesConcept", "implements"]
 # the Wiki "allow-list" and their types from the ontology
 ENTITY_MAP_WIKI = {
     # Entity Name : Ontology Class
-    "features": "QuantumConcept",
-    "quantum_computer": "QuantumHardware",
-    "possibilities": "QuantumConcept",
-    "quantum_measurements": "Person",
-    "quantum": "QuantumAlgorithm",
-    "computing": "QuantumConcept",
-    "Peter Shor": "Person"  # <-- UNALIGNED ENTITY
+    "Quantum computer": "QuantumHardware",
+    "Quantum computing": "QuantumConcept",
+    "Quantum algorithm": "QuantumAlgorithm",
+    "Hadamard test": "QuantumAlgorithm",
+    "Quantum circuit": "QuantumConcept",
+    "Quantum devices": "QuantumHardware",
+    "Qubit": "QuantumConcept",
+    "Quantum supremacy": "QuantumConcept",
+    "Quantum simulators": "QuantumHardware",
 }
 
 # the arXiv "allow-list" and their types from the ontology
 ENTITY_MAP_ARXIV = {
     # notice the different strings for the same concepts
-    "quantum": "QuantumConcept",
-    "classical": "QuantumHardware",
-    "distributed": "QuantumConcept",
-    "Internet": "Person",
-    "computations": "Algorithm",
-    "nodes": "Person",
-    "Internet": "Algorithm",
-    "Lov Grover": "Person"   # <-- UNALIGNED ENTITY
+    "Quantum algorithms": "QuantumAlgorithm",
+    "Quantum Turing Machines": "QuantumAlgorithm",
+    "Quantum computers": "QuantumHardware",
+    "Quantum computing devices": "QuantumHardware",
+    "Quantum simulation": "QuantumConcept",
+    "Unitary operator": "QuantumConcept",
+    "Representation": "QuantumConcept",
+    "Theory": "QuantumConcept",
+    "Quantum": "QuantumConcept",
 }
 
 
 # ===================== KNOWLEDGE GRAPH SETTINGS =====================
 
 
-NS_RAW = Namespace("http://example.org/raw/") # namespace for raw relations extracted from text
+NS_RAW = Namespace("http://unpruned.local/") # namespace for raw relations extracted from text
 REL_GENERIC = NS_RAW.is_related_to # generic relation for untyped relations
 
-MAX_UNPRUNED_TRIPLES = 200 # max number of triples in the unpruned KG before applying pruning
+MAX_UNPRUNED_TRIPLES = None # max number of triples in the unpruned KG before applying pruning
 
 # we need to put the ontology namespace here for building the KG
 # we can find it in the first line of the ontology.ttl file
@@ -130,7 +143,12 @@ GRAPH_PHYSICS = """
 
 EMBEDDING_DIM = 64 # final vector size (e.g., 64)
 HIDDEN_DIM = 128  # GCN hidden layer size
-EPOCHS = 200      # number of training loops
-LEARNING_RATE = 0.01
+EPOCHS = 500      # number of training loops
+LEARNING_RATE = 0.001
+GAE_DROPOUT = 0.2 # dropout used inside the graph encoders
+
+GAEA_MMD_WEIGHT = 0.5       # weight applied to the distribution alignment term
+GAEA_STATS_WEIGHT = 0.1     # weight applied to first/second moment alignment
+GAEA_MAX_ALIGN_SAMPLES = 2048 # max samples drawn when estimating MMD
 
 USE_SCIBERT_FEATURES = True # whether to use SciBERT features for node attributes (false to set the initial features to identity matrix)

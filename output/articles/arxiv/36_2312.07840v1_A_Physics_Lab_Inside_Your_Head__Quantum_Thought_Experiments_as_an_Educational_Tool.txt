@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2312.07840v1
+Title: A Physics Lab Inside Your Head: Quantum Thought Experiments as an Educational Tool
+Query: Quantum Computing
+---
+Thought experiments are where logical reasoning meets storytelling, catalysing progress in quantum science and technology. Schrödinger's famous cat brought quantum science to the public consciousness, while Deutsch's thought experiment to test the many-worlds and Copenhagen interpretations involved the first conception of a quantum computer. I will show how presenting thought experiments using quantum circuits can demystify apparent quantum paradoxes, and provide fun, conceptually important activities for learners to implement themselves on near-term quantum devices. Additionally, I will explain how thought experiments can be used as a first introduction to quantum, and outline a workshop based on the "quantum bomb tester" for school students as young as 11. This paper draws upon my experience in developing and delivering quantum computing workshops in Oxford, and in creating a quantum paradoxes content series with IBM Quantum of videos, blogs and code tutorials.

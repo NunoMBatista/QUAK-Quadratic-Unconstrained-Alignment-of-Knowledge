@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2107.08049v1
+Title: 3D Topological Quantum Computing
+Query: Quantum Computing
+---
+In this paper we will present some ideas to use 3D topology for quantum computing extending ideas from a previous paper. Topological quantum computing used \textquotedblleft knotted\textquotedblright{} quantum states of topological phases of matter, called anyons. But anyons are connected with surface topology. But surfaces have (usually) abelian fundamental groups and therefore one needs non-abelian anyons to use it for quantum computing. But usual materials are 3D objects which can admit more complicated topologies. Here, complements of knots do play a prominent role and are in principle the main parts to understand 3-manifold topology. For that purpose, we will construct a quantum system on the complements of a knot in the 3-sphere (see arXiv:2102.04452 for previous work). The whole system is designed as knotted superconductor where every crossing is a Josephson junction and the qubit is realized as flux qubit. We discuss the properties of this systems in particular the fluxion quantization by using the A-polynomial of the knot. Furthermore we showed that 2-qubit operations can be realized by linked (knotted) superconductors again coupled via a Josephson junction.

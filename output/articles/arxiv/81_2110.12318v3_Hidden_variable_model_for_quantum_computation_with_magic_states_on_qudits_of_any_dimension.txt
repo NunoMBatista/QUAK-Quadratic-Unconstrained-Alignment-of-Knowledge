@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2110.12318v3
+Title: Hidden variable model for quantum computation with magic states on qudits of any dimension
+Query: Quantum Computing
+---
+It was recently shown that a hidden variable model can be constructed for universal quantum computation with magic states on qubits. Here we show that this result can be extended, and a hidden variable model can be defined for quantum computation with magic states on qudits with any Hilbert space dimension. This model leads to a classical simulation algorithm for universal quantum computation.

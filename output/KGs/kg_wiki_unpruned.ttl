@@ -1,238 +1,157 @@
-@prefix ns1: <http://example.org/raw/> .
+@prefix ns1: <http://unpruned.local/> .
 
-ns1:physical_simulations ns1:is_related_to ns1:large-scale .
+ns1: ns1:is_a ns1:quantum_state .
 
-ns1:computers ns1:is_related_to ns1:deterministic_rules,
-        ns1:ordinary .
+ns1:Atoms ns1:demonstrate ns1:favourable_performance_indicators .
 
-ns1:deterministic_rules ns1:is_related_to ns1:computers,
-        ns1:ordinary .
+ns1:Computing ns1:is_a ns1:California-based_developer .
 
-ns1:ordinary ns1:is_related_to ns1:computers,
-        ns1:deterministic_rules .
+ns1:E_isigma ns1:is_a ns1:tr .
 
-ns1:physicists ns1:is_related_to ns1:large-scale,
-        ns1:quantum_computer .
+ns1:Examples ns1:include ns1:proposal,
+        ns1:spin .
 
-ns1:public-key_cryptographic_schemes ns1:is_related_to ns1:large-scale,
-        ns1:quantum_computer .
+ns1:Hadamard_test ns1:is_a ns1:quantum_computation ;
+    ns1:produce ns1:random_variable .
 
-ns1:calculations ns1:is_related_to ns1:classical_computer,
-        ns1:exponentially_faster,
-        ns1:quantum_computer .
+ns1:Institute_for_Quantum_Computing ns1:is_a ns1:IQC,
+        ns1:scientific_research_institute_of .
 
-ns1:classical_computer ns1:is_related_to ns1:calculations,
-        ns1:exponentially_faster,
-        ns1:quantum_computer .
+ns1:M_Solovay ns1:announce ns1:result .
 
-ns1:exponentially_faster ns1:is_related_to ns1:calculations,
-        ns1:classical_computer,
-        ns1:quantum_computer .
+ns1:O_irho ns1:is_a ns1:tr .
 
-ns1:mechanical_device ns1:is_related_to ns1:multiple,
-        ns1:replicated,
-        ns1:time_cost .
+ns1:PQCrypto ns1:is_a ns1:workshops .
 
-ns1:multiple ns1:is_related_to ns1:mechanical_device,
-        ns1:replicated,
-        ns1:time_cost .
+ns1:Post-quantum_cryptography ns1:is_a ns1:PQC,
+        ns1:development .
 
-ns1:replicated ns1:is_related_to ns1:mechanical_device,
-        ns1:multiple,
-        ns1:time_cost .
+ns1:Pty_Ltd ns1:is_a ns1:SQC,
+        ns1:quantum_computing_company .
 
-ns1:time_cost ns1:is_related_to ns1:mechanical_device,
-        ns1:multiple,
-        ns1:replicated .
+ns1:QPUs ns1:is_a ns1:quantum_processing_units ;
+    ns1:use ns1:architecture .
 
-ns1:large-scale ns1:is_related_to ns1:physical_simulations,
-        ns1:physicists,
-        ns1:public-key_cryptographic_schemes,
-        ns1:quantum_computer .
+ns1:QTM ns1:is_a ns1:abstract_machine .
 
-ns1:classically ns1:is_related_to ns1:energy,
-        ns1:exponentially,
-        ns1:quantum_computer,
-        ns1:simulated,
-        ns1:time .
+ns1:Quantum_simulators ns1:permit ns1:study .
 
-ns1:energy ns1:is_related_to ns1:classically,
-        ns1:exponentially,
-        ns1:quantum_computer,
-        ns1:simulated,
-        ns1:time .
+ns1:Rigetti ns1:develop ns1:cloud_platform ;
+    ns1:is_a ns1:California-based_developer .
 
-ns1:exponentially ns1:is_related_to ns1:classically,
-        ns1:energy,
-        ns1:quantum_computer,
-        ns1:simulated,
-        ns1:time .
+ns1:Shor_code ns1:is_a ns1:Subsystem .
 
-ns1:simulated ns1:is_related_to ns1:classically,
-        ns1:energy,
-        ns1:exponentially,
-        ns1:quantum_computer,
-        ns1:time .
+ns1:Solovay ns1:give ns1:talk .
 
-ns1:time ns1:is_related_to ns1:classically,
-        ns1:energy,
-        ns1:exponentially,
-        ns1:quantum_computer,
-        ns1:simulated .
+ns1:US_National_Institute_of_Standards_and_Technology ns1:is_a ns1:NIST ;
+    ns1:release ns1:versions .
 
-ns1:Quantum_computers ns1:is_related_to ns1:computational,
-        ns1:constraints,
-        ns1:evolve,
-        ns1:possibilities,
-        ns1:quantum_systems,
-        ns1:sampling,
-        ns1:simultaneously .
+ns1:Waterloo ns1:is_a ns1:Ontario .
 
-ns1:computational ns1:is_related_to ns1:Quantum_computers,
-        ns1:constraints,
-        ns1:evolve,
-        ns1:possibilities,
-        ns1:quantum_systems,
-        ns1:sampling,
-        ns1:simultaneously .
+ns1:Y2Q ns1:is_a ns1:day .
 
-ns1:constraints ns1:is_related_to ns1:Quantum_computers,
-        ns1:computational,
-        ns1:evolve,
-        ns1:possibilities,
-        ns1:quantum_systems,
-        ns1:sampling,
-        ns1:simultaneously .
+ns1:code ns1:implement ns1:universal_gate_set .
 
-ns1:evolve ns1:is_related_to ns1:Quantum_computers,
-        ns1:computational,
-        ns1:constraints,
-        ns1:possibilities,
-        ns1:quantum_systems,
-        ns1:sampling,
-        ns1:simultaneously .
+ns1:company_develops ns1:develop ns1:quantum_computers .
 
-ns1:possibilities ns1:is_related_to ns1:Quantum_computers,
-        ns1:computational,
-        ns1:constraints,
-        ns1:evolve,
-        ns1:quantum_systems,
-        ns1:sampling,
-        ns1:simultaneously .
+ns1:complexity_class ns1:is_a ns1:BPP .
 
-ns1:quantum_systems ns1:is_related_to ns1:Quantum_computers,
-        ns1:computational,
-        ns1:constraints,
-        ns1:evolve,
-        ns1:possibilities,
-        ns1:sampling,
-        ns1:simultaneously .
+ns1:computers ns1:achieve ns1:computing .
 
-ns1:sampling ns1:is_related_to ns1:Quantum_computers,
-        ns1:computational,
-        ns1:constraints,
-        ns1:evolve,
-        ns1:possibilities,
-        ns1:quantum_systems,
-        ns1:simultaneously .
+ns1:contextuality ns1:is_a ns1:ingredient .
 
-ns1:simultaneously ns1:is_related_to ns1:Quantum_computers,
-        ns1:computational,
-        ns1:constraints,
-        ns1:evolve,
-        ns1:possibilities,
-        ns1:quantum_systems,
-        ns1:sampling .
+ns1:cryptographers ns1:design ns1:algorithms .
 
-ns1:computation ns1:is_related_to ns1:entangled,
-        ns1:features,
-        ns1:non-deterministic,
-        ns1:outcomes,
-        ns1:quantum_computer,
-        ns1:quantum_measurements,
-        ns1:states,
-        ns1:theoretical_computer .
+ns1:cryptographic_algorithms ns1:is_a ns1:public-key_algorithms .
 
-ns1:entangled ns1:is_related_to ns1:computation,
-        ns1:features,
-        ns1:non-deterministic,
-        ns1:outcomes,
-        ns1:quantum_computer,
-        ns1:quantum_measurements,
-        ns1:states,
-        ns1:theoretical_computer .
+ns1:displaystyle ns1:is_a ns1:langle_psi_Upsi_rangle_ .
 
-ns1:features ns1:is_related_to ns1:computation,
-        ns1:entangled,
-        ns1:non-deterministic,
-        ns1:outcomes,
-        ns1:quantum_computer,
-        ns1:quantum_measurements,
-        ns1:states,
-        ns1:theoretical_computer .
+ns1:displaystyle_Px_i ns1:is_a ns1:probability .
 
-ns1:non-deterministic ns1:is_related_to ns1:computation,
-        ns1:entangled,
-        ns1:features,
-        ns1:outcomes,
-        ns1:quantum_computer,
-        ns1:quantum_measurements,
-        ns1:states,
-        ns1:theoretical_computer .
+ns1:displaystyle_grangle ns1:is_a ns1:erangle .
 
-ns1:outcomes ns1:is_related_to ns1:computation,
-        ns1:entangled,
-        ns1:features,
-        ns1:non-deterministic,
-        ns1:quantum_computer,
-        ns1:quantum_measurements,
-        ns1:states,
-        ns1:theoretical_computer .
+ns1:displaystyle_psi ns1:is_a ns1:rangle .
 
-ns1:quantum_measurements ns1:is_related_to ns1:computation,
-        ns1:entangled,
-        ns1:features,
-        ns1:non-deterministic,
-        ns1:outcomes,
-        ns1:quantum_computer,
-        ns1:states,
-        ns1:theoretical_computer .
+ns1:executive_director ns1:is_a ns1:Norbert_Ltkenhaus .
 
-ns1:states ns1:is_related_to ns1:computation,
-        ns1:entangled,
-        ns1:features,
-        ns1:non-deterministic,
-        ns1:outcomes,
-        ns1:quantum_computer,
-        ns1:quantum_measurements,
-        ns1:theoretical_computer .
+ns1:gates ns1:is_a ns1:S .
 
-ns1:theoretical_computer ns1:is_related_to ns1:computation,
-        ns1:entangled,
-        ns1:features,
-        ns1:non-deterministic,
-        ns1:outcomes,
-        ns1:quantum_computer,
-        ns1:quantum_measurements,
-        ns1:states .
+ns1:hardware ns1:is_a ns1:experimental .
 
-ns1:quantum_computer ns1:is_related_to ns1:calculations,
-        ns1:classical_computer,
-        ns1:classically,
-        ns1:computation,
-        ns1:energy,
-        ns1:entangled,
-        ns1:exponentially,
-        ns1:exponentially_faster,
-        ns1:features,
-        ns1:large-scale,
-        ns1:non-deterministic,
-        ns1:outcomes,
-        ns1:physicists,
-        ns1:public-key_cryptographic_schemes,
-        ns1:quantum_measurements,
-        ns1:simulated,
-        ns1:states,
-        ns1:theoretical_computer,
-        ns1:time .
+ns1:logic_states ns1:is_a ns1:ground_state .
+
+ns1:lookup_table ns1:give ns1:control_system,
+        ns1:information .
+
+ns1:mathematical_problems ns1:is_a ns1:integer_factorization_problem .
+
+ns1:operations ns1:harness ns1:phenomena .
+
+ns1:physical_qubits ns1:is_a ns1:code_block .
+
+ns1:programmers ns1:write ns1:quantum_algorithms .
+
+ns1:properties ns1:is_a ns1:entanglement .
+
+<http://unpruned.local/quantum_Grover's_algorithm> ns1:speed ns1:attacks .
+
+ns1:quantum_algorithm ns1:is_a ns1:algorithm,
+        ns1:step-by-step_procedure .
+
+ns1:quantum_circuit ns1:is_a ns1:model .
+
+ns1:quantum_computer ns1:break ns1:public-key_cryptographic_schemes ;
+    ns1:generate ns1:samples ;
+    ns1:is_a ns1:noisy,
+        ns1:theoretical_computer ;
+    ns1:manipulate ns1:qubit ;
+    ns1:perform ns1:amplification,
+        ns1:calculations ;
+    ns1:require ns1:time .
+
+ns1:quantum_computing ns1:is_a ns1:branch .
+
+ns1:quantum_devices ns1:outperform ns1:classical_computers .
+
+ns1:quantum_polynomial_time ns1:is_a ns1:BQP,
+        ns1:class .
+
+ns1:quantum_supremacy ns1:involve ns1:task .
+
+ns1:simulators ns1:is_a ns1:devices .
+
+ns1:states ns1:is_a ns1:binary .
+
+ns1:supercomputer ns1:compute ns1:XEB .
+
+ns1:tasks ns1:is_a ns1:milestone .
+
+ns1:technologies ns1:offer ns1:capabilities .
+
+ns1:theorem ns1:provide ns1:risk_analysis .
+
+ns1:wave_interference ns1:amplify ns1:probability .
+
+ns1:IQC ns1:host ns1:conferences .
+
+ns1:SQC ns1:use ns1:nuclear_spin .
+
+ns1:algorithm ns1:is_a ns1:finite_sequence .
+
+ns1:algorithms ns1:is_a ns1:vulnerable .
+
+ns1:computing ns1:is_a ns1:sub-fields .
+
+ns1:model ns1:is_a ns1:quantum_circuit_model .
+
+ns1:proposal ns1:is_a ns1:loop_problems .
+
+ns1:quantum_algorithms ns1:require ns1:memory .
+
+ns1:quantum_computers ns1:is_a ns1:noisy .
+
+ns1:qubit ns1:is_a ns1:quantum-mechanical_system,
+        ns1:quantum_system .
+
+ns1:study ns1:is_a ns1:subfield .
 

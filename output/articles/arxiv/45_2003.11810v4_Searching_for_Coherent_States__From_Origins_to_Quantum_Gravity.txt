@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2003.11810v4
+Title: Searching for Coherent States: From Origins to Quantum Gravity
+Query: Quantum Computing
+---
+We discuss the notion of coherent states from three different perspectives: the seminal approach of Schroedinger, the experimental take of quantum optics, and the theoretical developments in quantum gravity. This comparative study tries to emphasise the connections between the approaches, and to offer a coherent short story of the field, so to speak. It may be useful for pedagogical purposes, as well as for specialists of quantum optics and quantum gravity willing to embed their perspective within a wider landscape.

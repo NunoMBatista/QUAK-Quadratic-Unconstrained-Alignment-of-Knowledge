@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: quant-ph/0504100v1
+Title: Decompositions of general quantum gates
+Query: Quantum Computing
+---
+Quantum algorithms may be described by sequences of unitary transformations called quantum gates and measurements applied to the quantum register of n quantum bits, qubits. A collection of quantum gates is called universal if it can be used to construct any n-qubit gate. In 1995, the universality of the set of one-qubit gates and controlled NOT gate was shown by Barenco et al. using QR decomposition of unitary matrices. Almost ten years later the decomposition was improved to include essentially fewer elementary gates. In addition, the cosine-sine matrix decomposition was applied to efficiently implement decompositions of general quantum gates. In this chapter, we review the different types of general gate decompositions and slightly improve the best known gate count for the controlled NOT gates to (23/48)4^n in the leading order. In physical realizations, the interaction strength between the qubits can decrease strongly as a function of their distance. Therefore, we also discuss decompositions with the restriction to nearest-neighbor interactions in a linear chain of qubits.

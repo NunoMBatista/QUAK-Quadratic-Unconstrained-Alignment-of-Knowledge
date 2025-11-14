@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: quant-ph/0402090v1
+Title: Towards Linear Optical Quantum Computers
+Query: Quantum Computing
+---
+Scalable quantum computation with linear optics was considered to be impossible due to the lack of efficient two-qubit logic gates, despite its ease of implementation of one-qubit gates. Two-qubit gates necessarily need a nonlinear interaction between the two photons, and the efficiency of this nonlinear interaction is typically very tiny in bulk materials. However, we recently have shown that this barrier can be circumvented with effective nonlinearities produced by projective measurements, and with this work linear-optical quantum computing becomes a new possibility of scalable quantum computation. We review several issues concerning its principles and requirements.

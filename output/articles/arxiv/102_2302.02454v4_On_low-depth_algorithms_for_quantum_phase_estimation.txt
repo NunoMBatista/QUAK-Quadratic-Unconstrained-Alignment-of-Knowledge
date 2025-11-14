@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2302.02454v4
+Title: On low-depth algorithms for quantum phase estimation
+Query: Quantum Computing
+---
+Quantum phase estimation is one of the critical building blocks of quantum computing. For early fault-tolerant quantum devices, it is desirable for a quantum phase estimation algorithm to (1) use a minimal number of ancilla qubits, (2) allow for inexact initial states with a significant mismatch, (3) achieve the Heisenberg limit for the total resource used, and (4) have a diminishing prefactor for the maximum circuit length when the overlap between the initial state and the target state approaches one. In this paper, we prove that an existing algorithm from quantum metrology can achieve the first three requirements. As a second contribution, we propose a modified version of the algorithm that also meets the fourth requirement, which makes it particularly attractive for early fault-tolerant quantum devices.

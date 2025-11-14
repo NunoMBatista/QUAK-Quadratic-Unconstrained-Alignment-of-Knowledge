@@ -1,0 +1,7 @@
+Source: Wikipedia
+Title: Quantum Turing machine
+URL: https://en.wikipedia.org/wiki/Quantum_Turing_machine
+Query: Quantum Computing
+---
+A quantum Turing machine (QTM) or universal quantum computer is an abstract machine used to model the effects of a quantum computer.  It provides a simple model that captures all of the power of quantum computation—that is, any quantum algorithm can be expressed formally as a particular quantum Turing machine. However, the computationally equivalent quantum circuit is a more common model.
+Quantum Turing machines can be related to classical and probabilistic Turing machines in a framework based on transition matrices. That is, a matrix can be specified whose product with the matrix representing a classical or probabilistic machine provides the quantum probability matrix representing the quantum machine. This was shown by Lance Fortnow.

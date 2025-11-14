@@ -15,6 +15,25 @@ import torch
 
 
 def _add(Q: Dict[Tuple[int, int], float], u: int, v: int, value: float) -> None:
+    """
+    helper to add a coefficient to the QUBO dictionary.
+    
+    Parameters
+    ----------
+    Q : Dict[Tuple[int, int], float]
+        The QUBO dictionary to modify.
+    u : int
+        The first variable index.
+    v : int
+        The second variable index.
+    value : float
+        The coefficient to add.
+    
+    Returns
+    -------
+    None
+    """
+    
     # accumulate coefficients while keeping matrix upper-triangular
     if u > v:  # enforce ordering
         u, v = v, u

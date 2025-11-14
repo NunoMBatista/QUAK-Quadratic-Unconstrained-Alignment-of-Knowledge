@@ -1,6 +1,22 @@
 @prefix ont: <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#> .
+@prefix raw: <http://unpruned.local/> .
 
-ont:features a ont:QuantumConcept .
+ont:Hadamard_test a ont:QuantumAlgorithm .
 
-ont:possibilities a ont:QuantumConcept .
+ont:Quantum_algorithm a ont:QuantumAlgorithm .
+
+ont:Quantum_circuit a ont:QuantumConcept .
+
+ont:Quantum_computer a ont:QuantumHardware ;
+    raw:manipulate ont:Qubit .
+
+ont:Quantum_computing a ont:QuantumConcept .
+
+ont:Quantum_devices a ont:QuantumHardware .
+
+ont:Quantum_simulators a ont:QuantumHardware .
+
+ont:Quantum_supremacy a ont:QuantumConcept .
+
+ont:Qubit a ont:QuantumConcept .
 

@@ -1,0 +1,7 @@
+Source: Wikipedia
+Title: QuEra Computing Inc.
+URL: https://en.wikipedia.org/wiki/QuEra_Computing_Inc.
+Query: Quantum Computing
+---
+QuEra Computing Inc. is a quantum computing company based in Boston, Massachusetts. The company develops quantum computers using neutral atoms based on research conducted at both Harvard University and MIT. QuEra also develops software for simulating systems of Rydberg atoms. and finding solutions to Combinatorial Optimization problems.
+QuEra actively conducts research in Condensed Matter Physics and combinatorial optimization using neutral atoms as well.

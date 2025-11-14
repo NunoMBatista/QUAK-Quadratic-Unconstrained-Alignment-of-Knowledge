@@ -1,0 +1,224 @@
+1,000-qubit barrier
+access
+accessible
+ACP
+ACP-like
+advancements
+advent
+algebraic approach
+algorithms
+allocation
+analysis
+assumption
+axiomatization
+bounded-depth quantum circuits
+BQP
+capabilities
+classic
+classical
+classical computers
+classical processes
+cloned
+closed
+closed systems
+Cloud
+collaborate
+communication
+complexity
+components
+comprehensive
+computation
+computational statistics
+computational tasks
+computational technology
+computations
+computer science
+Computers
+computing
+computing power
+concepts
+connections
+Connes'
+Consequently
+contributions
+conventional
+cost
+cryptography
+cutting edge
+decade
+defines
+demands
+development
+distributed
+DQC
+duplicated
+effectiveness
+efficient
+efficiently
+engineering
+era
+error correction
+Essentially
+evaluation
+evolution
+examples
+exponential computational speed-ups
+exponential speedups
+exponentially
+faces
+fault-tolerant
+fermionic
+fidelity
+finite
+formulation
+framework
+fundamentally
+gauge
+generations
+genuine random numbers
+geometric evolution process
+geometrical model
+Google Quantum AI
+Google Quantum AI's
+Google Quantum AI's initiatives
+hardware
+high
+IBM
+IBM's
+information
+interconnected
+Internet
+Internet-scale distances
+investigates
+landscape
+leader
+level
+Markov chain simulation
+mathematics
+median
+milestone
+mixed systems
+Monte Carlo integration
+Monte Carlo techniques
+multiple
+NISQ
+nodes
+noise
+noisy intermediate-scale quantum
+non-local gates
+noncommutative connections
+noncommutative geometry
+nonlinear
+notions
+on-demand
+open
+paper reviews
+performance
+physical sciences
+polynomial-time
+practical
+private computing
+probabilistic process
+probability
+problems
+process algebra
+proof systems
+Properties
+proposal
+protocols
+provisioning under
+pseudo-random numbers
+qACP
+QIP
+QMA
+quadratically
+quantities
+Quantum
+quantum advice
+quantum algorithms
+quantum applications
+Quantum Assembly language
+Quantum C language
+quantum channel
+quantum channels
+quantum circuit model
+quantum cloud
+quantum complexity
+quantum complexity classes
+quantum computation
+quantum computation devices
+quantum computational
+quantum computational supremacy
+quantum computations
+quantum computer
+quantum computers
+quantum computing
+quantum computing devices
+quantum computing journey
+quantum entanglement
+quantum generalization
+Quantum Grammars
+quantum hardware
+quantum information
+quantum interactive
+quantum Internet
+Quantum Languages
+quantum measurement
+quantum mechanics
+quantum networks
+quantum operations
+quantum physics
+quantum proofs
+quantum protocols
+quantum resources
+quantum simulation
+quantum software
+quantum states
+quantum systems
+Quantum Turing Machines
+Quantum's
+Quantum's processors
+qubit
+random
+randomness
+realizing
+reformulating
+representation
+result
+review
+shaping
+software
+solution
+space-bounded quantum computation
+speed
+stand
+statistical framework
+statistics
+stochastic
+strides
+study
+surpassing
+surveys
+technological innovation
+technological innovations
+technology
+teleport
+theory
+time
+transformation
+transformations
+transformative frontier
+transformative impact
+transition
+two-stage stochastic programming model
+unavoidable
+uncertainty
+unconventional
+unification
+unified
+unitary
+unitary operator
+utilization
+verifiable blind
+verification
+world's

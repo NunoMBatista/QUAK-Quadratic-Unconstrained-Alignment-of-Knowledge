@@ -1,0 +1,7 @@
+Source: Wikipedia
+Title: List of quantum processors
+URL: https://en.wikipedia.org/wiki/List_of_quantum_processors
+Query: Quantum Computing
+---
+This list contains quantum processors, also known as quantum processing units (QPUs). Some devices listed below have only been announced at press conferences so far, with no actual demonstrations or scientific publications characterizing the performance.
+Quantum processors are difficult to compare due to the different architectures and approaches. Due to this, published physical qubit numbers do not reflect the performance levels of the processor. This is instead achieved through the number of logical qubits or benchmarking metrics such as quantum volume, randomized benchmarking or circuit layer operations per second (CLOPS).

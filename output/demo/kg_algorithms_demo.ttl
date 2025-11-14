@@ -1,0 +1,22 @@
+@prefix ns1: <http://demo.local/schema/> .
+@prefix ns2: <http://demo.local/rel/> .
+
+<http://demo.local/wiki/Shor_s_Algorithm> a ns1:Entity ;
+    ns2:references <http://demo.local/wiki/Grover_s_Algorithm> ;
+    ns1:attribute "Shor's Algorithm" ;
+    ns1:label "Shor's Algorithm" .
+
+<http://demo.local/wiki/Grover_s_Algorithm> a ns1:Entity ;
+    ns1:attribute "Grover's Algorithm" ;
+    ns1:label "Grover's Algorithm" .
+
+<http://demo.local/wiki/QAOA_Quantum_Approximate_Optimization_Algorithm> a ns1:Entity ;
+    ns2:published_same_year_as <http://demo.local/wiki/VQE_Variational_Quantum_Eigensolver> ;
+    ns1:attribute "A variational eigenvalue solver on a quantum processor" ;
+    ns1:label "QAOA (Quantum Approximate Optimization Algorithm)" .
+
+<http://demo.local/wiki/VQE_Variational_Quantum_Eigensolver> a ns1:Entity ;
+    ns2:published_same_year_as <http://demo.local/wiki/QAOA_Quantum_Approximate_Optimization_Algorithm> ;
+    ns1:attribute "A quantum approximate optimization algorithm" ;
+    ns1:label "VQE (Variational Quantum Eigensolver)" .
+

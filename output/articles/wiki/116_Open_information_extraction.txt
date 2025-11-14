@@ -1,0 +1,6 @@
+Source: Wikipedia
+Title: Open information extraction
+URL: https://en.wikipedia.org/wiki/Open_information_extraction
+Query: fetch mode
+---
+In natural language processing, open information extraction (OIE) is the task of generating a structured, machine-readable representation of the information in text, usually in the form of triples or n-ary propositions.

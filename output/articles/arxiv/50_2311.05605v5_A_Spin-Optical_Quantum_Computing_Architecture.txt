@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2311.05605v5
+Title: A Spin-Optical Quantum Computing Architecture
+Query: Quantum Computing
+---
+We introduce an adaptable and modular hybrid architecture designed for fault-tolerant quantum computing. It combines quantum emitters and linear-optical entangling gates to leverage the strength of both matter-based and photonic-based approaches. A key feature of the architecture is its practicality, grounded in the utilisation of experimentally proven optical components. Our framework enables the execution of any quantum error correcting code, but in particular maintains scalability for low-density parity check codes by exploiting built-in non-local connectivity through distant optical links. To gauge its efficiency, we evaluated the architecture using a physically motivated error model. It exhibits loss tolerance comparable to existing all-photonic architecture but without the need for intricate linear-optical resource-state-generation modules that conventionally rely on resource-intensive multiplexing. The versatility of the architecture also offers uncharted avenues for further advancing performance standards.

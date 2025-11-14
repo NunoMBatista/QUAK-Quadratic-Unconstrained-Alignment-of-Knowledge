@@ -1,8 +1,9 @@
 import re
+from typing import List, Set, Tuple, cast
 from src.config import *
 from src.kg_construction.fetch_data import fetch_wiki_data, fetch_arxiv_data
-from src.kg_construction.nlp_pipeline import NLPPipeline
-from rdflib import Graph, Namespace, RDF  # <-- IMPORT RDF
+from src.kg_construction.nlp_pipeline import NLPPipeline, RelationTriple
+from rdflib import Graph, RDF
 from src.utils.graph_visualizer import visualize_ttl
 from pathlib import Path
 
@@ -20,10 +21,29 @@ def clean_for_uri(text):
     text = re.sub(r"[^a-zA-Z0-9_'-]", '', text)
     return text
 
+def _persist_entities(entities: Set[str], output_dir: Path, output_file: Path, label: str) -> None:
+    canonical = {}
+    for entity in entities:
+        stripped = entity.strip()
+        if not stripped:
+            continue
+        key = stripped.lower()
+        if key not in canonical:
+            canonical[key] = stripped
+
+    sorted_entities = sorted(canonical.values(), key=lambda value: value.lower())
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    if sorted_entities:
+        output_file.write_text("\n".join(sorted_entities) + "\n", encoding="utf-8")
+    else:
+        output_file.write_text("", encoding="utf-8")
+    print(f"-> Saved {len(sorted_entities)} {label} entities to {output_file}")
+
 def prune_kgs():
     """
     loads the "messy" unpruned KGs and creates clean, pruned
-    KGs based on the entity maps and ontology rules.
+    KGs while preserving the automatically extracted relations.
     """
     
     print("\n--- STEP 4: PRUNING KGs ---")
@@ -56,6 +76,7 @@ def _prune_and_map_kg(raw_path, clean_path, entity_map):
     
     # this binds the ontology namespace to the clean graph
     g_clean.bind("ont", NS_ONT) 
+    g_clean.bind("raw", NS_RAW)
     
     # create the filter and lookup maps
     allowed_entities_lower = { # this will have all of the allowed entity names in lowercase
@@ -107,88 +128,92 @@ def _prune_and_map_kg(raw_path, clean_path, entity_map):
             
             # 'rdf:type' triples are already added. skip to relations.
             
-            # ==== Rule-Based Relation Extraction Block ====
-            
-            predicate = None
-            # if the subject is a QuantumAlgorithm and the object is a Person, we can say 'developedBy'
-            if s_type == 'QuantumAlgorithm' and o_type == 'Person':
-                predicate = NS_ONT['developedBy']
-
-            # if the subject is a QuantumHardware and the object is a QuantumConcept, we can say 'implements'
-            elif s_type == 'QuantumHardware' and o_type == 'QuantumConcept':
-                predicate = NS_ONT['implements']
+            predicate = p_raw_uri
+            g_clean.add((NS_ONT[clean_for_uri(s_canon)], predicate, NS_ONT[clean_for_uri(o_canon)]))
                 
-            # we can try other rules
-            else:
-                core_types = ['QuantumAlgorithm', 'QuantumConcept', 'QuantumHardware']
-                if s_type in core_types and o_type in core_types:
-                    predicate = NS_ONT['usesConcept']
-
-            # add the clean Triple
-            if predicate != None:
-                g_clean.add((NS_ONT[clean_for_uri(s_canon)], predicate, NS_ONT[clean_for_uri(o_canon)]))
-                
-    # save the final, clean graph
+    # save the final, clean grapherarchy langu
     print(f"    -> Saving {len(g_clean)} clean triples to {clean_path}")
     g_clean.serialize(destination=str(clean_path), format="turtle")
 
+def _relation_uri(value: str):
+    """helper to create a relation URI from a raw string."""
+    relation_label = clean_for_uri(value)
+    if not relation_label:
+        relation_label = "related_to"
+    return NS_RAW[relation_label]
 
-def build_unpruned_kgs():
+
+def build_unpruned_kgs(wiki_data: List[str], arxiv_data: List[str]):
     """
     this will build the unpruned KGs for both Wikipedia and
     arXiv data.
     
-    it will save them to disk as turtle files, no need to return them.
+    it will save them to disk as turtle files (.ttl), no need to return them.
     
     Parameters
     ----------
-    None
+    wiki_data : List[str]
+        list of raw Wikipedia article texts.
+    arxiv_data : List[str]
+        list of raw arXiv abstract texts.
     
     Returns
     -------
     None
     """
     
-    print("\n--- STEP 1: FETCH THE DATA ---")
-    wiki_data, _wiki_titles = fetch_wiki_data()
-    arxiv_data, _arxiv_ids = fetch_arxiv_data()
+    #print("\n--- STEP 1: FETCH THE DATA ---")
+    #wiki_data, _wiki_titles = fetch_wiki_data()
+    #arxiv_data, _arxiv_ids = fetch_arxiv_data()
     
     
-    print("\n--- STEP 2: RUN THE NLP PIPELINE ---")
-    nlp_pipeline = NLPPipeline()
+    print("\n--- STEP 1: RUN THE NLP PIPELINE ---")
     
-    wiki_triples = []
+    nlp_pipeline = NLPPipeline() # initialize the NLP pipeline
+    
+    # Extract everything in both corpora (NER and RE)
+    wiki_triples: List[RelationTriple] = []
+    wiki_entities: Set[str] = set()
     for article in wiki_data:
-        triples = nlp_pipeline.extract_triples(article)
+        triples_result = nlp_pipeline.extract_triples(article, return_entities=True)
+        triples, entities = cast(Tuple[List[RelationTriple], List[str]], triples_result)
         wiki_triples.extend(triples)
+        wiki_entities.update(entities)
         
-    arxiv_triples = []
+    arxiv_triples: List[RelationTriple] = []
+    arxiv_entities: Set[str] = set()
     for abstract in arxiv_data:
-        triples = nlp_pipeline.extract_triples(abstract)
+        triples_result = nlp_pipeline.extract_triples(abstract, return_entities=True)
+        triples, entities = cast(Tuple[List[RelationTriple], List[str]], triples_result)
         arxiv_triples.extend(triples)
+        arxiv_entities.update(entities)
+
+    _persist_entities(wiki_entities, WIKI_ENTITIES_DIR, WIKI_ENTITIES_FILE, "wiki")
+    _persist_entities(arxiv_entities, ARXIV_ENTITIES_DIR, ARXIV_ENTITIES_FILE, "arXiv")
         
-    print("\n--- STEP 3: BUILD THE UNPRUNED KGs ---")
+    print("\n--- STEP 2: BUILD THE UNPRUNED KGs ---")
+    wiki_relation_count = len({triple.relation for triple in wiki_triples})
+    arxiv_relation_count = len({triple.relation for triple in arxiv_triples})
     print(f"-> Wiki triples extracted: {len(wiki_triples)}")
     print(f"-> arXiv triples extracted: {len(arxiv_triples)}")
+    print(f"-> Unique wiki relations: {wiki_relation_count}")
+    print(f"-> Unique arXiv relations: {arxiv_relation_count}")
 
     # Build the unpruned KGs
     wiki_kg = Graph()
     arxiv_kg = Graph()
     
     # [:MAX_UNPRUNED_TRIPLES] for quick testing
-    for subj, pred, obj in wiki_triples[:MAX_UNPRUNED_TRIPLES]:
-        # clean the strings before adding them
-        subj_clean = clean_for_uri(subj)
-        obj_clean = clean_for_uri(obj)
+
+    for triple in wiki_triples[:MAX_UNPRUNED_TRIPLES]:
+        subj_clean = clean_for_uri(triple.subject)
+        obj_clean = clean_for_uri(triple.object)
+        wiki_kg.add((NS_RAW[subj_clean], _relation_uri(triple.relation), NS_RAW[obj_clean]))
         
-        # add the triple to the graph with the generic relation
-        wiki_kg.add((NS_RAW[subj_clean], REL_GENERIC, NS_RAW[obj_clean]))
-        
-    for subj, pred, obj in arxiv_triples[:MAX_UNPRUNED_TRIPLES]:
-        # clean the strings before adding them
-        subj_clean = clean_for_uri(subj)
-        obj_clean = clean_for_uri(obj)
-        arxiv_kg.add((NS_RAW[subj_clean], REL_GENERIC, NS_RAW[obj_clean]))
+    for triple in arxiv_triples[:MAX_UNPRUNED_TRIPLES]:
+        subj_clean = clean_for_uri(triple.subject)
+        obj_clean = clean_for_uri(triple.object)
+        arxiv_kg.add((NS_RAW[subj_clean], _relation_uri(triple.relation), NS_RAW[obj_clean]))
         
     # -----------------------
     
@@ -199,9 +224,14 @@ def build_unpruned_kgs():
     print(f"-> Saving {len(arxiv_kg)} arXiv triples to {KG_ARXIV_UNPRUNED_PATH}")
     arxiv_kg.serialize(destination=str(KG_ARXIV_UNPRUNED_PATH), format='turtle')
 
+
 if __name__ == "__main__":
     KG_DIR.mkdir(exist_ok=True, parents=True)
-    build_unpruned_kgs() # get the unpruned KGs into the disk
+
+    wiki_data, _wiki_titles = fetch_wiki_data()
+    arxiv_data, _arxiv_ids = fetch_arxiv_data()
+    
+    build_unpruned_kgs(wiki_data, arxiv_data) # get the unpruned KGs into the disk
     prune_kgs() # prune them
 
     print("\n--- VISUALIZING RAW ---")

@@ -1,0 +1,9 @@
+Source: Wikipedia
+Title: Unconventional computing
+URL: https://en.wikipedia.org/wiki/Unconventional_computing
+Query: Quantum Computing
+---
+Unconventional computing (also known as alternative computing or nonstandard computation) is computing by any of a wide range of new or unusual methods. 
+The term unconventional computation was coined by Cristian S. Calude and John Casti and used at the First International Conference on Unconventional Models of Computation in 1998.
+
+

@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: Chetan Nayak
+URL: https://en.wikipedia.org/wiki/Chetan_Nayak
+Query: Quantum Computing
+---
+Chetan Nayak (born 1971) is an Indian-American physicist and computer scientist specializing in quantum computing. He is a professor at the University of California, Santa Barbara and a technical fellow and distinguished engineer on the Microsoft Azure Quantum hardware team. He joined Microsoft in 2005 and became director and general manager of Quantum Hardware at Microsoft Station Q at Microsoft Research in 2014.
+
+

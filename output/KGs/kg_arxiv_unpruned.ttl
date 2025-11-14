@@ -1,97 +1,39 @@
-@prefix ns1: <http://example.org/raw/> .
+@prefix ns1: <http://unpruned.local/> .
 
-ns1:Internet-scale_distances ns1:is_related_to ns1:Internet,
-        ns1:quantum .
+ns1:Google_Quantum_AI ns1:is_a ns1:leader .
 
-ns1:computations ns1:is_related_to ns1:Internet,
-        ns1:quantum .
+ns1:Quantum ns1:lead ns1:advancements .
 
-ns1:nodes ns1:is_related_to ns1:Internet,
-        ns1:quantum .
+ns1:computers ns1:represent ns1:transformative_frontier .
 
-ns1:non-local_gates ns1:is_related_to ns1:Internet,
-        ns1:quantum .
+ns1:notions ns1:is_a ns1:quantum_computations .
 
-ns1:private_computing ns1:is_related_to ns1:Internet,
-        ns1:quantum .
+ns1:paper_reviews ns1:review ns1:performance .
 
-ns1:quantum_applications ns1:is_related_to ns1:Internet,
-        ns1:quantum .
+ns1:quantum_algorithms ns1:is_a ns1:random .
 
-ns1:quantum_cloud ns1:is_related_to ns1:Internet,
-        ns1:quantum .
+ns1:quantum_computing_devices ns1:compute ns1:quantities .
 
-ns1:quantum_information ns1:is_related_to ns1:Internet,
-        ns1:quantum .
+ns1:quantum_resources ns1:is_a ns1:quantum_computers .
 
-ns1:verifiable_blind ns1:is_related_to ns1:Internet,
-        ns1:quantum .
+ns1:quantum_simulation ns1:utilize ns1:Monte_Carlo_techniques .
 
-ns1:quantum_protocols ns1:is_related_to ns1:Internet,
-        ns1:computing,
-        ns1:quantum .
+ns1:representation ns1:define ns1:Quantum_Turing_Machines .
 
-ns1:study ns1:is_related_to ns1:Internet,
-        ns1:computing,
-        ns1:quantum .
+ns1:study ns1:highlight ns1:transformative_impact .
 
-ns1:classical ns1:is_related_to ns1:Internet,
-        ns1:computing,
-        ns1:distributed,
-        ns1:quantum,
-        ns1:quantum_Internet .
+ns1:theory ns1:is_a ns1:stochastic .
 
-ns1:distributed ns1:is_related_to ns1:Internet,
-        ns1:classical,
-        ns1:computing,
-        ns1:quantum,
-        ns1:quantum_Internet .
+ns1:unitary_operator ns1:is_a ns1:components .
 
-ns1:quantum_Internet ns1:is_related_to ns1:Internet,
-        ns1:classical,
-        ns1:computing,
-        ns1:distributed,
-        ns1:quantum .
+ns1:DQC ns1:face ns1:problems .
 
-ns1:computing ns1:is_related_to ns1:Internet,
-        ns1:classical,
-        ns1:distributed,
-        ns1:quantum,
-        ns1:quantum_Internet,
-        ns1:quantum_protocols,
-        ns1:study .
+ns1:evaluation ns1:demonstrate ns1:effectiveness ;
+    ns1:is_a ns1:Monte_Carlo_integration .
 
-ns1:Internet ns1:is_related_to ns1:Internet-scale_distances,
-        ns1:classical,
-        ns1:computations,
-        ns1:computing,
-        ns1:distributed,
-        ns1:nodes,
-        ns1:non-local_gates,
-        ns1:private_computing,
-        ns1:quantum,
-        ns1:quantum_Internet,
-        ns1:quantum_applications,
-        ns1:quantum_cloud,
-        ns1:quantum_information,
-        ns1:quantum_protocols,
-        ns1:study,
-        ns1:verifiable_blind .
+ns1:quantum_computers ns1:is_a ns1:quantum_computing ;
+    ns1:speed ns1:evaluation ;
+    ns1:teleport ns1:information .
 
-ns1:quantum ns1:is_related_to ns1:Internet,
-        ns1:Internet-scale_distances,
-        ns1:classical,
-        ns1:computations,
-        ns1:computing,
-        ns1:distributed,
-        ns1:nodes,
-        ns1:non-local_gates,
-        ns1:private_computing,
-        ns1:quantum_Internet,
-        ns1:quantum_applications,
-        ns1:quantum_cloud,
-        ns1:quantum_information,
-        ns1:quantum_protocols,
-        ns1:study,
-        ns1:verifiable_blind .
+ns1:quantum_computing ns1:is_a ns1:DQC .
 

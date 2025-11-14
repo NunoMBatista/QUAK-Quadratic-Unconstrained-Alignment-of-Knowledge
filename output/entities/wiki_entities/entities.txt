@@ -1,0 +1,724 @@
+1D array
+2D
+3-level
+\displaystyle
+\displaystyle (E_{i})_{i
+\displaystyle \rho
+\displaystyle \rho }
+\displaystyle \{\pm 1\}
+\displaystyle C}
+\displaystyle F_{\rm {XEB}}=2^{n}\langle P(x_{i})\rangle _{k}-1={\frac {2^{n}}{k}}\left(\sum
+\displaystyle F_{XEB}=1
+\displaystyle I
+\displaystyle k
+\displaystyle M
+\displaystyle P(x_{i}
+\displaystyle p_{i}
+\displaystyle S
+\displaystyle U
+\displaystyle U}
+\displaystyle X
+\displaystyle Z
+\displaystyle {
+\displaystyle |\psi
+\displaystyle |g\rangle
+\langle \psi |U|\psi
+\langle \psi |U|\psi \rangle }
+\rangle
+\rho
+\sigma
+\text
+\{O_{i}\
+Aaronson
+abstract machine
+academic
+academics
+access
+accuracy
+AdS/CFT correspondence
+Alexei Kitaev
+algorithm
+algorithms
+alternatives
+amplification
+analogue
+Anders Sørensen
+API
+approximated
+arbitrary
+architecture
+architectures
+Arkhipov
+array of ion traps
+artificial atoms
+atomic particle
+atomic scale measurements
+Atoms
+attacks
+Australia-based
+avoids
+Bacon
+BBN
+Berkeley
+beyond-classical computations
+biased noise
+binary
+bitstring
+bitstrings
+boson sampling
+bounded-error
+BPP
+BQP
+branch
+calculate
+calculations
+California-based developer
+capabilities
+charged atomic particles
+chip
+Christopher
+circuit
+circuits
+circumventing
+class
+classical
+classical algorithm
+classical computer
+classical computers
+Classical shadow
+classical system
+classically
+Clifford gates
+cloud
+cloud platform
+cloud services
+Cloud-based
+CNOT
+code
+code block
+code's
+codes
+coherence times
+coherent
+coined
+collected
+collection
+combinations
+comes
+communication
+companies
+company develops
+complexity class
+complexity theory
+computation
+computational
+computational problems
+computational-complexity-theoretic task
+computationally
+computer
+computer's
+computers
+computing
+concept
+concepts
+Conceptually
+condensed matter
+conferences
+confine
+connected networks
+constraints
+contextuality
+continued
+continuous
+control system
+correct
+corrected data
+correcting codes
+correction
+correlation functions
+Coulomb force
+coupling
+Cross-entropy
+cross-entropy benchmark
+cryptanalytic attack
+cryptographers
+cryptographic
+cryptographic algorithms
+current
+D-Wave's
+data
+dates
+day
+decision problem
+decision problems
+Decoding
+decoherence
+decrypt
+definitions
+dense
+departments
+design
+designing
+detected
+deterministic rules
+development
+develops
+Devices
+difficulty
+discrete logarithm problem
+donation
+donations
+E_{i}\sigma
+Eastin
+Eastin–Knill
+Eastin–Knill theorem
+effects
+effects of
+electrical current
+electrical resistance
+electromagnetic fields
+electron
+electronic circuits
+electronic states
+element
+elliptic-curve discrete logarithm problem
+email list
+encode
+encoded
+encryption
+energy
+engineering
+entangled
+entanglement
+entanglement entropy
+entanglement verification
+environment
+environments
+equivalent
+equivalents
+error
+error rates
+errors
+estimated
+estimation
+European Telecommunications Standards Institute (ETSI
+evolve
+Examples
+excited state
+executive director
+existence
+expectation
+expected value
+experimental
+experimental research
+experimentally
+exponentially
+exponentially faster
+expressed
+expresses
+external motional states
+F
+F_{\rm
+factorization
+faculties
+fault
+fault-tolerant
+faulty
+faulty measurements
+favourable performance indicators
+features
+fidelity
+field
+fields
+finding
+finite sequence
+Five-qubit
+Forest
+founded
+free space
+function
+functions
+fundamental
+fundamental operations
+future
+gate
+gates
+generators
+glossary
+Google
+ground state
+group
+Hadamard test
+hardware
+harness
+hash functions
+heavily
+high
+high school students
+high-level constructs
+high-quality qubits
+higher
+highest
+Hilbert space
+horizontal
+hosts
+IBM
+ideal
+ideas
+Identity matrix
+image
+IMEC
+implement
+implemented
+implements
+independent
+induce
+industry
+information
+information science
+ingredient
+inherent
+initiating
+instances
+institute
+Institute for Quantum Computing
+instruction
+instructions
+integer
+integer factorization problem
+Intel
+interacting
+interference
+internal qubit
+internet
+interrupted
+investigating
+invocation
+ion
+ion chains
+ion traps
+Ions
+IQC
+isolate
+isolated
+isotopically pure
+IXZZX
+Kitaev
+Klaus Mølmer
+Knill
+languages
+large-scale
+Lasers
+lend
+length of time
+level
+levels
+linear combination
+locations
+logarithmic number
+logic states
+logical
+logical operators
+logical qubit
+long coherence times
+lookup table
+loop problems
+lower
+M. Dawson
+M. Solovay
+magic
+Magic state
+manufactured
+many-body theory
+Martinis
+massive
+mathematical problems
+maximum size
+measurement
+measurements
+measures
+measuring
+mechanical device
+Median-of-means estimation algorithm
+memory
+method
+metric
+Michael Curtis
+migrating
+migration
+Mike Lazaridis
+milestone
+minimum storage requirements
+modality
+model
+modify
+Mosca's
+motivation
+MS
+MSRI
+multidisciplinary
+multiple
+Mølmer
+National governments
+NIST
+No
+no chance
+noise
+noiseless
+noisy
+non-deterministic
+Norbert Lütkenhaus
+novel
+nuclear spin
+O_{i}\rho
+observables
+Ontario
+open houses
+open-source philosophy
+open-source software
+operations
+Ophelia
+optimization
+optimize
+ordinary
+organizations
+orthogonal states
+outcome
+outcomes
+outliers
+outperform
+output
+outputs
+P_{\rm
+pair
+pairing
+parallelism
+particles
+Pauli matrices
+peculiarity
+performances
+phenomena
+phosphorus atoms
+photon
+physical gate
+physical qubit
+physical qubits
+physical simulations
+Physically engineering
+physically realized
+physicists
+physics
+polarization
+polynomial time
+possibilities
+post-quantum algorithms
+Post-quantum cryptography
+Post-Quantum Cryptography Standards
+post-quantum symmetric cryptography
+POVM
+power
+PQC
+PQCrypto
+practical applications
+Practical Quantum Instruction
+predicting
+prepare
+Prob
+probabilistic rule
+probabilities
+probability
+problem
+problems
+procedures
+processing
+processing power
+processors
+professor
+programmable fashion
+programmers
+programs
+Promising
+properties
+property
+proposal
+proposals
+protocol
+Pty Ltd
+public
+public-key
+public-key algorithms
+public-key cryptographic schemes
+pyQuil
+Python library
+Q-Day
+QEC
+QIMP
+QPUs
+QTM
+quantized motion
+Quantum
+quantum advantage
+quantum algorithm
+quantum algorithms
+quantum analogue
+quantum benchmarking protocol
+quantum bit
+quantum channel 
+  
+    
+      
+        M
+quantum chips
+quantum circuit
+quantum circuit 
+  
+    
+      
+        C
+quantum circuit model
+quantum circuits
+quantum communication
+quantum computation
+quantum computational
+quantum computations
+quantum computer
+quantum computer running
+quantum computer system
+Quantum computers
+Quantum Computing
+quantum computing company
+quantum decoherence
+quantum device
+quantum devices
+quantum dots
+quantum emulators
+quantum entanglement
+quantum error
+Quantum error correction
+quantum gates
+quantum gravity
+quantum Grover's algorithm
+Quantum image processing
+quantum images
+quantum information
+quantum information science
+quantum instruction
+quantum integrated circuits
+quantum measurements
+quantum mechanics
+quantum noise
+quantum physics
+quantum polynomial time
+quantum preparation
+quantum problems
+quantum processing
+quantum processing units
+quantum processors
+Quantum programming
+quantum programs
+quantum reference frame
+Quantum Safe Cryptography
+quantum sensing
+Quantum simulator
+Quantum simulators
+quantum software
+quantum state
+Quantum state discrimination
+quantum states
+quantum superposition
+quantum supremacy
+quantum supremacy regime
+quantum system
+quantum systems
+quantum technologies
+quantum teleportation
+quantum trit
+Quantum Turing machine
+quantum version
+Quantum volume
+quantum volumes
+quantum-mechanical system
+quantum-powered
+quantum-proof
+quantum-resistant
+quantum-safe
+quantum-safe cryptography
+quantum/classical memory model
+qubit
+Qubits
+Quil
+Quil programs
+Qutrit
+qutrits
+random
+random guessing
+random variable
+randomly sampling
+Re
+real-world applications
+realistic model
+realizations
+realized
+received
+reduce
+remotely
+replicated
+Research
+Research Advancement Centre
+researchers
+resources
+result
+results
+Richard Feynman's
+Rigetti
+risk analysis
+Robert
+Robert Smith
+RSA
+rumoured
+running
+S
+samples
+sampling
+scalable
+scanning tunnelling microscopes
+schemes
+scientific outreach events
+scientific research institute of
+secure
+security
+sensitive
+sensitivity
+sequences
+Shadow generation algorithm
+shadows
+shared trap
+Shor code
+Shor's algorithm
+short courses
+Si-28
+Silicon
+simplest
+simplicity
+simulated
+simulating
+simulation
+simulators
+simultaneously
+single-qubit
+size
+solid state
+Solovay
+space
+specialized tasks
+speed
+speedup
+spin
+spin down
+spin qubits
+spin up
+SQC
+square
+stabilizer
+stable
+standard formulation
+state
+states
+Steane code
+step-by-step procedure
+steps
+stored
+study
+SU(2
+sub-disciplines
+sub-fields
+subfield
+subspace
+Subsystem
+Subsystem code
+Subsystem codes
+suffers
+supercomputer
+superconducting
+superconductors
+superpolynomial
+superposition
+surpass
+Sydney
+symmetric ciphers
+symmetric cryptographic algorithms
+symmetric cryptography
+symmetry
+Sørensen gate
+T
+T gate
+talk
+task
+tasks
+Technologies
+term
+theorem
+theoretical
+theoretical) computer
+theorizes
+threat
+time
+time cost
+timeline
+TIQC
+tolerant
+traditional
+transferred
+Transversal gates
+transversely
+trapped ion
+trapped-ion
+trapped-ion systems
+tr}
+two-level
+two-state
+two-state device
+U.S. National Institute of Standards and Technology
+undergraduate
+unitary
+universal
+universal gate set
+University of Waterloo
+usefulness
+users
+versions
+vertical polarization
+vulnerable
+Waterloo
+wave interference
+widespread
+William Zeng
+work
+workshops
+X
+        Z
+x_{k}\
+XEB
+XIXZZ
+Y2Q
+years
+Yuri Manin's
+Z
+Z
+        X
+ZXIXZ\rangle
+{
+{H
+{i=1}^{k}|\langle 0^{n}|C|x_{i}\rangle |^{2}\right)-1}
+{Im
+{i}\}_{i
+{i}E_{i
+{j
+{j}
+{tr}
+|e\rangle
+}}
+ψ
+∑
+⟨
+⟩

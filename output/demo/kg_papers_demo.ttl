@@ -1,0 +1,29 @@
+@prefix ns1: <http://demo.local/schema/> .
+@prefix ns2: <http://demo.local/rel/> .
+
+<http://demo.local/arxiv/Qubit> a ns1:Entity ;
+    ns2:appears_in <http://demo.local/arxiv/Farhi_et_al_2014>,
+        <http://demo.local/arxiv/Grover_1996>,
+        <http://demo.local/arxiv/Peruzzo_et_al_2014>,
+        <http://demo.local/arxiv/Shor_1994> ;
+    ns1:attribute "Shared resource" ;
+    ns1:label "Qubit" .
+
+<http://demo.local/arxiv/Grover_1996> a ns1:Entity ;
+    ns1:attribute "Grover, 1996" ;
+    ns1:label "Grover, 1996" .
+
+<http://demo.local/arxiv/Shor_1994> a ns1:Entity ;
+    ns1:attribute "Shor, 1994" ;
+    ns1:label "Shor, 1994" .
+
+<http://demo.local/arxiv/Farhi_et_al_2014> a ns1:Entity ;
+    ns2:published_same_year_as <http://demo.local/arxiv/Peruzzo_et_al_2014> ;
+    ns1:attribute "A quantum approximate optimization algorithm" ;
+    ns1:label "Farhi et al., 2014" .
+
+<http://demo.local/arxiv/Peruzzo_et_al_2014> a ns1:Entity ;
+    ns2:published_same_year_as <http://demo.local/arxiv/Farhi_et_al_2014> ;
+    ns1:attribute "A variational eigenvalue solver on a quantum processor" ;
+    ns1:label "Peruzzo et al., 2014" .
+

@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 1905.02666v5
+Title: Option Pricing using Quantum Computers
+Query: Quantum Computing
+---
+We present a methodology to price options and portfolios of options on a gate-based quantum computer using amplitude estimation, an algorithm which provides a quadratic speedup compared to classical Monte Carlo methods. The options that we cover include vanilla options, multi-asset options and path-dependent options such as barrier options. We put an emphasis on the implementation of the quantum circuits required to build the input states and operators needed by amplitude estimation to price the different option types. Additionally, we show simulation results to highlight how the circuits that we implement price the different option contracts. Finally, we examine the performance of option pricing circuits on quantum hardware using the IBM Q Tokyo quantum device. We employ a simple, yet effective, error mitigation scheme that allows us to significantly reduce the errors arising from noisy two-qubit gates.

@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2502.09956v2
+Title: KGGen: Extracting Knowledge Graphs from Plain Text with Language Models
+Query: fetch mode
+---
+Recent interest in building foundation models for KGs has highlighted a fundamental challenge: knowledge-graph data is relatively scarce. The best-known KGs are primarily human-labeled, created by pattern-matching, or extracted using early NLP techniques. While human-generated KGs are in short supply, automatically extracted KGs are of questionable quality. We present a solution to this data scarcity problem in the form of a text-to-KG generator (KGGen), a package that uses language models to create high-quality graphs from plaintext. Unlike other KG extractors, KGGen clusters related entities to reduce sparsity in extracted KGs. KGGen is available as a Python library (\texttt{pip install kg-gen}), making it accessible to everyone. Along with KGGen, we release the first benchmark, Measure of of Information in Nodes and Edges (MINE), that tests an extractor's ability to produce a useful KG from plain text. We benchmark our new tool against existing extractors and demonstrate far superior performance.

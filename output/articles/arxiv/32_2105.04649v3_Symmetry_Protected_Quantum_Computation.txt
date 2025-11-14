@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2105.04649v3
+Title: Symmetry Protected Quantum Computation
+Query: Quantum Computing
+---
+We consider a model of quantum computation using qubits where it is possible to measure whether a given pair are in a singlet (total spin $0$) or triplet (total spin $1$) state. The physical motivation is that we can do these measurements in a way that is protected against revealing other information so long as all terms in the Hamiltonian are $SU(2)$-invariant. We conjecture that this model is equivalent to BQP. Towards this goal, we show: (1) this model is capable of universal quantum computation with polylogarithmic overhead if it is supplemented by single qubit $X$ and $Z$ gates. (2) Without any additional gates, it is at least as powerful as the weak model of "permutational quantum computation" of Jordan [14, 18]. (3) With postselection, the model is equivalent to PostBQP.

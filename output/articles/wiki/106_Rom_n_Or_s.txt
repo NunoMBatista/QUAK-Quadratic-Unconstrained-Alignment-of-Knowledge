@@ -1,0 +1,6 @@
+Source: Wikipedia
+Title: Román Orús
+URL: https://en.wikipedia.org/wiki/Rom%C3%A1n_Or%C3%BAs
+Query: Quantum Computing
+---
+Román Orús Lacort (Barcelona, 1979) is a Spanish theoretical physicist who specializes in quantum information science and quantum tensor networks. He is Ikerbasque Research Professor at the Donostia International Physics Center (DIPC), as well as co-founder and Chief Scientific Officer of Multiverse Computing.

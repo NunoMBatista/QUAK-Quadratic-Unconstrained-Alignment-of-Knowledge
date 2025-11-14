@@ -1,0 +1,6 @@
+Source: Wikipedia
+Title: PsiQuantum
+URL: https://en.wikipedia.org/wiki/PsiQuantum
+Query: Quantum Computing
+---
+PsiQuantum, Corp. (formerly PsiQ) is an American quantum computing company based in Palo Alto, California. It is developing a general-purpose silicon photonic quantum computer.

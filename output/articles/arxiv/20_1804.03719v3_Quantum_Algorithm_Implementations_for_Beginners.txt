@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 1804.03719v3
+Title: Quantum Algorithm Implementations for Beginners
+Query: Quantum Computing
+---
+As quantum computers become available to the general public, the need has arisen to train a cohort of quantum programmers, many of whom have been developing classical computer programs for most of their careers. While currently available quantum computers have less than 100 qubits, quantum computing hardware is widely expected to grow in terms of qubit count, quality, and connectivity. This review aims to explain the principles of quantum programming, which are quite different from classical programming, with straightforward algebra that makes understanding of the underlying fascinating quantum mechanical principles optional. We give an introduction to quantum computing algorithms and their implementation on real quantum hardware. We survey 20 different quantum algorithms, attempting to describe each in a succinct and self-contained fashion. We show how these algorithms can be implemented on IBM's quantum computer, and in each case, we discuss the results of the implementation with respect to differences between the simulator and the actual hardware runs. This article introduces computer scientists, physicists, and engineers to quantum algorithms and provides a blueprint for their implementations.

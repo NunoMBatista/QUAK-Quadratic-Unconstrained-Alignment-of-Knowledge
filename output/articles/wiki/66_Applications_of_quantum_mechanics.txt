@@ -1,0 +1,11 @@
+Source: Wikipedia
+Title: Applications of quantum mechanics
+URL: https://en.wikipedia.org/wiki/Applications_of_quantum_mechanics
+Query: Quantum Computing
+---
+Quantum physics is a branch of modern physics in which energy and matter are described at their most fundamental level, that of energy quanta, elementary particles, and quantum fields. Quantum physics encompasses any discipline concerned with systems that exhibit notable quantum-mechanical effects, where waves have properties of particles, and particles behave like waves. Applications of quantum mechanics include explaining phenomena found in nature as well as developing technologies that rely upon quantum effects, like integrated circuits and lasers.
+Quantum mechanics is also critically important for understanding how individual atoms are joined by covalent bonds to form molecules. The application of quantum mechanics to chemistry is known as quantum chemistry.  Quantum mechanics can also provide quantitative insight into ionic and covalent bonding processes by explicitly showing which molecules are energetically favorable to which others and the magnitudes of the energies involved.  
+Historically, the first applications of quantum mechanics to physical systems were the algebraic determination of the hydrogen spectrum by Wolfgang Pauli and the treatment of diatomic molecules by Lucy Mensing.
+In many aspects modern technology operates at a scale where quantum effects are significant. Important applications of quantum theory include quantum chemistry, quantum optics, quantum computing, superconducting magnets, light-emitting diodes, the optical amplifier and the laser, the transistor and semiconductors such as the microprocessor, medical and research imaging such as magnetic resonance imaging and electron microscopy. Explanations for many biological and physical phenomena are rooted in the nature of the chemical bond, most notably the macro-molecule DNA.
+
+

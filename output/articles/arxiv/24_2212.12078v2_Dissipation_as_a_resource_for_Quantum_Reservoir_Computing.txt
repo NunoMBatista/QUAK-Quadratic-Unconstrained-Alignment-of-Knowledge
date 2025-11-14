@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2212.12078v2
+Title: Dissipation as a resource for Quantum Reservoir Computing
+Query: Quantum Computing
+---
+Dissipation induced by interactions with an external environment typically hinders the performance of quantum computation, but in some cases can be turned out as a useful resource. We show the potential enhancement induced by dissipation in the field of quantum reservoir computing introducing tunable local losses in spin network models. Our approach based on continuous dissipation is able not only to reproduce the dynamics of previous proposals of quantum reservoir computing, based on discontinuous erasing maps but also to enhance their performance. Control of the damping rates is shown to boost popular machine learning temporal tasks as the capability to linearly and non-linearly process the input history and to forecast chaotic series. Finally, we formally prove that, under non-restrictive conditions, our dissipative models form a universal class for reservoir computing. It means that considering our approach, it is possible to approximate any fading memory map with arbitrary precision.

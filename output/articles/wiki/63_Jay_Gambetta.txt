@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: Jay Gambetta
+URL: https://en.wikipedia.org/wiki/Jay_Gambetta
+Query: Quantum Computing
+---
+Jay M. Gambetta is a scientist and executive, leading the team at IBM Thomas J Watson Research Center working to build a quantum computer.
+
+

@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: Quantum Artificial Intelligence Lab
+URL: https://en.wikipedia.org/wiki/Quantum_Artificial_Intelligence_Lab
+Query: Quantum Computing
+---
+The Quantum Artificial Intelligence Lab (also called the Quantum AI Lab or QuAIL) is a joint initiative of NASA, Universities Space Research Association, and Google (specifically, Google Research) whose goal is to pioneer research on how quantum computing might help with machine learning and other difficult computer science problems. The lab is hosted at NASA's Ames Research Center.
+
+

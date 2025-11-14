@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: quant-ph/0411074v1
+Title: Universal uncertainty principle and quantum state control under conservation laws
+Query: Quantum Computing
+---
+Heisenberg's uncertainty principle, exemplified by the gamma ray thought experiment, suggests that any finite precision measurement disturbs any observables noncommuting with the measured observable. Here, it is shown that this statement contradicts the limit of the accuracy of measurements under conservation laws originally found by Wigner in 1950s, and should be modified to correctly derive the unavoidable noise caused by the conservation law induced decoherence. The obtained accuracy limit leads to an interesting conclusion that a widely accepted, but rather naive, physical encoding of qubits for quantum computing suffers significantly from the decoherence induced by the angular momentum conservation law.

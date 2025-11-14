@@ -1,0 +1,6 @@
+Source: Wikipedia
+Title: QC Ware
+URL: https://en.wikipedia.org/wiki/QC_Ware
+Query: Quantum Computing
+---
+QC Ware is a quantum-computing-as-a-service company based in Palo Alto, California.

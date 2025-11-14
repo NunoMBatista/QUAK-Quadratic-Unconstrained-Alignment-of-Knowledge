@@ -1,0 +1,12 @@
+Source: Wikipedia
+Title: India's quantum computer
+URL: https://en.wikipedia.org/wiki/India%27s_quantum_computer
+Query: Quantum Computing
+---
+India's quantum computer is the proposed and planned quantum computer to be developed by 2026. A quantum computer is a computer based on quantum phenomena and governed by the principles of quantum mechanics in physics.  The development in the field of quantum computing in the world is also intricately linked to India. The legacy of quantum computing in India can be traced back from the period of Indian theoretical physicist Satyendra Nath Bose. His last four publication on quantum statistics and condensed matter physics led to the foundation of quantum mechanics. It was published in the year 1924. 
+
+The first quantum computer India launch was of 7 qubits developed at Tata Institute of Fundamental Research, Mumbai. In April 2025, An Indian startup named QpiAi unveiled a 25 qubit Quantum Computer named Indus, this quantum computer launched, is the first full-stack quantum computing system in the country selected under National Quantum Mission(NQM), Government of India scheme. In the next five years, it is expected that India will invest around one billion dollars in the programs related to the development of the quantum computer.  The Government of India has launched an initiative called as National Quantum Mission to achieve the goal of the development of the India's quantum computer. India is one of the seven countries having dedicated National Quantum Mission to the development of quantum technologies in the country. The union defence minister Rajnath Singh emphasized on the development of quantum computing during the ceremony of 16th foundation day of Indian Institute Technology, Mandi. 
+
+"The time to come is of quantum computing."The Indian startup company QpiAI launched a 25 qubits quantum computer known as QpiAI-Indus on 14 April 2025. The QpiAI-Indus quantum computer is an India's one of the most powerful quantum computer. It is a superconducting quantum computer. The launch of the QpiAI-Indus quantum computer was announced on the occasion of the World Quantum Day. The QpiAI-Indus quantum computer is India's first full-stack quantum computing system that combines advanced quantum hardware, scalable control, and optimized software for transformative hybrid computing. In this quantum computer, advanced quantum processors, next-generation Quantum-HPC software platforms, and AI-enhanced quantum solutions have been integrated.
+
+

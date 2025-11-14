@@ -1,0 +1,6 @@
+Source: Wikipedia
+Title: Amaravati Quantum Valley
+URL: https://en.wikipedia.org/wiki/Amaravati_Quantum_Valley
+Query: Quantum Computing
+---
+Amaravati Quantum Valley is a planned quantum technology park and hub dedicated for innovations and researches in the field of quantum computing and technologies in India. It is located in Amaravati city of Andhra Pradesh state in India. It is planned that the quantum technology hub will attract huge investments of worth 1 billion USD dollar. It is alignment with the goals of the National Quantum Mission to increase productivity and create wealth through the advanced technologies going to be developed from the Amaravati Quantum Valley. The foreign company IBM and the Indian company Tata Consultancy Services have planned to establish India’s largest quantum computer at the tech park of the Amaravati Quantum Valley, featuring a 156-qubit IBM Heron processor. The planned Amaravati Quantum Valley is seen as a historic opportunity for the state of Andhra Pradesh to become a global hub for the future advanced quantum technologies. It is also considered as the first dedicated "Quantum Valley" tech park in the region of Southern asia.

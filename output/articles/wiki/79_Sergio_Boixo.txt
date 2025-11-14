@@ -1,0 +1,7 @@
+Source: Wikipedia
+Title: Sergio Boixo
+URL: https://en.wikipedia.org/wiki/Sergio_Boixo
+Query: Quantum Computing
+---
+Sergio Boixo has degrees in computer engineering, philosophy, mathematics, and master and PhD in physics, and is best known for his work on quantum computing. He is currently working as Director of Quantum Computing for Google's Quantum Artificial Intelligence Lab, a team he joined in 2013, shortly after its foundation.
+Boixo is a Fellow of the American Physical Society and a corresponding academician of the Royal Academy of Engineering.

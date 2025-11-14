@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2207.10592v2
+Title: Quantum States of Fields for Quantum Split Sources
+Query: Quantum Computing
+---
+Field mediated entanglement experiments probe the quantum superposition of macroscopically distinct field configurations. We show that this phenomenon can be described by using a transparent quantum field theoretical formulation of electromagnetism and gravity in the field basis. The strength of such a description is that it explicitly displays the superposition of macroscopically distinct states of the field. In the case of (linearised) quantum general relativity, this formulation exhibits the quantum superposition of geometries giving rise to the effect.

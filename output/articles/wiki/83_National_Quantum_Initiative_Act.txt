@@ -1,0 +1,6 @@
+Source: Wikipedia
+Title: National Quantum Initiative Act
+URL: https://en.wikipedia.org/wiki/National_Quantum_Initiative_Act
+Query: Quantum Computing
+---
+The National Quantum Initiative Act is an Act of Congress passed on December 13, 2018, and signed into law on December 21, 2018. The law gives the United States a plan for advancing quantum technology, particularly quantum computing.

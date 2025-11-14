@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 1106.5712v1
+Title: Quantum Computing and Quantum Simulation with Group-II Atoms
+Query: Quantum Computing
+---
+Recent experimental progress in controlling neutral group-II atoms for optical clocks, and in the production of degenerate gases with group-II atoms has given rise to novel opportunities to address challenges in quantum computing and quantum simulation. In these systems, it is possible to encode qubits in nuclear spin states, which are decoupled from the electronic state in the $^1$S$_0$ ground state and the long-lived $^3$P$_0$ metastable state on the clock transition. This leads to quantum computing scenarios where qubits are stored in long lived nuclear spin states, while electronic states can be accessed independently, for cooling of the atoms, as well as manipulation and readout of the qubits. The high nuclear spin in some fermionic isotopes also offers opportunities for the encoding of multiple qubits on a single atom, as well as providing an opportunity for studying many-body physics in systems with a high spin symmetry. Here we review recent experimental and theoretical progress in these areas, and summarise the advantages and challenges for quantum computing and quantum simulation with group-II atoms.

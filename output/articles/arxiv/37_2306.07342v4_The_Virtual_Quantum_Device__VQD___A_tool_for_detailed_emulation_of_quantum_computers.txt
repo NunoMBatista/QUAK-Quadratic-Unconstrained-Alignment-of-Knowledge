@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2306.07342v4
+Title: The Virtual Quantum Device (VQD): A tool for detailed emulation of quantum computers
+Query: Quantum Computing
+---
+We present the Virtual Quantum Device (VQD) platform, a system based on the QuEST quantum emulator. Through the use of VQDs, non-expert users can emulate specific quantum computers with detailed error models, bespoke gate sets and connectivities. The platform boasts an intuitive interface, powerful visualisation, and compatibility with high-performance computation for effective testing and optimisation of complex quantum algorithms or ideas across a range of quantum computing hardware. We create and explore five families of VQDs corresponding to trapped ions, nitrogen-vacancy-centres, neutral atom arrays, silicon quantum dot spins, and superconducting devices. Each is highly configurable through a set of tailored parameters. We showcase the key characteristics of each virtual device, providing practical examples of the tool's usefulness and highlighting each device's specific attributes. By offering user-friendly encapsulated descriptions of diverse quantum hardware, the VQD platform offers researchers the ability to rapidly explore algorithms and protocols in a realistic setting; meanwhile hardware experts can create their own VQDs to compare with their experiments.

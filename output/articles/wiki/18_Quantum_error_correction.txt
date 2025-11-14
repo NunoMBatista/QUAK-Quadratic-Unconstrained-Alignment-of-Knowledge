@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: Quantum error correction
+URL: https://en.wikipedia.org/wiki/Quantum_error_correction
+Query: Quantum Computing
+---
+Quantum error correction (QEC) comprises a set of techniques used in quantum memory and quantum computing to protect quantum information from errors arising from decoherence and other sources of quantum noise. QEC schemes that employ codewords stabilized by a set of commuting operators are known as stabilizer codes, and the corresponding codewords are referred to as quantum error-correcting codes (QECCs).
+
+

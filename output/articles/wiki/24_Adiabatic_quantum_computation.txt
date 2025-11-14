@@ -1,0 +1,6 @@
+Source: Wikipedia
+Title: Adiabatic quantum computation
+URL: https://en.wikipedia.org/wiki/Adiabatic_quantum_computation
+Query: Quantum Computing
+---
+Adiabatic quantum computation (AQC) is a form of quantum computing which relies on the adiabatic theorem to perform calculations and is closely related to quantum annealing.

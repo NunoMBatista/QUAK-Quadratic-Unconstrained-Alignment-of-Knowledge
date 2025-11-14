@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2308.11740v1
+Title: Exploration of superconducting multi-mode cavity architectures for quantum computing
+Query: Quantum Computing
+---
+Superconducting radio-frequency (SRF) cavities coupled to transmon circuits have proven to be a promising platform for building high-coherence quantum information processors. An essential aspect of this realization involves designing high quality factor three-dimensional superconducting cavities to extend the lifetime of quantum systems. To increase the computational capability of this architecture, we are exploring a multimode approach. This paper presents the design optimization process of a multi-cell SRF cavity to perform quantum computation based on an existing design developed in the scope of particle accelerator technology. We perform parametric electromagnetic simulations to evaluate and optimize the design. In particular, we focus on the analysis of the interaction between a nonlinear superconducting circuit known as the transmon and the cavity. This parametric design optimization is structured to serve as a blueprint for future studies on similar systems.

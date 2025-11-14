@@ -1,0 +1,6 @@
+Source: Wikipedia
+Title: IQM Quantum Computers
+URL: https://en.wikipedia.org/wiki/IQM_Quantum_Computers
+Query: Quantum Computing
+---
+IQM Quantum Computers is a Finnish quantum computing hardware and software company headquartered in Espoo, Finland. The company develops and commercializes quantum computers based on superconducting technology. Their goal is to become the leading European company in quantum computing hardware.

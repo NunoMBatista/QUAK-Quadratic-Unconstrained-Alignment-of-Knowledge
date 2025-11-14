@@ -8,7 +8,9 @@ from torch_geometric.utils import negative_sampling, to_undirected, add_self_loo
 from transformers import AutoTokenizer, AutoModel
 import numpy as np
 from rdflib import Graph, URIRef
+from rdflib.namespace import RDF
 import os
+from typing import List
 from src.config import *
 from pathlib import Path
 from src.embedding.gae_model import GraphAutoencoder
@@ -26,25 +28,70 @@ def get_mean_pooled_embedding(text, tokenizer, model):
     embedding = outputs.last_hidden_state.mean(dim=1).squeeze(0)
     return embedding.detach().cpu()
 
+def _relation_label_from_uri(value: URIRef) -> str:
+    text = str(value)
+    if "#" in text:
+        text = text.rsplit("#", 1)[-1]
+    if "/" in text:
+        text = text.rsplit("/", 1)[-1]
+    return text.replace("_", " ").strip()
+
+
+def _collect_relation_labels() -> List[str]:
+    candidates = [
+        KG_WIKI_UNPRUNED_PATH,
+        KG_ARXIV_UNPRUNED_PATH,
+        KG_WIKI_FINAL_PATH,
+        KG_ARXIV_FINAL_PATH,
+    ]
+    labels = set()
+    for path in candidates:
+        ttl_path = Path(path)
+        if not ttl_path.exists():
+            continue
+        graph = Graph()
+        graph.parse(str(ttl_path), format="turtle")
+        for _, predicate, _ in graph:
+            if predicate == RDF.type:
+                continue
+            if not isinstance(predicate, URIRef):
+                continue
+            label = _relation_label_from_uri(predicate)
+            if label:
+                labels.add(label)
+    if not labels:
+        labels.update(RELATION_LABELS)
+    return sorted(labels)
+
+
+def _relation_key(label: str) -> str:
+    return "_".join(label.lower().split())
+
+
 def generate_relation_embeddings():
     """generates and saves SciBERT embeddings for relation labels."""
-    
+
     print(f"\n--- Part 1: Generating Relation Embeddings (for H_structure) ---")
     print(f"Loading SciBERT model: {SCIBERT_MODEL_NAME}...")
     tokenizer = AutoTokenizer.from_pretrained(SCIBERT_MODEL_NAME)
     model = AutoModel.from_pretrained(SCIBERT_MODEL_NAME)
     model.eval()
-    
+
+    relation_labels = _collect_relation_labels()
+    print(f"Discovered {len(relation_labels)} relation labels.")
+
     embeddings_dict = {}
-    print("Generating embeddings for relations:")
-    for label in RELATION_LABELS:
-        print(f"  - {label}")
-        vec = get_mean_pooled_embedding(label, tokenizer, model).numpy()
-        embeddings_dict[label] = vec
-        
-    #np.save(REL_EMBEDDINGS_PATH, embeddings_dict)
+    for label in relation_labels:
+        text_label = label.replace("_", " ")
+        key = _relation_key(text_label)
+        if key in embeddings_dict:
+            continue
+        print(f"  - {text_label}")
+        vec = get_mean_pooled_embedding(text_label, tokenizer, model).numpy()
+        embeddings_dict[key] = vec
+
     np.savez(REL_EMBEDDINGS_PATH, **embeddings_dict)
-    
+
     print(f"Successfully saved relation embeddings to {REL_EMBEDDINGS_PATH}")
 
 # --- Part 2: GAE Entity Embeddings ---
@@ -136,12 +183,72 @@ def load_pyg_data_from_ttl(ttl_path, tokenizer=None, model=None, use_scibert_fea
     print(f"  Graph loaded: {data.num_nodes} nodes, {data.num_edges} edges.")
     return data, node_to_index
 
+
+def _sample_embeddings_for_alignment(z, max_samples):
+    """Randomly subsample embeddings to keep MMD computation tractable."""
+    if max_samples is None or max_samples <= 0 or z.size(0) <= max_samples:
+        return z
+    idx = torch.randperm(z.size(0), device=z.device)[:max_samples]
+    return z.index_select(0, idx)
+
+
+def _gaussian_kernel(x, y, gamma):
+    distances = torch.cdist(x, y, p=2) ** 2
+    return torch.exp(-gamma * distances)
+
+
+def _kernel_mean(kmat, same_input=False):
+    if same_input:
+        n = kmat.size(0)
+        if n <= 1:
+            return kmat.new_zeros(())
+        sum_ex_diag = kmat.sum() - kmat.diagonal().sum()
+        return sum_ex_diag / (n * (n - 1))
+    return kmat.mean()
+
+
+def _mmd_loss(z_a, z_b, max_samples=GAEA_MAX_ALIGN_SAMPLES):
+    if z_a.size(0) == 0 or z_b.size(0) == 0:
+        return z_a.new_zeros(())
+
+    a = _sample_embeddings_for_alignment(z_a, max_samples)
+    b = _sample_embeddings_for_alignment(z_b, max_samples)
+
+    with torch.no_grad():
+        combined = torch.cat([a, b], dim=0)
+        pairwise = torch.cdist(combined, combined, p=2)
+        mask = ~torch.eye(pairwise.size(0), dtype=torch.bool, device=pairwise.device)
+        off_diag = pairwise[mask]
+        if off_diag.numel() == 0:
+            bandwidth = 1.0
+        else:
+            median = torch.median(off_diag)
+            bandwidth = median.item() if median.item() > 0 else 1.0
+        gamma = 1.0 / (2.0 * bandwidth ** 2)
+
+    k_xx = _gaussian_kernel(a, a, gamma)
+    k_yy = _gaussian_kernel(b, b, gamma)
+    k_xy = _gaussian_kernel(a, b, gamma)
+
+    return _kernel_mean(k_xx, same_input=True) + _kernel_mean(k_yy, same_input=True) - 2.0 * _kernel_mean(k_xy)
+
+
+def _moment_alignment_loss(z_a, z_b):
+    if z_a.size(0) == 0 or z_b.size(0) == 0:
+        return z_a.new_zeros(())
+    mean_loss = F.mse_loss(z_a.mean(dim=0), z_b.mean(dim=0))
+    std_a = torch.sqrt(z_a.var(dim=0, unbiased=False) + 1e-6)
+    std_b = torch.sqrt(z_b.var(dim=0, unbiased=False) + 1e-6)
+    std_loss = F.mse_loss(std_a, std_b)
+    return mean_loss + std_loss
+
+
 def train_gae(data, in_channels, hidden_channels, out_channels, epochs, lr):
     """
     Trains a single GAE model in an unsupervised way (link prediction).
     """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = GraphAutoencoder(in_channels, hidden_channels, out_channels).to(device)
+    model = GraphAutoencoder(in_channels, hidden_channels, out_channels, dropout=GAE_DROPOUT).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
 
     # Move data to the same device (PyG returns a new Data object)
@@ -194,6 +301,96 @@ def train_gae(data, in_channels, hidden_channels, out_channels, epochs, lr):
     model.cpu()
     return model
 
+
+def train_gaea_joint(
+    wiki_data,
+    arxiv_data,
+    in_channels,
+    hidden_channels,
+    out_channels,
+    epochs,
+    lr,
+    mmd_weight=GAEA_MMD_WEIGHT,
+    stats_weight=GAEA_STATS_WEIGHT,
+    max_samples=GAEA_MAX_ALIGN_SAMPLES,
+):
+    """Train a shared GAE (GAEA) that aligns both graphs simultaneously."""
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = GraphAutoencoder(in_channels, hidden_channels, out_channels, dropout=GAE_DROPOUT).to(device)
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
+
+    wiki_device = wiki_data.to(device)
+    arxiv_device = arxiv_data.to(device)
+
+    wiki_pos_edges = wiki_device.train_pos_edge_index
+    arxiv_pos_edges = arxiv_device.train_pos_edge_index
+
+    print(f"  Training joint GAEA for {epochs} epochs...")
+    for epoch in range(1, epochs + 1):
+        model.train()
+        optimizer.zero_grad()
+
+        z_wiki = model.encode(wiki_device.x, wiki_device.edge_index)
+        z_arxiv = model.encode(arxiv_device.x, arxiv_device.edge_index)
+
+        wiki_neg_edges = negative_sampling(
+            wiki_pos_edges,
+            num_nodes=wiki_device.num_nodes,
+            num_neg_samples=wiki_pos_edges.size(1),
+        ).to(device)
+        arxiv_neg_edges = negative_sampling(
+            arxiv_pos_edges,
+            num_nodes=arxiv_device.num_nodes,
+            num_neg_samples=arxiv_pos_edges.size(1),
+        ).to(device)
+
+        wiki_pos_logits = model.decode(z_wiki, wiki_pos_edges)
+        wiki_neg_logits = model.decode(z_wiki, wiki_neg_edges)
+        wiki_labels = torch.cat([
+            torch.ones_like(wiki_pos_logits),
+            torch.zeros_like(wiki_neg_logits),
+        ])
+        wiki_logits = torch.cat([wiki_pos_logits, wiki_neg_logits])
+        wiki_loss = F.binary_cross_entropy_with_logits(wiki_logits, wiki_labels)
+
+        arxiv_pos_logits = model.decode(z_arxiv, arxiv_pos_edges)
+        arxiv_neg_logits = model.decode(z_arxiv, arxiv_neg_edges)
+        arxiv_labels = torch.cat([
+            torch.ones_like(arxiv_pos_logits),
+            torch.zeros_like(arxiv_neg_logits),
+        ])
+        arxiv_logits = torch.cat([arxiv_pos_logits, arxiv_neg_logits])
+        arxiv_loss = F.binary_cross_entropy_with_logits(arxiv_logits, arxiv_labels)
+
+        alignment_loss = _mmd_loss(z_wiki, z_arxiv, max_samples=max_samples)
+        stats_loss = _moment_alignment_loss(z_wiki, z_arxiv)
+
+        loss = wiki_loss + arxiv_loss + mmd_weight * alignment_loss + stats_weight * stats_loss
+
+        if torch.isnan(loss):
+            raise ValueError("Encountered NaN while training the joint GAEA model.")
+
+        loss.backward()
+        optimizer.step()
+
+        if epoch % 20 == 0 or epoch == 1:
+            with torch.no_grad():
+                wiki_pos_prob = torch.sigmoid(wiki_pos_logits.detach()).mean().item()
+                wiki_neg_prob = torch.sigmoid(wiki_neg_logits.detach()).mean().item()
+                arxiv_pos_prob = torch.sigmoid(arxiv_pos_logits.detach()).mean().item()
+                arxiv_neg_prob = torch.sigmoid(arxiv_neg_logits.detach()).mean().item()
+            print(
+                f"    Epoch {epoch}/{epochs}, Loss: {loss.item():.4f}, "
+                f"Wiki recon: {wiki_loss.item():.4f}, ArXiv recon: {arxiv_loss.item():.4f}, "
+                f"MMD: {alignment_loss.item():.4f}, Stats: {stats_loss.item():.4f}, "
+                f"Wiki pos/neg: {wiki_pos_prob:.3f}/{wiki_neg_prob:.3f}, "
+                f"ArXiv pos/neg: {arxiv_pos_prob:.3f}/{arxiv_neg_prob:.3f}"
+            )
+
+    model.cpu()
+    return model
+
 def generate_entity_embeddings():
     """
     loads, trains, and saves GAE embeddings for both KGs.
@@ -206,9 +403,7 @@ def generate_entity_embeddings():
     model = AutoModel.from_pretrained(SCIBERT_MODEL_NAME)
     model.eval()
 
-    # --- WIKI ---
     print("\nProcessing Wiki KG:")
-    # WE TRAIN ON THE UNPRUNED KG TO GET BETTER EMBEDDINGS
     wiki_data, wiki_map = load_pyg_data_from_ttl(
         KG_WIKI_UNPRUNED_PATH,
         tokenizer=tokenizer,
@@ -219,24 +414,6 @@ def generate_entity_embeddings():
     if wiki_data.x is None:
         raise ValueError("Wiki graph is missing node features after preprocessing.")
 
-    # Train GAE_Wiki
-    gae_wiki = train_gae(wiki_data,
-                         in_channels=wiki_data.num_node_features,
-                         hidden_channels=HIDDEN_DIM,
-                         out_channels=EMBEDDING_DIM,
-                         epochs=EPOCHS,
-                         lr=LEARNING_RATE)
-
-    # Get final embeddings from the trained encoder
-    gae_wiki.eval()
-    with torch.no_grad():
-        wiki_embeddings = gae_wiki.encode(wiki_data.x, wiki_data.edge_index)
-    
-    # Save the embeddings AND the map
-    torch.save({'embeddings': wiki_embeddings, 'map': wiki_map}, ENTITY_EMBEDDINGS_WIKI_PATH)
-    print(f"Saved Wiki entity embeddings to {ENTITY_EMBEDDINGS_WIKI_PATH}")
-
-    # --- ARXIV ---
     print("\nProcessing ArXiv KG:")
     arxiv_data, arxiv_map = load_pyg_data_from_ttl(
         KG_ARXIV_UNPRUNED_PATH,
@@ -248,21 +425,66 @@ def generate_entity_embeddings():
     if arxiv_data.x is None:
         raise ValueError("ArXiv graph is missing node features after preprocessing.")
 
-    # Train GAE_Arxiv (independently!)
-    gae_arxiv = train_gae(arxiv_data,
-                          in_channels=arxiv_data.num_node_features,
-                          hidden_channels=HIDDEN_DIM,
-                          out_channels=EMBEDDING_DIM,
-                          epochs=EPOCHS,
-                          lr=LEARNING_RATE)
+    if wiki_data.num_node_features != arxiv_data.num_node_features:
+        raise ValueError(
+            "Wiki and ArXiv graphs must share the same feature dimension for joint training."
+        )
 
-    # Get final embeddings
-    gae_arxiv.eval()
+    joint_model = train_gaea_joint(
+        wiki_data,
+        arxiv_data,
+        in_channels=wiki_data.num_node_features,
+        hidden_channels=HIDDEN_DIM,
+        out_channels=EMBEDDING_DIM,
+        epochs=EPOCHS,
+        lr=LEARNING_RATE,
+    )
+
+    joint_model.eval()
     with torch.no_grad():
-        arxiv_embeddings = gae_arxiv.encode(arxiv_data.x, arxiv_data.edge_index)
-    
-    # Save the embeddings AND the map
-    torch.save({'embeddings': arxiv_embeddings, 'map': arxiv_map}, ENTITY_EMBEDDINGS_ARXIV_PATH)
+        wiki_embeddings = joint_model.encode(wiki_data.x, wiki_data.edge_index)
+        arxiv_embeddings = joint_model.encode(arxiv_data.x, arxiv_data.edge_index)
+
+    wiki_final = wiki_embeddings
+    arxiv_final = arxiv_embeddings
+    if USE_SCIBERT_FEATURES and wiki_data.x is not None:
+        wiki_final = torch.cat([wiki_data.x, wiki_embeddings], dim=1)
+    if USE_SCIBERT_FEATURES and arxiv_data.x is not None:
+        arxiv_final = torch.cat([arxiv_data.x, arxiv_embeddings], dim=1)
+
+    wiki_final = wiki_final.cpu()
+    arxiv_final = arxiv_final.cpu()
+
+    metadata_base = {
+        "model": "GAEA",
+        "hidden_dim": HIDDEN_DIM,
+        "embedding_dim": EMBEDDING_DIM,
+        "epochs": EPOCHS,
+        "learning_rate": LEARNING_RATE,
+        "mmd_weight": GAEA_MMD_WEIGHT,
+        "stats_weight": GAEA_STATS_WEIGHT,
+        "max_align_samples": GAEA_MAX_ALIGN_SAMPLES,
+        "use_scibert_features": USE_SCIBERT_FEATURES,
+    }
+
+    torch.save(
+        {
+            "embeddings": wiki_final,
+            "map": wiki_map,
+            "metadata": {**metadata_base, "graph": "wiki"},
+        },
+        ENTITY_EMBEDDINGS_WIKI_PATH,
+    )
+    print(f"Saved Wiki entity embeddings to {ENTITY_EMBEDDINGS_WIKI_PATH}")
+
+    torch.save(
+        {
+            "embeddings": arxiv_final,
+            "map": arxiv_map,
+            "metadata": {**metadata_base, "graph": "arxiv"},
+        },
+        ENTITY_EMBEDDINGS_ARXIV_PATH,
+    )
     print(f"Saved ArXiv entity embeddings to {ENTITY_EMBEDDINGS_ARXIV_PATH}")
 
 

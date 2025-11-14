@@ -1,0 +1,7 @@
+Source: Wikipedia
+Title: Majorana 1
+URL: https://en.wikipedia.org/wiki/Majorana_1
+Query: Quantum Computing
+---
+Majorana 1 is a hardware device developed by Microsoft, with potential applications to quantum computing. It is the first device produced by Microsoft intended for use in quantum computing. It is an indium arsenide-aluminium hybrid device that admits superconductivity at low temperatures. Microsoft claims that it shows some signals of hosting boundary Majorana zero modes. The device can fit eight qubits. Majorana zero modes, if confirmed, could have potential application to making topological qubits, and eventually large-scale topological quantum computers.    
+In its February 2025 announcement, Microsoft claimed that the Majorana 1 represents progress in its long-running project to create a quantum computer based on topological qubits. The announcement has generated both excitement and skepticism within the scientific community, in the absence of definitive public evidence that the Majorana 1 device exhibits Majorana zero modes.

@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2311.13644v2
+Title: Towards a measurement theory in QFT: "Impossible" quantum measurements are possible but not ideal
+Query: Quantum Computing
+---
+Naive attempts to put together relativity and quantum measurements lead to signaling between space-like separated regions. In QFT, these are known as impossible measurements. We show that the same problem arises in non-relativistic quantum physics, where joint nonlocal measurements (i.e., between systems kept spatially separated) in general lead to signaling, while one would expect no-signaling (based for instance on the principle of no-nonphysical communication). This raises the question: Which nonlocal quantum measurements are physically possible? We review and develop further a non-relativistic quantum information approach developed independently of the impossible measurements in QFT, and show that these two have been addressing virtually the same problem. The non-relativistic solution shows that all nonlocal measurements are localizable (i.e., they can be carried out at a distance without violating no-signaling) but they (i) may require arbitrarily large entangled resources and (ii) cannot in general be ideal, i.e., are not immediately reproducible. These considerations could help guide the development of a complete theory of measurement in QFT.

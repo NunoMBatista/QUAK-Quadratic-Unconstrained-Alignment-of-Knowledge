@@ -1,0 +1,28 @@
+Source: Wikipedia
+Title: Superconducting quantum computing
+URL: https://en.wikipedia.org/wiki/Superconducting_quantum_computing
+Query: Quantum Computing
+---
+Superconducting quantum computing is a branch of solid state  physics and quantum computing that implements superconducting electronic circuits using superconducting qubits as artificial atoms, or quantum dots. For superconducting qubits, the two logic states are the ground state and the excited state, denoted 
+  
+    
+      
+        
+          |
+        
+        g
+        ⟩
+        
+           and 
+        
+        
+          |
+        
+        e
+        ⟩
+      
+    
+    {\displaystyle |g\rangle {\text{ and }}|e\rangle }
+  
+ respectively. Research in superconducting quantum computing is conducted by companies such as Google, IBM, IMEC, BBN Technologies, Rigetti, and Intel.  Many recently developed QPUs (quantum processing units, or quantum chips) use superconducting architecture.
+As of May 2016, up to 9 fully controllable qubits are demonstrated in the 1D array, and up to 16 in 2D architecture. In October 2019, the Martinis group, partnered with Google, published an article demonstrating novel quantum supremacy, using a chip composed of 53 superconducting qubits.

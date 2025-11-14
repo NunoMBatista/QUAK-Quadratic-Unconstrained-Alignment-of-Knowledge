@@ -1,0 +1,8 @@
+Source: Wikipedia
+Title: Quantum Computing: A Gentle Introduction
+URL: https://en.wikipedia.org/wiki/Quantum_Computing:_A_Gentle_Introduction
+Query: Quantum Computing
+---
+Quantum Computing: A Gentle Introduction is a textbook on quantum computing. It was written by Eleanor Rieffel and Wolfgang Polak, and published in 2011 by the MIT Press.
+
+

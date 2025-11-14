@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2112.00984v1
+Title: Measurement Crosstalk Errors in Cloud-Based Quantum Computing
+Query: Quantum Computing
+---
+Quantum technologies available currently contain noise in general, often dubbed noisy intermediate-scale quantum (NISQ) systems. We here present the verification of noise in measurement readout errors in cloud-based quantum computing services, IBMQ and Rigetti, by directly performing quantum detector tomography, and show that there exist measurement crosstalk errors. We provide the characterization and the quantification of noise in a quantum measurement of multiple qubits. We remark that entanglement is found as a source of crosstalk errors in a measurement of three qubits.

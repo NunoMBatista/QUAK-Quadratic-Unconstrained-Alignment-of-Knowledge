@@ -1,0 +1,43 @@
+@prefix ont: <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#> .
+@prefix raw: <http://example.org/raw/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ont:Simulation_protocols a ont:QuantumConcept ;
+    rdfs:label "Simulation protocols" ;
+    raw:leverages ont:Superconducting_circuits ;
+    raw:runs_on ont:NISQ_architectures .
+
+ont:Computational_supremacy a ont:QuantumConcept ;
+    rdfs:label "Computational supremacy" ;
+    raw:demonstrated_by ont:Quantum_processors ;
+    raw:requires ont:NISQ_architectures .
+
+ont:Quantum_processors a ont:QuantumHardware ;
+    rdfs:label "Quantum processors" ;
+    raw:developed_by ont:Shor_researcher ;
+    raw:implements ont:Amplitude_amplification,
+        ont:Search_routines .
+
+ont:Search_routines a ont:QuantumAlgorithm ;
+    rdfs:label "Search routines" ;
+    raw:influences ont:Computational_supremacy ;
+    raw:uses ont:Fault_tolerance .
+
+ont:Shor_researcher a ont:Person ;
+    rdfs:label "Shor researcher" .
+
+ont:Amplitude_amplification a ont:QuantumAlgorithm ;
+    rdfs:label "Amplitude amplification" ;
+    raw:uses ont:Fault_tolerance .
+
+ont:Fault_tolerance a ont:QuantumConcept ;
+    rdfs:label "Fault tolerance" .
+
+ont:NISQ_architectures a ont:QuantumHardware ;
+    rdfs:label "NISQ architectures" ;
+    raw:built_from ont:Superconducting_circuits .
+
+ont:Superconducting_circuits a ont:QuantumHardware ;
+    rdfs:label "Superconducting circuits" ;
+    raw:implements ont:Amplitude_amplification .
+

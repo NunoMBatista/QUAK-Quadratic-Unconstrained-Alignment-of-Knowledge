@@ -1,7 +1,10 @@
 wiki_entity,arxiv_entity,not_aligned
-possibilities,computations,
-features,nodes,
-,,arxiv: classical
-,,arxiv: distributed
-,,arxiv: Internet
-,,arxiv: quantum
+Quantum computer,Quantum algorithms,
+Quantum algorithm,Quantum simulation,
+Qubit,Representation,
+Quantum computing,Quantum Turing Machines,
+Quantum devices,Quantum computing devices,
+Quantum simulators,Quantum computers,
+Hadamard test,Unitary operator,
+Quantum circuit,Theory,
+Quantum supremacy,Quantum,
