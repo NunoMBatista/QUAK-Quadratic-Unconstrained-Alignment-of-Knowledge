@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 1109.5549v1
-Title: Quantum Discord and Quantum Computing - An Appraisal
-Query: Quantum Computing
----
-We discuss models of computing that are beyond classical. The primary motivation is to unearth the cause of nonclassical advantages in computation. Completeness results from computational complexity theory lead to the identification of very disparate problems, and offer a kaleidoscopic view into the realm of quantum enhancements in computation. Emphasis is placed on the `power of one qubit' model, and the boundary between quantum and classical correlations as delineated by quantum discord. A recent result by Eastin on the role of this boundary in the efficient classical simulation of quantum computation is discussed. Perceived drawbacks in the interpretation of quantum discord as a relevant certificate of quantum enhancements are addressed.

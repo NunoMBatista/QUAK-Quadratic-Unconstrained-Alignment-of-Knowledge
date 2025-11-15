@@ -1,6 +1,0 @@
-Source: Wikipedia
-Title: Qiskit
-URL: https://en.wikipedia.org/wiki/Qiskit
-Query: Quantum Computing
----
-Qiskit (Quantum Information Software Kit) is an open-source, Python-based, high-performance software stack for quantum computing, originally developed by IBM Research and first released in 2017. It provides tools for creating quantum programs (by defining quantum circuits and operations) and executing them on quantum computers or classical simulators. The name "Qiskit" refers broadly to a collection of quantum software tools. It is centered around the core Qiskit SDK, and combined with a suite of tools and services for quantum computation, like the Qiskit Runtime service that enables optimized computations through the cloud. Qiskit allows users to write quantum circuits and execute them on real quantum processors (such as superconducting qubit systems) or on various other compatible quantum devices. Over time, Qiskit’s capabilities have expanded with new components and improvements, such as Qiskit Functions and Qiskit addons, while maintaining an open-source ecosystem for quantum computing research and application development.

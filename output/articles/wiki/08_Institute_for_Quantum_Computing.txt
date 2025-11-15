@@ -1,7 +1,0 @@
-Source: Wikipedia
-Title: Institute for Quantum Computing
-URL: https://en.wikipedia.org/wiki/Institute_for_Quantum_Computing
-Query: fetch mode
----
-The Institute for Quantum Computing (IQC) is an affiliate scientific research institute of the University of Waterloo located in Waterloo, Ontario with a multidisciplinary approach to the field of quantum information processing. IQC was founded in 2002 primarily through a donation made by Mike Lazaridis and his wife Ophelia whose substantial donations have continued over the years.  The institute is now located in the Mike & Ophelia Lazaridis Quantum-Nano Centre and the Research Advancement Centre at the University of Waterloo.
-Its executive director is physics professor Norbert Lütkenhaus and hosts researchers based in 7 departments across 3 faculties at the University of Waterloo. In addition to theoretical and experimental research on quantum computing, IQC also hosts academic conferences and workshops, short courses for undergraduate and high school students, and scientific outreach events including open houses and tours for the public.

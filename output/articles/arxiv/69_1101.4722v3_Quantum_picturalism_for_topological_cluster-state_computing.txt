@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 1101.4722v3
-Title: Quantum picturalism for topological cluster-state computing
-Query: Quantum Computing
----
-Topological quantum computing is a way of allowing precise quantum computations to run on noisy and imperfect hardware. One implementation uses surface codes created by forming defects in a highly-entangled cluster state. Such a method of computing is a leading candidate for large-scale quantum computing. However, there has been a lack of sufficiently powerful high-level languages to describe computing in this form without resorting to single-qubit operations, which quickly become prohibitively complex as the system size increases. In this paper we apply the category-theoretic work of Abramsky and Coecke to the topological cluster-state model of quantum computing to give a high-level graphical language that enables direct translation between quantum processes and physical patterns of measurement in a computer - a "compiler language". We give the equivalence between the graphical and topological information flows, and show the applicable rewrite algebra for this computing model. We show that this gives us a native graphical language for the design and analysis of topological quantum algorithms, and finish by discussing the possibilities for automating this process on a large scale.

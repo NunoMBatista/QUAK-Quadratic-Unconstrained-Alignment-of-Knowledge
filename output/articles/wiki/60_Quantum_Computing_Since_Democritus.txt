@@ -1,6 +1,0 @@
-Source: Wikipedia
-Title: Quantum Computing Since Democritus
-URL: https://en.wikipedia.org/wiki/Quantum_Computing_Since_Democritus
-Query: Quantum Computing
----
-Quantum Computing Since Democritus is a 2013 book on quantum information science written by Scott Aaronson. It is loosely based on a course Aaronson taught at the University of Waterloo, Canada, the lecture notes for which are available online.

@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2303.05533v3
-Title: Realization of quantum signal processing on a noisy quantum computer
-Query: Quantum Computing
----
-Quantum signal processing (QSP) is a powerful toolbox for the design of quantum algorithms and can lead to asymptotically optimal computational costs. Its realization on noisy quantum computers without fault tolerance, however, is challenging because it requires a deep quantum circuit in general. We propose a strategy to run an entire QSP protocol on noisy quantum hardware by carefully reducing overhead costs at each step. To illustrate the approach, we consider the application of Hamiltonian simulation for which QSP implements a polynomial approximation of the time evolution operator. We test the protocol by running the algorithm on the Quantinuum H1-1 trapped-ion quantum computer powered by Honeywell. In particular, we compute the time dependence of bipartite entanglement entropies for Ising spin chains and find good agreements with exact numerical simulations. To make the best use of the device, we determine optimal experimental parameters by using a simplified error model for the hardware and numerically studying the trade-off between Hamiltonian simulation time, polynomial degree, and total accuracy. Our results are the first step in the experimental realization of QSP-based quantum algorithms.

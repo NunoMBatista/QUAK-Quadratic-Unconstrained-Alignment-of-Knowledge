@@ -1,8 +1,0 @@
-Source: Wikipedia
-Title: Quantum engineering
-URL: https://en.wikipedia.org/wiki/Quantum_engineering
-Query: Quantum Computing
----
-Quantum engineering is the development of technology that capitalizes on the laws of quantum mechanics. This type of engineering uses quantum mechanics to develop technologies such as quantum sensors and quantum computers.
-
-

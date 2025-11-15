@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2407.17745v1
-Title: Beyond Entity Alignment: Towards Complete Knowledge Graph Alignment via Entity-Relation Synergy
-Query: fetch mode
----
-Knowledge Graph Alignment (KGA) aims to integrate knowledge from multiple sources to address the limitations of individual Knowledge Graphs (KGs) in terms of coverage and depth. However, current KGA models fall short in achieving a ``complete'' knowledge graph alignment. Existing models primarily emphasize the linkage of cross-graph entities but overlook aligning relations across KGs, thereby providing only a partial solution to KGA. The semantic correlations embedded in relations are largely overlooked, potentially restricting a comprehensive understanding of cross-KG signals. In this paper, we propose to conceptualize relation alignment as an independent task and conduct KGA by decomposing it into two distinct but highly correlated sub-tasks: entity alignment and relation alignment. To capture the mutually reinforcing correlations between these objectives, we propose a novel Expectation-Maximization-based model, EREM, which iteratively optimizes both sub-tasks. Experimental results on real-world datasets demonstrate that EREM consistently outperforms state-of-the-art models in both entity alignment and relation alignment tasks.

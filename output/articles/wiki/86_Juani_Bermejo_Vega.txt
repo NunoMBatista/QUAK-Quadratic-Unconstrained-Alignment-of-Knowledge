@@ -1,8 +1,0 @@
-Source: Wikipedia
-Title: Juani Bermejo Vega
-URL: https://en.wikipedia.org/wiki/Juani_Bermejo_Vega
-Query: Quantum Computing
----
-Juani Bermejo Vega (born 1987 in Cáceres, Spain) is a Spanish quantum computing researcher, activist, and the most senior transgender woman in quantum computing in Europe.
-
-

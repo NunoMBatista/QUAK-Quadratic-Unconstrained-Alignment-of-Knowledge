@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: quant-ph/0207059v1
-Title: Quantum Computing with Electron Spins in Quantum Dots
-Query: Quantum Computing
----
-We present a set of concrete and realistic ideas for the implementation of a small-scale quantum computer using electron spins in lateral GaAs/AlGaAs quantum dots. Initialization is based on leads in the quantum Hall regime with tunable spin-polarization. Read-out hinges on spin-to-charge conversion via spin-selective tunneling to or from the leads, followed by measurement of the number of electron charges on the dot via a charge detector. Single-qubit manipulation relies on a microfabricated wire located close to the quantum dot, and two-qubit interactions are controlled via the tunnel barrier connecting the respective quantum dots. Based on these ideas, we have begun a series of experiments in order to demonstrate unitary control and to measure the coherence time of individual electron spins in quantum dots.

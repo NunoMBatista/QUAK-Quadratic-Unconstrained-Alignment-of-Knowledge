@@ -1,8 +1,0 @@
-Source: Wikipedia
-Title: List of quantum computing journals
-URL: https://en.wikipedia.org/wiki/List_of_quantum_computing_journals
-Query: Quantum Computing
----
-This is a list of quantum computing journals which is a collection of peer-reviewed scientific journals that publish research in the field of quantum computing, including topics such as quantum algorithms, quantum information theory, quantum cryptography, and quantum hardware.
-
-

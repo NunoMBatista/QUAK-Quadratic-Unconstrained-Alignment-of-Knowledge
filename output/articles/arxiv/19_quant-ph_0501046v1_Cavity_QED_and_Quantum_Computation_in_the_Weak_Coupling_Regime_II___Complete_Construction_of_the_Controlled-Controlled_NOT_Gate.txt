@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: quant-ph/0501046v1
-Title: Cavity QED and Quantum Computation in the Weak Coupling Regime II : Complete Construction of the Controlled-Controlled NOT Gate
-Query: Quantum Computing
----
-In this paper we treat a cavity QED quantum computation. Namely, we consider a model of quantum computation based on n atoms of laser-cooled and trapped linearly in a cavity and realize it as the n atoms Tavis-Cummings Hamiltonian interacting with n external (laser) fields.   We solve the Schr{\" o}dinger equation of the model in the weak coupling regime to construct the controlled NOT gate in the case of n=2, and to construct the controlled-controlled NOT gate in the case of n=3 by making use of several resonance conditions and rotating wave approximation associated to them. We also present an idea to construct general quantum circuits.   The approach is more sophisticated than that of the paper [K. Fujii, Higashida, Kato and Wada, Cavity QED and Quantum Computation in the Weak Coupling Regime, J. Opt. B : Quantum Semiclass. Opt. {\bf 6} (2004), 502].   Our method is not heuristic but completely mathematical, and the significant feature is based on a consistent use of Rabi oscillations.

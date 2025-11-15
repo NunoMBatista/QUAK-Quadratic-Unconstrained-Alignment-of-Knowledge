@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2501.11119v1
-Title: Classical (ontological) dual states in quantum theory and the minimal group representation Hilbert space
-Query: Quantum Computing
----
-We investigate the classical aspects of Quantum theory and under which description Quantum theory does appear Classical. Although such descriptions or variables are known as "ontological" or "hidden", they are not hidden at all, but are dual classical states (in the sense of the general classical-quantum duality of Nature). The application of the Minimal Group Representation immediately classicalizes the system, Mp(2) emerging as the group of the classical-quantum duality symmetry. (Abridged)

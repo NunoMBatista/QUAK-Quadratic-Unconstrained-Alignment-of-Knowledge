@@ -1,0 +1,9 @@
+Source: Wikipedia
+Title: Quantum counting algorithm
+URL: https://en.wikipedia.org/wiki/Quantum_counting_algorithm
+Query: fetch mode
+---
+The Quantum counting algorithm is a quantum algorithm for efficiently counting the number of solutions for a given search problem.
+The algorithm is based on the quantum phase estimation algorithm and on Grover's search algorithm.
+Counting problems are common in diverse fields such as statistical estimation, statistical physics, networking, etc. As for quantum computing, the ability to perform quantum counting efficiently is needed in order to use Grover's search algorithm (because running Grover's search algorithm requires knowing how many solutions exist). Moreover, this algorithm solves the quantum existence problem (namely, deciding whether any solution exists) as a special case.
+The algorithm was devised by Gilles Brassard, Peter Høyer and Alain Tapp in 1998.

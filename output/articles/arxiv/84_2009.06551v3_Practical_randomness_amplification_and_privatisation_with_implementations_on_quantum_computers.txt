@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2009.06551v3
-Title: Practical randomness amplification and privatisation with implementations on quantum computers
-Query: Quantum Computing
----
-We present an end-to-end and practical randomness amplification and privatisation protocol based on Bell tests. This allows the building of device-independent random number generators which output (near-)perfectly unbiased and private numbers, even if using an uncharacterised quantum device potentially built by an adversary. Our generation rates are linear in the repetition rate of the quantum device and the classical randomness post-processing has quasi-linear complexity - making it efficient on a standard personal laptop. The statistical analysis is also tailored for real-world quantum devices.   Our protocol is then showcased on several different quantum computers. Although not purposely built for the task, we show that quantum computers can run faithful Bell tests by adding minimal assumptions. In this semi-device-independent manner, our protocol generates (near-)perfectly unbiased and private random numbers on today's quantum computers.

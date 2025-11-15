@@ -1,7 +1,0 @@
-Source: Wikipedia
-Title: Mike Lazaridis
-URL: https://en.wikipedia.org/wiki/Mike_Lazaridis
-Query: Quantum Computing
----
-Mihal "Mike" Lazaridis (born March 14, 1961) is a Greek Canadian businessman, investor in quantum computing technologies, and co-founder of Research In Motion, which created and manufactured the BlackBerry wireless handheld device. In November 2009, Canadian Business ranked Lazaridis as the 11th wealthiest Canadian, with an estimated net worth of CA$2.9 billion.
-Lazaridis served in various positions including co-chairman and co-CEO of BlackBerry from 1984 to 2012 and Board Vice Chair and Chair of the Innovation Committee from 2012 to 2013. As an advocate for the power of basic science to improve and transform the world, he co-founded Quantum Valley Investments in March 2013 with childhood friend and BlackBerry co-founder Douglas Fregin to provide financial and intellectual capital for the further development and commercialization of breakthroughs in quantum information science. In 1999 he founded the Perimeter Institute for Theoretical Physics, where he also serves as board chair. In 2002, he founded the Institute for Quantum Computing. He is also a former chancellor of the University of Waterloo, and an Officer of the Order of Canada (OC).

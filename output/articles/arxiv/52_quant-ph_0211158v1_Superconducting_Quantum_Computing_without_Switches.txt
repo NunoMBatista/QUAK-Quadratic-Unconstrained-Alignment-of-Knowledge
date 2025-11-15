@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: quant-ph/0211158v1
-Title: Superconducting Quantum Computing without Switches
-Query: Quantum Computing
----
-This paper presents a very simple architecture for a large-scale superconducting quantum computer. All of the SQUID qubits are fixed-coupled to a single large superconducting loop.

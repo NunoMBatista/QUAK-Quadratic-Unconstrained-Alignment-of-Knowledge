@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2207.01005v3
-Title: A model of quantum spacetime
-Query: Quantum Computing
----
-We consider a global quantum system (the "Universe") satisfying a double constraint, both on total energy and total momentum. Generalizing the Page and Wootters quantum clock formalism, we provide a model of 3+1 dimensional, non-relativistic, quantum spacetime emerging from entanglement among different subsystems in a globally "timeless" and "positionless" Universe.

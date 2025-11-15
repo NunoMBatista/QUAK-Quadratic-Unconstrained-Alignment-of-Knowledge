@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 2108.10854v2
+Title: Grover search revisited; application to image pattern matching
+Query: fetch mode
+---
+The landmark Grover algorithm for amplitude amplification serves as an essential subroutine in various type of quantum algorithms, with guaranteed quantum speedup in query complexity. However, there have been no proposal to realize the original motivating application of the algorithm, i.e., the database search or more broadly the pattern matching in a practical setting, mainly due to the technical difficulty in efficiently implementing the data loading and amplitude amplification processes. In this paper, we propose a quantum algorithm that approximately executes the entire Grover database search or pattern matching algorithm. The key idea is to use the recently proposed approximate amplitude encoding method on a shallow quantum circuit, together with the easily implementable inversion-test operation for realizing the projected quantum state having similarity to the query data, followed by the amplitude amplification operation that is independent to the target data index. We provide a thorough demonstration of the algorithm in the problem of image pattern matching.

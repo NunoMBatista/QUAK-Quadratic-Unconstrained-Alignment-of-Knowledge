@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 1204.2907v1
-Title: Quantum Annealing: from Viewpoints of Statistical Physics, Condensed Matter Physics, and Computational Physics
-Query: Quantum Computing
----
-In this paper, we review some features of quantum annealing and related topics from viewpoints of statistical physics, condensed matter physics, and computational physics. We can obtain a better solution of optimization problems in many cases by using the quantum annealing. Actually the efficiency of the quantum annealing has been demonstrated for problems based on statistical physics. Then the quantum annealing has been expected to be an efficient and generic solver of optimization problems. Since many implementation methods of the quantum annealing have been developed and will be proposed in the future, theoretical frameworks of wide area of science and experimental technologies will be evolved through studies of the quantum annealing.

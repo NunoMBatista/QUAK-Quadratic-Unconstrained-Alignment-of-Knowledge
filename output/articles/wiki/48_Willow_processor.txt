@@ -1,6 +1,0 @@
-Source: Wikipedia
-Title: Willow processor
-URL: https://en.wikipedia.org/wiki/Willow_processor
-Query: Quantum Computing
----
-The Willow processor is a 105-qubit superconducting quantum computing processor developed by Google Quantum AI and manufactured in Santa Barbara, California.

@@ -1,7 +1,0 @@
-Source: Wikipedia
-Title: National Quantum Computing Centre
-URL: https://en.wikipedia.org/wiki/National_Quantum_Computing_Centre
-Query: Quantum Computing
----
-The National Quantum Computing Centre (NQCC) is the United Kingdom's national laboratory for quantum computing, located within the Rutherford Appleton Laboratory, in south Oxfordshire. It is part of UK Research and Innovation (UKRI). 
-Construction began in September 2021 and it was officially opened in 2024-10-25.

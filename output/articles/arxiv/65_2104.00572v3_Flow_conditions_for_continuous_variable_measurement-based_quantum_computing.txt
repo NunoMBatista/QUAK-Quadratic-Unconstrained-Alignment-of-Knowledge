@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2104.00572v3
-Title: Flow conditions for continuous variable measurement-based quantum computing
-Query: Quantum Computing
----
-In measurement-based quantum computing (MBQC), computation is carried out by a sequence of measurements and corrections on an entangled state. Flow, and related concepts, are powerful techniques for characterising the dependence of the corrections on previous measurement results. We introduce flow-based methods for quantum computation with continuous-variable graph states, which we call CV-flow. These are inspired by, but not equivalent to, the notions of causal flow and g-flow for qubit MBQC. We also show that an MBQC with CV-flow approximates a unitary arbitrarily well in the infinite-squeezing limit, addressing issues of convergence which are unavoidable in the infinite-dimensional setting. In developing our proofs, we provide a method for converting a CV-MBQC computation into a circuit form, analogous to the circuit extraction method of Miyazaki et al, and an efficient algorithm for finding CV-flow when it exists based on the qubit version by Mhalla and Perdrix. Our results and techniques naturally extend to the cases of MBQC for quantum computation with qudits of prime local dimension.

@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2312.06975v1
-Title: Arbitrary Ground State Observables from Quantum Computed Moments
-Query: Quantum Computing
----
-The determination of ground state properties of quantum systems is a fundamental problem in physics and chemistry, and is considered a key application of quantum computers. A common approach is to prepare a trial ground state on the quantum computer and measure observables such as energy, but this is often limited by hardware constraints that prevent an accurate description of the target ground state. The quantum computed moments (QCM) method has proven to be remarkably useful in estimating the ground state energy of a system by computing Hamiltonian moments with respect to a suboptimal or noisy trial state. In this paper, we extend the QCM method to estimate arbitrary ground state observables of quantum systems. We present preliminary results of using QCM to determine the ground state magnetisation and spin-spin correlations of the Heisenberg model in its various forms. Our findings validate the well-established advantage of QCM over existing methods in handling suboptimal trial states and noise, extend its applicability to the estimation of more general ground state properties, and demonstrate its practical potential for solving a wide range of problems on near-term quantum hardware.

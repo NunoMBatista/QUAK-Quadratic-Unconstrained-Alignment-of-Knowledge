@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: quant-ph/9505018v1
-Title: Universality in Quantum Computation
-Query: Quantum Computing
----
-We show that in quantum computation almost every gate that operates on two or more bits is a universal gate. We discuss various physical considerations bearing on the proper definition of universality for computational components such as logic gates.

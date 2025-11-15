@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 1401.6658v1
-Title: Efficiency of open quantum walk implementation of dissipative quantum computing algorithms
-Query: Quantum Computing
----
-An open quantum walk formalism for dissipative quantum computing is presented. The approach is illustrated with the examples of the Toffoli gate and the Quantum Fourier Transform for 3 and 4 qubits. It is shown that the algorithms based on the open quantum walk formalism are more efficient than the canonical dissipative quantum computing approach. In particular, the open quantum walks can be designed to converge faster to the desired steady state and to increase the probability of detection of the outcome of the computation.

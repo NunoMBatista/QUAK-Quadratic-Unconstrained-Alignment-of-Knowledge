@@ -1,8 +1,0 @@
-Source: Wikipedia
-Title: Ontology alignment
-URL: https://en.wikipedia.org/wiki/Ontology_alignment
-Query: fetch mode
----
-Ontology alignment, or ontology matching, is the process of determining correspondences between concepts in ontologies. A set of correspondences is also called an alignment. The phrase takes on a slightly different meaning, in computer science, cognitive science or philosophy.
-
-

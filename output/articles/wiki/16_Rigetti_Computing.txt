@@ -1,8 +1,0 @@
-Source: Wikipedia
-Title: Rigetti Computing
-URL: https://en.wikipedia.org/wiki/Rigetti_Computing
-Query: Quantum Computing
----
-Rigetti Computing, Inc. is a Berkeley, California-based developer of  superconducting quantum integrated circuits used for quantum computers. Rigetti also develops a cloud platform called Forest that enables programmers to write quantum algorithms.
-
-

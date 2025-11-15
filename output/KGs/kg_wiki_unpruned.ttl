@@ -1,157 +1,92 @@
 @prefix ns1: <http://unpruned.local/> .
 
-ns1: ns1:is_a ns1:quantum_state .
+ns1: ns1:is_a ns1:displaystyle_N,
+        ns1:displaystyle_ON .
 
-ns1:Atoms ns1:demonstrate ns1:favourable_performance_indicators .
-
-ns1:Computing ns1:is_a ns1:California-based_developer .
-
-ns1:E_isigma ns1:is_a ns1:tr .
-
-ns1:Examples ns1:include ns1:proposal,
-        ns1:spin .
-
-ns1:Hadamard_test ns1:is_a ns1:quantum_computation ;
-    ns1:produce ns1:random_variable .
-
-ns1:Institute_for_Quantum_Computing ns1:is_a ns1:IQC,
-        ns1:scientific_research_institute_of .
-
-ns1:M_Solovay ns1:announce ns1:result .
-
-ns1:O_irho ns1:is_a ns1:tr .
+<http://unpruned.local/Grover's_algorithm> ns1:is_a ns1:optimal,
+        ns1:quantum_algorithm ;
+    ns1:pose ns1:risk ;
+    ns1:provide ns1:polynomial-time_solutions,
+        ns1:quadratic_speedup .
 
 ns1:PQCrypto ns1:is_a ns1:workshops .
 
 ns1:Post-quantum_cryptography ns1:is_a ns1:PQC,
         ns1:development .
 
-ns1:Pty_Ltd ns1:is_a ns1:SQC,
-        ns1:quantum_computing_company .
+ns1:Quantum_counting_algorithm ns1:is_a ns1:quantum_algorithm .
 
-ns1:QPUs ns1:is_a ns1:quantum_processing_units ;
-    ns1:use ns1:architecture .
+ns1:Quantum_machine_learning ns1:is_a ns1:QML,
+        ns1:study .
 
-ns1:QTM ns1:is_a ns1:abstract_machine .
-
-ns1:Quantum_simulators ns1:permit ns1:study .
-
-ns1:Rigetti ns1:develop ns1:cloud_platform ;
-    ns1:is_a ns1:California-based_developer .
-
-ns1:Shor_code ns1:is_a ns1:Subsystem .
-
-ns1:Solovay ns1:give ns1:talk .
+ns1:Shor ns1:propose ns1:algorithms .
 
 ns1:US_National_Institute_of_Standards_and_Technology ns1:is_a ns1:NIST ;
     ns1:release ns1:versions .
 
-ns1:Waterloo ns1:is_a ns1:Ontario .
-
 ns1:Y2Q ns1:is_a ns1:day .
 
-ns1:code ns1:implement ns1:universal_gate_set .
-
-ns1:company_develops ns1:develop ns1:quantum_computers .
-
-ns1:complexity_class ns1:is_a ns1:BPP .
-
-ns1:computers ns1:achieve ns1:computing .
-
-ns1:contextuality ns1:is_a ns1:ingredient .
+ns1:best-known_algorithms ns1:is_a <http://unpruned.local/Shor's_algorithm> .
 
 ns1:cryptographers ns1:design ns1:algorithms .
 
 ns1:cryptographic_algorithms ns1:is_a ns1:public-key_algorithms .
 
-ns1:displaystyle ns1:is_a ns1:langle_psi_Upsi_rangle_ .
-
-ns1:displaystyle_Px_i ns1:is_a ns1:probability .
-
-ns1:displaystyle_grangle ns1:is_a ns1:erangle .
-
-ns1:displaystyle_psi ns1:is_a ns1:rangle .
-
-ns1:executive_director ns1:is_a ns1:Norbert_Ltkenhaus .
-
-ns1:gates ns1:is_a ns1:S .
+ns1:environment ns1:is_a ns1:noisy .
 
 ns1:hardware ns1:is_a ns1:experimental .
 
-ns1:logic_states ns1:is_a ns1:ground_state .
-
-ns1:lookup_table ns1:give ns1:control_system,
-        ns1:information .
-
 ns1:mathematical_problems ns1:is_a ns1:integer_factorization_problem .
 
-ns1:operations ns1:harness ns1:phenomena .
-
-ns1:physical_qubits ns1:is_a ns1:code_block .
-
-ns1:programmers ns1:write ns1:quantum_algorithms .
-
-ns1:properties ns1:is_a ns1:entanglement .
+ns1:model ns1:is_a ns1:quantum_circuit_model .
 
 <http://unpruned.local/quantum_Grover's_algorithm> ns1:speed ns1:attacks .
 
-ns1:quantum_algorithm ns1:is_a ns1:algorithm,
-        ns1:step-by-step_procedure .
-
-ns1:quantum_circuit ns1:is_a ns1:model .
-
 ns1:quantum_computer ns1:break ns1:public-key_cryptographic_schemes ;
-    ns1:generate ns1:samples ;
-    ns1:is_a ns1:noisy,
-        ns1:theoretical_computer ;
+    ns1:is_a ns1:theoretical_computer ;
     ns1:manipulate ns1:qubit ;
     ns1:perform ns1:amplification,
         ns1:calculations ;
     ns1:require ns1:time .
 
-ns1:quantum_computing ns1:is_a ns1:branch .
-
 ns1:quantum_devices ns1:outperform ns1:classical_computers .
 
-ns1:quantum_polynomial_time ns1:is_a ns1:BQP,
-        ns1:class .
+ns1:quantum_phase_estimation_algorithm ns1:is_a ns1:algorithm,
+        ns1:quantum_algorithm .
 
-ns1:quantum_supremacy ns1:involve ns1:task .
+ns1:quantum_processors ns1:is_a ns1:norm ;
+    ns1:remain ns1:norm .
 
-ns1:simulators ns1:is_a ns1:devices .
+ns1:researchers ns1:investigate ns1:notions .
+
+ns1:routines ns1:is_a ns1:complex .
+
+ns1:square_root ns1:is_a ns1:exponential .
 
 ns1:states ns1:is_a ns1:binary .
 
-ns1:supercomputer ns1:compute ns1:XEB .
+ns1:task ns1:is_a ns1:linear_search .
 
 ns1:tasks ns1:is_a ns1:milestone .
 
-ns1:technologies ns1:offer ns1:capabilities .
+ns1:term ns1:is_a ns1:quantum_algorithm .
 
 ns1:theorem ns1:provide ns1:risk_analysis .
 
 ns1:wave_interference ns1:amplify ns1:probability .
 
-ns1:IQC ns1:host ns1:conferences .
+<http://unpruned.local/Shor's_algorithm> ns1:is_a ns1:quantum_algorithm ;
+    ns1:run ns1:log________________N______________displaystyle_log_N .
 
-ns1:SQC ns1:use ns1:nuclear_spin .
+ns1:exponential ns1:is_a ns1:polynomial_function .
 
-ns1:algorithm ns1:is_a ns1:finite_sequence .
+ns1:algorithm ns1:is_a ns1:finite_sequence ;
+    ns1:solve ns1:quantum_existence_problem .
 
-ns1:algorithms ns1:is_a ns1:vulnerable .
+ns1:algorithms ns1:is_a ns1:quantum_algorithms,
+        ns1:vulnerable ;
+    ns1:use ns1:qubits .
 
-ns1:computing ns1:is_a ns1:sub-fields .
-
-ns1:model ns1:is_a ns1:quantum_circuit_model .
-
-ns1:proposal ns1:is_a ns1:loop_problems .
-
-ns1:quantum_algorithms ns1:require ns1:memory .
-
-ns1:quantum_computers ns1:is_a ns1:noisy .
-
-ns1:qubit ns1:is_a ns1:quantum-mechanical_system,
-        ns1:quantum_system .
-
-ns1:study ns1:is_a ns1:subfield .
+ns1:quantum_algorithm ns1:is_a ns1:algorithm,
+        ns1:step-by-step_procedure .
 

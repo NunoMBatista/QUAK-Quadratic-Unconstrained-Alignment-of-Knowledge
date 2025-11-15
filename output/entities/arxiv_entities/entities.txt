@@ -1,224 +1,282 @@
-1,000-qubit barrier
-access
-accessible
-ACP
-ACP-like
-advancements
-advent
-algebraic approach
+Abelian
+abstraction
+academia
+accurate
+adiabatic
+algorithm
+algorithmic
+algorithmic primitives
 algorithms
-allocation
-analysis
-assumption
-axiomatization
-bounded-depth quantum circuits
-BQP
+amplitude
+amplitude amplification
+amplitude amplification processes
+analyzed
+analyzed articles
+anticipated
+application
+application area
+applications
+approaches
+approximate
+arbitrary
+area
+articles
+associated with
+banking
+benefits
+bibliography of references
+brute force
+building
+calculation
 capabilities
-classic
-classical
+central ideas
+Central notions
+challenges
+classes
 classical computers
-classical processes
-cloned
-closed
-closed systems
-Cloud
-collaborate
+classical systems
+code-based
 communication
+communication channels
+compare
+complex
+complexities
 complexity
-components
-comprehensive
+complexity-theoretic limitations
 computation
-computational statistics
-computational tasks
-computational technology
-computations
+computer power
 computer science
-Computers
-computing
-computing power
-concepts
-connections
-Connes'
-Consequently
-contributions
+computers
+Computing
+concept
+concrete
+content
 conventional
-cost
-cryptography
-cutting edge
-decade
-defines
-demands
-development
-distributed
-DQC
-duplicated
-effectiveness
+correction
+cost-ineffective
+counter-intuitive patterns
+counting
+cryptanalysis
+cryptographic attacks
+cryptographic systems
+cryptosystems
+data
+data index
+database
+decision making
+Deutsch's algorithm
+devices
+digital
+digital computer
+digital signatures
+discrete
+distinction
+domain
+efficiency
 efficient
 efficiently
-engineering
-era
-error correction
-Essentially
+eigenvalue
+embedded
+employs
+end-to-end complexities
+estimation process
+evaluate
 evaluation
-evolution
-examples
-exponential computational speed-ups
-exponential speedups
-exponentially
-faces
+executes
+exploration
+extensions
+factored
+factoring
+famous
+fault tolerance
 fault-tolerant
-fermionic
-fidelity
-finite
-formulation
-framework
-fundamentally
-gauge
-generations
-genuine random numbers
-geometric evolution process
-geometrical model
-Google Quantum AI
-Google Quantum AI's
-Google Quantum AI's initiatives
+finance
+finding
+finite dimensional
+Fuelled
+future
+gate-based optimization
+group
+Grover database
+Grover iteration
+Grover's
 hardware
-high
-IBM
-IBM's
+hash-based
+heuristics
+hidden costs
+hyperlinks
+hypothetical
+ideas
+image pattern
+impacted
+implement
+implemented
+implementing
+increase
+increasing
+industrialization stage
+industry
 information
-interconnected
-Internet
-Internet-scale distances
-investigates
-landscape
-leader
-level
-Markov chain simulation
+input size
+input-output model
+instantiating
+integer
+integers
+intellectual property
+intersection
+introduction
+inversion-test operation
+investigate
+IoT.
+isogeny-based cryptography
+lack
+landmark Grover algorithm
+lattice-based
+layers
+limitations
+logarithm
+logarithms
+machine learning
+many-body
+math
 mathematics
-median
-milestone
-mixed systems
-Monte Carlo integration
-Monte Carlo techniques
+measuring
+method
+methods
+mirrors
+modular
+motivating
 multiple
+multivariate polynomial
+navigation
+near
 NISQ
-nodes
 noise
-noisy intermediate-scale quantum
-non-local gates
-noncommutative connections
-noncommutative geometry
-nonlinear
-notions
-on-demand
-open
-paper reviews
-performance
-physical sciences
-polynomial-time
-practical
-private computing
-probabilistic process
-probability
+Noisy Intermediate-Scale Quantum
+operation
+operations
+operator
+opportunities
+optimization
+oracles
+outperform
+overall
+paper considers
+paths
+pattern
+pattern matching algorithm
+patterns
+physical computing device
+physics
+polynomial
+polynomial factor
+polynomial quantum algorithm
+polynomial quantum Fourier transform algorithm
+post-quantum cryptography
+post-quantum era
+potential
+potentials
+power
+PQC
+practical setting
+presentation
+primitives
+problem
 problems
-process algebra
-proof systems
-Properties
+procedure
+progress
+projected quantum state
 proposal
-protocols
-provisioning under
-pseudo-random numbers
-qACP
-QIP
-QMA
-quadratically
-quantities
+Proposed
+publications
+QOA
+QOAs
+quadratic speedup
 Quantum
-quantum advice
+quantum algorithm
+quantum algorithmic
 quantum algorithms
-quantum applications
-Quantum Assembly language
-Quantum C language
-quantum channel
-quantum channels
-quantum circuit model
-quantum cloud
-quantum complexity
-quantum complexity classes
+quantum architecture
+quantum chemistry
+quantum circuits
 quantum computation
-quantum computation devices
-quantum computational
-quantum computational supremacy
-quantum computations
 quantum computer
 quantum computers
 quantum computing
-quantum computing devices
-quantum computing journey
-quantum entanglement
-quantum generalization
-Quantum Grammars
+quantum error
+quantum gates
 quantum hardware
-quantum information
-quantum interactive
-quantum Internet
-Quantum Languages
-quantum measurement
+quantum machine
 quantum mechanics
-quantum networks
-quantum operations
 quantum physics
-quantum proofs
-quantum protocols
-quantum resources
-quantum simulation
+quantum searching
 quantum software
-quantum states
+quantum solutions
+quantum speedup
+quantum speedups
 quantum systems
-Quantum Turing Machines
-Quantum's
-Quantum's processors
-qubit
-random
-randomness
-realizing
-reformulating
-representation
+quantum technologies
+Quantum technologists
+quantum threats
+quantum-based
+qubits
+query
+randomized algorithms
+regular
+relevant
+research
 result
 review
-shaping
+right away
+robustness
+run-time performance
+science
+scientific journals
+search
+sections
+secure
+sensitive
+shallow quantum circuit
+Shor's
+similarity
+simplest
+simulate
+size
+small fraction of
 software
 solution
-space-bounded quantum computation
+solutions
 speed
-stand
-statistical framework
-statistics
-stochastic
-strides
+spheres
+stabilizer
+standalone section
+standardization
+state-of-the-art classical methods
+state-of-the-art solutions
+storage
+structure
 study
-surpassing
-surveys
-technological innovation
-technological innovations
+subroutine
+subroutines
+subtleties
+surpass
+survey
+systematic scoping review
+target
+tasks
+technical
+technical caveats
+technical difficulty
+techniques
 technology
-teleport
 theory
-time
-transformation
-transformations
-transformative frontier
-transformative impact
-transition
-two-stage stochastic programming model
-unavoidable
-uncertainty
-unconventional
-unification
-unified
+today's
+transactions
 unitary
-unitary operator
+universal computing device
 utilization
-verifiable blind
-verification
-world's
+vulnerabilities
+vulnerable
+work
+written
+years

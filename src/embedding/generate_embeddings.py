@@ -447,10 +447,28 @@ def generate_entity_embeddings():
 
     wiki_final = wiki_embeddings
     arxiv_final = arxiv_embeddings
+    # Ensure tensors are on the same device before concatenation to avoid
+    # CPU/CUDA mismatch errors (torch.cat requires same device for all inputs).
     if USE_SCIBERT_FEATURES and wiki_data.x is not None:
-        wiki_final = torch.cat([wiki_data.x, wiki_embeddings], dim=1)
+        # Move node features to the embeddings device if needed
+        try:
+            emb_dev = wiki_embeddings.device
+        except Exception:
+            emb_dev = torch.device("cpu")
+        wiki_x = wiki_data.x
+        if getattr(wiki_x, "device", None) != emb_dev:
+            wiki_x = wiki_x.to(emb_dev)
+        wiki_final = torch.cat([wiki_x, wiki_embeddings], dim=1)
+
     if USE_SCIBERT_FEATURES and arxiv_data.x is not None:
-        arxiv_final = torch.cat([arxiv_data.x, arxiv_embeddings], dim=1)
+        try:
+            emb_dev = arxiv_embeddings.device
+        except Exception:
+            emb_dev = torch.device("cpu")
+        arxiv_x = arxiv_data.x
+        if getattr(arxiv_x, "device", None) != emb_dev:
+            arxiv_x = arxiv_x.to(emb_dev)
+        arxiv_final = torch.cat([arxiv_x, arxiv_embeddings], dim=1)
 
     wiki_final = wiki_final.cpu()
     arxiv_final = arxiv_final.cpu()

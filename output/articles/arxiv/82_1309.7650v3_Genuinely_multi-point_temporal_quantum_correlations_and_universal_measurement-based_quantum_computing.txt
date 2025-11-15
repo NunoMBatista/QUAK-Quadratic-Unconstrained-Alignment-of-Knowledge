@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 1309.7650v3
-Title: Genuinely multi-point temporal quantum correlations and universal measurement-based quantum computing
-Query: Quantum Computing
----
-We introduce a constructive procedure that maps all spatial correlations of a broad class of states into temporal correlations between general quantum measurements. This allows us to present temporal phenomena analogous to genuinely multipartite nonlocal phenomena, such as Greenberger-Horne-Zeilinger correlations, which do not exist if only projective measurements on qubits are considered. The map is applied to certain lattice systems in order to replace one spatial dimension with a temporal one, without affecting measured correlations. We use this map to show how repeated application of a 1d-cluster-gate leads to universal one-way quantum computing when supplemented with the general measurements.

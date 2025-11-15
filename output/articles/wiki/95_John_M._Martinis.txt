@@ -1,9 +1,0 @@
-Source: Wikipedia
-Title: John M. Martinis
-URL: https://en.wikipedia.org/wiki/John_M._Martinis
-Query: Quantum Computing
----
-John Matthew Martinis (born 1958)  is an American physicist and Professor of Physics at the University of California, Santa Barbara. He led a team to develop a superconducting quantum computer at Google Quantum AI Lab, a partnership between UC Santa Barbara and Google. With the Sycamore processor, they claimed the first evidence of quantum supremacy in 2019.
-He shared the 2025 Nobel Prize in Physics with John Clarke and Michel Devoret for their joint work on macroscopic quantum phenomena in superconductors.
-
-

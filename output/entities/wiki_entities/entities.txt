@@ -1,724 +1,392 @@
-1D array
-2D
-3-level
+128-bit
 \displaystyle
-\displaystyle (E_{i})_{i
-\displaystyle \rho
-\displaystyle \rho }
-\displaystyle \{\pm 1\}
-\displaystyle C}
-\displaystyle F_{\rm {XEB}}=2^{n}\langle P(x_{i})\rangle _{k}-1={\frac {2^{n}}{k}}\left(\sum
-\displaystyle F_{XEB}=1
-\displaystyle I
-\displaystyle k
-\displaystyle M
-\displaystyle P(x_{i}
-\displaystyle p_{i}
-\displaystyle S
-\displaystyle U
-\displaystyle U}
-\displaystyle X
-\displaystyle Z
-\displaystyle {
-\displaystyle |\psi
-\displaystyle |g\rangle
-\langle \psi |U|\psi
-\langle \psi |U|\psi \rangle }
-\rangle
-\rho
-\sigma
-\text
-\{O_{i}\
-Aaronson
-abstract machine
-academic
+\displaystyle \Omega
+\displaystyle N
+\displaystyle N}
+\displaystyle O(N
+\displaystyle O(N)}
+\displaystyle O({\sqrt {N
+\displaystyle O\!\left((\log N)^{2}(\log \log N)(\log \log \log N)\right
+\displaystyle O\!\left((\log N)^{2}(\log \log N)\right
+\displaystyle O\!\left(e^{1.9(\log N)^{1/3}(\log \log N)^{2/3}}\right
+abstract
 academics
-access
-accuracy
-AdS/CFT correspondence
-Alexei Kitaev
+Alain Tapp
+Alexei
 algorithm
 algorithms
 alternatives
+American mathematician Peter Shor
+amount
 amplification
-analogue
-Anders Sørensen
-API
-approximated
-arbitrary
-architecture
-architectures
-Arkhipov
-array of ion traps
-artificial atoms
+analogous problem
+analyze
+applications
+asymptotically
+Atom Computing's
 atomic particle
-atomic scale measurements
-Atoms
 attacks
-Australia-based
-avoids
-Bacon
-BBN
-Berkeley
-beyond-classical computations
-biased noise
+best-known algorithms
 binary
-bitstring
-bitstrings
-boson sampling
-bounded-error
-BPP
+black box
 BQP
 branch
-calculate
 calculations
-California-based developer
-capabilities
-charged atomic particles
-chip
-Christopher
-circuit
-circuits
-circumventing
-class
+characterized
+Charles
+classes
 classical
 classical algorithm
+classical algorithms
 classical computer
 classical computers
-Classical shadow
-classical system
+classical machine
 classically
-Clifford gates
-cloud
-cloud platform
-cloud services
-Cloud-based
-CNOT
-code
-code block
-code's
-codes
 coherence times
-coherent
 coined
-collected
-collection
-combinations
-comes
-communication
-companies
-company develops
+complex
+complexity
 complexity class
-complexity theory
 computation
 computational
-computational problems
-computational-complexity-theoretic task
-computationally
-computer
-computer's
 computers
 computing
-concept
-concepts
-Conceptually
-condensed matter
-conferences
 confine
-connected networks
 constraints
-contextuality
-continued
 continuous
-control system
 correct
-corrected data
-correcting codes
 correction
-correlation functions
-Coulomb force
-coupling
-Cross-entropy
-cross-entropy benchmark
+Counting
+criteria
 cryptanalytic attack
 cryptographers
 cryptographic
 cryptographic algorithms
 current
-D-Wave's
 data
-dates
+database
 day
-decision problem
-decision problems
-Decoding
-decoherence
 decrypt
-definitions
-dense
-departments
+deep learning
 design
 designing
-detected
 deterministic rules
 development
-develops
-Devices
+devised
+difficult
 difficulty
+discrete logarithm algorithm
 discrete logarithm problem
-donation
-donations
-E_{i}\sigma
-Eastin
-Eastin–Knill
-Eastin–Knill theorem
-effects
-effects of
+diverse
+economics
+efficient
+efficiently
+eigenvalue
+eigenvalues
 electrical current
 electrical resistance
 electromagnetic fields
-electron
-electronic circuits
-electronic states
-element
 elliptic-curve discrete logarithm problem
-email list
-encode
-encoded
 encryption
 energy
 engineering
 entangled
-entanglement
-entanglement entropy
-entanglement verification
 environment
-environments
-equivalent
-equivalents
+equations
+era
 error
 error rates
-errors
-estimated
+estimate
 estimation
 European Telecommunications Standards Institute (ETSI
+evaluate
+evaluated
+evaluations
+evidence
 evolve
-Examples
-excited state
-executive director
 existence
-expectation
-expected value
 experimental
 experimental research
-experimentally
+exponential
+exponential function
 exponentially
 exponentially faster
-expressed
-expresses
-external motional states
-F
-F_{\rm
-factorization
-faculties
-fault
-fault-tolerant
-faulty
-faulty measurements
-favourable performance indicators
+factor
+factoring
+fast multiplication
+faster
+fault-tolerance
 features
-fidelity
-field
 fields
 finding
+finds
 finite sequence
-Five-qubit
-Forest
-founded
-free space
 function
-functions
-fundamental
-fundamental operations
+function's domain
 future
-gate
-gates
-generators
-glossary
-Google
-ground state
-group
-Hadamard test
+Gilles
+Grover
+Grover's
+Grover's algorithm
+Grover's search
+Grover's search algorithm
+H. Bennett
 hardware
-harness
+Harvey
 hash functions
 heavily
-high
-high school students
-high-level constructs
+hidden subgroup problem
 high-quality qubits
-higher
-highest
-Hilbert space
-horizontal
-hosts
-IBM
-ideal
-ideas
-Identity matrix
-image
-IMEC
-implement
+hybrid methods
+implementation
 implemented
-implements
-independent
-induce
+improve
+increased
 industry
 information
-information science
-ingredient
-inherent
-initiating
-instances
-institute
-Institute for Quantum Computing
+Institute
 instruction
 instructions
 integer
 integer factorization problem
-Intel
-interacting
-interference
-internal qubit
-internet
-interrupted
-investigating
-invocation
-ion
-ion chains
+intermediate-scale
+investigate
 ion traps
-Ions
-IQC
 isolate
 isolated
-isotopically pure
-IXZZX
+iterations
 Kitaev
-Klaus Mølmer
-Knill
-languages
+knowing
 large-scale
-Lasers
-lend
+learning
+learning systems
+learning theory
 length of time
-level
 levels
+Likewise
 linear combination
-locations
-logarithmic number
-logic states
-logical
-logical operators
-logical qubit
-long coherence times
-lookup table
-loop problems
+linear search
+linear systems
+list
+log
+log
+        ⁡
+        N
+      
+    
+    {\displaystyle \log N}
+Lov
 lower
-M. Dawson
-M. Solovay
-magic
-Magic state
-manufactured
-many-body theory
-Martinis
-massive
+machine
+machine learning
+mark
+Martinez
+mathematical
 mathematical problems
-maximum size
 measurement
-measurements
-measures
 measuring
 mechanical device
-Median-of-means estimation algorithm
-memory
-method
-metric
-Michael Curtis
+mechanics
+methodological
+Microsoft Azure
 migrating
 migration
-Mike Lazaridis
 milestone
-minimum storage requirements
-modality
+millions
+minimal
+minimization
 model
-modify
+moderate
 Mosca's
 motivation
-MS
-MSRI
-multidisciplinary
 multiple
-Mølmer
+multiplication
+N/2
 National governments
+networking
+neural networks
+NISQ
 NIST
-No
-no chance
 noise
-noiseless
 noisy
+Noisy intermediate-scale quantum
 non-deterministic
-Norbert Lütkenhaus
-novel
-nuclear spin
-O_{i}\rho
-observables
-Ontario
-open houses
-open-source philosophy
-open-source software
-operations
-Ophelia
+norm
+notions
+NP-complete problems
+numerical techniques
+operator
+optimal
 optimization
-optimize
 ordinary
 organizations
-orthogonal states
-outcome
 outcomes
-outliers
 outperform
-output
-outputs
-P_{\rm
-pair
-pairing
-parallelism
-particles
-Pauli matrices
-peculiarity
-performances
-phenomena
-phosphorus atoms
-photon
-physical gate
+output value
+outsourced
+period-finding algorithm
+period-finding problem
+Peter Høyer
+phase
+phase transitions
 physical qubit
-physical qubits
 physical simulations
+physical systems
 Physically engineering
-physically realized
 physicists
-physics
-polarization
+pioneered
+polynomial
+polynomial function
 polynomial time
+polynomial-time solutions
 possibilities
 post-quantum algorithms
 Post-quantum cryptography
 Post-Quantum Cryptography Standards
 post-quantum symmetric cryptography
-POVM
-power
 PQC
 PQCrypto
-practical applications
-Practical Quantum Instruction
-predicting
+practically
 prepare
-Prob
+prime factors
 probabilistic rule
-probabilities
 probability
 problem
-problems
+Problems
 procedures
 processing
-processing power
 processors
-professor
-programmable fashion
-programmers
 programs
-Promising
-properties
-property
-proposal
-proposals
-protocol
-Pty Ltd
-public
+prone
 public-key
 public-key algorithms
 public-key cryptographic schemes
-pyQuil
-Python library
 Q-Day
-QEC
-QIMP
-QPUs
-QTM
-quantized motion
+QML
+quadratic speedup
+quadratically
 Quantum
 quantum advantage
 quantum algorithm
 quantum algorithms
-quantum analogue
-quantum benchmarking protocol
 quantum bit
-quantum channel 
-  
-    
-      
-        M
-quantum chips
-quantum circuit
-quantum circuit 
-  
-    
-      
-        C
 quantum circuit model
-quantum circuits
-quantum communication
 quantum computation
-quantum computational
-quantum computations
 quantum computer
 quantum computer running
-quantum computer system
-Quantum computers
-Quantum Computing
-quantum computing company
+quantum computer technology
+quantum computers
+quantum computing
+quantum counting
+Quantum counting algorithm
 quantum decoherence
 quantum device
 quantum devices
-quantum dots
-quantum emulators
 quantum entanglement
 quantum error
-Quantum error correction
+quantum existence problem
+quantum experiments
 quantum gates
-quantum gravity
 quantum Grover's algorithm
-Quantum image processing
-quantum images
-quantum information
-quantum information science
-quantum instruction
-quantum integrated circuits
+quantum learning theory
+Quantum machine learning
 quantum measurements
-quantum mechanics
-quantum noise
+quantum operations
+quantum phase estimation algorithm
 quantum physics
-quantum polynomial time
-quantum preparation
-quantum problems
 quantum processing
-quantum processing units
+quantum processor
 quantum processors
-Quantum programming
-quantum programs
-quantum reference frame
 Quantum Safe Cryptography
-quantum sensing
-Quantum simulator
-Quantum simulators
-quantum software
-quantum state
-Quantum state discrimination
+quantum search algorithm
+quantum solution
 quantum states
 quantum superposition
-quantum supremacy
-quantum supremacy regime
+Quantum supremacy
 quantum system
 quantum systems
-quantum technologies
-quantum teleportation
-quantum trit
-Quantum Turing machine
-quantum version
-Quantum volume
-quantum volumes
-quantum-mechanical system
-quantum-powered
+quantum volume
+Quantum's scheme
+quantum-enhanced machine learning
 quantum-proof
 quantum-resistant
 quantum-safe
 quantum-safe cryptography
-quantum/classical memory model
 qubit
-Qubits
-Quil
-Quil programs
-Qutrit
-qutrits
-random
-random guessing
-random variable
-randomly sampling
-Re
+qubits
 real-world applications
 realistic model
-realizations
-realized
-received
-reduce
-remotely
 replicated
-Research
-Research Advancement Centre
+research
 researchers
-resources
 result
-results
-Richard Feynman's
-Rigetti
+risk
 risk analysis
-Robert
-Robert Smith
-RSA
+routines
 rumoured
 running
-S
-samples
 sampling
 scalable
-scanning tunnelling microscopes
-schemes
-scientific outreach events
-scientific research institute of
+search
 secure
-security
 sensitive
-sensitivity
-sequences
-Shadow generation algorithm
-shadows
-shared trap
-Shor code
+Shor
 Shor's algorithm
-short courses
-Si-28
-Silicon
-simplest
-simplicity
 simulated
-simulating
-simulation
-simulators
 simultaneously
-single-qubit
 size
-solid state
-Solovay
+solution
+solutions
+solving
 space
 specialized tasks
 speed
-speedup
-spin
-spin down
-spin qubits
-spin up
-SQC
-square
-stabilizer
-stable
-standard formulation
-state
+square root
 states
-Steane code
+statistical estimation
+statistical physics
 step-by-step procedure
 steps
-stored
+structural
 study
-SU(2
-sub-disciplines
-sub-fields
-subfield
-subspace
-Subsystem
-Subsystem code
-Subsystem codes
+sub-exponential time
+subroutine
+subroutines
 suffers
-supercomputer
-superconducting
 superconductors
 superpolynomial
-superposition
-surpass
-Sydney
+symmetric
 symmetric ciphers
 symmetric cryptographic algorithms
 symmetric cryptography
-symmetry
-Sørensen gate
-T
-T gate
-talk
 task
 tasks
-Technologies
+techniques
 term
 theorem
-theoretical
 theoretical) computer
-theorizes
 threat
 time
+time complexity
 time cost
-timeline
-TIQC
-tolerant
-traditional
-transferred
-Transversal gates
-transversely
-trapped ion
-trapped-ion
-trapped-ion systems
-tr}
-two-level
-two-state
-two-state device
+tries
+Trugenberger
 U.S. National Institute of Standards and Technology
-undergraduate
+Umesh Vazirani
+unit modulus
 unitary
-universal
-universal gate set
-University of Waterloo
-usefulness
-users
+unordered
+unstructured
+van der Hoeven
+Ventura
 versions
-vertical polarization
+vice
 vulnerable
-Waterloo
 wave interference
 widespread
-William Zeng
 work
 workshops
-X
-        Z
-x_{k}\
-XEB
-XIXZZ
 Y2Q
 years
-Yuri Manin's
-Z
-Z
-        X
-ZXIXZ\rangle
 {
-{H
-{i=1}^{k}|\langle 0^{n}|C|x_{i}\rangle |^{2}\right)-1}
-{Im
-{i}\}_{i
-{i}E_{i
-{j
-{j}
-{tr}
-|e\rangle
-}}
-ψ
-∑
-⟨
-⟩
+{N}

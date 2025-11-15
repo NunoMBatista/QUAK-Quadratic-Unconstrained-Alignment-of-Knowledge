@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: 0708.0261v1
+Title: An Introduction to Quantum Computing
+Query: fetch mode
+---
+Quantum Computing is a new and exciting field at the intersection of mathematics, computer science and physics. It concerns a utilization of quantum mechanics to improve the efficiency of computation. Here we present a gentle introduction to some of the ideas in quantum computing. The paper begins by motivating the central ideas of quantum mechanics and quantum computation with simple toy models. From there we move on to a formal presentation of the small fraction of (finite dimensional) quantum mechanics that we will need for basic quantum computation. Central notions of quantum architecture (qubits and quantum gates) are described. The paper ends with a presentation of one of the simplest quantum algorithms: Deutsch's algorithm. Our presentation demands neither advanced mathematics nor advanced physics.

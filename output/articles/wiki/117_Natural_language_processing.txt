@@ -1,9 +1,0 @@
-Source: Wikipedia
-Title: Natural language processing
-URL: https://en.wikipedia.org/wiki/Natural_language_processing
-Query: fetch mode
----
-Natural language processing (NLP) is the processing of natural language information by a computer. The study of NLP, a subfield of computer science, is generally associated with artificial intelligence. NLP is related to information retrieval, knowledge representation, computational linguistics, and more broadly with linguistics.
-Major processing tasks in an NLP system include: speech recognition, text classification, natural language understanding, and natural language generation.
-
-

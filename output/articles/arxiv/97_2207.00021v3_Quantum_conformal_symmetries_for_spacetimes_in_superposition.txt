@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2207.00021v3
-Title: Quantum conformal symmetries for spacetimes in superposition
-Query: Quantum Computing
----
-Without a complete theory of quantum gravity, the question of how quantum fields and quantum particles behave in a superposition of spacetimes seems beyond the reach of theoretical and experimental investigations. Here we use an extension of the quantum reference frame formalism to address this question for the Klein-Gordon field residing on a superposition of conformally equivalent metrics. Based on the group structure of ``quantum conformal transformations'', we construct an explicit quantum operator that can map states describing a quantum field on a superposition of spacetimes to states representing a quantum field with a superposition of masses on a Minkowski background. This constitutes an extended symmetry principle, namely invariance under quantum conformal transformations. The latter allows to build an understanding of superpositions of diffeomorphically non-equivalent spacetimes by relating them to a more intuitive superposition of quantum fields on curved spacetime. Furthermore, it can be used to import the phenomenon of particle production in curved spacetime to its conformally equivalent counterpart, thus revealing new features in modified Minkowski spacetime.

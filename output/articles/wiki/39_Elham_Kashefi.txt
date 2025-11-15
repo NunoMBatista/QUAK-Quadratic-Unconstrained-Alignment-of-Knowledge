@@ -1,7 +1,0 @@
-Source: Wikipedia
-Title: Elham Kashefi
-URL: https://en.wikipedia.org/wiki/Elham_Kashefi
-Query: Quantum Computing
----
-Elham Kashefi (Persian: الهام کاشفی) is a Professor of Computer Science and Personal Chair in quantum computing at the School of Informatics at the University of Edinburgh, and a Centre national de la recherche scientifique (CNRS) researcher at the Sorbonne University. She is known as one of the inventors of blind quantum computing.
-Her work has included contributions to quantum cryptography, verification of quantum computing, and cloud quantum computing.

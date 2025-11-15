@@ -1,9 +1,0 @@
-Source: Wikipedia
-Title: Nuclear magnetic resonance quantum computer
-URL: https://en.wikipedia.org/wiki/Nuclear_magnetic_resonance_quantum_computer
-Query: Quantum Computing
----
-Nuclear magnetic resonance quantum computing (NMRQC) is one of the several proposed approaches for constructing a quantum computer, that uses the spin states of nuclei within molecules as qubits. The quantum states are probed through the nuclear magnetic resonances, allowing the system to be implemented as a variation of nuclear magnetic resonance spectroscopy. NMR differs from other implementations of quantum computers in that it uses an ensemble of systems, in this case molecules, rather than a single pure state.
-Initially the approach was to use the spin properties of atoms of particular molecules in a liquid sample as qubits - this is known as liquid state NMR (LSNMR). This approach has since been superseded by solid state NMR (SSNMR) as a means of quantum computation.
-
-

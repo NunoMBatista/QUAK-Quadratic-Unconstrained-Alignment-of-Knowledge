@@ -1,0 +1,6 @@
+Source: arXiv
+ArXiv ID: quant-ph/9805082v1
+Title: Quantum Counting
+Query: fetch mode
+---
+We study some extensions of Grover's quantum searching algorithm. First, we generalize the Grover iteration in the light of a concept called amplitude amplification. Then, we show that the quadratic speedup obtained by the quantum searching algorithm over classical brute force can still be obtained for a large family of search problems for which good classical heuristics exist. Finally, as our main result, we combine ideas from Grover's and Shor's quantum algorithms to perform approximate counting, which can be seen as an amplitude estimation process.

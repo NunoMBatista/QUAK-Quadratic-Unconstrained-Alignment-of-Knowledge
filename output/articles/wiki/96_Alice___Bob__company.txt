@@ -1,6 +1,0 @@
-Source: Wikipedia
-Title: Alice & Bob (company)
-URL: https://en.wikipedia.org/wiki/Alice_%26_Bob_(company)
-Query: Quantum Computing
----
-Alice & Bob is a quantum computing company based in Paris and Boston. The company is known for its cat qubit quantum architecture and its work in quantum error correction.

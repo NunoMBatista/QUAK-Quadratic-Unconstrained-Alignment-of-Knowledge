@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2110.10587v3
-Title: Quantum networks theory
-Query: Quantum Computing
----
-The formalism of quantum theory over discrete systems is extended in two significant ways. First, quantum evolutions are generalized to act over entire network configurations, so that nodes may find themselves in a quantum superposition of being connected or not, and be allowed to merge, split and reconnect coherently in a superposition. Second, tensors and traceouts are generalized, so that systems can be partitioned according to almost arbitrary logical predicates in a robust manner. The hereby presented mathematical framework is anchored on solid grounds through numerous lemmas. Indeed, one might have feared that the familiar interrelations between the notions of unitarity, complete positivity, trace-preservation, non-signalling causality, locality and localizability that are standard in quantum theory be jeopardized as the neighbourhood and partitioning between systems become both quantum, dynamical, and logical. Such interrelations in fact carry through, albeit two new notions become instrumental: consistency and comprehension.

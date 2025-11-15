@@ -33,9 +33,34 @@ class GraphAutoencoder(torch.nn.Module):
         self.decoder = InnerProductDecoder()
 
     def encode(self, x, edge_index):
+        # Ensure inputs are on the same device as the model parameters.
+        # This prevents runtime errors when the model is on CUDA but the
+        # input tensors are still on CPU (or vice-versa).
+        try:
+            device = next(self.parameters()).device
+        except StopIteration:
+            device = torch.device("cpu")
+
+        if x is not None and x.device != device:
+            x = x.to(device)
+        if edge_index is not None and edge_index.device != device:
+            edge_index = edge_index.to(device)
+
         return self.encoder(x, edge_index)
 
     def decode(self, z, edge_index):
+        # Move inputs to model device to ensure decoder operations run
+        # without device mismatch errors.
+        try:
+            device = next(self.parameters()).device
+        except StopIteration:
+            device = torch.device("cpu")
+
+        if z is not None and z.device != device:
+            z = z.to(device)
+        if edge_index is not None and edge_index.device != device:
+            edge_index = edge_index.to(device)
+
         return self.decoder(z, edge_index)
 
     def forward(self, x, edge_index):

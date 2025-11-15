@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2103.04502v2
-Title: Quantum-accelerated constraint programming
-Query: Quantum Computing
----
-Constraint programming (CP) is a paradigm used to model and solve constraint satisfaction and combinatorial optimization problems. In CP, problems are modeled with constraints that describe acceptable solutions and solved with backtracking tree search augmented with logical inference. In this paper, we show how quantum algorithms can accelerate CP, at both the levels of inference and search. Leveraging existing quantum algorithms, we introduce a quantum-accelerated filtering algorithm for the $\texttt{alldifferent}$ global constraint and discuss its applicability to a broader family of global constraints with similar structure. We propose frameworks for the integration of quantum filtering algorithms within both classical and quantum backtracking search schemes, including a novel hybrid classical-quantum backtracking search method. This work suggests that CP is a promising candidate application for early fault-tolerant quantum computers and beyond.

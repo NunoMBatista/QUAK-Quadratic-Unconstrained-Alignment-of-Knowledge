@@ -1,8 +1,0 @@
-Source: Wikipedia
-Title: Quantum Supremacy
-URL: https://en.wikipedia.org/wiki/Quantum_Supremacy
-Query: Quantum Computing
----
-Quantum Supremacy: How the Quantum Computer Revolution Will Change Everything is a non-fiction book by the American futurist and physicist Michio Kaku. The book, Kaku's eleventh, was initially published on 2 May 2023 by Doubleday.
-
-

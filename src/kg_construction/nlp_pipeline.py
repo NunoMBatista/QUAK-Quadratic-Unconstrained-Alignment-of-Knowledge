@@ -57,7 +57,6 @@ class NLPPipeline:
         except IOError:
             print(f"-> '{NLP_MODEL}' model not found.")
             print(f"    -> run: pip install --no-deps https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.3/{NLP_MODEL}-0.5.3.tar.gz")
-            exit(1)            
             
 
     def _load_tokenizer_model(self):

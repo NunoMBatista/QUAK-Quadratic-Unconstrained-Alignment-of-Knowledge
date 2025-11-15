@@ -1,6 +1,0 @@
-Source: Wikipedia
-Title: Relationship extraction
-URL: https://en.wikipedia.org/wiki/Relationship_extraction
-Query: fetch mode
----
-A relationship extraction task requires the detection and classification of semantic relationship mentions within a set of artifacts, typically from text or XML documents. The task is very similar to that of information extraction (IE), but IE additionally requires the removal of repeated relations (disambiguation) and generally refers to the extraction of many different relationships.

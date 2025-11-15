@@ -1,51 +1,16 @@
 @prefix ns1: <http://unpruned.local/> .
 @prefix ont: <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#> .
 
-ont:Hadamard_test a ont:QuantumAlgorithm .
+ont:Quantum_algorithm a ont:QuantumAlgorithm .
 
-ont:Quantum a ont:QuantumConcept .
-
-ont:Quantum_computing a ont:QuantumConcept .
-
-ont:Quantum_computing_devices a ont:QuantumHardware .
-
-ont:Quantum_simulators a ont:QuantumHardware .
-
-ont:Quantum_supremacy a ont:QuantumConcept .
-
-ont:Theory a ont:QuantumConcept .
-
-ont:Unitary_operator a ont:QuantumConcept .
-
-ont:Quantum_algorithm a ont:QuantumAlgorithm ;
-    ont:alignedWith ont:Quantum_algorithms .
-
-ont:Quantum_algorithms a ont:QuantumAlgorithm ;
-    ont:alignedWith ont:Quantum_algorithm .
-
-ont:Quantum_circuit a ont:QuantumConcept ;
-    ont:alignedWith ont:Quantum_simulation .
+ont:Quantum_devices a ont:QuantumHardware .
 
 ont:Quantum_computer a ont:QuantumHardware ;
     ns1:manipulate ont:Qubit ;
-    ont:alignedWith ont:Representation .
-
-ont:Quantum_computers a ont:QuantumHardware ;
-    ont:alignedWith ont:Quantum_devices .
-
-ont:Quantum_devices a ont:QuantumHardware ;
     ont:alignedWith ont:Quantum_computers .
 
-ont:Quantum_simulation a ont:QuantumConcept ;
-    ont:alignedWith ont:Quantum_circuit .
-
-ont:Representation a ont:QuantumConcept ;
-    ns1:define ont:Quantum_Turing_Machines ;
+ont:Quantum_computers a ont:QuantumHardware ;
     ont:alignedWith ont:Quantum_computer .
 
-ont:Quantum_Turing_Machines a ont:QuantumAlgorithm ;
-    ont:alignedWith ont:Qubit .
-
-ont:Qubit a ont:QuantumConcept ;
-    ont:alignedWith ont:Quantum_Turing_Machines .
+ont:Qubit a ont:QuantumConcept .
 

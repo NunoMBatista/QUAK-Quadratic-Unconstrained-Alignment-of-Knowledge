@@ -1,6 +1,0 @@
-Source: Wikipedia
-Title: Guillaume Verdon
-URL: https://en.wikipedia.org/wiki/Guillaume_Verdon
-Query: Quantum Computing
----
-Guillaume Verdon-Akzam, also known as Guillaume Verdon or Gill Verdon, is a Canadian mathematical physicist, quantum computing researcher, entrepreneur, and writer who is a key contributor of Google's quantum machine learning software, Tensorflow Quantum. He is also a co-founder of the effective accelerationism movement and the start-up company Extropic AI which operates at the intersection between physics-based computing and artificial intelligence.

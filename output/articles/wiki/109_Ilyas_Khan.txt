@@ -1,6 +1,0 @@
-Source: Wikipedia
-Title: Ilyas Khan
-URL: https://en.wikipedia.org/wiki/Ilyas_Khan
-Query: Quantum Computing
----
-Ilyas Khan KSG (born 1962) is a British technologist and businessman.  He is the founder of Cambridge Quantum Computing.

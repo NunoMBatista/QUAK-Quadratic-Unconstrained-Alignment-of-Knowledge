@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2410.00916v1
-Title: IBM Quantum Computers: Evolution, Performance, and Future Directions
-Query: fetch mode
----
-Quantum computers represent a transformative frontier in computational technology, promising exponential speedups beyond classical computing limits. IBM Quantum has led significant advancements in both hardware and software, providing access to quantum hardware via IBM Cloud since 2016, achieving a milestone with the world's first accessible quantum computer. This article explores IBM's quantum computing journey, focusing on the development of practical quantum computers. We summarize the evolution and advancements of IBM Quantum's processors across generations, including their recent breakthrough surpassing the 1,000-qubit barrier. The paper reviews detailed performance metrics across various hardware, tracing their evolution over time and highlighting IBM Quantum's transition from the noisy intermediate-scale quantum (NISQ) computing era towards fault-tolerant quantum computing capabilities.

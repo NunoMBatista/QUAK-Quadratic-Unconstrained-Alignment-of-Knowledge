@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 1705.00365v2
-Title: Measuring Holographic Entanglement Entropy on a Quantum Simulator
-Query: Quantum Computing
----
-Quantum simulation promises to have wide applications in many fields where problems are hard to model with classical computers. Various quantum devices of different platforms have been built to tackle the problems in, say, quantum chemistry, condensed matter physics, and high-energy physics. Here, we report an experiment towards the simulation of quantum gravity by simulating the holographic entanglement entropy. On a six-qubit nuclear magnetic resonance quantum simulator, we demonstrate a key result of Anti-de Sitter/conformal field theory(\adscft) correspondence---the Ryu-Takayanagi formula is demonstrated by measuring the relevant entanglement entropies on the perfect tensor state. The fidelity of our experimentally prepared the six-qubit state is 85.0\% via full state tomography and reaches 93.7\% if the signal-decay due to decoherence is taken into account. Our experiment serves as the basic module of simulating more complex tensor network states that exploring \adscft correspondence. As the initial experimental attempt to study \adscft via quantum information processing, our work opens up new avenues exploring quantum gravity phenomena on quantum simulators.

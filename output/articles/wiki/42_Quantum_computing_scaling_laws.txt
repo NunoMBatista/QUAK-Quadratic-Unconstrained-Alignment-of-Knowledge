@@ -1,6 +1,0 @@
-Source: Wikipedia
-Title: Quantum computing scaling laws
-URL: https://en.wikipedia.org/wiki/Quantum_computing_scaling_laws
-Query: Quantum Computing
----
-Quantum computing scaling laws (sometimes abbreviated as QC scaling laws)  are a set of observations describing the exponential growth of various aspects of quantum computer development. The most important scaling laws in quantum computing are Rose's law, Neven's law, and Schoelkopf's law. These laws are named after prominent quantum computing researchers and predict continued improvement in quantum computer performance in the coming years. However, it is important to note that these laws are more empirical rules of thumb and predictions based on observations rather than immutable truths, and technological development may bring unexpected challenges and breakthroughs.

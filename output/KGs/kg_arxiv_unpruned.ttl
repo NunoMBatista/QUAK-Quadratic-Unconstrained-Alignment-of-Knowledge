@@ -1,39 +1,26 @@
 @prefix ns1: <http://unpruned.local/> .
 
-ns1:Google_Quantum_AI ns1:is_a ns1:leader .
+ns1:Central_notions ns1:is_a ns1:qubits .
 
-ns1:Quantum ns1:lead ns1:advancements .
+ns1:QOA ns1:enable ns1:benefits .
 
-ns1:computers ns1:represent ns1:transformative_frontier .
+ns1:algorithms ns1:is_a ns1:relevant .
 
-ns1:notions ns1:is_a ns1:quantum_computations .
+ns1:approaches ns1:is_a ns1:sensitive .
 
-ns1:paper_reviews ns1:review ns1:performance .
+ns1:cryptographic_systems ns1:encounter ns1:vulnerabilities .
 
-ns1:quantum_algorithms ns1:is_a ns1:random .
+ns1:noise ns1:limit ns1:size .
 
-ns1:quantum_computing_devices ns1:compute ns1:quantities .
+ns1:post-quantum_cryptography ns1:is_a ns1:PQC .
 
-ns1:quantum_resources ns1:is_a ns1:quantum_computers .
+ns1:presentation ns1:demand ns1:mathematics .
 
-ns1:quantum_simulation ns1:utilize ns1:Monte_Carlo_techniques .
+ns1:quantum_computers ns1:enter ns1:industrialization_stage ;
+    ns1:outperform ns1:classical_computers .
 
-ns1:representation ns1:define ns1:Quantum_Turing_Machines .
+ns1:quantum_systems ns1:produce ns1:counter-intuitive_patterns .
 
-ns1:study ns1:highlight ns1:transformative_impact .
-
-ns1:theory ns1:is_a ns1:stochastic .
-
-ns1:unitary_operator ns1:is_a ns1:components .
-
-ns1:DQC ns1:face ns1:problems .
-
-ns1:evaluation ns1:demonstrate ns1:effectiveness ;
-    ns1:is_a ns1:Monte_Carlo_integration .
-
-ns1:quantum_computers ns1:is_a ns1:quantum_computing ;
-    ns1:speed ns1:evaluation ;
-    ns1:teleport ns1:information .
-
-ns1:quantum_computing ns1:is_a ns1:DQC .
+ns1:review ns1:employ ns1:systematic_scoping_review ;
+    ns1:examine ns1:articles .
 

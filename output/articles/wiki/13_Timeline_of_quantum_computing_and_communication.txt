@@ -1,8 +1,0 @@
-Source: Wikipedia
-Title: Timeline of quantum computing and communication
-URL: https://en.wikipedia.org/wiki/Timeline_of_quantum_computing_and_communication
-Query: Quantum Computing
----
-This is a timeline of quantum computing and communication.
-
-

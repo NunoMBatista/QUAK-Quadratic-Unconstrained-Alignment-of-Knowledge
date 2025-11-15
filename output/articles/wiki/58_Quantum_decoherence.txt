@@ -1,8 +1,0 @@
-Source: Wikipedia
-Title: Quantum decoherence
-URL: https://en.wikipedia.org/wiki/Quantum_decoherence
-Query: Quantum Computing
----
-Quantum decoherence is the loss of quantum coherence.  It involves generally a loss of information of a system to its environment. Quantum decoherence has been studied to understand how quantum systems convert to systems that can be explained by classical mechanics.  Beginning out of attempts to extend the understanding of quantum mechanics, the theory has developed in several  directions and experimental studies have confirmed some of the key issues. Quantum computing relies on quantum coherence and is one of the primary practical applications of the concept.
-
-

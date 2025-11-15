@@ -1,6 +1,0 @@
-Source: Wikipedia
-Title: Atom Computing
-URL: https://en.wikipedia.org/wiki/Atom_Computing
-Query: Quantum Computing
----
-Atom Computing Inc. is a quantum computing company headquartered in Berkeley, California with a commercial operations facility in Boulder, Colorado. The company develops quantum computers based on neutral atom technology.

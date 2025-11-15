@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2212.10990v1
-Title: NP-hard but no longer hard to solve? Using quantum computing to tackle optimization problems
-Query: Quantum Computing
----
-In the last decade, public and industrial research funding has moved quantum computing from the early promises of Shor's algorithm through experiments to the era of noisy intermediate scale quantum devices (NISQ) for solving real-world problems. It is likely that quantum methods can efficiently solve certain (NP-)hard optimization problems where classical approaches fail. In our perspective, we examine the field of quantum optimization where we solve optimisation problems using quantum computers. We demonstrate this through a proper use case and discuss the current quality of quantum computers, their solver capabilities, and benchmarking difficulties. Although we show a proof-of-concept rather than a full benchmark, we use the results to emphasize the importance of using appropriate metrics when comparing quantum and classical methods. We conclude with discussion on some recent quantum optimization breakthroughs and the current status and future directions.

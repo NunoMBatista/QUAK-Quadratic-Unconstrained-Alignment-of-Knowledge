@@ -1,7 +1,0 @@
-Source: Wikipedia
-Title: DBpedia
-URL: https://en.wikipedia.org/wiki/DBpedia
-Query: fetch mode
----
-DBpedia (from "DB" for "database") is a project aiming to extract structured content from the information created in the Wikipedia project. This structured information is made available on the World Wide Web using OpenLink Virtuoso. DBpedia allows users to semantically query relationships and properties of Wikipedia resources, including links to other related datasets.
-The project was heralded as "one of the more famous pieces" of the decentralized linked data effort by Tim Berners-Lee, the inventor of the World Wide Web. As of June 2021, DBpedia contained over 850 million semantic triples.

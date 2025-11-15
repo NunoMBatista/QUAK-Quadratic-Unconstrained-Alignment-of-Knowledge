@@ -1,6 +1,0 @@
-Source: arXiv
-ArXiv ID: 2101.05560v1
-Title: Secure Multi-Party Quantum Conference and Xor Computation
-Query: Quantum Computing
----
-Quantum conference is a process of securely exchanging messages between three or more parties, using quantum resources. A Measurement Device Independent Quantum Dialogue (MDI-QD) protocol, which is secure against information leakage, has been proposed (Quantum Information Processing 16.12 (2017): 305) in 2017, is proven to be insecure against intercept-and-resend attack strategy. We first modify this protocol and generalize this MDI-QD to a three-party quantum conference and then to a multi-party quantum conference. We also propose a protocol for quantum multi-party XOR computation. None of these three protocols proposed here use entanglement as a resource and we prove the correctness and security of our proposed protocols.
