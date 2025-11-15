@@ -46,8 +46,10 @@ filelock==3.20.0
 Flask==3.1.2
 frozenlist==1.8.0
 fsspec==2025.10.0
+groq==0.11.0
 hf-xet==1.2.0
 homebase==1.0.1
+httpx==0.27.2
 http-sf==1.0.4
 huggingface-hub==0.36.0
 idna==3.11
@@ -118,6 +120,7 @@ pyqubo==1.5.0
 pysbd==0.3.4
 PySocks==1.7.1
 python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
 pytz==2025.2
 pyvis==0.3.2
 PyYAML==6.0.3

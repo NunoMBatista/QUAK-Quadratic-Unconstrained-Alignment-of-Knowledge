@@ -6,5 +6,3 @@ Query: fetch mode
 Noisy intermediate-scale quantum (NISQ) computing is characterized by quantum processors containing up to 1,000 qubits which are not advanced enough yet for fault-tolerance or large enough to achieve quantum advantage. These processors, which are sensitive to their environment (noisy) and prone to quantum decoherence, are not yet capable of continuous quantum error correction. This intermediate-scale is defined by the quantum volume, which is based on a moderate number of qubits and gate fidelity. The NISQ era is the current state of quantum computer technology, and the term was coined by John Preskill in 2018.
 According to Microsoft Azure Quantum's scheme, NISQ computation is considered level 1, the lowest of the quantum computing implementation levels.
 In October 2023, the 1,000 qubit mark was passed for the first time by Atom Computing's 1,180 qubit quantum processor.  However, as of 2024, only two quantum processors have over 1,000 qubits, with sub-1,000 quantum processors still remaining the norm.
-
-

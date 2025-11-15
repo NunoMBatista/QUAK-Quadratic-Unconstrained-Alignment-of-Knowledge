@@ -69,6 +69,7 @@ $$
 ├── kg_construction/# Module 1: Build KGs from raw text.
 │   ├── fetch_data.py     # Download Wikipedia/arXiv articles.
 │   ├── nlp_pipeline.py   # Extract entities/relations with SciBERT.
+│   └── llm_based_pipeline.py # Alternative Groq-powered KG builder (JSON triples).
 │   └── build_kg.py       # Create and save the rdflib .ttl graphs.
 │
 ├── gnn_embedding/# Module 2: Learn entity embeddings.
@@ -97,3 +98,26 @@ $$
     └── results/# The final alignment CSVs.
 
 ```
+
+### LLM-based KG extraction
+
+The Groq-driven pipeline in `src/kg_construction/llm_based_pipeline.py` prompts a modern LLM to return JSON-formatted entities and triples and then writes the unpruned KGs. To enable it:
+
+1. Duplicate the sample env file and add your Groq key:
+  ```bash
+  cp .env.example .env
+  # edit .env and set GROQ_API_KEY
+  ```
+2. Install the updated dependencies (`groq`, `python-dotenv`).
+3. Instantiate `LLMBasedPipeline` in your script or notebook:
+  ```python
+  from src.kg_construction.fetch_data import fetch_wiki_data, fetch_arxiv_data
+  from src.kg_construction.llm_based_pipeline import LLMBasedPipeline
+
+  wiki_data, _ = fetch_wiki_data()
+  arxiv_data, _ = fetch_arxiv_data()
+
+  LLMBasedPipeline().build_unpruned_kgs(wiki_data, arxiv_data)
+  ```
+
+The pipeline persists entities and TTL files to the same locations used by the classical NLP pipeline, so downstream steps (pruning, embedding, alignment) continue to work unchanged.

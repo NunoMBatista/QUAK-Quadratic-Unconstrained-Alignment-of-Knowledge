@@ -1,282 +1,100 @@
-Abelian
-abstraction
+Abelian stabilizer problem
 academia
-accurate
-adiabatic
-algorithm
-algorithmic
-algorithmic primitives
-algorithms
-amplitude
+advantages
+algorithmic advances
 amplitude amplification
-amplitude amplification processes
-analyzed
-analyzed articles
-anticipated
-application
-application area
-applications
-approaches
-approximate
-arbitrary
-area
-articles
-associated with
-banking
-benefits
-bibliography of references
-brute force
-building
-calculation
-capabilities
-central ideas
-Central notions
-challenges
-classes
-classical computers
+amplitude estimation process
+approximate amplitude encoding method
+approximate counting
+arbitrary finite Abelian group
+banking transactions
+classical brute force
+classical computer
+classical heuristics
+classical methods
 classical systems
-code-based
+code-based cryptography
 communication
-communication channels
-compare
-complex
-complexities
-complexity
 complexity-theoretic limitations
-computation
 computer power
 computer science
-computers
-Computing
-concept
-concrete
-content
-conventional
-correction
-cost-ineffective
 counter-intuitive patterns
-counting
-cryptanalysis
-cryptographic attacks
-cryptographic systems
 cryptosystems
-data
-data index
-database
+database search
 decision making
 Deutsch's algorithm
-devices
-digital
-digital computer
 digital signatures
-discrete
-distinction
-domain
-efficiency
-efficient
-efficiently
-eigenvalue
-embedded
-employs
-end-to-end complexities
-estimation process
-evaluate
-evaluation
-executes
-exploration
-extensions
-factored
+discrete logarithm
 factoring
-famous
 fault tolerance
-fault-tolerant
 finance
-finding
-finite dimensional
-Fuelled
-future
-gate-based optimization
-group
-Grover database
-Grover iteration
-Grover's
-hardware
-hash-based
-heuristics
-hidden costs
-hyperlinks
-hypothetical
-ideas
-image pattern
-impacted
-implement
-implemented
-implementing
-increase
-increasing
-industrialization stage
+finite dimensional quantum mechanics
+Grover algorithm
+hardware challenges
+hash-based cryptography
+image pattern matching
 industry
-information
 input size
-input-output model
-instantiating
-integer
-integers
+integer to be factored
 intellectual property
-intersection
-introduction
 inversion-test operation
-investigate
-IoT.
+IoT
 isogeny-based cryptography
-lack
-landmark Grover algorithm
-lattice-based
-layers
-limitations
-logarithm
-logarithms
+lack of standardization
+lattice-based cryptography
 machine learning
-many-body
-math
+many-body quantum physics
 mathematics
-measuring
-method
-methods
-mirrors
-modular
-motivating
-multiple
-multivariate polynomial
-navigation
-near
-NISQ
+multivariate polynomial cryptography
+NISQ devices
 noise
-Noisy Intermediate-Scale Quantum
-operation
-operations
-operator
-opportunities
+number of digits
+operations research
 optimization
-oracles
-outperform
-overall
-paper considers
-paths
-pattern
-pattern matching algorithm
-patterns
+paper
+pattern matching
 physical computing device
 physics
-polynomial
-polynomial factor
 polynomial quantum algorithm
 polynomial quantum Fourier transform algorithm
-post-quantum cryptography
-post-quantum era
-potential
-potentials
-power
-PQC
-practical setting
-presentation
-primitives
-problem
-problems
-procedure
-progress
+post-quantum cryptography (PQC)
+procedure for measuring an eigenvalue of a unitary operator
 projected quantum state
-proposal
-Proposed
-publications
+proposed quantum algorithm
 QOA
-QOAs
-quadratic speedup
-Quantum
-quantum algorithm
-quantum algorithmic
+quantum algorithmic primitives
 quantum algorithms
 quantum architecture
 quantum chemistry
 quantum circuits
-quantum computation
 quantum computer
-quantum computers
 quantum computing
-quantum error
+quantum error correction
 quantum gates
 quantum hardware
-quantum machine
+quantum machine learning
 quantum mechanics
-quantum physics
-quantum searching
+quantum optimization algorithms
 quantum software
 quantum solutions
-quantum speedup
 quantum speedups
 quantum systems
-quantum technologies
-Quantum technologists
+quantum technologists
 quantum threats
-quantum-based
 qubits
-query
+query complexity
+query data
 randomized algorithms
-regular
-relevant
-research
-result
-review
-right away
-robustness
-run-time performance
-science
-scientific journals
-search
-sections
-secure
-sensitive
+search problems
 shallow quantum circuit
-Shor's
-similarity
-simplest
-simulate
-size
-small fraction of
-software
-solution
+Shor's quantum algorithms
+software challenges
 solutions
-speed
-spheres
-stabilizer
-standalone section
-standardization
-state-of-the-art classical methods
-state-of-the-art solutions
-storage
-structure
-study
-subroutine
-subroutines
-subtleties
-surpass
-survey
 systematic scoping review
-target
-tasks
-technical
-technical caveats
-technical difficulty
-techniques
-technology
-theory
-today's
-transactions
-unitary
+target data index
+theory of quantum computation
+toy models
 universal computing device
-utilization
-vulnerabilities
-vulnerable
-work
-written
-years
+unknown vulnerabilities
+vast computation power
+vast storage

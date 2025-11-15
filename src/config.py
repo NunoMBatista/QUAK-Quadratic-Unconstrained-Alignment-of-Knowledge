@@ -41,6 +41,11 @@ ALIGNED_ENTITIES_NN_CSV = ALIGNMENTS_DIR / 'alignment_nn.csv'
 # Backwards compatibility for older imports
 ALIGNED_ENTITIES_CSV = ALIGNED_ENTITIES_ANNEALER_CSV
 
+QUBO_OUTPUT_DIR = OUTPUT_DIR / 'qubo'
+QUBO_MATRIX_CSV = QUBO_OUTPUT_DIR / 'qubo_matrix.csv'
+QUBO_NODE_MATRIX_CSV = QUBO_OUTPUT_DIR / 'qubo_matrix_H_node.csv'
+QUBO_STRUCTURE_MATRIX_CSV = QUBO_OUTPUT_DIR / 'qubo_matrix_H_structure.csv'
+
 
 # embedding outputs
 EMBEDDINGS_DIR = OUTPUT_DIR / 'embeddings'
@@ -49,10 +54,136 @@ ENTITY_EMBEDDINGS_ARXIV_PATH = EMBEDDINGS_DIR / 'entity_embeddings_arxiv.pt'
 REL_EMBEDDINGS_PATH = EMBEDDINGS_DIR / 'relation_embeddings.npz' # Output file for H_structure
 
 
-# ===================== NLP SETTINGS =====================
+# ===================== NLP / LLM SETTINGS =====================
+
+KG_CONSTRUCTION_MODE = "llm"  # either 'nlp' or 'llm'
 
 NLP_MODEL = "en_core_sci_scibert"
 NLP_PIPELINE = "src/kg_construction/nlp_pipeline.py"
+
+DOTENV_PATH = PROJECT_ROOT / ".env"
+
+LLM_VENDOR = "groq"
+LLM_MODEL_NAME = "openai/gpt-oss-120b"
+LLM_TEMPERATURE = 0.15
+LLM_MAX_OUTPUT_TOKENS = 8192
+LLM_CHUNK_CHAR_LIMIT = 3500
+LLM_MAX_TRIPLES_PER_CHUNK = 20
+LLM_MAX_ENTITIES_PER_CHUNK = 25
+
+LLM_EXTRACTION_SYSTEM_PROMPT = (
+    "You are an ontology engineer who writes compact knowledge graphs. "
+    "Return valid JSON only—no code fences or commentary. "
+    "Follow the configured JSON schema exactly and always emit both top-level arrays, even if they are empty."
+)
+
+LLM_EXTRACTION_USER_PROMPT = """
+Extract entities and factual triples from the provided scientific text.
+- Focus on quantum computing, algorithms, hardware, complexity, people, and institutions.
+- Keep every surface form you encounter; duplicates will be resolved later.
+- Relations should be concise verbs or predicates in snake_case (e.g., derived_from).
+- If a statement is speculative, mark confidence below 0.5.
+- Always return JSON with both top-level keys `entities` and `triples`. Use empty arrays when you have nothing to add.
+
+Return only JSON that conforms to the configured schema.
+
+Text to analyze:
+{text}
+"""
+
+
+LLM_EXTRACTION_JSON_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "entities": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "properties": {
+                    "name": {"type": "string"},
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "Concept",
+                            "Algorithm",
+                            "Hardware",
+                            "Institution",
+                            "Metric",
+                            "Person",
+                            "Other"
+                        ]
+                    },
+                    "description": {"type": "string"}
+                },
+                "required": ["name"]
+            }
+        },
+        "triples": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "properties": {
+                    "subject": {"type": "string"},
+                    "relation": {"type": "string"},
+                    "object": {"type": "string"},
+                    "evidence": {"type": "string"},
+                    "confidence": {
+                        "type": "number",
+                        "minimum": 0.0,
+                        "maximum": 1.0
+                    }
+                },
+                "required": ["subject", "relation", "object"]
+            }
+        }
+    },
+    "required": ["entities", "triples"]
+}
+
+LLM_RECON_SYSTEM_PROMPT = (
+    "You are a precise data steward who canonicalizes entity names. "
+    "Return valid JSON only—no code fences or commentary. "
+    "Follow the configured JSON schema exactly."
+)
+
+LLM_RECON_USER_PROMPT = """
+You will be given a list of entity surface forms extracted from related documents. Group
+aliases that clearly refer to the same real-world concept or person, and choose the most
+complete surface form as the canonical label.
+
+Entities:
+{entity_names}
+
+Return only JSON that adheres to the configured schema.
+"""
+
+LLM_RECON_JSON_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "canonical_entities": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "properties": {
+                    "canonical": {"type": "string"},
+                    "aliases": {
+                        "type": "array",
+                        "items": {"type": "string"}
+                    }
+                },
+                "required": ["canonical"]
+            }
+        }
+    },
+    "required": ["canonical_entities"]
+}
+
+LLM_RECON_MAX_NAMES = 200
 
 
 # ===================== DATA FETCHING SETTINGS =====================
@@ -108,30 +239,27 @@ RELATION_LABELS = ["developedBy", "usesConcept", "implements"]
 
 # the Wiki "allow-list" and their types from the ontology
 ENTITY_MAP_WIKI = {
-    # Entity Name : Ontology Class
-    "Quantum computer": "QuantumHardware",
+    "Grover's algorithm": "QuantumAlgorithm",
+    "Shor's algorithm": "QuantumAlgorithm",
+    "Quantum machine learning QML": "QuantumConcept",
+    "Noisy intermediate-scale quantum NISQ computing": "QuantumConcept",
+    "Post-quantum cryptography": "QuantumConcept",
     "Quantum computing": "QuantumConcept",
-    "Quantum algorithm": "QuantumAlgorithm",
-    "Hadamard test": "QuantumAlgorithm",
-    "Quantum circuit": "QuantumConcept",
-    "Quantum devices": "QuantumHardware",
-    "Qubit": "QuantumConcept",
-    "Quantum supremacy": "QuantumConcept",
-    "Quantum simulators": "QuantumHardware",
+    "Quantum computer": "QuantumHardware",
+    "Quantum optimization algorithms": "QuantumAlgorithm",
+    "Peter Shor": "Person",
 }
 
-# the arXiv "allow-list" and their types from the ontology
 ENTITY_MAP_ARXIV = {
-    # notice the different strings for the same concepts
-    "Quantum algorithms": "QuantumAlgorithm",
-    "Quantum Turing Machines": "QuantumAlgorithm",
-    "Quantum computers": "QuantumHardware",
-    "Quantum computing devices": "QuantumHardware",
-    "Quantum simulation": "QuantumConcept",
-    "Unitary operator": "QuantumConcept",
-    "Representation": "QuantumConcept",
-    "Theory": "QuantumConcept",
-    "Quantum": "QuantumConcept",
+    "Grover algorithm": "QuantumAlgorithm",
+    "Shor's quantum algorithms": "QuantumAlgorithm",
+    "quantum machine learning": "QuantumConcept",
+    "NISQ devices": "QuantumConcept",
+    "post-quantum cryptography PQC": "QuantumConcept",
+    "quantum computing": "QuantumConcept",
+    "quantum computer": "QuantumHardware",
+    "quantum optimization algorithms": "QuantumAlgorithm",
+    "QOA": "QuantumAlgorithm"
 }
 
 
@@ -179,3 +307,8 @@ GAEA_STATS_WEIGHT = 0.1     # weight applied to first/second moment alignment
 GAEA_MAX_ALIGN_SAMPLES = 2048 # max samples drawn when estimating MMD
 
 USE_SCIBERT_FEATURES = True # whether to use SciBERT features for node attributes (false to set the initial features to identity matrix)
+
+# toggle to fully skip the graph autoencoder (GAE/GAEA) stage and reuse the raw
+# node features (e.g., SciBERT) as the exported entity embeddings. Set to False
+# when you only need surface-form embeddings and want to avoid GNN training time.
+USE_GAE_FOR_ENTITY_EMBEDDINGS = False

@@ -392,10 +392,8 @@ def train_gaea_joint(
     return model
 
 def generate_entity_embeddings():
-    """
-    loads, trains, and saves GAE embeddings for both KGs.
-    """
-    
+    """Loads, trains, and saves entity embeddings for both KGs."""
+
     print(f"\n--- Part 2: Generating Entity Embeddings (for H_node) ---")
 
     # load SciBERT once and reuse for both graphs
@@ -430,60 +428,79 @@ def generate_entity_embeddings():
             "Wiki and ArXiv graphs must share the same feature dimension for joint training."
         )
 
-    joint_model = train_gaea_joint(
-        wiki_data,
-        arxiv_data,
-        in_channels=wiki_data.num_node_features,
-        hidden_channels=HIDDEN_DIM,
-        out_channels=EMBEDDING_DIM,
-        epochs=EPOCHS,
-        lr=LEARNING_RATE,
+    def _cpu_clone(tensor: torch.Tensor) -> torch.Tensor:
+        if tensor is None:
+            return tensor
+        return tensor.detach().clone().cpu()
+
+    if USE_GAE_FOR_ENTITY_EMBEDDINGS:
+        joint_model = train_gaea_joint(
+            wiki_data,
+            arxiv_data,
+            in_channels=wiki_data.num_node_features,
+            hidden_channels=HIDDEN_DIM,
+            out_channels=EMBEDDING_DIM,
+            epochs=EPOCHS,
+            lr=LEARNING_RATE,
+        )
+
+        joint_model.eval()
+        with torch.no_grad():
+            wiki_embeddings = joint_model.encode(wiki_data.x, wiki_data.edge_index)
+            arxiv_embeddings = joint_model.encode(arxiv_data.x, arxiv_data.edge_index)
+
+        wiki_final = wiki_embeddings
+        arxiv_final = arxiv_embeddings
+        # Ensure tensors are on the same device before concatenation to avoid
+        # CPU/CUDA mismatch errors (torch.cat requires same device for all inputs).
+        if USE_SCIBERT_FEATURES and wiki_data.x is not None:
+            # Move node features to the embeddings device if needed
+            try:
+                emb_dev = wiki_embeddings.device
+            except Exception:
+                emb_dev = torch.device("cpu")
+            wiki_x = wiki_data.x
+            if getattr(wiki_x, "device", None) != emb_dev:
+                wiki_x = wiki_x.to(emb_dev)
+            wiki_final = torch.cat([wiki_x, wiki_embeddings], dim=1)
+
+        if USE_SCIBERT_FEATURES and arxiv_data.x is not None:
+            try:
+                emb_dev = arxiv_embeddings.device
+            except Exception:
+                emb_dev = torch.device("cpu")
+            arxiv_x = arxiv_data.x
+            if getattr(arxiv_x, "device", None) != emb_dev:
+                arxiv_x = arxiv_x.to(emb_dev)
+            arxiv_final = torch.cat([arxiv_x, arxiv_embeddings], dim=1)
+
+        wiki_final = _cpu_clone(wiki_final)
+        arxiv_final = _cpu_clone(arxiv_final)
+    else:
+        print("\nSkipping GAE training; exporting raw node features as embeddings.")
+        wiki_final = _cpu_clone(wiki_data.x)
+        arxiv_final = _cpu_clone(arxiv_data.x)
+
+    model_name = "GAEA" if USE_GAE_FOR_ENTITY_EMBEDDINGS else (
+        "SciBERT" if USE_SCIBERT_FEATURES else "IdentityFeatures"
     )
 
-    joint_model.eval()
-    with torch.no_grad():
-        wiki_embeddings = joint_model.encode(wiki_data.x, wiki_data.edge_index)
-        arxiv_embeddings = joint_model.encode(arxiv_data.x, arxiv_data.edge_index)
-
-    wiki_final = wiki_embeddings
-    arxiv_final = arxiv_embeddings
-    # Ensure tensors are on the same device before concatenation to avoid
-    # CPU/CUDA mismatch errors (torch.cat requires same device for all inputs).
-    if USE_SCIBERT_FEATURES and wiki_data.x is not None:
-        # Move node features to the embeddings device if needed
-        try:
-            emb_dev = wiki_embeddings.device
-        except Exception:
-            emb_dev = torch.device("cpu")
-        wiki_x = wiki_data.x
-        if getattr(wiki_x, "device", None) != emb_dev:
-            wiki_x = wiki_x.to(emb_dev)
-        wiki_final = torch.cat([wiki_x, wiki_embeddings], dim=1)
-
-    if USE_SCIBERT_FEATURES and arxiv_data.x is not None:
-        try:
-            emb_dev = arxiv_embeddings.device
-        except Exception:
-            emb_dev = torch.device("cpu")
-        arxiv_x = arxiv_data.x
-        if getattr(arxiv_x, "device", None) != emb_dev:
-            arxiv_x = arxiv_x.to(emb_dev)
-        arxiv_final = torch.cat([arxiv_x, arxiv_embeddings], dim=1)
-
-    wiki_final = wiki_final.cpu()
-    arxiv_final = arxiv_final.cpu()
-
     metadata_base = {
-        "model": "GAEA",
-        "hidden_dim": HIDDEN_DIM,
-        "embedding_dim": EMBEDDING_DIM,
-        "epochs": EPOCHS,
-        "learning_rate": LEARNING_RATE,
-        "mmd_weight": GAEA_MMD_WEIGHT,
-        "stats_weight": GAEA_STATS_WEIGHT,
-        "max_align_samples": GAEA_MAX_ALIGN_SAMPLES,
+        "model": model_name,
+        "use_gae": USE_GAE_FOR_ENTITY_EMBEDDINGS,
         "use_scibert_features": USE_SCIBERT_FEATURES,
     }
+
+    if USE_GAE_FOR_ENTITY_EMBEDDINGS:
+        metadata_base.update({
+            "hidden_dim": HIDDEN_DIM,
+            "embedding_dim": EMBEDDING_DIM,
+            "epochs": EPOCHS,
+            "learning_rate": LEARNING_RATE,
+            "mmd_weight": GAEA_MMD_WEIGHT,
+            "stats_weight": GAEA_STATS_WEIGHT,
+            "max_align_samples": GAEA_MAX_ALIGN_SAMPLES,
+        })
 
     torch.save(
         {

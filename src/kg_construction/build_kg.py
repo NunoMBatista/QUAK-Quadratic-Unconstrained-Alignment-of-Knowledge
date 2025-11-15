@@ -3,6 +3,7 @@ from typing import List, Set, Tuple, cast
 from src.config import *
 from src.kg_construction.fetch_data import fetch_wiki_data, fetch_arxiv_data
 from src.kg_construction.nlp_pipeline import NLPPipeline, RelationTriple
+from src.kg_construction.llm_based_pipeline import LLMBasedPipeline
 from rdflib import Graph, RDF
 from src.utils.graph_visualizer import visualize_ttl
 from pathlib import Path
@@ -20,6 +21,15 @@ def clean_for_uri(text):
     # --- FIX 1: Allow apostrophes in the URI ---
     text = re.sub(r"[^a-zA-Z0-9_'-]", '', text)
     return text
+
+
+def _log_doc_progress(corpus_label: str, index: int, total: int, text: str) -> None:
+    preview = re.sub(r"\s+", " ", (text or "").strip())
+    if len(preview) > 80:
+        preview = preview[:80] + "..."
+    if not preview:
+        preview = "<empty document>"
+    print(f"   [{corpus_label} {index + 1}/{total}] {preview}")
 
 def _persist_entities(entities: Set[str], output_dir: Path, output_file: Path, label: str) -> None:
     canonical = {}
@@ -143,7 +153,12 @@ def _relation_uri(value: str):
     return NS_RAW[relation_label]
 
 
-def build_unpruned_kgs(wiki_data: List[str], arxiv_data: List[str]):
+def build_unpruned_kgs(
+    wiki_data: List[str],
+    arxiv_data: List[str],
+    *,
+    force_rebuild: bool = False,
+):
     """
     this will build the unpruned KGs for both Wikipedia and
     arXiv data.
@@ -157,32 +172,51 @@ def build_unpruned_kgs(wiki_data: List[str], arxiv_data: List[str]):
     arxiv_data : List[str]
         list of raw arXiv abstract texts.
     
+    Parameters
+    ----------
+    force_rebuild : bool, optional
+        Force regeneration even if cached TTLs already exist. Defaults to False.
+
     Returns
     -------
     None
     """
     
-    #print("\n--- STEP 1: FETCH THE DATA ---")
-    #wiki_data, _wiki_titles = fetch_wiki_data()
-    #arxiv_data, _arxiv_ids = fetch_arxiv_data()
+    if not force_rebuild:
+        wiki_cached = KG_WIKI_UNPRUNED_PATH.exists()
+        arxiv_cached = KG_ARXIV_UNPRUNED_PATH.exists()
+        if wiki_cached and arxiv_cached:
+            print("\n--- STEP 1: SKIPPING BUILD; UNPRUNED TTLs ARE ALREADY PRESENT ---")
+            return
     
-    
+    mode = (KG_CONSTRUCTION_MODE or "nlp").strip().lower()
+    if mode == "llm":
+        print("\n--- STEP 1: RUN THE LLM PIPELINE ---")
+        LLMBasedPipeline().build_unpruned_kgs(wiki_data, arxiv_data)
+        return
+    if mode != "nlp":
+        raise ValueError(
+            f"Unknown KG_CONSTRUCTION_MODE '{KG_CONSTRUCTION_MODE}'. Use 'nlp' or 'llm'."
+        )
+
     print("\n--- STEP 1: RUN THE NLP PIPELINE ---")
-    
-    nlp_pipeline = NLPPipeline() # initialize the NLP pipeline
-    
+
+    nlp_pipeline = NLPPipeline()  # initialize the NLP pipeline
+
     # Extract everything in both corpora (NER and RE)
     wiki_triples: List[RelationTriple] = []
     wiki_entities: Set[str] = set()
-    for article in wiki_data:
+    for idx, article in enumerate(wiki_data):
+        _log_doc_progress("wiki", idx, len(wiki_data), article)
         triples_result = nlp_pipeline.extract_triples(article, return_entities=True)
         triples, entities = cast(Tuple[List[RelationTriple], List[str]], triples_result)
         wiki_triples.extend(triples)
         wiki_entities.update(entities)
-        
+
     arxiv_triples: List[RelationTriple] = []
     arxiv_entities: Set[str] = set()
-    for abstract in arxiv_data:
+    for idx, abstract in enumerate(arxiv_data):
+        _log_doc_progress("arXiv", idx, len(arxiv_data), abstract)
         triples_result = nlp_pipeline.extract_triples(abstract, return_entities=True)
         triples, entities = cast(Tuple[List[RelationTriple], List[str]], triples_result)
         arxiv_triples.extend(triples)
@@ -190,7 +224,7 @@ def build_unpruned_kgs(wiki_data: List[str], arxiv_data: List[str]):
 
     _persist_entities(wiki_entities, WIKI_ENTITIES_DIR, WIKI_ENTITIES_FILE, "wiki")
     _persist_entities(arxiv_entities, ARXIV_ENTITIES_DIR, ARXIV_ENTITIES_FILE, "arXiv")
-        
+
     print("\n--- STEP 2: BUILD THE UNPRUNED KGs ---")
     wiki_relation_count = len({triple.relation for triple in wiki_triples})
     arxiv_relation_count = len({triple.relation for triple in arxiv_triples})
@@ -202,25 +236,25 @@ def build_unpruned_kgs(wiki_data: List[str], arxiv_data: List[str]):
     # Build the unpruned KGs
     wiki_kg = Graph()
     arxiv_kg = Graph()
-    
+
     # [:MAX_UNPRUNED_TRIPLES] for quick testing
 
     for triple in wiki_triples[:MAX_UNPRUNED_TRIPLES]:
         subj_clean = clean_for_uri(triple.subject)
         obj_clean = clean_for_uri(triple.object)
         wiki_kg.add((NS_RAW[subj_clean], _relation_uri(triple.relation), NS_RAW[obj_clean]))
-        
+
     for triple in arxiv_triples[:MAX_UNPRUNED_TRIPLES]:
         subj_clean = clean_for_uri(triple.subject)
         obj_clean = clean_for_uri(triple.object)
         arxiv_kg.add((NS_RAW[subj_clean], _relation_uri(triple.relation), NS_RAW[obj_clean]))
-        
+
     # -----------------------
-    
+
     # save the unpruned KGs to files
     print(f"\n-> Saving {len(wiki_kg)} wiki triples to {KG_WIKI_UNPRUNED_PATH}")
     wiki_kg.serialize(destination=str(KG_WIKI_UNPRUNED_PATH), format='turtle')
-    
+
     print(f"-> Saving {len(arxiv_kg)} arXiv triples to {KG_ARXIV_UNPRUNED_PATH}")
     arxiv_kg.serialize(destination=str(KG_ARXIV_UNPRUNED_PATH), format='turtle')
 

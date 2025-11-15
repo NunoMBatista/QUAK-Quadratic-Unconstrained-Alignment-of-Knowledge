@@ -86,6 +86,49 @@ def _build_alignment_problem(
 	return qubo_data, node_info
 
 
+def _write_qubo_matrix_csv(
+	qubo: Dict[Tuple[int, int], float],
+	labels: Sequence[str],
+	path: Path,
+) -> Path:
+	"""Persist the symmetric QUBO matrix to CSV for inspection."""
+	size = len(labels)
+	if size <= 0:
+		return path
+
+	path.parent.mkdir(parents=True, exist_ok=True)
+	matrix = [[0.0 for _ in range(size)] for _ in range(size)]
+	for (row, col), coeff in qubo.items():
+		value = float(coeff)
+		matrix[row][col] = value
+		if row != col:
+			matrix[col][row] = value
+
+	header = ["pair"] + list(labels)
+	with path.open("w", newline="", encoding="utf-8") as handle:
+		writer = csv.writer(handle)
+		writer.writerow(header)
+		for idx, row_values in enumerate(matrix):
+			writer.writerow([labels[idx]] + row_values)
+
+	print(f"[QUBO] matrix exported to {path} with dimension {size}×{size}")
+	return path
+
+
+def _build_variable_labels(
+	var_index: Dict[Tuple[int, int], int],
+	node_info: Dict[str, object],
+) -> List[str]:
+	labels = [""] * len(var_index)
+	wiki_nodes = cast(Sequence[URIRef], node_info["wiki_nodes"])
+	arxiv_nodes = cast(Sequence[URIRef], node_info["arxiv_nodes"])
+	for (wiki_idx, arxiv_idx), var_id in var_index.items():
+		wiki_label = _entity_label(wiki_nodes[wiki_idx])
+		arxiv_label = _entity_label(arxiv_nodes[arxiv_idx])
+		labels[var_id] = f"{wiki_label} ↔ {arxiv_label}"
+	return labels
+
+
 def _solve_with_simulated_annealing(
 	qubo: Dict[Tuple[int, int], float],
 	num_reads: int,
@@ -262,6 +305,14 @@ def solve_alignment_with_annealer(
 		arxiv_penalty,
 		max_structural_pairs,
 	)
+
+	labels = _build_variable_labels(qubo_data["index"], node_info)
+	_write_qubo_matrix_csv(qubo_data["Q"], labels, QUBO_MATRIX_CSV)
+	components = qubo_data.get("components", {})
+	if "node" in components:
+		_write_qubo_matrix_csv(components["node"], labels, QUBO_NODE_MATRIX_CSV)
+	if "structure" in components:
+		_write_qubo_matrix_csv(components["structure"], labels, QUBO_STRUCTURE_MATRIX_CSV)
 
 	sampleset = _solve_with_simulated_annealing(
 		qubo_data["Q"], num_reads, beta_range, seed, sampler

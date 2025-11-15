@@ -75,12 +75,17 @@ def formulate(
         similarity = torch.tensor(similarity)  # accept numpy arrays or lists
 
     var_index, reverse_index = _build_variable_index(similarity, similarity_threshold)  # variable ids
-    Q = defaultdict(float)  # sparse qubo accumulator
+    Q_total = defaultdict(float)  # sparse qubo accumulator
+    Q_node = defaultdict(float)
+    Q_structure = defaultdict(float)
+    Q_constraints = defaultdict(float)
 
     # linear rewards for matching similar entities. (H_node)
     for (i, j), var in var_index.items():
         score = float(similarity[i, j])  # similarity score
-        _add(Q, var, var, -node_weight * score)  # negative reward encourages matches
+        coeff = -node_weight * score
+        _add(Q_total, var, var, coeff)  # negative reward encourages matches
+        _add(Q_node, var, var, coeff)
 
     # quadratic rewards for matching consistent structures. (H_structure)
     structural_weights = structural_info.get("weights", {})
@@ -89,7 +94,9 @@ def formulate(
         right = var_index.get((j, b))  # check variable exists
         if left is None or right is None:  # skip missing nodes
             continue
-        _add(Q, left, right, -structural_weight * float(weight))  # reward consistent structure
+        coeff = -structural_weight * float(weight)
+        _add(Q_total, left, right, coeff)  # reward consistent structure
+        _add(Q_structure, left, right, coeff)
 
     # at-most-one penalties across wiki nodes (H_constraint).
     wiki_nodes = node_info["wiki_nodes"]
@@ -98,20 +105,27 @@ def formulate(
         active = [var_index[(i, a)] for a in range(len(arxiv_nodes)) if (i, a) in var_index]  # viable matches
         for idx, left in enumerate(active):  # pair every combination
             for right in active[idx + 1 :]:
-                _add(Q, left, right, wiki_penalty)  # penalty discourages double matches
+                _add(Q_total, left, right, wiki_penalty)  # penalty discourages double matches
+                _add(Q_constraints, left, right, wiki_penalty)
 
     # at-most-one penalties across arXiv nodes.
     for a, _ in enumerate(arxiv_nodes):
         active = [var_index[(i, a)] for i in range(len(wiki_nodes)) if (i, a) in var_index]  # viable matches
         for idx, left in enumerate(active):  # pair every combination
             for right in active[idx + 1 :]:
-                _add(Q, left, right, arxiv_penalty)  # penalize duplicate pulls
+                _add(Q_total, left, right, arxiv_penalty)  # penalize duplicate pulls
+                _add(Q_constraints, left, right, arxiv_penalty)
 
     result = {
-        "Q": dict(Q),
+        "Q": dict(Q_total),
         "index": var_index,
         "reverse_index": reverse_index,
         "constants": 0.0,
+        "components": {
+            "node": dict(Q_node),
+            "structure": dict(Q_structure),
+            "constraints": dict(Q_constraints),
+        },
     }
     return result
 

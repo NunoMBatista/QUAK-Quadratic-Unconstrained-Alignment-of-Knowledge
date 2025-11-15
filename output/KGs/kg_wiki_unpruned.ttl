@@ -1,92 +1,206 @@
-@prefix ns1: <http://unpruned.local/> .
+@prefix raw: <http://unpruned.local/> .
 
-ns1: ns1:is_a ns1:displaystyle_N,
-        ns1:displaystyle_ON .
+raw:1000_qubit_mark raw:passed_by raw:Atom_Computing_1180_qubit_quantum_processor .
 
-<http://unpruned.local/Grover's_algorithm> ns1:is_a ns1:optimal,
-        ns1:quantum_algorithm ;
-    ns1:pose ns1:risk ;
-    ns1:provide ns1:polynomial-time_solutions,
-        ns1:quadratic_speedup .
+raw:Charles_H_Bennett raw:proved_lower_bound raw:sqrtN_evaluations_for_quantum_solution .
 
-ns1:PQCrypto ns1:is_a ns1:workshops .
+raw:Counting_problems raw:related_to raw:networking,
+        raw:statistical_estimation,
+        raw:statistical_physics .
 
-ns1:Post-quantum_cryptography ns1:is_a ns1:PQC,
-        ns1:development .
+raw:Ethan_Bernstein raw:proved_lower_bound raw:sqrtN_evaluations_for_quantum_solution .
 
-ns1:Quantum_counting_algorithm ns1:is_a ns1:quantum_algorithm .
+raw:Lov_Grover raw:devised <http://unpruned.local/Grover's_algorithm> .
 
-ns1:Quantum_machine_learning ns1:is_a ns1:QML,
-        ns1:study .
+raw:Mathematical_optimization raw:deals_with raw:optimization_problems .
 
-ns1:Shor ns1:propose ns1:algorithms .
+raw:Microsoft_Azure_Quantum raw:considers_level raw:level_1 .
 
-ns1:US_National_Institute_of_Standards_and_Technology ns1:is_a ns1:NIST ;
-    ns1:release ns1:versions .
+<http://unpruned.local/Mosca's_theorem> raw:provides raw:risk_analysis_framework .
 
-ns1:Y2Q ns1:is_a ns1:day .
+raw:Noisy_intermediate-scale_quantum_NISQ_computing raw:characterized_by raw:Quantum_computer ;
+    raw:coined_by raw:John_Preskill ;
+    raw:defined_by raw:Quantum_volume ;
+    raw:is_state_of raw:Quantum_computer .
 
-ns1:best-known_algorithms ns1:is_a <http://unpruned.local/Shor's_algorithm> .
+raw:PQCrypto_conference_series raw:hosted_since raw:2006 .
 
-ns1:cryptographers ns1:design ns1:algorithms .
+raw:Post-quantum_cryptography raw:also_known_as raw:quantum-resistant ;
+    raw:development_of raw:cryptographic_algorithms .
 
-ns1:cryptographic_algorithms ns1:is_a ns1:public-key_algorithms .
+raw:Quantum_computing raw:enable raw:solving_problems_not_feasible_on_classical_computers ;
+    raw:suggest_speedup_over raw:classical_algorithm .
 
-ns1:environment ns1:is_a ns1:noisy .
+raw:Quantum_optimization_algorithms raw:solve raw:optimization_problems ;
+    raw:subtype_of raw:Quantum_algorithms .
 
-ns1:hardware ns1:is_a ns1:experimental .
+raw:Umesh_Vazirani raw:proved_lower_bound raw:sqrtN_evaluations_for_quantum_solution .
 
-ns1:mathematical_problems ns1:is_a ns1:integer_factorization_problem .
+raw:cryptographers raw:designing raw:new_algorithms .
 
-ns1:model ns1:is_a ns1:quantum_circuit_model .
+raw:discrete_logarithm_algorithm raw:instance_of raw:hidden_subgroup_problem,
+        raw:period-finding_problem .
 
-<http://unpruned.local/quantum_Grover's_algorithm> ns1:speed ns1:attacks .
+raw:hybrid_methods raw:involve raw:Quantum_processing,
+        raw:classical_processing .
 
-ns1:quantum_computer ns1:break ns1:public-key_cryptographic_schemes ;
-    ns1:is_a ns1:theoretical_computer ;
-    ns1:manipulate ns1:qubit ;
-    ns1:perform ns1:amplification,
-        ns1:calculations ;
-    ns1:require ns1:time .
+raw:measurement_of_qubit raw:yields_state_via raw:probabilistic_rule .
 
-ns1:quantum_devices ns1:outperform ns1:classical_computers .
+raw:optimization_problem raw:formulated_as raw:minimization_problem .
 
-ns1:quantum_phase_estimation_algorithm ns1:is_a ns1:algorithm,
-        ns1:quantum_algorithm .
+raw:physical_qubit raw:suffers_from raw:Quantum_decoherence .
 
-ns1:quantum_processors ns1:is_a ns1:norm ;
-    ns1:remain ns1:norm .
+raw:routines raw:executed_faster_on raw:Quantum_computer ;
+    raw:more_complex_than_classical raw:classical_routines .
 
-ns1:researchers ns1:investigate ns1:notions .
+raw:sub-1000_quantum_processors raw:remain_norm raw:norm .
 
-ns1:routines ns1:is_a ns1:complex .
+raw:subroutines raw:outsourced_to raw:Quantum_computer .
 
-ns1:square_root ns1:is_a ns1:exponential .
+raw:two_quantum_processors raw:have_over raw:1000_qubits .
 
-ns1:states ns1:is_a ns1:binary .
+raw:undecidable_problem raw:remains_undecidable_using raw:Quantum_computer .
 
-ns1:task ns1:is_a ns1:linear_search .
+raw:wave_interference_effects raw:amplify raw:probability_of_desired_measurement_result .
 
-ns1:tasks ns1:is_a ns1:milestone .
+raw:Gilles_Brassard raw:proved_lower_bound raw:sqrtN_evaluations_for_quantum_solution .
 
-ns1:term ns1:is_a ns1:quantum_algorithm .
+raw:Peter_Shor raw:proposed raw:factoring_algorithm .
 
-ns1:theorem ns1:provide ns1:risk_analysis .
+raw:Quantum_counting_algorithm raw:based_on <http://unpruned.local/Grover's_algorithm>,
+        raw:Quantum_phase_estimation_algorithm ;
+    raw:counts_solutions_for raw:unstructured_search ;
+    raw:devised_by raw:Alain_Tapp,
+        raw:Gilles_Brassard,
+        raw:Peter_Hyer ;
+    raw:needed_for <http://unpruned.local/Grover's_algorithm> ;
+    raw:solves raw:Quantum_existence_problem .
 
-ns1:wave_interference ns1:amplify ns1:probability .
+raw:Quantum_machine_learning_QML raw:improve_complexity raw:space_complexity,
+        raw:time_complexity ;
+    raw:improve_complexity_of raw:classical_machine_learning_algorithms ;
+    raw:pioneered_by raw:Martinez,
+        raw:Trugenberger,
+        raw:Ventura ;
+    raw:refer_to raw:classical_machine_learning_methods ;
+    raw:studies raw:Quantum_algorithms ;
+    raw:synonym_of raw:Quantum_machine_learning_QML ;
+    raw:use raw:Quantum_operations,
+        raw:qubit .
 
-<http://unpruned.local/Shor's_algorithm> ns1:is_a ns1:quantum_algorithm ;
-    ns1:run ns1:log________________N______________displaystyle_log_N .
+raw:Quantum_phase_estimation_algorithm raw:estimates raw:eigenvalue,
+        raw:phase ;
+    raw:introduced_by raw:Alexei_Kitaev ;
+    raw:introduced_in raw:1995 ;
+    raw:operates_on raw:unitary_operator ;
+    raw:used_as_subroutine_in raw:Quantum_algorithm_for_linear_systems_of_equations,
+        raw:Quantum_counting_algorithm,
+        <http://unpruned.local/Shor's_algorithm> .
 
-ns1:exponential ns1:is_a ns1:polynomial_function .
+raw:Quantum_volume raw:based_on raw:gate_fidelity,
+        raw:moderate_number_of_qubits .
 
-ns1:algorithm ns1:is_a ns1:finite_sequence ;
-    ns1:solve ns1:quantum_existence_problem .
+raw:discrete_logarithm_problem raw:solvable_by raw:Quantum_computer .
 
-ns1:algorithms ns1:is_a ns1:quantum_algorithms,
-        ns1:vulnerable ;
-    ns1:use ns1:qubits .
+raw:elliptic-curve_discrete_logarithm_problem raw:solvable_by raw:Quantum_computer .
 
-ns1:quantum_algorithm ns1:is_a ns1:algorithm,
-        ns1:step-by-step_procedure .
+raw:factoring_algorithm raw:instance_of raw:hidden_subgroup_problem,
+        raw:period-finding_problem .
+
+raw:fast_multiplication raw:developed_by raw:Harvey_and_van_der_Hoeven .
+
+raw:new_algorithms raw:prepare_for raw:Q-Day,
+        raw:Y2Q .
+
+raw:risk_analysis_framework raw:helps raw:organizations .
+
+raw:Quantum_algorithm raw:can_be_performed_on raw:Quantum_computer ;
+    raw:exploits raw:Quantum_entanglement,
+        raw:Quantum_superposition ;
+    raw:is_a raw:algorithm ;
+    raw:runs_on raw:Quantum_circuit_model ;
+    raw:solves_faster_than raw:classical_algorithm ;
+    raw:uses raw:Quantum_entanglement,
+        raw:Quantum_superposition .
+
+raw:Quantum_algorithms raw:analyze raw:Quantum_states,
+        raw:classical_data ;
+    raw:involve raw:procedure_creation ;
+    raw:solve raw:machine_learning_tasks ;
+    raw:used_for raw:machine_learning_tasks .
+
+<http://unpruned.local/Shor's_algorithm> raw:developed_by raw:Peter_Shor ;
+    raw:faster_than raw:general_number_field_sieve ;
+    raw:finds raw:prime_factors ;
+    raw:is_a raw:Quantum_algorithm,
+        raw:algorithm ;
+    raw:provides_speedup_over raw:classical_algorithm ;
+    raw:requires raw:millions_of_qubits ;
+    raw:runs_faster_than raw:general_number_field_sieve ;
+    raw:runs_in_time raw:polynomial_time ;
+    raw:runs_on raw:Quantum_computer ;
+    raw:used_for raw:integer_factorization_problem ;
+    raw:uses_algorithm raw:fast_multiplication ;
+    raw:uses_complexity raw:Olog_N2_log_log_Nlog_log_log_N .
+
+raw:cryptographic_algorithms raw:secure_against raw:Quantum_computer ;
+    raw:subclass_of raw:public-key_cryptographic_schemes .
+
+raw:general_number_field_sieve raw:has_complexity raw:sub-exponential_time .
+
+raw:integer_factorization_problem raw:in_complexity_class raw:BQP ;
+    raw:solvable_by raw:Quantum_computer .
+
+raw:period-finding_problem raw:instance_of raw:hidden_subgroup_problem .
+
+raw:public-key_cryptographic_schemes raw:rely_on raw:discrete_logarithm_problem,
+        raw:elliptic-curve_discrete_logarithm_problem,
+        raw:integer_factorization_problem .
+
+raw:qubit raw:can_exist_in raw:Quantum_superposition ;
+    raw:serves_same_function_as raw:bit .
+
+raw:Quantum_entanglement raw:cannot_be_efficiently_simulated_on raw:classical_computer .
+
+raw:classical_algorithm raw:can_be_performed_on raw:Quantum_computer,
+        raw:classical_computer ;
+    raw:is_a raw:algorithm .
+
+<http://unpruned.local/Grover's_algorithm> raw:also_known_as <http://unpruned.local/Grover's_algorithm> ;
+    raw:can_brute_force raw:128-bit_symmetric_cryptographic_key,
+        raw:256-bit_key ;
+    raw:can_speed_up raw:broad_classes_of_algorithms ;
+    raw:finds_unique_input_of raw:black_box_function ;
+    raw:is_a raw:Quantum_algorithm,
+        raw:algorithm ;
+    raw:may_not_increase_risk_to raw:encryption ;
+    raw:provides_speedup raw:quadratic ;
+    raw:requires_evaluations raw:OsqrtN ;
+    raw:used_for raw:unstructured_search .
+
+raw:Quantum_superposition raw:cannot_be_efficiently_simulated_on raw:classical_computer .
+
+raw:classical_computer raw:has_query_complexity raw:ON ;
+    raw:operates_on raw:deterministic_rules .
+
+raw:Quantum_computer raw:aids raw:physical_simulations,
+        raw:physicists ;
+    raw:contain raw:1000_qubits ;
+    raw:could_break raw:public-key_cryptographic_schemes ;
+    raw:could_perform_exponentially_faster_calculations_than raw:classical_computer ;
+    raw:exploits raw:Quantum_entanglement,
+        raw:Quantum_measurement,
+        raw:Quantum_superposition ;
+    raw:lack_processing_power_to_break raw:cryptographic_algorithms ;
+    raw:manipulates raw:qubit ;
+    raw:not_advanced_for raw:fault-tolerance ;
+    raw:not_capable_of raw:Quantum_error_correction ;
+    raw:not_large_enough_for raw:quantum_advantage ;
+    raw:not_practical_for raw:real-world_applications ;
+    raw:prone_to raw:Quantum_decoherence ;
+    raw:requires_exponential_energy_for raw:classical_simulation ;
+    raw:requires_exponential_time_for raw:classical_simulation ;
+    raw:runs <http://unpruned.local/Shor's_algorithm> ;
+    raw:samples_from raw:Quantum_system ;
+    raw:sensitive_to raw:noisy_environment .
 

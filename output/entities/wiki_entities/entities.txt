@@ -1,392 +1,134 @@
-128-bit
-\displaystyle
-\displaystyle \Omega
-\displaystyle N
-\displaystyle N}
-\displaystyle O(N
-\displaystyle O(N)}
-\displaystyle O({\sqrt {N
-\displaystyle O\!\left((\log N)^{2}(\log \log N)(\log \log \log N)\right
-\displaystyle O\!\left((\log N)^{2}(\log \log N)\right
-\displaystyle O\!\left(e^{1.9(\log N)^{1/3}(\log \log N)^{2/3}}\right
-abstract
-academics
+1,000 qubit mark
+128-bit symmetric cryptographic key
+1994
+1995
+1996
+1998
+256-bit key
 Alain Tapp
-Alexei
+Alexei Kitaev
 algorithm
-algorithms
-alternatives
-American mathematician Peter Shor
-amount
-amplification
-analogous problem
-analyze
-applications
-asymptotically
-Atom Computing's
-atomic particle
-attacks
-best-known algorithms
-binary
-black box
+Atom Computing
+Atom Computing 1,180 qubit quantum processor
+bit
+black box function
 BQP
-branch
-calculations
-characterized
-Charles
-classes
-classical
+Charles H. Bennett
 classical algorithm
-classical algorithms
 classical computer
-classical computers
-classical machine
-classically
-coherence times
-coined
-complex
-complexity
-complexity class
-computation
-computational
-computers
-computing
-confine
-constraints
-continuous
-correct
-correction
-Counting
-criteria
-cryptanalytic attack
-cryptographers
-cryptographic
+classical data
+classical machine learning algorithms
+classical machine learning methods
+classical processing
+Counting problems
 cryptographic algorithms
-current
-data
-database
-day
-decrypt
-deep learning
-design
-designing
+data generated from quantum experiments
 deterministic rules
-development
-devised
-difficult
-difficulty
-discrete logarithm algorithm
 discrete logarithm problem
-diverse
 economics
-efficient
-efficiently
 eigenvalue
-eigenvalues
-electrical current
-electrical resistance
-electromagnetic fields
 elliptic-curve discrete logarithm problem
 encryption
-energy
 engineering
-entangled
-environment
-equations
-era
 error
-error rates
-estimate
-estimation
-European Telecommunications Standards Institute (ETSI
-evaluate
-evaluated
-evaluations
-evidence
-evolve
-existence
-experimental
-experimental research
-exponential
-exponential function
-exponentially
-exponentially faster
-factor
-factoring
+Ethan Bernstein
+European Telecommunications Standards Institute
+exponential energy
+exponential speedup
+exponential time
 fast multiplication
-faster
 fault-tolerance
-features
-fields
-finding
-finds
-finite sequence
-function
-function's domain
-future
-Gilles
-Grover
-Grover's
+gate fidelity
+general number field sieve
+Gilles Brassard
 Grover's algorithm
-Grover's search
-Grover's search algorithm
-H. Bennett
-hardware
-Harvey
+harvest now, decrypt later programs
+Harvey and van der Hoeven
 hash functions
-heavily
 hidden subgroup problem
 high-quality qubits
 hybrid methods
-implementation
-implemented
-improve
-increased
-industry
-information
-Institute
-instruction
-instructions
+Institute for Quantum Computing
 integer
 integer factorization problem
-intermediate-scale
-investigate
-ion traps
-isolate
-isolated
-iterations
-Kitaev
-knowing
-large-scale
-learning
-learning systems
-learning theory
-length of time
-levels
-Likewise
-linear combination
+John Preskill
+level 1
 linear search
-linear systems
-list
-log
-log
-        ⁡
-        N
-      
-    
-    {\displaystyle \log N}
-Lov
-lower
-machine
-machine learning
-mark
+Lov Grover
+machine learning tasks
 Martinez
-mathematical
-mathematical problems
-measurement
-measuring
-mechanical device
+Mathematical optimization
 mechanics
-methodological
-Microsoft Azure
-migrating
-migration
-milestone
-millions
-minimal
-minimization
-model
-moderate
-Mosca's
-motivation
-multiple
-multiplication
-N/2
-National governments
+Microsoft Azure Quantum
+minimization problem
+Mosca's theorem
 networking
-neural networks
-NISQ
-NIST
-noise
-noisy
-Noisy intermediate-scale quantum
-non-deterministic
-norm
-notions
+Noisy intermediate-scale quantum (NISQ) computing
 NP-complete problems
-numerical techniques
-operator
-optimal
-optimization
-ordinary
+O((log N)^2 (log log N)(log log log N))
+O(N)
+O(sqrt(N))
+optimization problems
 organizations
-outcomes
-outperform
-output value
-outsourced
-period-finding algorithm
 period-finding problem
 Peter Høyer
+Peter Shor
 phase
-phase transitions
 physical qubit
 physical simulations
-physical systems
-Physically engineering
 physicists
-pioneered
-polynomial
-polynomial function
 polynomial time
-polynomial-time solutions
-possibilities
-post-quantum algorithms
 Post-quantum cryptography
-Post-Quantum Cryptography Standards
-post-quantum symmetric cryptography
-PQC
-PQCrypto
-practically
-prepare
+PQCrypto conference series
 prime factors
 probabilistic rule
-probability
-problem
-Problems
-procedures
-processing
-processors
-programs
-prone
-public-key
-public-key algorithms
 public-key cryptographic schemes
 Q-Day
-QML
 quadratic speedup
-quadratically
-Quantum
 quantum advantage
-quantum algorithm
-quantum algorithms
-quantum bit
-quantum circuit model
-quantum computation
-quantum computer
-quantum computer running
-quantum computer technology
-quantum computers
-quantum computing
-quantum counting
+Quantum algorithm
+Quantum algorithm for linear systems of equations
+Quantum algorithms
+Quantum circuit model
+Quantum computer
+Quantum computing
 Quantum counting algorithm
-quantum decoherence
-quantum device
-quantum devices
-quantum entanglement
-quantum error
-quantum existence problem
+Quantum decoherence
+Quantum entanglement
+Quantum error correction
+Quantum existence problem
 quantum experiments
-quantum gates
-quantum Grover's algorithm
-quantum learning theory
-Quantum machine learning
-quantum measurements
-quantum operations
-quantum phase estimation algorithm
-quantum physics
-quantum processing
-quantum processor
-quantum processors
-Quantum Safe Cryptography
-quantum search algorithm
-quantum solution
-quantum states
-quantum superposition
+Quantum machine learning (QML)
+Quantum measurement
+Quantum operations
+Quantum optimization algorithms
+Quantum phase estimation algorithm
+Quantum processing
+Quantum solution
+Quantum states
+Quantum superposition
 Quantum supremacy
-quantum system
-quantum systems
-quantum volume
-Quantum's scheme
-quantum-enhanced machine learning
-quantum-proof
+Quantum system
+Quantum volume
 quantum-resistant
-quantum-safe
-quantum-safe cryptography
 qubit
-qubits
 real-world applications
-realistic model
-replicated
-research
-researchers
-result
-risk
-risk analysis
+risk analysis framework
 routines
-rumoured
-running
-sampling
-scalable
-search
-secure
-sensitive
-Shor
 Shor's algorithm
-simulated
-simultaneously
-size
-solution
-solutions
-solving
-space
-specialized tasks
-speed
-square root
-states
+space complexity
 statistical estimation
 statistical physics
-step-by-step procedure
-steps
-structural
-study
+sub-1,000 quantum processors
 sub-exponential time
-subroutine
 subroutines
-suffers
-superconductors
-superpolynomial
-symmetric
-symmetric ciphers
-symmetric cryptographic algorithms
-symmetric cryptography
-task
-tasks
-techniques
-term
-theorem
-theoretical) computer
-threat
-time
 time complexity
-time cost
-tries
 Trugenberger
-U.S. National Institute of Standards and Technology
+two quantum processors
 Umesh Vazirani
-unit modulus
-unitary
-unordered
-unstructured
-van der Hoeven
+undecidable problem
+unitary operator
+unstructured search
 Ventura
-versions
-vice
-vulnerable
-wave interference
-widespread
-work
-workshops
+wave interference effects
 Y2Q
-years
-{
-{N}

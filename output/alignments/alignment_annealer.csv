@@ -1,5 +1,10 @@
 wiki_entity,arxiv_entity,not_aligned
-Quantum computer,Quantum computers,
-,,wiki: Quantum algorithm
-,,wiki: Quantum devices
-,,wiki: Qubit
+Quantum optimization algorithms,quantum optimization algorithms,
+Quantum computer,quantum computing,
+Quantum computing,quantum computer,
+Noisy intermediate-scale quantum NISQ computing,post-quantum cryptography PQC,
+Quantum machine learning QML,quantum machine learning,
+Shor's algorithm,Grover algorithm,
+Post-quantum cryptography,NISQ devices,
+Peter Shor,Shor's quantum algorithms,
+Grover's algorithm,QOA,
