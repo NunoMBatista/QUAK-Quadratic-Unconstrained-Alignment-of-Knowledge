@@ -1,6 +1,8 @@
 @prefix ont: <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#> .
 @prefix raw: <http://unpruned.local/> .
 
+<urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Deutsch's_algorithm> a ont:QuantumAlgorithm .
+
 ont:Grover_algorithm a ont:QuantumAlgorithm ;
     raw:combined_with <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_quantum_algorithms> .
 
@@ -8,15 +10,13 @@ ont:NISQ_devices a ont:QuantumConcept .
 
 ont:QOA a ont:QuantumAlgorithm .
 
-ont:post-quantum_cryptography_PQC a ont:QuantumConcept .
-
-ont:quantum_computer a ont:QuantumHardware .
+ont:post-quantum_cryptography a ont:QuantumConcept .
 
 ont:quantum_computing a ont:QuantumConcept .
 
 ont:quantum_machine_learning a ont:QuantumConcept .
 
-ont:quantum_optimization_algorithms a ont:QuantumAlgorithm .
+ont:qubits a ont:QuantumConcept .
 
 <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_quantum_algorithms> a ont:QuantumAlgorithm .
 

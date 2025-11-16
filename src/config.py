@@ -22,6 +22,8 @@ WIKI_ENTITIES_DIR = ENTITIES_DIR / 'wiki_entities'
 ARXIV_ENTITIES_DIR = ENTITIES_DIR / 'arxiv_entities'
 WIKI_ENTITIES_FILE = WIKI_ENTITIES_DIR / 'entities.txt'
 ARXIV_ENTITIES_FILE = ARXIV_ENTITIES_DIR / 'entities.txt'
+WIKI_ENTITIES_METADATA_FILE = WIKI_ENTITIES_DIR / 'entities_metadata.json'
+ARXIV_ENTITIES_METADATA_FILE = ARXIV_ENTITIES_DIR / 'entities_metadata.json'
 
 # raw data outputs
 ARTICLES_DIR = OUTPUT_DIR / 'articles'
@@ -34,6 +36,7 @@ KG_ARXIV_UNPRUNED_PATH = KG_DIR / 'kg_arxiv_unpruned.ttl'
 KG_WIKI_FINAL_PATH = KG_DIR / 'kg_wiki_final.ttl'
 KG_ARXIV_FINAL_PATH = KG_DIR / 'kg_arxiv_final.ttl'
 KG_ALIGNED_PATH = KG_DIR / 'kg_aligned.ttl'
+ALIGNED_KG_HTML = KG_DIR / 'aligned_kg.html'
 
 ALIGNMENTS_DIR = OUTPUT_DIR / 'alignments'
 ALIGNED_ENTITIES_ANNEALER_CSV = ALIGNMENTS_DIR / 'alignment_annealer.csv'
@@ -45,8 +48,7 @@ QUBO_OUTPUT_DIR = OUTPUT_DIR / 'qubo'
 QUBO_MATRIX_CSV = QUBO_OUTPUT_DIR / 'qubo_matrix.csv'
 QUBO_NODE_MATRIX_CSV = QUBO_OUTPUT_DIR / 'qubo_matrix_H_node.csv'
 QUBO_STRUCTURE_MATRIX_CSV = QUBO_OUTPUT_DIR / 'qubo_matrix_H_structure.csv'
-
-
+QUBO_PENALTY_MATRIX_CSV = QUBO_OUTPUT_DIR / 'qubo_matrix_H_penalty.csv'
 # embedding outputs
 EMBEDDINGS_DIR = OUTPUT_DIR / 'embeddings'
 ENTITY_EMBEDDINGS_WIKI_PATH = EMBEDDINGS_DIR / 'entity_embeddings_wiki.pt'
@@ -60,6 +62,7 @@ KG_CONSTRUCTION_MODE = "llm"  # either 'nlp' or 'llm'
 
 NLP_MODEL = "en_core_sci_scibert"
 NLP_PIPELINE = "src/kg_construction/nlp_pipeline.py"
+SCIBERT_MODEL_NAME = "allenai/scibert_scivocab_cased"
 
 DOTENV_PATH = PROJECT_ROOT / ".env"
 
@@ -241,11 +244,11 @@ RELATION_LABELS = ["developedBy", "usesConcept", "implements"]
 ENTITY_MAP_WIKI = {
     "Grover's algorithm": "QuantumAlgorithm",
     "Shor's algorithm": "QuantumAlgorithm",
-    "Quantum machine learning QML": "QuantumConcept",
+    "qubit": "QuantumConcept",
     "Noisy intermediate-scale quantum NISQ computing": "QuantumConcept",
     "Post-quantum cryptography": "QuantumConcept",
-    "Quantum computing": "QuantumConcept",
-    "Quantum computer": "QuantumHardware",
+    "quantum machine learning": "QuantumConcept",
+    "quantum computer technology": "QuantumHardware",
     "Quantum optimization algorithms": "QuantumAlgorithm",
     "Peter Shor": "Person",
 }
@@ -255,10 +258,10 @@ ENTITY_MAP_ARXIV = {
     "Shor's quantum algorithms": "QuantumAlgorithm",
     "quantum machine learning": "QuantumConcept",
     "NISQ devices": "QuantumConcept",
-    "post-quantum cryptography PQC": "QuantumConcept",
+    "post-quantum cryptography": "QuantumConcept",
     "quantum computing": "QuantumConcept",
-    "quantum computer": "QuantumHardware",
-    "quantum optimization algorithms": "QuantumAlgorithm",
+    "qubits": "QuantumConcept",
+    "Deutsch's algorithm": "QuantumAlgorithm",
     "QOA": "QuantumAlgorithm"
 }
 
@@ -312,3 +315,32 @@ USE_SCIBERT_FEATURES = True # whether to use SciBERT features for node attribute
 # node features (e.g., SciBERT) as the exported entity embeddings. Set to False
 # when you only need surface-form embeddings and want to avoid GNN training time.
 USE_GAE_FOR_ENTITY_EMBEDDINGS = False
+
+# optionally enforce soft constraints between known aligned entities while
+# training the joint graph autoencoder. Each pair should specify the canonical
+# Wiki-side label and the ArXiv-side label (matching the canonicalized entity
+# names saved in the KG step). When disabled or when the list is empty, the
+# model falls back to unsupervised joint training.
+USE_ANCHOR_ALIGNMENTS = True
+ANCHOR_ALIGNMENT_WEIGHT = 1.0
+ANCHOR_ALIGNMENT_PAIRS = [
+    # example:
+    # {"wiki": "Grover's algorithm", "arxiv": "Grover algorithm"},
+    {"wiki": "qubit", "arxiv": "qubits"},
+]
+
+
+# ===================== ANNEALING SETTINGS =====================
+
+QUBO_NODE_WEIGHT = 1.0
+QUBO_STRUCTURE_WEIGHT = 0.2
+QUBO_WIKI_PENALTY = 2.0
+QUBO_ARXIV_PENALTY = 2.0
+ANNEALER_NUM_READS = 100
+ANNEALER_BETA_RANGE = None  # e.g., (0.1, 4.0) for custom cooling schedule
+ANNEALER_SEED = None
+ANNEALER_MAX_STRUCTURAL_PAIRS = 2000
+
+# ===================== ALIGNMENT SOLVER SETTINGS =====================
+
+DEFAULT_SIMILARITY_THRESHOLD = 0.75

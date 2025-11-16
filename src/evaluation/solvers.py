@@ -22,7 +22,6 @@ from src.qubo_alignment import formulate, weights
 from src.utils.graph_visualizer import visualize_ttl
 
 
-ALIGNED_KG_HTML = KG_DIR / "aligned_kg.html"
 
 
 @dataclass
@@ -250,15 +249,15 @@ def _write_alignment_report(
 
 def solve_alignment_with_annealer(
 	*,
-	similarity_threshold: Optional[float] = None,
-	node_weight: float = 1.0,
-	structural_weight: float = 1.0,
-	wiki_penalty: float = 2.0,
-	arxiv_penalty: float = 2.0,
-	max_structural_pairs: Optional[int] = None,
-	num_reads: int = 100,
-	beta_range: Optional[Tuple[float, float]] = None,
-	seed: Optional[int] = None,
+	similarity_threshold: Optional[float] = DEFAULT_SIMILARITY_THRESHOLD,
+	node_weight: float = QUBO_NODE_WEIGHT,
+	structural_weight: float = QUBO_STRUCTURE_WEIGHT,
+	wiki_penalty: float = QUBO_WIKI_PENALTY,
+	arxiv_penalty: float = QUBO_ARXIV_PENALTY,
+	max_structural_pairs: Optional[int] = ANNEALER_MAX_STRUCTURAL_PAIRS,
+	num_reads: int = ANNEALER_NUM_READS,
+	beta_range: Optional[Tuple[float, float]] = ANNEALER_BETA_RANGE,
+	seed: Optional[int] = ANNEALER_SEED,
 	sampler: Optional[SimulatedAnnealingSampler] = None,
 	visualize: bool = True,
 ) -> AlignmentResult:
@@ -268,7 +267,8 @@ def solve_alignment_with_annealer(
 	Parameters
 	----------
 	similarity_threshold : Optional[float]
-		Minimum cosine similarity to consider a node pair.
+		Minimum cosine similarity to consider a node pair. Defaults to
+		`DEFAULT_SIMILARITY_THRESHOLD` from `config.py`.
 	node_weight : float
 		Weight for node similarity terms in the QUBO.
 	structural_weight : float
@@ -313,6 +313,8 @@ def solve_alignment_with_annealer(
 		_write_qubo_matrix_csv(components["node"], labels, QUBO_NODE_MATRIX_CSV)
 	if "structure" in components:
 		_write_qubo_matrix_csv(components["structure"], labels, QUBO_STRUCTURE_MATRIX_CSV)
+	if "constraints" in components:
+		_write_qubo_matrix_csv(components["constraints"], labels, QUBO_PENALTY_MATRIX_CSV)
 
 	sampleset = _solve_with_simulated_annealing(
 		qubo_data["Q"], num_reads, beta_range, seed, sampler
@@ -352,7 +354,7 @@ def solve_alignment_with_annealer(
 
 def solve_alignment_with_nearest_neighbor(
 	*,
-	similarity_threshold: Optional[float] = None,
+	similarity_threshold: Optional[float] = DEFAULT_SIMILARITY_THRESHOLD,
 	visualize: bool = False,
 ) -> AlignmentResult:
 	"""Greedy nearest-neighbor baseline using cosine similarity scores."""
@@ -447,7 +449,7 @@ def solve_alignment_with_nearest_neighbor(
 
 if __name__ == "__main__":
 	result = solve_alignment_with_annealer(
-		similarity_threshold=0.0,
+		similarity_threshold=DEFAULT_SIMILARITY_THRESHOLD,
 		max_structural_pairs=2000,
 		num_reads=50,
 		visualize=False,

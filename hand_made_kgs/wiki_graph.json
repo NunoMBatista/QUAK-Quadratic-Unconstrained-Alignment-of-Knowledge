@@ -1,0 +1,31 @@
+{
+  "name": "Wiki Graph",
+  "nodes": [
+    {
+      "id": "n1",
+      "label": "qubit",
+      "description": "quantum bit",
+      "position": [
+        213,
+        125
+      ]
+    },
+    {
+      "id": "n2",
+      "label": "grover's algorithm",
+      "description": "",
+      "position": [
+        402,
+        209
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "n1",
+      "target": "n2",
+      "relation": "related_to"
+    }
+  ],
+  "next_id": 3
+}

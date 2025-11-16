@@ -3,10 +3,8 @@ Post-quantum cryptography,post-quantum cryptography,
 quantum machine learning,quantum machine learning,
 qubit,qubits,
 Shor's algorithm,Shor's quantum algorithms,
+Grover's algorithm,Grover algorithm,
 Quantum optimization algorithms,quantum computing,
-Grover's algorithm,Deutsch's algorithm,
-quantum computer technology,Grover algorithm,
-,,wiki: Noisy intermediate-scale quantum NISQ computing
-,,wiki: Peter Shor
-,,arxiv: NISQ devices
-,,arxiv: QOA
+Noisy intermediate-scale quantum NISQ computing,NISQ devices,
+Peter Shor,QOA,
+quantum computer technology,Deutsch's algorithm,

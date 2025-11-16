@@ -1,145 +1,153 @@
 @prefix raw: <http://unpruned.local/> .
 
-raw:Grover_algorithm raw:achieves_quadratic_speedup_over raw:classical_brute_force ;
-    raw:combined_with <http://unpruned.local/Shor's_quantum_algorithms> ;
-    raw:generalized_by raw:amplitude_amplification ;
-    raw:performs raw:approximate_counting ;
-    raw:provides_speedup_in raw:query_complexity ;
-    raw:serves_as_subroutine_in raw:quantum_algorithms .
+raw:NISQ_devices raw:will_be_available raw:near_future ;
+    raw:will_be_useful_for raw:exploring_many-body_quantum_physics .
 
-raw:NISQ_devices raw:useful_for_exploring raw:many-body_quantum_physics ;
-    raw:will_be_available_in raw:near_future .
+raw:Noise_in_quantum_gates raw:will_limit raw:size_of_quantum_circuits .
 
-raw:QOA raw:enable raw:significant_run-time_performance_benefits .
+raw:Quantum_computers_with_50-100_qubits raw:may_surpass <http://unpruned.local/capabilities_of_today's_classical_digital_computers> .
 
-raw:classical_systems raw:inefficiently_produce raw:counter-intuitive_patterns .
+raw:Quantum_machine_learning raw:explore raw:Quantum_software .
 
-raw:inversion-test_operation raw:realizes raw:projected_quantum_state .
+raw:Quantum_solutions raw:combine raw:Quantum_algorithms ;
+    raw:combine_into raw:Quantum_algorithms ;
+    raw:compare_against raw:state-of-the-art_classical_methods ;
+    raw:evaluate_against raw:complexity-theoretic_limitations ;
+    raw:evaluate_possible raw:Quantum_speedup .
 
-raw:noise raw:limits raw:quantum_circuits .
+raw:Quantum_systems raw:produce raw:pattern_matching .
 
-raw:paper raw:compare raw:adiabatic_and_gate-based_optimization_algorithms ;
-    raw:contains raw:theory_of_quantum_computation ;
-    raw:describe raw:adiabatic_and_gate-based_optimization_algorithms ;
-    raw:discuss raw:current_implications_of_future_use_of_QOA ;
-    raw:investigate raw:operations_research_application_areas_impacted_by_QOA ;
+raw:Quantum_technologists raw:aim_for raw:Fault-tolerant_quantum_computing ;
+    raw:should_strive_for raw:more_accurate_quantum_gates .
+
+raw:adiabatic_optimization_algorithms raw:class_of raw:Quantum_optimization_algorithms .
+
+raw:approximate_counting raw:seen_as raw:amplitude_estimation_process .
+
+raw:classical_systems raw:inefficiently_produce raw:pattern_matching .
+
+raw:gate-based_optimization_algorithms raw:class_of raw:Quantum_optimization_algorithms .
+
+raw:input_size raw:measured_by raw:number_of_digits .
+
+raw:operations_research raw:be_impacted_by raw:QOA .
+
+raw:paper raw:analyzes raw:PQC_algorithms ;
+    raw:contains raw:Quantum_Computing ;
+    raw:demonstrate raw:growing_importance_in_academia_and_industry ;
+    raw:demonstrates raw:Quantum_algorithms ;
+    raw:does_not_require raw:advanced_mathematics,
+        raw:advanced_physics ;
+    raw:examines_applications_of raw:Quantum_computers ;
     raw:presents <http://unpruned.local/Deutsch's_algorithm> ;
-    raw:provide_insight_into raw:main_techniques_of_quantum-based_optimization_algorithms .
+    raw:proposes raw:Quantum_algorithms ;
+    raw:restricted_to_domain raw:post-quantum_cryptography ;
+    raw:uses raw:toy_models .
 
-raw:polynomial_quantum_algorithm raw:based_on raw:procedure_for_measuring_an_eigenvalue_of_a_unitary_operator ;
-    raw:extends <http://unpruned.local/Shor's_quantum_algorithms> ;
-    raw:includes raw:discrete_logarithm,
-        raw:factoring ;
-    raw:solves raw:Abelian_stabilizer_problem .
+raw:practical_setting raw:lacks_proposal_for raw:database_search .
 
-raw:proposed_quantum_algorithm raw:approximates_execution_of raw:Grover_database_search ;
-    raw:demonstrated_in raw:image_pattern_matching ;
-    raw:uses raw:approximate_amplitude_encoding_method .
+raw:quantum-based_optimization_algorithms raw:become_more_relevant raw:progress_on_building_quantum_computers .
 
 raw:quantum_architecture raw:includes raw:quantum_gates,
         raw:qubits .
 
-raw:quantum_computers_with_50-100_qubits raw:surpasses raw:classical_computer .
+raw:randomized_algorithms raw:have_complexity raw:polynomial_in_input_size ;
+    raw:run_on raw:Quantum_computers .
 
-raw:quantum_machine_learning raw:explores raw:devise_and_implement_concrete_quantum_software ;
-    raw:offers raw:advantages ;
-    raw:opened_paths_towards raw:solutions .
+raw:technical_difficulty raw:hinders_implementation_of raw:amplitude_amplification,
+        raw:data_loading .
 
-raw:quantum_optimization_algorithms raw:transform raw:optimization_methods_in_decision_making .
+<http://unpruned.local/Deutsch's_algorithm> raw:type_of raw:Quantum_algorithms .
 
-raw:quantum_solutions raw:combine_with raw:quantum_algorithmic_primitives ;
-    raw:compare_against raw:classical_methods ;
-    raw:evaluate_possible raw:quantum_speedups .
-
-raw:quantum_systems raw:produce raw:counter-intuitive_patterns .
-
-raw:quantum_technologists raw:strive_for raw:more_accurate_quantum_gates .
-
-raw:randomized_algorithms raw:given_for raw:discrete_logarithm,
-        raw:factoring ;
-    raw:run_on raw:quantum_computer ;
-    raw:takes_steps_polynomial_in raw:input_size .
-
-raw:systematic_scoping_review raw:analyze raw:code-based_cryptography,
-        raw:hash-based_cryptography,
+raw:PQC_algorithms raw:face_challenge raw:high_computation_power_requirements,
+        raw:lack_of_standardization,
+        raw:vast_storage_requirements ;
+    raw:implemented_in raw:banking_transactions,
+        raw:communication,
+        raw:intellectual_property ;
+    raw:include raw:code-based,
+        raw:hash-based,
         raw:isogeny-based_cryptography,
-        raw:lattice-based_cryptography,
-        raw:multivariate_polynomial_cryptography ;
-    raw:examine raw:quantum_computing ;
-    raw:scope_restricted_to raw:post-quantum_cryptography_PQC .
-
-<http://unpruned.local/Deutsch's_algorithm> raw:is_a raw:Algorithm .
-
-raw:amplitude_amplification raw:independent_of raw:target_data_index .
-
-raw:approximate_amplitude_encoding_method raw:applied_on raw:shallow_quantum_circuit .
-
-raw:approximate_counting raw:is_a raw:amplitude_estimation_process .
-
-raw:code-based_cryptography raw:enable raw:communication,
+        raw:lattice-based,
+        raw:multivariate_polynomial ;
+    raw:promising_for raw:IoT,
+        raw:communication,
         raw:digital_signatures .
 
-raw:hash-based_cryptography raw:enable raw:communication,
-        raw:digital_signatures .
+raw:QOA raw:enable raw:significant_run-time_performance_benefits_over_current_state-of-the-art_solutions .
 
-raw:input_size raw:measured_by raw:number_of_digits .
-
-raw:isogeny-based_cryptography raw:enable raw:communication,
-        raw:digital_signatures .
-
-raw:lattice-based_cryptography raw:enable raw:communication,
-        raw:digital_signatures .
-
-raw:machine_learning raw:become raw:powerful_tools_for_finding_patterns_in_data .
-
-raw:multivariate_polynomial_cryptography raw:enable raw:communication,
-        raw:digital_signatures .
-
-raw:polynomial_quantum_Fourier_transform_algorithm raw:applies_to raw:arbitrary_finite_Abelian_group .
-
-raw:post-quantum_cryptography_PQC raw:solution_to raw:quantum_threats .
-
-raw:procedure_for_measuring_an_eigenvalue_of_a_unitary_operator raw:enables raw:polynomial_quantum_Fourier_transform_algorithm .
-
-raw:projected_quantum_state raw:has_similarity_to raw:query_data .
-
-raw:quantum_algorithms raw:implemented_on raw:quantum_hardware ;
-    raw:incorporate raw:fault_tolerance,
-        raw:quantum_error_correction .
-
-raw:quantum_computer raw:enter_stage raw:industrialization ;
-    raw:have_advantage_over raw:classical_computer ;
-    raw:may_outperform raw:classical_computers_on_machine_learning_tasks ;
-    raw:reduce_security_of raw:cryptosystems ;
-    raw:span_across raw:finance,
-        raw:machine_learning,
-        raw:many-body_quantum_physics,
-        raw:optimization,
-        raw:quantum_chemistry ;
-    raw:will_not_change_world_right_away raw:world .
-
-raw:quantum_computing raw:become_fully_fault_tolerant raw:eventually ;
-    raw:does_not_require raw:advanced_mathematics,
-        raw:advanced_physics ;
+raw:Quantum_Computing raw:improves_efficiency_of raw:computation ;
     raw:intersects raw:computer_science,
         raw:mathematics,
         raw:physics ;
     raw:utilizes raw:quantum_mechanics .
 
-raw:quantum_speedups raw:limited_by raw:complexity-theoretic_limitations ;
+raw:approximate_amplitude_encoding_method raw:runs_on raw:shallow_quantum_circuit .
+
+raw:database_search raw:is_original_motivating_application_of raw:Grover_algorithm .
+
+raw:discrete_logarithm raw:is_hard_on raw:Classical_computers .
+
+raw:factoring raw:is_hard_on raw:Classical_computers .
+
+raw:inversion-test_operation raw:realizes raw:projected_quantum_state .
+
+raw:machine_learning raw:fuelled_by raw:algorithmic_advances .
+
+raw:polynomial_quantum_algorithm raw:applies_to raw:arbitrary_finite_Abelian_group ;
+    raw:based_on raw:procedure_for_measuring_an_eigenvalue_of_a_unitary_operator ;
+    raw:extends <http://unpruned.local/Shor's_quantum_algorithms> ;
+    raw:includes raw:discrete_logarithm,
+        raw:factoring ;
+    raw:solves raw:Abelian_stabilizer_problem .
+
+raw:post-quantum_cryptography raw:is_solution_to raw:Quantum_threats .
+
+raw:procedure_for_measuring_an_eigenvalue_of_a_unitary_operator raw:enables raw:polynomial_quantum_algorithm .
+
+raw:projected_quantum_state raw:similar_to raw:query_data .
+
+raw:quadratic_speedup raw:compared_to raw:classical_brute_force ;
     raw:obtainable_for raw:search_problems .
+
+raw:quantum_mechanics raw:challenges raw:digital_computer_simulation_claim .
 
 raw:search_problems raw:have raw:classical_heuristics .
 
-raw:discrete_logarithm raw:hard_on raw:classical_computer ;
-    raw:used_as_basis_of raw:cryptosystems .
+raw:Grover_algorithm raw:combined_with <http://unpruned.local/Shor's_quantum_algorithms> ;
+    raw:generalized_using raw:amplitude_amplification ;
+    raw:provides raw:quadratic_speedup ;
+    raw:provides_quantum_speedup_in raw:query_complexity ;
+    raw:serves_as_subroutine_in raw:Quantum_algorithms .
 
-raw:factoring raw:hard_on raw:classical_computer ;
-    raw:used_as_basis_of raw:cryptosystems .
+raw:Quantum_computers raw:applies_to raw:Many-body_quantum_physics,
+        raw:Quantum_chemistry,
+        raw:finance,
+        raw:machine_learning,
+        raw:optimization ;
+    raw:have_advantage_in_calculation_speed_over raw:Classical_computers ;
+    raw:outperform raw:Classical_computers ;
+    raw:span_across raw:industry,
+        raw:science ;
+    raw:threaten raw:cryptographic_algorithms ;
+    raw:will_not_change raw:world_right_away .
 
-raw:quantum_mechanics raw:improves_efficiency_of raw:computation .
+raw:Quantum_optimization_algorithms raw:transform raw:optimization_methods_in_decision_making .
 
-raw:classical_computer raw:able_to_simulate raw:physical_computing_device ;
-    raw:affected_by raw:quantum_mechanics ;
-    raw:believed_to_be raw:universal_computing_device .
+raw:amplitude_amplification raw:independent_of raw:target_data_index .
+
+raw:pattern_matching raw:is_original_motivating_application_of raw:Grover_algorithm .
+
+raw:Classical_computers raw:believed_to_be raw:universal_computing_device ;
+    raw:can_simulate raw:physical_computing_device .
+
+raw:Quantum_algorithms raw:applied_to raw:pattern_matching ;
+    raw:approximately_executes raw:Grover_database_search,
+        raw:pattern_matching_algorithm ;
+    raw:follows_with raw:amplitude_amplification ;
+    raw:implement_on raw:Quantum_hardware ;
+    raw:incorporate raw:Fault_tolerance,
+        raw:Quantum_error_correction ;
+    raw:uses raw:approximate_amplitude_encoding_method,
+        raw:inversion-test_operation .
 

@@ -10,13 +10,13 @@ import numpy as np
 from rdflib import Graph, URIRef
 from rdflib.namespace import RDF
 import os
-from typing import List
+from typing import List, Dict, Tuple, Optional
 from src.config import *
 from pathlib import Path
 from src.embedding.gae_model import GraphAutoencoder
 
-# Part 1: SciBERT (for Relations)
-SCIBERT_MODEL_NAME = 'allenai/scibert_scivocab_cased'
+def _normalize_label(name: str) -> str:
+    return (name or "").strip().lower()
 
 # --- Part 1: SciBERT Relation Embeddings ---
 
@@ -65,7 +65,7 @@ def _collect_relation_labels() -> List[str]:
 
 
 def _relation_key(label: str) -> str:
-    return "_".join(label.lower().split())
+    return label.strip().lower().replace(" ", "_")
 
 
 def generate_relation_embeddings():
@@ -156,19 +156,14 @@ def load_pyg_data_from_ttl(ttl_path, tokenizer=None, model=None, use_scibert_fea
             model = AutoModel.from_pretrained(SCIBERT_MODEL_NAME)
             model.eval()
 
-        # Generate embeddings for each URI label
         node_features = []
-        for uri in unique_uris:  # This order matches the node_to_index mapping
+        for uri in unique_uris:
             label = _get_entity_label_from_uri(str(uri))
             embedding = get_mean_pooled_embedding(label, tokenizer, model)
             node_features.append(embedding.numpy())
 
         x = torch.tensor(np.array(node_features), dtype=torch.float)
-        # The GAE's input dimension will now be the SciBERT embedding dimension
-        # Make sure to update the 'in_channels' parameter when calling train_gae
     else:
-        # We don't have initial features, so we use a simple
-        # identity matrix. GCNs can learn from this.
         print("  Using identity matrix for node features.")
         x = torch.eye(num_nodes)
 
@@ -181,7 +176,41 @@ def load_pyg_data_from_ttl(ttl_path, tokenizer=None, model=None, use_scibert_fea
 
     # We also return the map to know which vector belongs to which URI
     print(f"  Graph loaded: {data.num_nodes} nodes, {data.num_edges} edges.")
-    return data, node_to_index
+
+    label_lookup: Dict[str, int] = {}
+    for uri, idx in node_to_index.items():
+        label = _normalize_label(_get_entity_label_from_uri(str(uri)))
+        if label and label not in label_lookup:
+            label_lookup[label] = idx
+
+    return data, node_to_index, label_lookup
+
+
+def _build_anchor_pairs(
+    anchor_specs: List[Dict[str, str]],
+    wiki_lookup: Dict[str, int],
+    arxiv_lookup: Dict[str, int],
+) -> List[Tuple[int, int]]:
+    pairs: List[Tuple[int, int]] = []
+    for spec in anchor_specs:
+        wiki_label = _normalize_label(spec.get("wiki", ""))
+        arxiv_label = _normalize_label(spec.get("arxiv", ""))
+        if not wiki_label or not arxiv_label:
+            continue
+        wiki_idx = wiki_lookup.get(wiki_label)
+        arxiv_idx = arxiv_lookup.get(arxiv_label)
+        if wiki_idx is None or arxiv_idx is None:
+            print(
+                f"[ANCHOR] Skipping anchor pair (wiki='{spec.get('wiki')}', arxiv='{spec.get('arxiv')}')"
+                " because one of the entities was not found in the current graphs."
+            )
+            continue
+        pairs.append((wiki_idx, arxiv_idx))
+    if pairs:
+        print(f"[ANCHOR] Using {len(pairs)} anchor alignments during embedding training.")
+    else:
+        print("[ANCHOR] No valid anchor alignments were resolved; proceeding without anchor loss.")
+    return pairs
 
 
 def _sample_embeddings_for_alignment(z, max_samples):
@@ -313,6 +342,8 @@ def train_gaea_joint(
     mmd_weight=GAEA_MMD_WEIGHT,
     stats_weight=GAEA_STATS_WEIGHT,
     max_samples=GAEA_MAX_ALIGN_SAMPLES,
+    anchor_pairs: Optional[List[Tuple[int, int]]] = None,
+    anchor_weight: float = ANCHOR_ALIGNMENT_WEIGHT,
 ):
     """Train a shared GAE (GAEA) that aligns both graphs simultaneously."""
 
@@ -325,6 +356,13 @@ def train_gaea_joint(
 
     wiki_pos_edges = wiki_device.train_pos_edge_index
     arxiv_pos_edges = arxiv_device.train_pos_edge_index
+
+    anchor_pairs = anchor_pairs or []
+    wiki_anchor_idx = None
+    arxiv_anchor_idx = None
+    if anchor_pairs:
+        wiki_anchor_idx = torch.tensor([pair[0] for pair in anchor_pairs], dtype=torch.long, device=device)
+        arxiv_anchor_idx = torch.tensor([pair[1] for pair in anchor_pairs], dtype=torch.long, device=device)
 
     print(f"  Training joint GAEA for {epochs} epochs...")
     for epoch in range(1, epochs + 1):
@@ -365,8 +403,13 @@ def train_gaea_joint(
 
         alignment_loss = _mmd_loss(z_wiki, z_arxiv, max_samples=max_samples)
         stats_loss = _moment_alignment_loss(z_wiki, z_arxiv)
+        anchor_loss = torch.tensor(0.0, device=device)
+        if wiki_anchor_idx is not None and arxiv_anchor_idx is not None and anchor_weight > 0:
+            anchor_loss = F.mse_loss(z_wiki[wiki_anchor_idx], z_arxiv[arxiv_anchor_idx])
 
         loss = wiki_loss + arxiv_loss + mmd_weight * alignment_loss + stats_weight * stats_loss
+        if wiki_anchor_idx is not None and anchor_weight > 0:
+            loss = loss + anchor_weight * anchor_loss
 
         if torch.isnan(loss):
             raise ValueError("Encountered NaN while training the joint GAEA model.")
@@ -384,6 +427,7 @@ def train_gaea_joint(
                 f"    Epoch {epoch}/{epochs}, Loss: {loss.item():.4f}, "
                 f"Wiki recon: {wiki_loss.item():.4f}, ArXiv recon: {arxiv_loss.item():.4f}, "
                 f"MMD: {alignment_loss.item():.4f}, Stats: {stats_loss.item():.4f}, "
+                f"Anchor: {anchor_loss.item():.4f}, "
                 f"Wiki pos/neg: {wiki_pos_prob:.3f}/{wiki_neg_prob:.3f}, "
                 f"ArXiv pos/neg: {arxiv_pos_prob:.3f}/{arxiv_neg_prob:.3f}"
             )
@@ -402,7 +446,7 @@ def generate_entity_embeddings():
     model.eval()
 
     print("\nProcessing Wiki KG:")
-    wiki_data, wiki_map = load_pyg_data_from_ttl(
+    wiki_data, wiki_map, wiki_label_lookup = load_pyg_data_from_ttl(
         KG_WIKI_UNPRUNED_PATH,
         tokenizer=tokenizer,
         model=model,
@@ -413,7 +457,7 @@ def generate_entity_embeddings():
         raise ValueError("Wiki graph is missing node features after preprocessing.")
 
     print("\nProcessing ArXiv KG:")
-    arxiv_data, arxiv_map = load_pyg_data_from_ttl(
+    arxiv_data, arxiv_map, arxiv_label_lookup = load_pyg_data_from_ttl(
         KG_ARXIV_UNPRUNED_PATH,
         tokenizer=tokenizer,
         model=model,
@@ -433,6 +477,14 @@ def generate_entity_embeddings():
             return tensor
         return tensor.detach().clone().cpu()
 
+    anchor_pairs: List[Tuple[int, int]] = []
+    if USE_ANCHOR_ALIGNMENTS and ANCHOR_ALIGNMENT_PAIRS:
+        anchor_pairs = _build_anchor_pairs(
+            ANCHOR_ALIGNMENT_PAIRS,
+            wiki_label_lookup,
+            arxiv_label_lookup,
+        )
+
     if USE_GAE_FOR_ENTITY_EMBEDDINGS:
         joint_model = train_gaea_joint(
             wiki_data,
@@ -442,6 +494,8 @@ def generate_entity_embeddings():
             out_channels=EMBEDDING_DIM,
             epochs=EPOCHS,
             lr=LEARNING_RATE,
+            anchor_pairs=anchor_pairs,
+            anchor_weight=ANCHOR_ALIGNMENT_WEIGHT,
         )
 
         joint_model.eval()
@@ -489,6 +543,7 @@ def generate_entity_embeddings():
         "model": model_name,
         "use_gae": USE_GAE_FOR_ENTITY_EMBEDDINGS,
         "use_scibert_features": USE_SCIBERT_FEATURES,
+        "use_anchor_alignments": USE_ANCHOR_ALIGNMENTS and bool(anchor_pairs),
     }
 
     if USE_GAE_FOR_ENTITY_EMBEDDINGS:
@@ -500,6 +555,8 @@ def generate_entity_embeddings():
             "mmd_weight": GAEA_MMD_WEIGHT,
             "stats_weight": GAEA_STATS_WEIGHT,
             "max_align_samples": GAEA_MAX_ALIGN_SAMPLES,
+            "anchor_alignment_weight": ANCHOR_ALIGNMENT_WEIGHT,
+            "anchor_pairs_resolved": len(anchor_pairs),
         })
 
     torch.save(

@@ -17,6 +17,7 @@ from rdflib import Graph
 from src.config import (
 	ARXIV_ENTITIES_DIR,
 	ARXIV_ENTITIES_FILE,
+	ARXIV_ENTITIES_METADATA_FILE,
 	DOTENV_PATH,
 	KG_ARXIV_UNPRUNED_PATH,
 	KG_WIKI_UNPRUNED_PATH,
@@ -37,6 +38,7 @@ from src.config import (
 	REL_GENERIC,
 	WIKI_ENTITIES_DIR,
 	WIKI_ENTITIES_FILE,
+	WIKI_ENTITIES_METADATA_FILE,
 )
 
 
@@ -132,6 +134,7 @@ class LLMBasedPipeline:
 			ttl_path=KG_WIKI_UNPRUNED_PATH,
 			entity_dir=WIKI_ENTITIES_DIR,
 			entity_file=WIKI_ENTITIES_FILE,
+			entity_metadata_file=WIKI_ENTITIES_METADATA_FILE,
 		)
 		self._persist_corpus(
 			corpus_label="arXiv",
@@ -140,6 +143,7 @@ class LLMBasedPipeline:
 			ttl_path=KG_ARXIV_UNPRUNED_PATH,
 			entity_dir=ARXIV_ENTITIES_DIR,
 			entity_file=ARXIV_ENTITIES_FILE,
+			entity_metadata_file=ARXIV_ENTITIES_METADATA_FILE,
 		)
 
 	# ------------------------------------------------------------------
@@ -490,8 +494,9 @@ class LLMBasedPipeline:
 		ttl_path: Path,
 		entity_dir: Path,
 		entity_file: Path,
+		entity_metadata_file: Path,
 	) -> None:
-		_persist_entities(entities, entity_dir, entity_file, corpus_label)
+		_persist_entities(entities, entity_dir, entity_file, entity_metadata_file, corpus_label)
 		graph = self._triples_to_graph(triples)
 		ttl_path.parent.mkdir(parents=True, exist_ok=True)
 		graph.serialize(destination=str(ttl_path), format="turtle")
@@ -539,7 +544,11 @@ def _chunk_list(values: List[str], chunk_size: int) -> List[List[str]]:
 
 
 def _persist_entities(
-	entities: Iterable[LLMEntity], output_dir: Path, output_file: Path, label: str
+	entities: Iterable[LLMEntity],
+	output_dir: Path,
+	output_file: Path,
+	metadata_file: Path,
+	label: str,
 ) -> None:
 	canonical: Dict[str, LLMEntity] = {}
 	for entity in entities:
@@ -554,6 +563,17 @@ def _persist_entities(
 	output_dir.mkdir(parents=True, exist_ok=True)
 	content = "\n".join(ent.name for ent in sorted_names)
 	output_file.write_text(content + ("\n" if content else ""), encoding="utf-8")
+	metadata_payload = [
+		{
+			"name": ent.name,
+			"type": ent.type or "",
+			"description": ent.description or "",
+		}
+		for ent in sorted_names
+	]
+	metadata_file.write_text(
+		json.dumps(metadata_payload, indent=2), encoding="utf-8"
+	)
 	print(f"-> Saved {len(sorted_names)} {label} entities to {output_file}")
 
 

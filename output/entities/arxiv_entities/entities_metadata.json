@@ -1,0 +1,517 @@
+[
+  {
+    "name": "50-100 qubits",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Abelian stabilizer problem",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "adiabatic optimization algorithms",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "advanced mathematics",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "advanced physics",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "algorithmic advances",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "amplitude amplification",
+    "type": "Concept",
+    "description": "Technique that generalizes Grover iteration"
+  },
+  {
+    "name": "amplitude_estimation_process",
+    "type": "Concept",
+    "description": "Process related to estimating amplitudes in quantum states"
+  },
+  {
+    "name": "approximate amplitude encoding method",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "approximate_counting",
+    "type": "Algorithm",
+    "description": "Quantum algorithm combining Grover and Shor ideas for counting"
+  },
+  {
+    "name": "arbitrary finite Abelian group",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "banking transactions",
+    "type": "Concept",
+    "description": "Domain where some PQC algorithms are implemented"
+  },
+  {
+    "name": "Classical computers",
+    "type": "Hardware",
+    "description": "Conventional classical computers"
+  },
+  {
+    "name": "classical systems",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "classical_brute_force",
+    "type": "Algorithm",
+    "description": "Standard exhaustive search method"
+  },
+  {
+    "name": "classical_heuristics",
+    "type": "Concept",
+    "description": "Classical methods that guide search"
+  },
+  {
+    "name": "code-based",
+    "type": "Algorithm",
+    "description": "Code-based post-quantum cryptographic algorithm"
+  },
+  {
+    "name": "communication",
+    "type": "Concept",
+    "description": "Application area for PQC algorithms"
+  },
+  {
+    "name": "complexity-theoretic limitations",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "computation",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "computer science",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "cryptographic algorithms",
+    "type": "Algorithm",
+    "description": "Algorithms used in conventional cryptographic systems"
+  },
+  {
+    "name": "cryptosystems",
+    "type": "Concept",
+    "description": "Cryptographic systems based on hard problems"
+  },
+  {
+    "name": "data loading",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "database search",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "decision making",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Deutsch's algorithm",
+    "type": "Algorithm",
+    "description": "One of the simplest quantum algorithms."
+  },
+  {
+    "name": "digital signatures",
+    "type": "Concept",
+    "description": "Application area for PQC algorithms"
+  },
+  {
+    "name": "discrete logarithm",
+    "type": "Concept",
+    "description": "Problem of finding discrete logarithms, considered hard on classical computers"
+  },
+  {
+    "name": "factoring",
+    "type": "Concept",
+    "description": "Problem of factoring integers, considered hard on classical computers"
+  },
+  {
+    "name": "Fault tolerance",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Fault-tolerant quantum computing",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "finance",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "gate-based optimization algorithms",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "Grover algorithm",
+    "type": "Algorithm",
+    "description": "Landmark quantum algorithm for amplitude amplification"
+  },
+  {
+    "name": "hardware",
+    "type": "Hardware",
+    "description": ""
+  },
+  {
+    "name": "hardware challenges",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "hash-based",
+    "type": "Algorithm",
+    "description": "Hash-based post-quantum cryptographic algorithm"
+  },
+  {
+    "name": "high computation power requirements",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "industry",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "input size",
+    "type": "Metric",
+    "description": "Size of input, e.g., number of digits"
+  },
+  {
+    "name": "integer",
+    "type": "Concept",
+    "description": "The integer to be factored"
+  },
+  {
+    "name": "intellectual property",
+    "type": "Concept",
+    "description": "Domain where some PQC algorithms are implemented"
+  },
+  {
+    "name": "inversion-test operation",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "IoT",
+    "type": "Concept",
+    "description": "Internet of Things, application area for PQC algorithms"
+  },
+  {
+    "name": "isogeny-based cryptography",
+    "type": "Algorithm",
+    "description": "Isogeny-based post-quantum cryptographic algorithm"
+  },
+  {
+    "name": "lack of standardization",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "lattice-based",
+    "type": "Algorithm",
+    "description": "Lattice-based post-quantum cryptographic algorithm"
+  },
+  {
+    "name": "machine learning",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Many-body quantum physics",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "mathematics",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "multivariate polynomial",
+    "type": "Algorithm",
+    "description": "Multivariate polynomial post-quantum cryptographic algorithm"
+  },
+  {
+    "name": "NISQ devices",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Noise in quantum gates",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "number of digits",
+    "type": "Metric",
+    "description": "Number of digits of the integer to be factored"
+  },
+  {
+    "name": "operations research",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "optimization",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "oracles",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "paper",
+    "type": "Other",
+    "description": "Systematic scoping review described in the paper"
+  },
+  {
+    "name": "pattern matching",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "physical computing device",
+    "type": "Concept",
+    "description": "Any physical computing device that can be simulated"
+  },
+  {
+    "name": "physics",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "polynomial quantum algorithm",
+    "type": "Algorithm",
+    "description": "Algorithm for the Abelian stabilizer problem"
+  },
+  {
+    "name": "post-quantum cryptography",
+    "type": "Concept",
+    "description": "Cryptographic approaches resistant to quantum attacks"
+  },
+  {
+    "name": "PQC algorithms",
+    "type": "Algorithm",
+    "description": "Algorithms within post-quantum cryptography"
+  },
+  {
+    "name": "procedure for measuring an eigenvalue of a unitary operator",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "projected quantum state",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "QOA",
+    "type": "Algorithm",
+    "description": "abbreviation for Quantum optimization algorithms"
+  },
+  {
+    "name": "quadratic_speedup",
+    "type": "Metric",
+    "description": "Quadratic improvement over classical brute-force search"
+  },
+  {
+    "name": "Quantum algorithms",
+    "type": "Concept",
+    "description": "Proposed approximate Grover-like algorithm"
+  },
+  {
+    "name": "quantum architecture",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Quantum chemistry",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Quantum circuits",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Quantum computers",
+    "type": "Hardware",
+    "description": "Quantum computers with advancing capabilities"
+  },
+  {
+    "name": "Quantum Computing",
+    "type": "Concept",
+    "description": "A field at the intersection of mathematics, computer science and physics that utilizes quantum mechanics for computation."
+  },
+  {
+    "name": "Quantum error correction",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Quantum gates",
+    "type": "Concept",
+    "description": "Operations applied to qubits."
+  },
+  {
+    "name": "Quantum hardware",
+    "type": "Hardware",
+    "description": ""
+  },
+  {
+    "name": "Quantum machine learning",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum mechanics",
+    "type": "Concept",
+    "description": "The physical theory underlying quantum computing."
+  },
+  {
+    "name": "Quantum optimization algorithms",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "Quantum software",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "Quantum solutions",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Quantum speedup",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Quantum systems",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Quantum technologists",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "Quantum threats",
+    "type": "Concept",
+    "description": "Potential threats posed by quantum computers to cryptography"
+  },
+  {
+    "name": "qubits",
+    "type": "Concept",
+    "description": "Quantum bits, basic units of quantum information."
+  },
+  {
+    "name": "query complexity",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "query data",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "randomized algorithms",
+    "type": "Algorithm",
+    "description": "Efficient algorithms for factoring and discrete logarithms on quantum computer"
+  },
+  {
+    "name": "science",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "search_problems",
+    "type": "Concept",
+    "description": "Family of problems addressed by quantum search"
+  },
+  {
+    "name": "shallow quantum circuit",
+    "type": "Hardware",
+    "description": ""
+  },
+  {
+    "name": "Shor's quantum algorithms",
+    "type": "Algorithm",
+    "description": "Quantum algorithms for integer factorization and related tasks"
+  },
+  {
+    "name": "software",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "solutions",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "state-of-the-art classical methods",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "target data index",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "toy models",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "universal computing device",
+    "type": "Concept",
+    "description": "An efficient universal computing device"
+  },
+  {
+    "name": "unknown vulnerabilities",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "vast storage requirements",
+    "type": "Other",
+    "description": ""
+  }
+]

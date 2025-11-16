@@ -1,60 +1,59 @@
-1,000 qubit mark
-128-bit symmetric cryptographic key
 1994
 1995
-1996
 1998
+2018
+2024
 256-bit key
 Alain Tapp
 Alexei Kitaev
-algorithm
 Atom Computing
-Atom Computing 1,180 qubit quantum processor
+Atom Computing's 1,180 qubit quantum processor
+best known classical algorithm
 bit
-black box function
+Black box function
 BQP
 Charles H. Bennett
 classical algorithm
 classical computer
 classical data
 classical machine learning algorithms
-classical machine learning methods
-classical processing
 Counting problems
 cryptographic algorithms
-data generated from quantum experiments
+current symmetric cryptography
+deep learning
 deterministic rules
 discrete logarithm problem
 economics
 eigenvalue
 elliptic-curve discrete logarithm problem
-encryption
 engineering
-error
+enormous number of possibilities simultaneously
 Ethan Bernstein
 European Telecommunications Standards Institute
-exponential energy
-exponential speedup
-exponential time
+experimental research
+Exponential speedup
 fast multiplication
 fault-tolerance
-gate fidelity
 general number field sieve
 Gilles Brassard
 Grover's algorithm
+hardware implementations of quantum computation
 harvest now, decrypt later programs
-Harvey and van der Hoeven
+Harvey
 hash functions
 hidden subgroup problem
-high-quality qubits
 hybrid methods
 Institute for Quantum Computing
 integer
 integer factorization problem
+ion traps
 John Preskill
 level 1
 linear search
+log N
+longer coherence times
 Lov Grover
+lower error rates
 machine learning tasks
 Martinez
 Mathematical optimization
@@ -62,73 +61,69 @@ mechanics
 Microsoft Azure Quantum
 minimization problem
 Mosca's theorem
+national governments
 networking
+neural networks
 Noisy intermediate-scale quantum (NISQ) computing
+non-deterministic outcomes of quantum measurements
+norm
 NP-complete problems
-O((log N)^2 (log log N)(log log log N))
-O(N)
-O(sqrt(N))
+O((log N)^2(log log N)(log log log N))
+October 2023
 optimization problems
-organizations
 period-finding problem
 Peter Høyer
 Peter Shor
 phase
-physical qubit
+phase transitions
 physical simulations
-physicists
 polynomial time
-Post-quantum cryptography
+post-quantum cryptography
 PQCrypto conference series
-prime factors
-probabilistic rule
-public-key cryptographic schemes
+problems not feasible on classical computers
 Q-Day
-quadratic speedup
+Quadratic speedup
 quantum advantage
-Quantum algorithm
-Quantum algorithm for linear systems of equations
-Quantum algorithms
-Quantum circuit model
-Quantum computer
-Quantum computing
+quantum algorithm for linear systems of equations
+quantum algorithms
+quantum circuit model of computation
+quantum computer technology
 Quantum counting algorithm
-Quantum decoherence
-Quantum entanglement
-Quantum error correction
-Quantum existence problem
+quantum decoherence
+quantum entanglement
+quantum error correction
+quantum existence problem
 quantum experiments
-Quantum machine learning (QML)
-Quantum measurement
-Quantum operations
+quantum machine learning
+quantum measurement
+quantum operations
 Quantum optimization algorithms
-Quantum phase estimation algorithm
-Quantum processing
-Quantum solution
-Quantum states
-Quantum superposition
+quantum phase estimation algorithm
+quantum physics
+quantum processors
+quantum states
+quantum superposition
 Quantum supremacy
-Quantum system
-Quantum volume
-quantum-resistant
+quantum system
+quantum volume
 qubit
-real-world applications
 risk analysis framework
 routines
 Shor's algorithm
-space complexity
 statistical estimation
 statistical physics
-sub-1,000 quantum processors
 sub-exponential time
 subroutines
-time complexity
+superconductors
+techniques
 Trugenberger
-two quantum processors
 Umesh Vazirani
 undecidable problem
 unitary operator
+unordered list
+unstructured database
 unstructured search
+van der Hoeven
 Ventura
 wave interference effects
 Y2Q

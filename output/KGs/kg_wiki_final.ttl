@@ -1,28 +1,26 @@
 @prefix ont: <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#> .
 @prefix raw: <http://unpruned.local/> .
 
+<urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Grover's_algorithm> a ont:QuantumAlgorithm .
+
 ont:Noisy_intermediate-scale_quantum_NISQ_computing a ont:QuantumConcept ;
-    raw:characterized_by ont:Quantum_computer ;
-    raw:is_state_of ont:Quantum_computer .
-
-ont:Post-quantum_cryptography a ont:QuantumConcept .
-
-ont:Quantum_computing a ont:QuantumConcept .
+    raw:is_state_of ont:quantum_computer_technology .
 
 ont:Quantum_optimization_algorithms a ont:QuantumAlgorithm .
 
-<urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Grover's_algorithm> a ont:QuantumAlgorithm ;
-    raw:also_known_as <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Grover's_algorithm> .
+ont:quantum_machine_learning a ont:QuantumConcept .
 
-ont:Peter_Shor a ont:Person .
+ont:qubit a ont:QuantumConcept .
 
-ont:Quantum_machine_learning_QML a ont:QuantumConcept ;
-    raw:synonym_of ont:Quantum_machine_learning_QML .
+ont:Peter_Shor a ont:Person ;
+    raw:proposed_algorithm <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_algorithm> .
+
+ont:Post-quantum_cryptography a ont:QuantumConcept ;
+    raw:also_known_as ont:Post-quantum_cryptography .
+
+ont:quantum_computer_technology a ont:QuantumHardware ;
+    raw:runs <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_algorithm> .
 
 <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_algorithm> a ont:QuantumAlgorithm ;
-    raw:developed_by ont:Peter_Shor ;
-    raw:runs_on ont:Quantum_computer .
-
-ont:Quantum_computer a ont:QuantumHardware ;
-    raw:runs <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_algorithm> .
+    raw:developed_by ont:Peter_Shor .
 

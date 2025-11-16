@@ -1,100 +1,103 @@
+50-100 qubits
 Abelian stabilizer problem
-academia
-advantages
+adiabatic optimization algorithms
+advanced mathematics
+advanced physics
 algorithmic advances
 amplitude amplification
-amplitude estimation process
+amplitude_estimation_process
 approximate amplitude encoding method
-approximate counting
+approximate_counting
 arbitrary finite Abelian group
 banking transactions
-classical brute force
-classical computer
-classical heuristics
-classical methods
+Classical computers
 classical systems
-code-based cryptography
+classical_brute_force
+classical_heuristics
+code-based
 communication
 complexity-theoretic limitations
-computer power
+computation
 computer science
-counter-intuitive patterns
+cryptographic algorithms
 cryptosystems
+data loading
 database search
 decision making
 Deutsch's algorithm
 digital signatures
 discrete logarithm
 factoring
-fault tolerance
+Fault tolerance
+Fault-tolerant quantum computing
 finance
-finite dimensional quantum mechanics
+gate-based optimization algorithms
 Grover algorithm
+hardware
 hardware challenges
-hash-based cryptography
-image pattern matching
+hash-based
+high computation power requirements
 industry
 input size
-integer to be factored
+integer
 intellectual property
 inversion-test operation
 IoT
 isogeny-based cryptography
 lack of standardization
-lattice-based cryptography
+lattice-based
 machine learning
-many-body quantum physics
+Many-body quantum physics
 mathematics
-multivariate polynomial cryptography
+multivariate polynomial
 NISQ devices
-noise
+Noise in quantum gates
 number of digits
 operations research
 optimization
+oracles
 paper
 pattern matching
 physical computing device
 physics
 polynomial quantum algorithm
-polynomial quantum Fourier transform algorithm
-post-quantum cryptography (PQC)
+post-quantum cryptography
+PQC algorithms
 procedure for measuring an eigenvalue of a unitary operator
 projected quantum state
-proposed quantum algorithm
 QOA
-quantum algorithmic primitives
-quantum algorithms
+quadratic_speedup
+Quantum algorithms
 quantum architecture
-quantum chemistry
-quantum circuits
-quantum computer
-quantum computing
-quantum error correction
-quantum gates
-quantum hardware
-quantum machine learning
+Quantum chemistry
+Quantum circuits
+Quantum computers
+Quantum Computing
+Quantum error correction
+Quantum gates
+Quantum hardware
+Quantum machine learning
 quantum mechanics
-quantum optimization algorithms
-quantum software
-quantum solutions
-quantum speedups
-quantum systems
-quantum technologists
-quantum threats
+Quantum optimization algorithms
+Quantum software
+Quantum solutions
+Quantum speedup
+Quantum systems
+Quantum technologists
+Quantum threats
 qubits
 query complexity
 query data
 randomized algorithms
-search problems
+science
+search_problems
 shallow quantum circuit
 Shor's quantum algorithms
-software challenges
+software
 solutions
-systematic scoping review
+state-of-the-art classical methods
 target data index
-theory of quantum computation
 toy models
 universal computing device
 unknown vulnerabilities
-vast computation power
-vast storage
+vast storage requirements

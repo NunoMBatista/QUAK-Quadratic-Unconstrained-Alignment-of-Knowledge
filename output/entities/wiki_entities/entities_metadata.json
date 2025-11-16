@@ -1,0 +1,647 @@
+[
+  {
+    "name": "1994",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "1995",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "1998",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "2018",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "2024",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "256-bit key",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Alain Tapp",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "Alexei Kitaev",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "Atom Computing",
+    "type": "Institution",
+    "description": ""
+  },
+  {
+    "name": "Atom Computing's 1,180 qubit quantum processor",
+    "type": "Hardware",
+    "description": ""
+  },
+  {
+    "name": "best known classical algorithm",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "bit",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Black box function",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "BQP",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Charles H. Bennett",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "classical algorithm",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "classical computer",
+    "type": "Hardware",
+    "description": ""
+  },
+  {
+    "name": "classical data",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "classical machine learning algorithms",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "Counting problems",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "cryptographic algorithms",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "current symmetric cryptography",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "deep learning",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "deterministic rules",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "discrete logarithm problem",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "economics",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "eigenvalue",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "elliptic-curve discrete logarithm problem",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "engineering",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "enormous number of possibilities simultaneously",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Ethan Bernstein",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "European Telecommunications Standards Institute",
+    "type": "Institution",
+    "description": ""
+  },
+  {
+    "name": "experimental research",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "Exponential speedup",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "fast multiplication",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "fault-tolerance",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "general number field sieve",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "Gilles Brassard",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "Grover's algorithm",
+    "type": "Algorithm",
+    "description": "Quantum search algorithm for unstructured search"
+  },
+  {
+    "name": "hardware implementations of quantum computation",
+    "type": "Hardware",
+    "description": ""
+  },
+  {
+    "name": "harvest now, decrypt later programs",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "Harvey",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "hash functions",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "hidden subgroup problem",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "hybrid methods",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Institute for Quantum Computing",
+    "type": "Institution",
+    "description": ""
+  },
+  {
+    "name": "integer",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "integer factorization problem",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "ion traps",
+    "type": "Hardware",
+    "description": ""
+  },
+  {
+    "name": "John Preskill",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "level 1",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "linear search",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "log N",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "longer coherence times",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "Lov Grover",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "lower error rates",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "machine learning tasks",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Martinez",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "Mathematical optimization",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "mechanics",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "Microsoft Azure Quantum",
+    "type": "Institution",
+    "description": ""
+  },
+  {
+    "name": "minimization problem",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Mosca's theorem",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "national governments",
+    "type": "Institution",
+    "description": ""
+  },
+  {
+    "name": "networking",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "neural networks",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Noisy intermediate-scale quantum (NISQ) computing",
+    "type": "Concept",
+    "description": "Quantum computing paradigm characterized by intermediate-scale processors"
+  },
+  {
+    "name": "non-deterministic outcomes of quantum measurements",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "norm",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "NP-complete problems",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "O((log N)^2(log log N)(log log log N))",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "October 2023",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "optimization problems",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "period-finding problem",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Peter H\u00f8yer",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "Peter Shor",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "phase",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "phase transitions",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "physical simulations",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "polynomial time",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "post-quantum cryptography",
+    "type": "Concept",
+    "description": "Development of cryptographic algorithms secure against quantum attacks"
+  },
+  {
+    "name": "PQCrypto conference series",
+    "type": "Institution",
+    "description": ""
+  },
+  {
+    "name": "problems not feasible on classical computers",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Q-Day",
+    "type": "Other",
+    "description": ""
+  },
+  {
+    "name": "Quadratic speedup",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "quantum advantage",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum algorithm for linear systems of equations",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "quantum algorithms",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "quantum circuit model of computation",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum computer technology",
+    "type": "Concept",
+    "description": "Computing paradigm using quantum mechanics"
+  },
+  {
+    "name": "Quantum counting algorithm",
+    "type": "Algorithm",
+    "description": "A quantum algorithm for efficiently counting the number of solutions for a given search problem"
+  },
+  {
+    "name": "quantum decoherence",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum entanglement",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum error correction",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum existence problem",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum experiments",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum machine learning",
+    "type": "Concept",
+    "description": "Study of quantum algorithms for machine learning tasks"
+  },
+  {
+    "name": "quantum measurement",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum operations",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Quantum optimization algorithms",
+    "type": "Algorithm",
+    "description": "Quantum algorithms used to solve optimization problems"
+  },
+  {
+    "name": "quantum phase estimation algorithm",
+    "type": "Algorithm",
+    "description": "Quantum algorithm to estimate the phase corresponding to an eigenvalue of a given unitary operator."
+  },
+  {
+    "name": "quantum physics",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum processors",
+    "type": "Hardware",
+    "description": ""
+  },
+  {
+    "name": "quantum states",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum superposition",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Quantum supremacy",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum system",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "quantum volume",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "qubit",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "risk analysis framework",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "routines",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Shor's algorithm",
+    "type": "Algorithm",
+    "description": ""
+  },
+  {
+    "name": "statistical estimation",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "statistical physics",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "sub-exponential time",
+    "type": "Metric",
+    "description": ""
+  },
+  {
+    "name": "subroutines",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "superconductors",
+    "type": "Hardware",
+    "description": ""
+  },
+  {
+    "name": "techniques",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Trugenberger",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "Umesh Vazirani",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "undecidable problem",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "unitary operator",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "unordered list",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "unstructured database",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "unstructured search",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "van der Hoeven",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "Ventura",
+    "type": "Person",
+    "description": ""
+  },
+  {
+    "name": "wave interference effects",
+    "type": "Concept",
+    "description": ""
+  },
+  {
+    "name": "Y2Q",
+    "type": "Other",
+    "description": ""
+  }
+]
