@@ -1,0 +1,235 @@
+{
+  "wiki_graph": {
+    "name": "Wiki Graph",
+    "nodes": [
+      {
+        "id": "n1",
+        "label": "Peter Shor",
+        "description": "",
+        "position": [
+          261,
+          104
+        ]
+      },
+      {
+        "id": "n2",
+        "label": "Lov Grover",
+        "description": "",
+        "position": [
+          106,
+          116
+        ]
+      },
+      {
+        "id": "n3",
+        "label": "Shor's Algorithm",
+        "description": "",
+        "position": [
+          242,
+          254
+        ]
+      },
+      {
+        "id": "n4",
+        "label": "Grover's Algorithm",
+        "description": "",
+        "position": [
+          127,
+          246
+        ]
+      },
+      {
+        "id": "n5",
+        "label": "Pauli",
+        "description": "",
+        "position": [
+          402,
+          162
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "source": "n1",
+        "target": "n3",
+        "relation": "developed"
+      },
+      {
+        "source": "n2",
+        "target": "n4",
+        "relation": "developed"
+      }
+    ],
+    "next_id": 6
+  },
+  "arxiv_graph": {
+    "name": "arXiv Graph",
+    "nodes": [
+      {
+        "id": "n1",
+        "label": "Dirac",
+        "description": "",
+        "position": [
+          214,
+          210
+        ]
+      },
+      {
+        "id": "n2",
+        "label": "P. Shor",
+        "description": "",
+        "position": [
+          79,
+          263
+        ]
+      },
+      {
+        "id": "n3",
+        "label": "L. Grover",
+        "description": "",
+        "position": [
+          377,
+          120
+        ]
+      },
+      {
+        "id": "n4",
+        "label": "Shor's Algo",
+        "description": "",
+        "position": [
+          134,
+          195
+        ]
+      },
+      {
+        "id": "n5",
+        "label": "Grover Algo",
+        "description": "",
+        "position": [
+          313,
+          160
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "source": "n2",
+        "target": "n4",
+        "relation": "author_of"
+      },
+      {
+        "source": "n5",
+        "target": "n3",
+        "relation": "author_of"
+      }
+    ],
+    "next_id": 6
+  },
+  "wiki_order": [
+    "n4",
+    "n2",
+    "n5",
+    "n1",
+    "n3"
+  ],
+  "arxiv_order": [
+    "n1",
+    "n5",
+    "n3",
+    "n2",
+    "n4"
+  ],
+  "similarity": [
+    [
+      0.648759663105011,
+      0.7394404411315918,
+      0.6701780557632446,
+      0.6528019309043884,
+      0.8266195058822632
+    ],
+    [
+      0.7109256982803345,
+      0.8727242350578308,
+      0.7720890045166016,
+      0.7084825038909912,
+      0.7601495981216431
+    ],
+    [
+      0.7760796546936035,
+      0.7090821862220764,
+      0.6672189235687256,
+      0.7520344257354736,
+      0.7162192463874817
+    ],
+    [
+      0.7588971257209778,
+      0.7679976224899292,
+      0.7067061066627502,
+      0.775549590587616,
+      0.8114831447601318
+    ],
+    [
+      0.6748137474060059,
+      0.6887115836143494,
+      0.6613293290138245,
+      0.7394917011260986,
+      0.8806577920913696
+    ]
+  ],
+  "structural_info": {
+    "wiki_edges": [
+      [
+        3,
+        4,
+        "developed"
+      ],
+      [
+        1,
+        0,
+        "developed"
+      ]
+    ],
+    "arxiv_edges": [
+      [
+        3,
+        4,
+        "author_of"
+      ],
+      [
+        1,
+        2,
+        "author_of"
+      ]
+    ],
+    "weights": [
+      {
+        "wiki_i": 3,
+        "wiki_j": 4,
+        "arxiv_a": 3,
+        "arxiv_b": 4,
+        "weight": 0.6391721963882446
+      },
+      {
+        "wiki_i": 3,
+        "wiki_j": 4,
+        "arxiv_a": 1,
+        "arxiv_b": 2,
+        "weight": 0.6391721963882446
+      },
+      {
+        "wiki_i": 1,
+        "wiki_j": 0,
+        "arxiv_a": 3,
+        "arxiv_b": 4,
+        "weight": 0.6391721963882446
+      },
+      {
+        "wiki_i": 1,
+        "wiki_j": 0,
+        "arxiv_a": 1,
+        "arxiv_b": 2,
+        "weight": 0.6391721963882446
+      }
+    ]
+  }
+}

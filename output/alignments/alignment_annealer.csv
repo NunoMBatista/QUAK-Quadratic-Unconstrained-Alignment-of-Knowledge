@@ -1,12 +1,12 @@
 wiki_entity,arxiv_entity,not_aligned
-Post-quantum cryptography,post-quantum cryptography,
-quantum machine learning,quantum machine learning,
 qubit,qubits,
-Shor's algorithm,Shor's quantum algorithms,
-Quantum optimization algorithms,quantum computing,
-Grover's algorithm,Deutsch's algorithm,
-quantum computer technology,Grover algorithm,
-,,wiki: Noisy intermediate-scale quantum NISQ computing
-,,wiki: Peter Shor
-,,arxiv: NISQ devices
+Peter Shor,Shor's quantum algorithms,
+Shor's algorithm,Grover algorithm,
+quantum computer technology,quantum computing,
+Post-quantum cryptography,post-quantum cryptography,
+Noisy intermediate-scale quantum NISQ computing,quantum machine learning,
+Quantum optimization algorithms,NISQ devices,
+,,wiki: Grover's algorithm
+,,wiki: quantum machine learning
+,,arxiv: Deutsch's algorithm
 ,,arxiv: QOA

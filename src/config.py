@@ -314,7 +314,7 @@ USE_SCIBERT_FEATURES = True # whether to use SciBERT features for node attribute
 # toggle to fully skip the graph autoencoder (GAE/GAEA) stage and reuse the raw
 # node features (e.g., SciBERT) as the exported entity embeddings. Set to False
 # when you only need surface-form embeddings and want to avoid GNN training time.
-USE_GAE_FOR_ENTITY_EMBEDDINGS = False
+USE_GAE_FOR_ENTITY_EMBEDDINGS = True
 
 # optionally enforce soft constraints between known aligned entities while
 # training the joint graph autoencoder. Each pair should specify the canonical

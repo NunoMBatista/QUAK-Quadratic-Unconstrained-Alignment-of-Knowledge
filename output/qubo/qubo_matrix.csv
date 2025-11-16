@@ -1,28 +1,19 @@
-pair,Grover's algorithm ↔ Deutsch's algorithm,Grover's algorithm ↔ Grover algorithm,Noisy intermediate-scale quantum NISQ computing ↔ post-quantum cryptography,Noisy intermediate-scale quantum NISQ computing ↔ quantum computing,Noisy intermediate-scale quantum NISQ computing ↔ quantum machine learning,Peter Shor ↔ Grover algorithm,Post-quantum cryptography ↔ post-quantum cryptography,Post-quantum cryptography ↔ quantum computing,Post-quantum cryptography ↔ quantum machine learning,quantum computer technology ↔ Grover algorithm,quantum computer technology ↔ post-quantum cryptography,quantum computer technology ↔ quantum computing,quantum computer technology ↔ quantum machine learning,quantum computer technology ↔ qubits,quantum machine learning ↔ post-quantum cryptography,quantum machine learning ↔ quantum computing,quantum machine learning ↔ quantum machine learning,Quantum optimization algorithms ↔ Grover algorithm,Quantum optimization algorithms ↔ post-quantum cryptography,Quantum optimization algorithms ↔ quantum computing,Quantum optimization algorithms ↔ quantum machine learning,qubit ↔ quantum computing,qubit ↔ quantum machine learning,qubit ↔ qubits,Shor's algorithm ↔ Deutsch's algorithm,Shor's algorithm ↔ Grover algorithm,Shor's algorithm ↔ Shor's quantum algorithms
-Grover's algorithm ↔ Deutsch's algorithm,-0.8671779036521912,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0
-Grover's algorithm ↔ Grover algorithm,2.0,-0.8859388828277588,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0
-Noisy intermediate-scale quantum NISQ computing ↔ post-quantum cryptography,0.0,0.0,-0.8729056119918823,2.0,2.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-Noisy intermediate-scale quantum NISQ computing ↔ quantum computing,0.0,0.0,2.0,-0.7955724000930786,2.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0
-Noisy intermediate-scale quantum NISQ computing ↔ quantum machine learning,0.0,0.0,2.0,2.0,-0.7786656618118286,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,2.0,0.0,0.0,0.0,0.0
-Peter Shor ↔ Grover algorithm,0.0,2.0,0.0,0.0,0.0,-0.7586876153945923,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,-0.11852507591247559
-Post-quantum cryptography ↔ post-quantum cryptography,0.0,0.0,2.0,0.0,0.0,0.0,-1.0,2.0,2.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-Post-quantum cryptography ↔ quantum computing,0.0,0.0,0.0,2.0,0.0,0.0,2.0,-0.8023627996444702,2.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0
-Post-quantum cryptography ↔ quantum machine learning,0.0,0.0,0.0,0.0,2.0,0.0,2.0,2.0,-0.7965251207351685,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,2.0,0.0,0.0,0.0,0.0
-quantum computer technology ↔ Grover algorithm,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,-0.7792012095451355,2.0,2.0,2.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,-0.09992485046386719
-quantum computer technology ↔ post-quantum cryptography,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,2.0,-0.7688840627670288,2.0,2.0,2.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-quantum computer technology ↔ quantum computing,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,2.0,2.0,-0.8752471208572388,2.0,2.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0
-quantum computer technology ↔ quantum machine learning,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,2.0,2.0,2.0,-0.8941059708595276,2.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,2.0,0.0,0.0,0.0,0.0
-quantum computer technology ↔ qubits,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,2.0,2.0,-0.7610486149787903,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0
-quantum machine learning ↔ post-quantum cryptography,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,-0.7965251207351685,2.0,2.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-quantum machine learning ↔ quantum computing,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,2.0,-0.9336909651756287,2.0,0.0,0.0,2.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0
-quantum machine learning ↔ quantum machine learning,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,2.0,2.0,-0.9999998807907104,0.0,0.0,0.0,2.0,0.0,2.0,0.0,0.0,0.0,0.0
-Quantum optimization algorithms ↔ Grover algorithm,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.7826701402664185,2.0,2.0,2.0,0.0,0.0,0.0,0.0,2.0,0.0
-Quantum optimization algorithms ↔ post-quantum cryptography,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,2.0,-0.7584236860275269,2.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0
-Quantum optimization algorithms ↔ quantum computing,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,2.0,2.0,-0.8845189809799194,2.0,2.0,0.0,0.0,0.0,0.0,0.0
-Quantum optimization algorithms ↔ quantum machine learning,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,2.0,2.0,2.0,-0.8696439266204834,0.0,2.0,0.0,0.0,0.0,0.0
-qubit ↔ quantum computing,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,-0.7914730310440063,2.0,2.0,0.0,0.0,0.0
-qubit ↔ quantum machine learning,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,2.0,-0.7668365240097046,2.0,0.0,0.0,0.0
-qubit ↔ qubits,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,-0.9296477437019348,0.0,0.0,0.0
-Shor's algorithm ↔ Deutsch's algorithm,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.7862098217010498,2.0,2.0
-Shor's algorithm ↔ Grover algorithm,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,-0.8136058449745178,2.0
-Shor's algorithm ↔ Shor's quantum algorithms,0.0,0.0,0.0,0.0,0.0,-0.11852507591247559,0.0,0.0,0.0,-0.09992485046386719,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,-0.8985694646835327
+pair,Grover's algorithm ↔ Grover algorithm,Grover's algorithm ↔ Shor's quantum algorithms,Noisy intermediate-scale quantum NISQ computing ↔ post-quantum cryptography,Noisy intermediate-scale quantum NISQ computing ↔ quantum machine learning,Noisy intermediate-scale quantum NISQ computing ↔ qubits,Peter Shor ↔ Grover algorithm,Peter Shor ↔ Shor's quantum algorithms,Post-quantum cryptography ↔ post-quantum cryptography,Post-quantum cryptography ↔ quantum computing,quantum computer technology ↔ quantum computing,Quantum optimization algorithms ↔ NISQ devices,qubit ↔ Deutsch's algorithm,qubit ↔ post-quantum cryptography,qubit ↔ quantum computing,qubit ↔ quantum machine learning,qubit ↔ qubits,Shor's algorithm ↔ Grover algorithm,Shor's algorithm ↔ Shor's quantum algorithms
+Grover's algorithm ↔ Grover algorithm,-0.9974600672721863,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0
+Grover's algorithm ↔ Shor's quantum algorithms,2.0,-0.9741290807723999,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0
+Noisy intermediate-scale quantum NISQ computing ↔ post-quantum cryptography,0.0,0.0,-0.7874455451965332,2.0,2.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0
+Noisy intermediate-scale quantum NISQ computing ↔ quantum machine learning,0.0,0.0,2.0,-0.7720834016799927,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0
+Noisy intermediate-scale quantum NISQ computing ↔ qubits,0.0,0.0,2.0,2.0,-0.7510634660720825,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0
+Peter Shor ↔ Grover algorithm,2.0,0.0,0.0,0.0,0.0,-0.9629033803939819,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,-0.11852507591247559
+Peter Shor ↔ Shor's quantum algorithms,0.0,2.0,0.0,0.0,0.0,2.0,-0.9866092205047607,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.16454228162765505,2.0
+Post-quantum cryptography ↔ post-quantum cryptography,0.0,0.0,2.0,0.0,0.0,0.0,0.0,-0.7945491075515747,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0
+Post-quantum cryptography ↔ quantum computing,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,-0.7631183862686157,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0
+quantum computer technology ↔ quantum computing,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,-0.8063616752624512,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0
+Quantum optimization algorithms ↔ NISQ devices,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.7632523775100708,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+qubit ↔ Deutsch's algorithm,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.7962806224822998,2.0,2.0,2.0,2.0,0.0,0.0
+qubit ↔ post-quantum cryptography,0.0,0.0,2.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,-0.9414324164390564,2.0,2.0,2.0,0.0,0.0
+qubit ↔ quantum computing,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,0.0,2.0,2.0,-0.9251338839530945,2.0,2.0,0.0,0.0
+qubit ↔ quantum machine learning,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,2.0,-0.9463815689086914,2.0,0.0,0.0
+qubit ↔ qubits,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,2.0,2.0,-0.9906487464904785,0.0,0.0
+Shor's algorithm ↔ Grover algorithm,2.0,0.0,0.0,0.0,0.0,2.0,-0.16454228162765505,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.9824705123901367,2.0
+Shor's algorithm ↔ Shor's quantum algorithms,0.0,2.0,0.0,0.0,0.0,-0.11852507591247559,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,-0.9661027789115906

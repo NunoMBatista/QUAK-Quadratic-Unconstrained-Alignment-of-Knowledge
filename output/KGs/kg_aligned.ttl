@@ -1,37 +1,34 @@
 @prefix ns1: <http://unpruned.local/> .
 @prefix ont: <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#> .
 
-ont:NISQ_devices a ont:QuantumConcept .
+<urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Deutsch's_algorithm> a ont:QuantumAlgorithm .
 
-ont:Noisy_intermediate-scale_quantum_NISQ_computing a ont:QuantumConcept ;
-    ns1:is_state_of ont:quantum_computer_technology .
+<urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Grover's_algorithm> a ont:QuantumAlgorithm .
 
 ont:QOA a ont:QuantumAlgorithm .
 
-<urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Deutsch's_algorithm> a ont:QuantumAlgorithm ;
-    ont:alignedWith <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Grover's_algorithm> .
-
-<urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Grover's_algorithm> a ont:QuantumAlgorithm ;
-    ont:alignedWith <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Deutsch's_algorithm> .
-
 ont:Grover_algorithm a ont:QuantumAlgorithm ;
     ns1:combined_with <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_quantum_algorithms> ;
-    ont:alignedWith ont:quantum_computer_technology .
+    ont:alignedWith <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_algorithm> .
 
-ont:Peter_Shor a ont:Person ;
-    ns1:proposed_algorithm <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_algorithm> .
+ont:NISQ_devices a ont:QuantumConcept ;
+    ont:alignedWith ont:Quantum_optimization_algorithms .
+
+ont:Noisy_intermediate-scale_quantum_NISQ_computing a ont:QuantumConcept ;
+    ns1:is_state_of ont:quantum_computer_technology ;
+    ont:alignedWith ont:quantum_machine_learning .
 
 ont:Quantum_optimization_algorithms a ont:QuantumAlgorithm ;
-    ont:alignedWith ont:quantum_computing .
+    ont:alignedWith ont:NISQ_devices .
 
 ont:post-quantum_cryptography a ont:QuantumConcept ;
     ont:alignedWith ont:Post-quantum_cryptography .
 
 ont:quantum_computing a ont:QuantumConcept ;
-    ont:alignedWith ont:Quantum_optimization_algorithms .
+    ont:alignedWith ont:quantum_computer_technology .
 
 ont:quantum_machine_learning a ont:QuantumConcept ;
-    ont:alignedWith ont:quantum_machine_learning .
+    ont:alignedWith ont:Noisy_intermediate-scale_quantum_NISQ_computing .
 
 ont:qubit a ont:QuantumConcept ;
     ont:alignedWith ont:qubits .
@@ -39,18 +36,22 @@ ont:qubit a ont:QuantumConcept ;
 ont:qubits a ont:QuantumConcept ;
     ont:alignedWith ont:qubit .
 
+ont:Peter_Shor a ont:Person ;
+    ns1:proposed_algorithm <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_algorithm> ;
+    ont:alignedWith <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_quantum_algorithms> .
+
 ont:Post-quantum_cryptography a ont:QuantumConcept ;
     ns1:also_known_as ont:Post-quantum_cryptography ;
     ont:alignedWith ont:post-quantum_cryptography .
 
 <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_quantum_algorithms> a ont:QuantumAlgorithm ;
-    ont:alignedWith <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_algorithm> .
+    ont:alignedWith ont:Peter_Shor .
 
 ont:quantum_computer_technology a ont:QuantumHardware ;
     ns1:runs <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_algorithm> ;
-    ont:alignedWith ont:Grover_algorithm .
+    ont:alignedWith ont:quantum_computing .
 
 <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_algorithm> a ont:QuantumAlgorithm ;
     ns1:developed_by ont:Peter_Shor ;
-    ont:alignedWith <urn:webprotege:ontology:1d3f8981-9e47-4c05-89fc-7f94b1a68603#Shor's_quantum_algorithms> .
+    ont:alignedWith ont:Grover_algorithm .
 
