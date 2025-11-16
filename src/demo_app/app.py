@@ -4,6 +4,7 @@ import copy
 import random
 import threading
 import tkinter as tk
+import tkinter.font as tkfont
 from dataclasses import dataclass
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
@@ -20,6 +21,93 @@ from src.quak import QUAK_ASCII_MASCOT, QUAK_WORDMARK
 CANVAS_WIDTH = 420
 CANVAS_HEIGHT = 320
 NODE_RADIUS = 18
+APP_FONT_FAMILY = "Courier New"
+
+
+def app_font(size: int, *modifiers: str) -> Tuple[Any, ...]:
+    if modifiers:
+        return (APP_FONT_FAMILY, size, *modifiers)
+    return (APP_FONT_FAMILY, size)
+
+
+def retro_button(master: tk.Misc, **kwargs: Any) -> tk.Button:
+    options: Dict[str, Any] = {
+        "font": app_font(10),
+        "bg": RETRO_BTN_BG,
+        "fg": RETRO_TEXT,
+        "activebackground": RETRO_BTN_ACTIVE,
+        "activeforeground": RETRO_TEXT,
+        "relief": "raised",
+        "bd": 3,
+        "highlightthickness": 1,
+        "highlightbackground": RETRO_BORDER_LIGHT,
+        "highlightcolor": RETRO_BORDER_LIGHT,
+        "cursor": "hand2",
+        "takefocus": True,
+        "padx": 6,
+        "pady": 2,
+    }
+    options.update(kwargs)
+    normal_bg = options.get("bg", RETRO_BTN_BG)
+    button = tk.Button(master, **options)
+
+    def _hover(_: tk.Event) -> None:  # type: ignore[override]
+        button.configure(bg=RETRO_BTN_HOVER)
+
+    def _leave(_: tk.Event) -> None:  # type: ignore[override]
+        button.configure(bg=normal_bg)
+
+    button.bind("<Enter>", _hover)
+    button.bind("<Leave>", _leave)
+    return button
+
+
+def configure_retro_style(style: ttk.Style) -> None:
+    style.configure("TFrame", background=RETRO_PANEL_BG)
+    style.configure("TLabel", background=RETRO_PANEL_BG, foreground=RETRO_TEXT)
+    style.configure("TEntry", fieldbackground=RETRO_CANVAS_BG, foreground=RETRO_TEXT)
+    style.configure("TCombobox", fieldbackground=RETRO_CANVAS_BG, foreground=RETRO_TEXT)
+    style.configure("Retro.TFrame", background=RETRO_PANEL_BG, borderwidth=2, relief="groove")
+    style.configure(
+        "Retro.TLabelframe",
+        background=RETRO_PANEL_BG,
+        borderwidth=2,
+        relief="groove",
+    )
+    style.configure(
+        "Retro.TLabelframe.Label",
+        background=RETRO_PANEL_BG,
+        foreground=RETRO_TEXT,
+        font=app_font(10, "bold"),
+    )
+    style.configure(
+        "Treeview",
+        background=RETRO_CANVAS_BG,
+        fieldbackground=RETRO_CANVAS_BG,
+        foreground=RETRO_TEXT,
+        bordercolor=RETRO_BORDER_DARK,
+        rowheight=22,
+    )
+    style.configure(
+        "Treeview.Heading",
+        background=RETRO_BTN_BG,
+        foreground=RETRO_TEXT,
+        font=app_font(10, "bold"),
+    )
+    style.map("Treeview", background=[("selected", RETRO_SELECTION_BG)])
+    style.map("Treeview", foreground=[("selected", "#ffffff")])
+
+
+RETRO_BG = "#c0c0c0"
+RETRO_PANEL_BG = "#d4d0c8"
+RETRO_CANVAS_BG = "#ffffff"
+RETRO_TEXT = "#000000"
+RETRO_BTN_BG = "#dfdfdf"
+RETRO_BTN_HOVER = "#f5f5f5"
+RETRO_BTN_ACTIVE = "#bdbdbd"
+RETRO_BORDER_DARK = "#7b7b7b"
+RETRO_BORDER_LIGHT = "#ffffff"
+RETRO_SELECTION_BG = "#0a246a"
 
 
 @dataclass
@@ -30,13 +118,14 @@ class GraphPanelState:
 
 class GraphPanel(ttk.Frame):
     def __init__(self, master: tk.Misc, title: str, color: str) -> None:
-        super().__init__(master, padding=8)
+        super().__init__(master, padding=8, style="Retro.TFrame")
         self.panel_state = GraphPanelState(model=GraphModel(title), color=color)
         self._drag_node: Optional[str] = None
         self._drag_offset = (0.0, 0.0)
         self._node_order: List[str] = []
+        self._edge_order: List[int] = []
 
-        ttk.Label(self, text=title, font=("Helvetica", 14, "bold"), foreground="#000000").pack(
+        ttk.Label(self, text=title, font=app_font(14, "bold"), foreground="#000000").pack(
             anchor="w", pady=(0, 6)
         )
 
@@ -44,27 +133,55 @@ class GraphPanel(ttk.Frame):
             self,
             width=CANVAS_WIDTH,
             height=CANVAS_HEIGHT,
-            bg="#ffffff",
-            highlightthickness=0,
+            bg=RETRO_CANVAS_BG,
+            highlightbackground=RETRO_BORDER_DARK,
+            highlightthickness=1,
+            relief="sunken",
+            borderwidth=2,
         )
         self.canvas.pack(fill="x", pady=(0, 8))
         self.canvas.bind("<ButtonPress-1>", self._on_canvas_press)
         self.canvas.bind("<B1-Motion>", self._on_canvas_drag)
         self.canvas.bind("<ButtonRelease-1>", self._on_canvas_release)
 
-        button_row = ttk.Frame(self)
+        button_row = ttk.Frame(self, style="Retro.TFrame")
         button_row.pack(fill="x", pady=4)
-        ttk.Button(button_row, text="Add Node", command=self._prompt_add_node).pack(side="left", padx=2)
-        ttk.Button(button_row, text="Edit Node", command=self._prompt_edit_node).pack(side="left", padx=2)
-        ttk.Button(button_row, text="Add Edge", command=self._prompt_add_edge).pack(side="left", padx=2)
-        ttk.Button(button_row, text="Save", command=self._save_graph).pack(side="left", padx=2)
-        ttk.Button(button_row, text="Load", command=self._load_graph).pack(side="left", padx=2)
-        ttk.Button(button_row, text="Clear", command=self._clear_graph).pack(side="left", padx=2)
+        retro_button(button_row, text="Add Node", command=self._prompt_add_node).pack(side="left", padx=2)
+        retro_button(button_row, text="Edit Node", command=self._prompt_edit_node).pack(side="left", padx=2)
+        retro_button(button_row, text="Add Edge", command=self._prompt_add_edge).pack(side="left", padx=2)
+        retro_button(button_row, text="Save", command=self._save_graph).pack(side="left", padx=2)
+        retro_button(button_row, text="Load", command=self._load_graph).pack(side="left", padx=2)
+        retro_button(button_row, text="Clear", command=self._clear_graph).pack(side="left", padx=2)
+        retro_button(button_row, text="Delete Selected", command=self._delete_selected).pack(side="right")
 
-        lists_frame = ttk.Frame(self)
+        lists_frame = ttk.Frame(self, style="Retro.TFrame")
         lists_frame.pack(fill="both", expand=True)
-        self.node_list = tk.Listbox(lists_frame, height=6, background="#0f172a", foreground="#f8fafc")
-        self.edge_list = tk.Listbox(lists_frame, height=6, background="#0f172a", foreground="#f8fafc")
+        self.node_list = tk.Listbox(
+            lists_frame,
+            height=6,
+            background=RETRO_CANVAS_BG,
+            foreground=RETRO_TEXT,
+            font=app_font(10),
+            selectbackground=RETRO_SELECTION_BG,
+            selectforeground="#ffffff",
+            relief="sunken",
+            borderwidth=2,
+            highlightbackground=RETRO_BORDER_DARK,
+            highlightcolor=RETRO_BORDER_DARK,
+        )
+        self.edge_list = tk.Listbox(
+            lists_frame,
+            height=6,
+            background=RETRO_CANVAS_BG,
+            foreground=RETRO_TEXT,
+            font=app_font(10),
+            selectbackground=RETRO_SELECTION_BG,
+            selectforeground="#ffffff",
+            relief="sunken",
+            borderwidth=2,
+            highlightbackground=RETRO_BORDER_DARK,
+            highlightcolor=RETRO_BORDER_DARK,
+        )
         ttk.Label(lists_frame, text="Nodes").grid(row=0, column=0, sticky="w")
         ttk.Label(lists_frame, text="Edges").grid(row=0, column=1, sticky="w")
         self.node_list.grid(row=1, column=0, sticky="nsew", padx=(0, 4))
@@ -80,6 +197,7 @@ class GraphPanel(ttk.Frame):
         dialog = tk.Toplevel(self)
         dialog.title("Add Node")
         dialog.transient(self.winfo_toplevel())
+        dialog.configure(bg=RETRO_BG)
 
         ttk.Label(dialog, text="Label").grid(row=0, column=0, sticky="w")
         label_entry = ttk.Entry(dialog, width=30)
@@ -101,7 +219,7 @@ class GraphPanel(ttk.Frame):
             self._refresh_ui()
             dialog.destroy()
 
-        ttk.Button(dialog, text="Add", command=submit).grid(row=2, column=0, columnspan=2, pady=8)
+        retro_button(dialog, text="Add", command=submit).grid(row=2, column=0, columnspan=2, pady=8)
         dialog.grab_set()
         label_entry.focus_set()
 
@@ -114,6 +232,7 @@ class GraphPanel(ttk.Frame):
         dialog = tk.Toplevel(self)
         dialog.title("Add Edge")
         dialog.transient(self.winfo_toplevel())
+        dialog.configure(bg=RETRO_BG)
 
         ttk.Label(dialog, text="Source").grid(row=0, column=0, sticky="w")
         ttk.Label(dialog, text="Target").grid(row=1, column=0, sticky="w")
@@ -148,7 +267,7 @@ class GraphPanel(ttk.Frame):
             self._refresh_ui()
             dialog.destroy()
 
-        ttk.Button(dialog, text="Add", command=submit).grid(row=3, column=0, columnspan=2, pady=8)
+        retro_button(dialog, text="Add", command=submit).grid(row=3, column=0, columnspan=2, pady=8)
         dialog.grab_set()
 
     def _save_graph(self) -> None:
@@ -206,7 +325,7 @@ class GraphPanel(ttk.Frame):
             self.canvas.create_line(*src.position, *dst.position, fill="#3b82f6", width=2)
             mid_x = (src.position[0] + dst.position[0]) / 2
             mid_y = (src.position[1] + dst.position[1]) / 2
-            self.canvas.create_text(mid_x, mid_y, text=edge.relation, fill="#9ca3af", font=("Helvetica", 9))
+            self.canvas.create_text(mid_x, mid_y, text=edge.relation, fill="#000000", font=app_font(9))
         for node in nodes:
             x, y = node.position
             self.canvas.create_oval(
@@ -218,7 +337,7 @@ class GraphPanel(ttk.Frame):
                 outline="#f9fafb",
                 width=2,
             )
-            self.canvas.create_text(x, y, text=node.label[:6], fill="#111827", font=("Helvetica", 10, "bold"))
+            self.canvas.create_text(x, y, text=node.label[:6], fill="#111827", font=app_font(10, "bold"))
 
     def _refresh_lists(self) -> None:
         selection = self.node_list.curselection()
@@ -228,6 +347,13 @@ class GraphPanel(ttk.Frame):
             if 0 <= index < len(self._node_order):
                 selected_id = self._node_order[index]
 
+        edge_selection = self.edge_list.curselection()
+        selected_edge_key: Optional[int] = None
+        if edge_selection:
+            edge_index = edge_selection[0]
+            if 0 <= edge_index < len(self._edge_order):
+                selected_edge_key = self._edge_order[edge_index]
+
         self.node_list.delete(0, tk.END)
         self._node_order = []
         for idx, node in enumerate(self.panel_state.model.list_nodes()):
@@ -236,13 +362,19 @@ class GraphPanel(ttk.Frame):
             self._node_order.append(node.id)
             if selected_id and node.id == selected_id:
                 self.node_list.selection_set(idx)
+
         self.edge_list.delete(0, tk.END)
-        for edge in self.panel_state.model.list_edges():
+        self._edge_order = []
+        for edge_idx, edge in enumerate(self.panel_state.model.list_edges()):
             src = self.panel_state.model.nodes.get(edge.source)
             dst = self.panel_state.model.nodes.get(edge.target)
             src_label = src.label if src else edge.source
             dst_label = dst.label if dst else edge.target
+            list_index = self.edge_list.size()
             self.edge_list.insert(tk.END, f"{src_label} --{edge.relation}--> {dst_label}")
+            self._edge_order.append(edge_idx)
+            if selected_edge_key is not None and edge_idx == selected_edge_key:
+                self.edge_list.selection_set(list_index)
 
     def _prompt_edit_node(self) -> None:
         node_id = self._get_selected_node_id()
@@ -260,10 +392,47 @@ class GraphPanel(ttk.Frame):
             return self._node_order[index]
         return None
 
+    def _get_selected_edge_index(self) -> Optional[int]:
+        selection = self.edge_list.curselection()
+        if not selection:
+            return None
+        index = selection[0]
+        if 0 <= index < len(self._edge_order):
+            return self._edge_order[index]
+        return None
+
     def _on_node_list_double_click(self, _: tk.Event) -> None:  # type: ignore[override]
         node_id = self._get_selected_node_id()
         if node_id:
             self._open_node_editor(node_id)
+
+    def _delete_selected(self) -> None:
+        node_id = self._get_selected_node_id()
+        if node_id:
+            node = self.panel_state.model.nodes.get(node_id)
+            label = node.label if node else node_id
+            if messagebox.askyesno("Delete node", f"Remove node '{label}' and its edges?"):
+                self.panel_state.model.remove_node(node_id)
+                self._refresh_ui()
+            return
+
+        edge_index = self._get_selected_edge_index()
+        if edge_index is not None:
+            edges = self.panel_state.model.list_edges()
+            edge_desc = "the selected edge"
+            if 0 <= edge_index < len(edges):
+                edge = edges[edge_index]
+                src = self.panel_state.model.nodes.get(edge.source)
+                dst = self.panel_state.model.nodes.get(edge.target)
+                src_label = src.label if src else edge.source
+                dst_label = dst.label if dst else edge.target
+                edge_desc = f"{src_label} --{edge.relation}--> {dst_label}"
+            if messagebox.askyesno("Delete edge", f"Remove {edge_desc}?"):
+                self.panel_state.model.remove_edge(edge_index)
+                self._refresh_ui()
+            return
+
+        messagebox.showinfo("Select an item", "Select a node or edge to delete.")
 
     def _open_node_editor(self, node_id: str) -> None:
         node = self.panel_state.model.nodes.get(node_id)
@@ -274,6 +443,7 @@ class GraphPanel(ttk.Frame):
         dialog = tk.Toplevel(self)
         dialog.title("Edit Node")
         dialog.transient(self.winfo_toplevel())
+        dialog.configure(bg=RETRO_BG)
         ttk.Label(dialog, text="Label").grid(row=0, column=0, sticky="w")
         label_var = tk.StringVar(value=node.label)
         ttk.Entry(dialog, textvariable=label_var, width=30).grid(row=0, column=1, padx=6, pady=4)
@@ -290,10 +460,10 @@ class GraphPanel(ttk.Frame):
             self._refresh_ui()
             dialog.destroy()
 
-        button_row = ttk.Frame(dialog)
+        button_row = ttk.Frame(dialog, style="Retro.TFrame")
         button_row.grid(row=2, column=0, columnspan=2, pady=8)
-        ttk.Button(button_row, text="Save", command=save).pack(side="left", padx=4)
-        ttk.Button(button_row, text="Cancel", command=dialog.destroy).pack(side="left", padx=4)
+        retro_button(button_row, text="Save", command=save).pack(side="left", padx=4)
+        retro_button(button_row, text="Cancel", command=dialog.destroy).pack(side="left", padx=4)
         dialog.grab_set()
 
     # ------------------------------------------------------------------
@@ -335,8 +505,8 @@ class GraphPanel(ttk.Frame):
 
 class ResultsPanel(ttk.Frame):
     def __init__(self, master: tk.Misc) -> None:
-        super().__init__(master, padding=8)
-        ttk.Label(self, text="Alignment Results", font=("Helvetica", 14, "bold")).pack(anchor="w")
+        super().__init__(master, padding=8, style="Retro.TFrame")
+        ttk.Label(self, text="Alignment Results", font=app_font(14, "bold")).pack(anchor="w")
 
         self.nn_tree = self._build_tree("Nearest Neighbor Alignments")
         self.qubo_tree = self._build_tree("QUBO Alignments")
@@ -347,8 +517,11 @@ class ResultsPanel(ttk.Frame):
             height=10,
             width=80,
             state="disabled",
-            background="#0f172a",
-            foreground="#f8fafc",
+            background=RETRO_CANVAS_BG,
+            foreground=RETRO_TEXT,
+            borderwidth=2,
+            relief="sunken",
+            font=app_font(10),
         )
         self.log_text.pack(fill="both", expand=True)
 
@@ -356,12 +529,12 @@ class ResultsPanel(ttk.Frame):
         ttk.Label(
             self,
             textvariable=self.energy_var,
-            font=("Helvetica", 11, "italic"),
+            font=app_font(11, "italic"),
             foreground="#f97316",
         ).pack(anchor="w", pady=6)
 
     def _build_tree(self, title: str) -> ttk.Treeview:
-        ttk.Label(self, text=title, font=("Helvetica", 11, "bold")).pack(anchor="w", pady=(8, 0))
+        ttk.Label(self, text=title, font=app_font(11, "bold")).pack(anchor="w", pady=(8, 0))
         columns = ("wiki", "arxiv", "similarity")
         tree = ttk.Treeview(self, columns=columns, show="headings", height=6)
         tree.heading("wiki", text="Wiki Entity")
@@ -405,6 +578,7 @@ class NodeMatrixEditor(tk.Toplevel):
         super().__init__(master)
         self.title("Edit H_node Matrix")
         self.geometry("600x420")
+        self.configure(bg=RETRO_BG)
         self.node_info = node_info
         self.similarity: torch.Tensor = cast(torch.Tensor, node_info["similarity"])
         self.wiki_nodes: Sequence[GraphNode] = node_info["wiki_nodes"]  # type: ignore[assignment]
@@ -419,13 +593,13 @@ class NodeMatrixEditor(tk.Toplevel):
         self.tree.pack(fill="both", expand=True, padx=8, pady=8)
         self.tree.bind("<<TreeviewSelect>>", self._on_select)
 
-        form = ttk.Frame(self)
+        form = ttk.Frame(self, style="Retro.TFrame")
         form.pack(fill="x", padx=8, pady=(0, 8))
         ttk.Label(form, text="New value:").pack(side="left")
         self.value_var = tk.StringVar()
         ttk.Entry(form, textvariable=self.value_var, width=12).pack(side="left", padx=6)
-        ttk.Button(form, text="Update", command=self._apply_change).pack(side="left")
-        ttk.Button(form, text="Close", command=self.destroy).pack(side="right")
+        retro_button(form, text="Update", command=self._apply_change).pack(side="left", padx=4)
+        retro_button(form, text="Close", command=self.destroy).pack(side="right")
 
         self._populate_rows()
 
@@ -476,8 +650,9 @@ class StructuralMatrixEditor(tk.Toplevel):
         structural_info: Dict[str, object],
     ) -> None:
         super().__init__(master)
-        self.title("Edit H_structure Weights")
+        self.title("Edit H_structure Matrix")
         self.geometry("700x420")
+        self.configure(bg=RETRO_BG)
         self.node_info = node_info
         self.structural_info = structural_info
         weights_raw = structural_info.get("weights", {})
@@ -514,13 +689,13 @@ class StructuralMatrixEditor(tk.Toplevel):
         self.tree.pack(fill="both", expand=True, padx=8, pady=8)
         self.tree.bind("<<TreeviewSelect>>", self._on_select)
 
-        form = ttk.Frame(self)
+        form = ttk.Frame(self, style="Retro.TFrame")
         form.pack(fill="x", padx=8, pady=(0, 8))
         ttk.Label(form, text="New weight:").pack(side="left")
         self.weight_var = tk.StringVar()
         ttk.Entry(form, textvariable=self.weight_var, width=12).pack(side="left", padx=6)
-        ttk.Button(form, text="Update", command=self._apply_change).pack(side="left")
-        ttk.Button(form, text="Close", command=self.destroy).pack(side="right")
+        retro_button(form, text="Update", command=self._apply_change).pack(side="left", padx=4)
+        retro_button(form, text="Close", command=self.destroy).pack(side="right")
 
         self._populate_rows()
 
@@ -567,7 +742,7 @@ class StructuralMatrixEditor(tk.Toplevel):
 
 class DemoApp(ttk.Frame):
     def __init__(self, master: tk.Misc) -> None:
-        super().__init__(master)
+        super().__init__(master, style="Retro.TFrame", padding=4)
         self.runner = ManualPipelineRunner()
         self.status_var = tk.StringVar(value="Ready")
         self.running = False
@@ -584,38 +759,38 @@ class DemoApp(ttk.Frame):
         self.pack(fill="both", expand=True)
         self.winfo_toplevel().title("Handmade KG Alignment Demo")
 
-        panels = ttk.Frame(self)
+        panels = ttk.Frame(self, style="Retro.TFrame")
         panels.pack(fill="both", padx=8, pady=8)
         self.wiki_panel = GraphPanel(panels, "Wiki Graph", "#38bdf8")
         self.arxiv_panel = GraphPanel(panels, "arXiv Graph", "#fcd34d")
         self.wiki_panel.pack(side="left", expand=True, fill="both")
         self.arxiv_panel.pack(side="left", expand=True, fill="both")
 
-        controls = ttk.Frame(self)
+        controls = ttk.Frame(self, style="Retro.TFrame")
         controls.pack(fill="x", padx=8, pady=(0, 4))
         self.nn_threshold_var = tk.StringVar(value=f"{DEFAULT_SIMILARITY_THRESHOLD:.2f}")
         self.qubo_threshold_var = tk.StringVar(value=f"{DEFAULT_SIMILARITY_THRESHOLD:.2f}")
 
-        pipeline_row = ttk.Frame(controls)
+        pipeline_row = ttk.Frame(controls, style="Retro.TFrame")
         pipeline_row.pack(fill="x", pady=(0, 4))
-        ttk.Button(
+        retro_button(
             pipeline_row,
             text="Generate Embeddings",
             command=self._prepare_embeddings,
         ).pack(side="left")
-        ttk.Button(
+        retro_button(
             pipeline_row,
             text="Run Alignment",
             command=self._run_alignment,
         ).pack(side="left", padx=6)
         ttk.Label(pipeline_row, textvariable=self.status_var).pack(side="left", padx=12)
-        ttk.Button(
+        retro_button(
             pipeline_row,
             text="Show Q.U.A.K.",
             command=self._show_ascii_art,
         ).pack(side="right")
 
-        threshold_row = ttk.LabelFrame(controls, text="Similarity thresholds (0-1)")
+        threshold_row = ttk.LabelFrame(controls, text="Similarity thresholds (0-1)", style="Retro.TLabelframe")
         threshold_row.pack(fill="x", pady=(0, 4))
         ttk.Label(threshold_row, text="Nearest Neighbor ≥").grid(row=0, column=0, sticky="w")
         ttk.Entry(threshold_row, textvariable=self.nn_threshold_var, width=8).grid(row=0, column=1, padx=(4, 16))
@@ -628,27 +803,27 @@ class DemoApp(ttk.Frame):
         ).grid(row=1, column=0, columnspan=4, sticky="w", pady=(4, 0))
         threshold_row.columnconfigure(4, weight=1)
 
-        editor_row = ttk.Frame(controls)
+        editor_row = ttk.Frame(controls, style="Retro.TFrame")
         editor_row.pack(fill="x", pady=(0, 4))
-        ttk.Button(
+        retro_button(
             editor_row,
             text="Edit H_node Matrix",
             command=self._open_node_editor,
         ).pack(side="left")
-        ttk.Button(
+        retro_button(
             editor_row,
             text="Edit H_structure Weights",
             command=self._open_structural_editor,
         ).pack(side="left", padx=6)
 
-        experience_row = ttk.Frame(controls)
+        experience_row = ttk.Frame(controls, style="Retro.TFrame")
         experience_row.pack(fill="x")
-        ttk.Button(
+        retro_button(
             experience_row,
             text="Save Experience",
             command=self._save_experience,
         ).pack(side="left")
-        ttk.Button(
+        retro_button(
             experience_row,
             text="Load Experience",
             command=self._load_experience,
@@ -657,15 +832,17 @@ class DemoApp(ttk.Frame):
         self.results = ResultsPanel(self)
         self.results.pack(fill="both", expand=True, padx=8, pady=(0, 8))
 
-        art_container = ttk.Frame(self, padding=(0, 0, 8, 8))
+        art_container = ttk.Frame(self, padding=(0, 0, 8, 8), style="Retro.TFrame")
         art_container.pack(fill="x", side="bottom", anchor="e")
         art_label = tk.Label(
             art_container,
             text=self._ascii_art,
-            font=("Courier New", 8),
+            font=app_font(8),
             justify="right",
-            bg="#020617",
-            fg="#f8fafc",
+            bg=RETRO_BG,
+            fg="#000080",
+            borderwidth=2,
+            relief="sunken",
         )
         art_label.pack(anchor="e")
 
@@ -683,7 +860,7 @@ class DemoApp(ttk.Frame):
             try:
                 node_info, structural_info, logs = self.runner.prepare_inputs(wiki_copy, arxiv_copy)
             except Exception as exc:
-                self.after(0, lambda: self._handle_error(exc))
+                self.after(0, lambda err=exc: self._handle_error(err))
             else:
                 self.after(0, lambda: self._store_prepared_inputs(node_info, structural_info, logs))
             finally:
@@ -737,7 +914,7 @@ class DemoApp(ttk.Frame):
                     qubo_threshold=qubo_threshold,
                 )
             except Exception as exc:
-                self.after(0, lambda: self._handle_error(exc))
+                self.after(0, lambda err=exc: self._handle_error(err))
             else:
                 self.after(0, lambda: self._display_result(result))
             finally:
@@ -945,13 +1122,13 @@ class DemoApp(ttk.Frame):
 
         window = tk.Toplevel(self)
         window.title("Q.U.A.K. Mascot")
-        window.configure(padx=12, pady=12)
+        window.configure(padx=12, pady=12, bg=RETRO_BG)
         window.resizable(False, False)
 
         label = ttk.Label(
             window,
-            text="Quantum Unconstrained Alignment of Knowledge (or Quantum Utility Alignment Kit)",
-            font=("Helvetica", 12, "bold"),
+            text="Quadratic Unconstrained Alignment of Knowledge (or Quantum Utility Alignment Kit)",
+            font=app_font(12, "bold"),
         )
         label.pack(anchor="center", pady=(0, 8))
 
@@ -959,17 +1136,18 @@ class DemoApp(ttk.Frame):
             window,
             width=50,
             height=len(self._ascii_art.splitlines()) + 1,
-            font=("Courier New", 10),
-            background="#020617",
-            foreground="#f8fafc",
-            borderwidth=0,
+            font=app_font(10),
+            background=RETRO_CANVAS_BG,
+            foreground=RETRO_TEXT,
+            borderwidth=2,
+            relief="sunken",
             highlightthickness=0,
         )
         text.insert("1.0", self._ascii_art + "\n")
         text.configure(state="disabled")
         text.pack()
 
-        ttk.Button(window, text="Close", command=window.destroy).pack(pady=(10, 0))
+        retro_button(window, text="Close", command=window.destroy).pack(pady=(10, 0))
 
         def _on_close() -> None:
             self._art_window = None
@@ -983,6 +1161,26 @@ def main() -> None:
     root = tk.Tk()
     style = ttk.Style()
     style.theme_use("clam")
+    root.configure(bg=RETRO_BG)
+    configure_retro_style(style)
+    for font_name in (
+        "TkDefaultFont",
+        "TkTextFont",
+        "TkMenuFont",
+        "TkHeadingFont",
+        "TkCaptionFont",
+        "TkSmallCaptionFont",
+        "TkMessageBoxFont",
+        "TkTooltipFont",
+        "TkFixedFont",
+        "TkIconFont",
+    ):
+        try:
+            tkfont.nametofont(font_name).configure(family=APP_FONT_FAMILY)
+        except tk.TclError:
+            continue
+    root.option_add("*Font", app_font(10))
+    root.option_add("*Background", RETRO_PANEL_BG)
     app = DemoApp(root)
     app.mainloop()
 

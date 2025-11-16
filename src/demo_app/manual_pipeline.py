@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Sequence, Tuple, cast
 
 import dimod
+import numpy as np
 import torch
 import torch.nn.functional as F
 from neal import SimulatedAnnealingSampler
@@ -195,14 +196,15 @@ class ManualPipelineRunner:
         mp_edge_index, _ = add_self_loops(pos_edge_index, num_nodes=num_nodes)
 
         if USE_SCIBERT_FEATURES:
-            features = []
+            features: List[np.ndarray] = []
             for node in nodes:
                 text = node.label
                 if node.description:
                     text = f"{node.label}. {node.description}"
                 embedding = get_mean_pooled_embedding(text, self.tokenizer, self.scibert)
                 features.append(embedding.numpy())
-            x = torch.tensor(features, dtype=torch.float)
+            stacked = np.stack(features, axis=0).astype(np.float32, copy=False)
+            x = torch.from_numpy(stacked)
         else:
             x = torch.eye(num_nodes)
 

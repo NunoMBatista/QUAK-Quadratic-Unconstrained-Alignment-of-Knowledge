@@ -327,6 +327,7 @@ ANCHOR_ALIGNMENT_PAIRS = [
     # example:
     # {"wiki": "Grover's algorithm", "arxiv": "Grover algorithm"},
     {"wiki": "qubit", "arxiv": "qubits"},
+    {"wiki": "Grover's algorithm", "arxiv": "Grover algorithm"}
 ]
 
 

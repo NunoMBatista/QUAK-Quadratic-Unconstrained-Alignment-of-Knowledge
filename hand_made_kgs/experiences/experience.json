@@ -1,0 +1,50 @@
+{
+  "wiki_graph": {
+    "name": "Wiki Graph",
+    "nodes": [
+      {
+        "id": "n1",
+        "label": "gsd",
+        "description": "",
+        "position": [
+          223,
+          118
+        ]
+      }
+    ],
+    "edges": [],
+    "next_id": 2
+  },
+  "arxiv_graph": {
+    "name": "arXiv Graph",
+    "nodes": [
+      {
+        "id": "n1",
+        "label": "gse",
+        "description": "",
+        "position": [
+          50,
+          88
+        ]
+      }
+    ],
+    "edges": [],
+    "next_id": 2
+  },
+  "wiki_order": [
+    "n1"
+  ],
+  "arxiv_order": [
+    "n1"
+  ],
+  "similarity": [
+    [
+      0.7809149026870728
+    ]
+  ],
+  "structural_info": {
+    "wiki_edges": [],
+    "arxiv_edges": [],
+    "weights": []
+  }
+}
