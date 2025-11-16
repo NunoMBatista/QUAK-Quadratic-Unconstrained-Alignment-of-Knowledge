@@ -14,6 +14,7 @@ import torch
 from . import storage
 from .graph_model import GraphModel, GraphNode
 from .manual_pipeline import ManualPipelineRunner, PipelineResult
+from src.config import DEFAULT_SIMILARITY_THRESHOLD
 from src.quak import QUAK_ASCII_MASCOT, QUAK_WORDMARK
 
 CANVAS_WIDTH = 420
@@ -33,6 +34,7 @@ class GraphPanel(ttk.Frame):
         self.panel_state = GraphPanelState(model=GraphModel(title), color=color)
         self._drag_node: Optional[str] = None
         self._drag_offset = (0.0, 0.0)
+        self._node_order: List[str] = []
 
         ttk.Label(self, text=title, font=("Helvetica", 14, "bold"), foreground="#000000").pack(
             anchor="w", pady=(0, 6)
@@ -53,6 +55,7 @@ class GraphPanel(ttk.Frame):
         button_row = ttk.Frame(self)
         button_row.pack(fill="x", pady=4)
         ttk.Button(button_row, text="Add Node", command=self._prompt_add_node).pack(side="left", padx=2)
+        ttk.Button(button_row, text="Edit Node", command=self._prompt_edit_node).pack(side="left", padx=2)
         ttk.Button(button_row, text="Add Edge", command=self._prompt_add_edge).pack(side="left", padx=2)
         ttk.Button(button_row, text="Save", command=self._save_graph).pack(side="left", padx=2)
         ttk.Button(button_row, text="Load", command=self._load_graph).pack(side="left", padx=2)
@@ -66,6 +69,7 @@ class GraphPanel(ttk.Frame):
         ttk.Label(lists_frame, text="Edges").grid(row=0, column=1, sticky="w")
         self.node_list.grid(row=1, column=0, sticky="nsew", padx=(0, 4))
         self.edge_list.grid(row=1, column=1, sticky="nsew")
+        self.node_list.bind("<Double-Button-1>", self._on_node_list_double_click)
         lists_frame.columnconfigure(0, weight=1)
         lists_frame.columnconfigure(1, weight=1)
 
@@ -93,7 +97,7 @@ class GraphPanel(ttk.Frame):
                 random.randint(NODE_RADIUS + 10, CANVAS_WIDTH - NODE_RADIUS - 10),
                 random.randint(NODE_RADIUS + 10, CANVAS_HEIGHT - NODE_RADIUS - 10),
             )
-            self.panel_state.model.add_node(label, desc_entry.get().strip(), position)
+            node = self.panel_state.model.add_node(label, desc_entry.get().strip(), position)
             self._refresh_ui()
             dialog.destroy()
 
@@ -217,10 +221,21 @@ class GraphPanel(ttk.Frame):
             self.canvas.create_text(x, y, text=node.label[:6], fill="#111827", font=("Helvetica", 10, "bold"))
 
     def _refresh_lists(self) -> None:
+        selection = self.node_list.curselection()
+        selected_id: Optional[str] = None
+        if selection:
+            index = selection[0]
+            if 0 <= index < len(self._node_order):
+                selected_id = self._node_order[index]
+
         self.node_list.delete(0, tk.END)
-        for node in self.panel_state.model.list_nodes():
+        self._node_order = []
+        for idx, node in enumerate(self.panel_state.model.list_nodes()):
             desc = f" - {node.description}" if node.description else ""
             self.node_list.insert(tk.END, f"{node.label}{desc}")
+            self._node_order.append(node.id)
+            if selected_id and node.id == selected_id:
+                self.node_list.selection_set(idx)
         self.edge_list.delete(0, tk.END)
         for edge in self.panel_state.model.list_edges():
             src = self.panel_state.model.nodes.get(edge.source)
@@ -228,6 +243,58 @@ class GraphPanel(ttk.Frame):
             src_label = src.label if src else edge.source
             dst_label = dst.label if dst else edge.target
             self.edge_list.insert(tk.END, f"{src_label} --{edge.relation}--> {dst_label}")
+
+    def _prompt_edit_node(self) -> None:
+        node_id = self._get_selected_node_id()
+        if not node_id:
+            messagebox.showinfo("Select a node", "Choose a node from the list to edit.")
+            return
+        self._open_node_editor(node_id)
+
+    def _get_selected_node_id(self) -> Optional[str]:
+        selection = self.node_list.curselection()
+        if not selection:
+            return None
+        index = selection[0]
+        if 0 <= index < len(self._node_order):
+            return self._node_order[index]
+        return None
+
+    def _on_node_list_double_click(self, _: tk.Event) -> None:  # type: ignore[override]
+        node_id = self._get_selected_node_id()
+        if node_id:
+            self._open_node_editor(node_id)
+
+    def _open_node_editor(self, node_id: str) -> None:
+        node = self.panel_state.model.nodes.get(node_id)
+        if not node:
+            messagebox.showerror("Missing node", "Could not find the selected node for editing.")
+            return
+
+        dialog = tk.Toplevel(self)
+        dialog.title("Edit Node")
+        dialog.transient(self.winfo_toplevel())
+        ttk.Label(dialog, text="Label").grid(row=0, column=0, sticky="w")
+        label_var = tk.StringVar(value=node.label)
+        ttk.Entry(dialog, textvariable=label_var, width=30).grid(row=0, column=1, padx=6, pady=4)
+        ttk.Label(dialog, text="Description").grid(row=1, column=0, sticky="w")
+        desc_var = tk.StringVar(value=node.description)
+        ttk.Entry(dialog, textvariable=desc_var, width=30).grid(row=1, column=1, padx=6, pady=4)
+
+        def save() -> None:
+            new_label = label_var.get().strip()
+            if not new_label:
+                messagebox.showwarning("Missing label", "Provide a label for the node.")
+                return
+            self.panel_state.model.update_node(node_id, label=new_label, description=desc_var.get())
+            self._refresh_ui()
+            dialog.destroy()
+
+        button_row = ttk.Frame(dialog)
+        button_row.grid(row=2, column=0, columnspan=2, pady=8)
+        ttk.Button(button_row, text="Save", command=save).pack(side="left", padx=4)
+        ttk.Button(button_row, text="Cancel", command=dialog.destroy).pack(side="left", padx=4)
+        dialog.grab_set()
 
     # ------------------------------------------------------------------
     def _hit_test(self, x: float, y: float) -> Optional[str]:
@@ -526,6 +593,8 @@ class DemoApp(ttk.Frame):
 
         controls = ttk.Frame(self)
         controls.pack(fill="x", padx=8, pady=(0, 4))
+        self.nn_threshold_var = tk.StringVar(value=f"{DEFAULT_SIMILARITY_THRESHOLD:.2f}")
+        self.qubo_threshold_var = tk.StringVar(value=f"{DEFAULT_SIMILARITY_THRESHOLD:.2f}")
 
         pipeline_row = ttk.Frame(controls)
         pipeline_row.pack(fill="x", pady=(0, 4))
@@ -545,6 +614,19 @@ class DemoApp(ttk.Frame):
             text="Show Q.U.A.K.",
             command=self._show_ascii_art,
         ).pack(side="right")
+
+        threshold_row = ttk.LabelFrame(controls, text="Similarity thresholds (0-1)")
+        threshold_row.pack(fill="x", pady=(0, 4))
+        ttk.Label(threshold_row, text="Nearest Neighbor ≥").grid(row=0, column=0, sticky="w")
+        ttk.Entry(threshold_row, textvariable=self.nn_threshold_var, width=8).grid(row=0, column=1, padx=(4, 16))
+        ttk.Label(threshold_row, text="QUBO ≥").grid(row=0, column=2, sticky="w")
+        ttk.Entry(threshold_row, textvariable=self.qubo_threshold_var, width=8).grid(row=0, column=3, padx=(4, 0))
+        ttk.Label(
+            threshold_row,
+            text="Leave blank to disable filtering for either solver.",
+            foreground="#475569",
+        ).grid(row=1, column=0, columnspan=4, sticky="w", pady=(4, 0))
+        threshold_row.columnconfigure(4, weight=1)
 
         editor_row = ttk.Frame(controls)
         editor_row.pack(fill="x", pady=(0, 4))
@@ -632,6 +714,12 @@ class DemoApp(ttk.Frame):
                 "Run 'Generate Embeddings' first to build the similarity and structural matrices.",
             )
             return
+        try:
+            nn_threshold = self._parse_threshold_value(self.nn_threshold_var.get(), "Nearest Neighbor")
+            qubo_threshold = self._parse_threshold_value(self.qubo_threshold_var.get(), "QUBO")
+        except ValueError as exc:
+            messagebox.showerror("Invalid threshold", str(exc))
+            return
         self.running = True
         self.status_var.set("Running alignment solvers…")
 
@@ -641,7 +729,13 @@ class DemoApp(ttk.Frame):
 
         def task() -> None:
             try:
-                result = self.runner.solve_from_inputs(node_info, structural_info, logs_input)
+                result = self.runner.solve_from_inputs(
+                    node_info,
+                    structural_info,
+                    logs_input,
+                    nn_threshold=nn_threshold,
+                    qubo_threshold=qubo_threshold,
+                )
             except Exception as exc:
                 self.after(0, lambda: self._handle_error(exc))
             else:
@@ -657,6 +751,18 @@ class DemoApp(ttk.Frame):
     def _display_result(self, result: PipelineResult) -> None:
         self.prep_logs = list(result.logs)
         self.results.display_result(result)
+
+    def _parse_threshold_value(self, raw_value: str, label: str) -> Optional[float]:
+        value = raw_value.strip()
+        if not value:
+            return None
+        try:
+            parsed = float(value)
+        except ValueError as exc:  # pragma: no cover - GUI validation
+            raise ValueError(f"{label} threshold must be a number between 0 and 1.") from exc
+        if not 0.0 <= parsed <= 1.0:
+            raise ValueError(f"{label} threshold must be between 0 and 1.")
+        return parsed
 
     def _open_node_editor(self) -> None:
         if self.node_info is None:

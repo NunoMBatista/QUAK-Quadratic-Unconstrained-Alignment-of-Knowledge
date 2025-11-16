@@ -82,6 +82,24 @@ class GraphModel:
         self.nodes[node.id] = node
         return node
 
+    def update_node(
+        self,
+        node_id: str,
+        *,
+        label: Optional[str] = None,
+        description: Optional[str] = None,
+    ) -> Optional[GraphNode]:
+        node = self.nodes.get(node_id)
+        if not node:
+            return None
+        if label is not None:
+            label = label.strip()
+            if label:
+                node.label = label
+        if description is not None:
+            node.description = description.strip()
+        return node
+
     def remove_node(self, node_id: str) -> None:
         if node_id not in self.nodes:
             return

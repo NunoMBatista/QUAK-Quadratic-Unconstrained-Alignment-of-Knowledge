@@ -69,9 +69,22 @@ class ManualPipelineRunner:
     # ------------------------------------------------------------------
     # Public API
     # ------------------------------------------------------------------
-    def run(self, wiki_graph: GraphModel, arxiv_graph: GraphModel) -> PipelineResult:
+    def run(
+        self,
+        wiki_graph: GraphModel,
+        arxiv_graph: GraphModel,
+        *,
+        nn_threshold: Optional[float] = None,
+        qubo_threshold: Optional[float] = None,
+    ) -> PipelineResult:
         node_info, structural_info, logs = self.prepare_inputs(wiki_graph, arxiv_graph)
-        return self.solve_from_inputs(node_info, structural_info, logs)
+        return self.solve_from_inputs(
+            node_info,
+            structural_info,
+            logs,
+            nn_threshold=nn_threshold,
+            qubo_threshold=qubo_threshold,
+        )
 
     def prepare_inputs(
         self, wiki_graph: GraphModel, arxiv_graph: GraphModel
@@ -110,10 +123,13 @@ class ManualPipelineRunner:
         node_info: Dict[str, object],
         structural_info: Dict[str, object],
         logs: Optional[List[str]] = None,
+        *,
+        nn_threshold: Optional[float] = None,
+        qubo_threshold: Optional[float] = None,
     ) -> PipelineResult:
         log_buffer = logs if logs is not None else []
         log_buffer.append("Solving nearest-neighbor baseline alignments...")
-        nn_alignments = self._nearest_neighbor_alignments(node_info)
+        nn_alignments = self._nearest_neighbor_alignments(node_info, similarity_threshold=nn_threshold)
 
         log_buffer.append("Formulating QUBO problem...")
         qubo_data = formulate.formulate(
@@ -123,7 +139,7 @@ class ManualPipelineRunner:
             structural_weight=QUBO_STRUCTURE_WEIGHT,
             wiki_penalty=QUBO_WIKI_PENALTY,
             arxiv_penalty=QUBO_ARXIV_PENALTY,
-            similarity_threshold=None,
+            similarity_threshold=qubo_threshold,
         )
         if not qubo_data["index"]:
             raise ValueError(
@@ -304,7 +320,11 @@ class ManualPipelineRunner:
         }
 
     # ------------------------------------------------------------------
-    def _nearest_neighbor_alignments(self, node_info: Dict[str, object]) -> List[AlignmentRow]:
+    def _nearest_neighbor_alignments(
+        self,
+        node_info: Dict[str, object],
+        similarity_threshold: Optional[float] = None,
+    ) -> List[AlignmentRow]:
         similarity = cast(torch.Tensor, node_info["similarity"])
         wiki_nodes: Sequence[GraphNode] = node_info["wiki_nodes"]  # type: ignore[assignment]
         arxiv_nodes: Sequence[GraphNode] = node_info["arxiv_nodes"]  # type: ignore[assignment]
@@ -321,6 +341,8 @@ class ManualPipelineRunner:
         alignments: List[AlignmentRow] = []
         for score, i, j in candidates:
             if i in used_wiki or j in used_arxiv:
+                continue
+            if similarity_threshold is not None and score < similarity_threshold:
                 continue
             used_wiki.add(i)
             used_arxiv.add(j)
