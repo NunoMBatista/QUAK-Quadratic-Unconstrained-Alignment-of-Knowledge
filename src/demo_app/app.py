@@ -14,8 +14,8 @@ import torch
 
 from . import storage
 from .graph_model import GraphModel, GraphNode
-from .manual_pipeline import ManualPipelineRunner, PipelineResult
-from src.config import DEFAULT_SIMILARITY_THRESHOLD
+from .manual_pipeline import EmbeddingMode, ManualPipelineRunner, PipelineResult
+from src.config import DEFAULT_SIMILARITY_THRESHOLD, QUBO_NODE_WEIGHT, QUBO_STRUCTURE_WEIGHT
 from src.quak import QUAK_ASCII_MASCOT, QUAK_WORDMARK
 
 CANVAS_WIDTH = 420
@@ -508,8 +508,42 @@ class ResultsPanel(ttk.Frame):
         super().__init__(master, padding=8, style="Retro.TFrame")
         ttk.Label(self, text="Alignment Results", font=app_font(14, "bold")).pack(anchor="w")
 
-        self.nn_tree = self._build_tree("Nearest Neighbor Alignments")
-        self.qubo_tree = self._build_tree("QUBO Alignments")
+        tree_row = ttk.Frame(self, style="Retro.TFrame")
+        tree_row.pack(fill="x", pady=(0, 4))
+
+        alignments_frame = ttk.Frame(tree_row, style="Retro.TFrame")
+        alignments_frame.pack(side="left", fill="both", expand=True)
+        nn_columns = [
+            {"id": "wiki", "label": "Wiki Entity", "width": 160},
+            {"id": "arxiv", "label": "arXiv Entity", "width": 160},
+            {"id": "similarity", "label": "Similarity", "width": 120, "anchor": "center"},
+        ]
+        qubo_columns = [
+            {"id": "wiki", "label": "Wiki Entity", "width": 140},
+            {"id": "arxiv", "label": "arXiv Entity", "width": 140},
+            {"id": "similarity", "label": "Similarity", "width": 90, "anchor": "center"},
+            {"id": "structure", "label": "Structure", "width": 90, "anchor": "center"},
+            {"id": "total", "label": "Total", "width": 90, "anchor": "center"},
+        ]
+        self.nn_tree = self._build_tree("Nearest Neighbor Alignments", nn_columns, parent=alignments_frame)
+        self.qubo_tree = self._build_tree("QUBO Alignments", qubo_columns, parent=alignments_frame)
+
+        unaligned_frame = ttk.LabelFrame(
+            tree_row,
+            text="Unaligned (below thresholds)",
+            style="Retro.TLabelframe",
+            padding=4,
+        )
+        unaligned_frame.pack(side="left", fill="y", padx=(8, 0))
+        self.unaligned_tree = self._build_unaligned_tree(unaligned_frame)
+        self.unaligned_summary = tk.StringVar(value="Run an alignment to see threshold misses.")
+        tk.Label(
+            unaligned_frame,
+            textvariable=self.unaligned_summary,
+            wraplength=180,
+            foreground="#475569",
+            background=RETRO_PANEL_BG,
+        ).pack(anchor="w", pady=(4, 0))
 
         ttk.Label(self, text="Pipeline Log").pack(anchor="w", pady=(8, 0))
         self.log_text = tk.Text(
@@ -533,21 +567,48 @@ class ResultsPanel(ttk.Frame):
             foreground="#f97316",
         ).pack(anchor="w", pady=6)
 
-    def _build_tree(self, title: str) -> ttk.Treeview:
-        ttk.Label(self, text=title, font=app_font(11, "bold")).pack(anchor="w", pady=(8, 0))
-        columns = ("wiki", "arxiv", "similarity")
-        tree = ttk.Treeview(self, columns=columns, show="headings", height=6)
-        tree.heading("wiki", text="Wiki Entity")
-        tree.heading("arxiv", text="arXiv Entity")
-        tree.heading("similarity", text="Similarity")
-        for column in columns:
-            tree.column(column, width=160)
+    def _build_tree(
+        self,
+        title: str,
+        columns: Sequence[Dict[str, object]],
+        *,
+        parent: Optional[tk.Misc] = None,
+    ) -> ttk.Treeview:
+        container = parent if parent is not None else self
+        ttk.Label(container, text=title, font=app_font(11, "bold")).pack(anchor="w", pady=(8, 0))
+        column_ids = [cast(str, spec["id"]) for spec in columns]
+        tree = ttk.Treeview(container, columns=column_ids, show="headings", height=6)
+        for spec in columns:
+            col_id = cast(str, spec["id"])
+            heading = cast(str, spec.get("label", col_id.title()))
+            width = cast(int, spec.get("width", 140))
+            anchor = cast(str, spec.get("anchor", "w"))
+            tree.heading(col_id, text=heading)
+            tree.column(col_id, width=width, anchor=anchor)  # type: ignore[arg-type]
         tree.pack(fill="x", pady=(2, 0))
         return tree
 
+    def _build_unaligned_tree(self, parent: tk.Misc) -> ttk.Treeview:
+        columns = ("graph", "entity", "best", "trigger")
+        tree = ttk.Treeview(parent, columns=columns, show="headings", height=10)
+        headings = ("Graph", "Entity", "Best sim", "Trigger")
+        widths = (70, 160, 80, 140)
+        for column, heading, width in zip(columns, headings, widths):
+            tree.heading(column, text=heading)
+            tree.column(column, width=width, anchor="center" if column != "entity" else "w")
+        tree.pack(fill="both", expand=True)
+        return tree
+
     def display_result(self, result: PipelineResult) -> None:
-        self._populate_tree(self.nn_tree, result.nn_alignments)
-        self._populate_tree(self.qubo_tree, result.qubo_alignments)
+        self._populate_tree(self.nn_tree, [row.as_nn_tuple() for row in result.nn_alignments])
+        self._populate_tree(self.qubo_tree, [row.as_qubo_tuple() for row in result.qubo_alignments])
+        self._populate_tree(self.unaligned_tree, [entry.as_tuple() for entry in result.unaligned_entities])
+        if result.unaligned_entities:
+            self.unaligned_summary.set(
+                f"{len(result.unaligned_entities)} entities filtered by the active thresholds."
+            )
+        else:
+            self.unaligned_summary.set("Every entity met the thresholds that were applied.")
         self.energy_var.set(
             f"QUBO energy: {result.qubo_energy:.4f}" if result.qubo_energy is not None else "QUBO energy: -"
         )
@@ -560,6 +621,8 @@ class ResultsPanel(ttk.Frame):
     def show_logs(self, logs: List[str]) -> None:
         self._populate_tree(self.nn_tree, [])
         self._populate_tree(self.qubo_tree, [])
+        self._populate_tree(self.unaligned_tree, [])
+        self.unaligned_summary.set("Run an alignment to see threshold misses.")
         self.energy_var.set("QUBO energy: -")
         self.log_text.configure(state="normal")
         self.log_text.delete("1.0", tk.END)
@@ -567,10 +630,10 @@ class ResultsPanel(ttk.Frame):
             self.log_text.insert(tk.END, f"• {line}\n")
         self.log_text.configure(state="disabled")
 
-    def _populate_tree(self, tree: ttk.Treeview, rows) -> None:
+    def _populate_tree(self, tree: ttk.Treeview, rows: Sequence[Tuple[object, ...]]) -> None:
         tree.delete(*tree.get_children())
         for row in rows:
-            tree.insert("", tk.END, values=row.as_tuple())
+            tree.insert("", tk.END, values=row)
 
 
 class NodeMatrixEditor(tk.Toplevel):
@@ -770,6 +833,9 @@ class DemoApp(ttk.Frame):
         controls.pack(fill="x", padx=8, pady=(0, 4))
         self.nn_threshold_var = tk.StringVar(value=f"{DEFAULT_SIMILARITY_THRESHOLD:.2f}")
         self.qubo_threshold_var = tk.StringVar(value=f"{DEFAULT_SIMILARITY_THRESHOLD:.2f}")
+        self.embedding_mode_var = tk.StringVar(value=EmbeddingMode.default().value)
+        self.node_weight_var = tk.StringVar(value=f"{QUBO_NODE_WEIGHT:.2f}")
+        self.structure_weight_var = tk.StringVar(value=f"{QUBO_STRUCTURE_WEIGHT:.2f}")
 
         pipeline_row = ttk.Frame(controls, style="Retro.TFrame")
         pipeline_row.pack(fill="x", pady=(0, 4))
@@ -803,6 +869,39 @@ class DemoApp(ttk.Frame):
         ).grid(row=1, column=0, columnspan=4, sticky="w", pady=(4, 0))
         threshold_row.columnconfigure(4, weight=1)
 
+        weight_row = ttk.LabelFrame(controls, text="QUBO weights", style="Retro.TLabelframe")
+        weight_row.pack(fill="x", pady=(0, 4))
+        ttk.Label(weight_row, text="Node weight").grid(row=0, column=0, sticky="w")
+        ttk.Entry(weight_row, textvariable=self.node_weight_var, width=8).grid(row=0, column=1, padx=(4, 16))
+        ttk.Label(weight_row, text="Structure weight").grid(row=0, column=2, sticky="w")
+        ttk.Entry(weight_row, textvariable=self.structure_weight_var, width=8).grid(row=0, column=3, padx=(4, 0))
+        ttk.Label(
+            weight_row,
+            text="Weights must be ≥ 0 and influence the QUBO scoring.",
+            foreground="#475569",
+        ).grid(row=1, column=0, columnspan=4, sticky="w", pady=(4, 0))
+        weight_row.columnconfigure(4, weight=1)
+
+        embedding_row = ttk.LabelFrame(controls, text="Embedding mode", style="Retro.TLabelframe")
+        embedding_row.pack(fill="x", pady=(0, 4))
+        ttk.Label(embedding_row, text="Entity embeddings:").grid(row=0, column=0, sticky="w")
+        embedding_choices = [mode.value for mode in EmbeddingMode]
+        mode_combo = ttk.Combobox(
+            embedding_row,
+            textvariable=self.embedding_mode_var,
+            values=embedding_choices,
+            state="readonly",
+            width=32,
+        )
+        mode_combo.grid(row=0, column=1, sticky="w", padx=(6, 0))
+        mode_combo.bind("<<ComboboxSelected>>", self._on_embedding_mode_change)
+        ttk.Label(
+            embedding_row,
+            text="SciBERT-only, hybrid (SciBERT + GNN), or pure GNN-GAEA",
+            foreground="#475569",
+        ).grid(row=1, column=0, columnspan=2, sticky="w", pady=(4, 0))
+        embedding_row.columnconfigure(2, weight=1)
+
         editor_row = ttk.Frame(controls, style="Retro.TFrame")
         editor_row.pack(fill="x", pady=(0, 4))
         retro_button(
@@ -812,7 +911,7 @@ class DemoApp(ttk.Frame):
         ).pack(side="left")
         retro_button(
             editor_row,
-            text="Edit H_structure Weights",
+            text="Edit H_structure Matrix",
             command=self._open_structural_editor,
         ).pack(side="left", padx=6)
 
@@ -847,18 +946,43 @@ class DemoApp(ttk.Frame):
         art_label.pack(anchor="e")
 
     # ------------------------------------------------------------------
+    def _current_embedding_mode(self) -> EmbeddingMode:
+        value = self.embedding_mode_var.get().strip()
+        try:
+            return EmbeddingMode.from_value(value)
+        except ValueError:
+            return EmbeddingMode.default()
+
+    def _on_embedding_mode_change(self, _: Optional[tk.Event] = None) -> None:
+        self.node_info = None
+        self.structural_info = None
+        self.prep_logs = []
+        self._close_node_editor()
+        self._close_struct_editor()
+        if hasattr(self, "results"):
+            self.results.show_logs([
+                "Embedding mode changed. Run 'Generate Embeddings' to rebuild matrices.",
+            ])
+        self.status_var.set("Embedding mode changed. Regenerate embeddings before running alignment.")
+
+    # ------------------------------------------------------------------
     def _prepare_embeddings(self) -> None:
         if self.running:
             return
         self.running = True
-        self.status_var.set("Preparing embeddings and structural weights…")
+        mode = self._current_embedding_mode()
+        self.status_var.set(f"Preparing embeddings ({mode.value})…")
 
         wiki_copy = copy.deepcopy(self.wiki_panel.model)
         arxiv_copy = copy.deepcopy(self.arxiv_panel.model)
 
         def task() -> None:
             try:
-                node_info, structural_info, logs = self.runner.prepare_inputs(wiki_copy, arxiv_copy)
+                node_info, structural_info, logs = self.runner.prepare_inputs(
+                    wiki_copy,
+                    arxiv_copy,
+                    embedding_mode=mode,
+                )
             except Exception as exc:
                 self.after(0, lambda err=exc: self._handle_error(err))
             else:
@@ -897,6 +1021,11 @@ class DemoApp(ttk.Frame):
         except ValueError as exc:
             messagebox.showerror("Invalid threshold", str(exc))
             return
+        try:
+            node_weight, structure_weight = self._current_qubo_weights()
+        except ValueError as exc:
+            messagebox.showerror("Invalid QUBO weight", str(exc))
+            return
         self.running = True
         self.status_var.set("Running alignment solvers…")
 
@@ -910,6 +1039,8 @@ class DemoApp(ttk.Frame):
                     node_info,
                     structural_info,
                     logs_input,
+                    node_weight=node_weight,
+                    structure_weight=structure_weight,
                     nn_threshold=nn_threshold,
                     qubo_threshold=qubo_threshold,
                 )
@@ -940,6 +1071,26 @@ class DemoApp(ttk.Frame):
         if not 0.0 <= parsed <= 1.0:
             raise ValueError(f"{label} threshold must be between 0 and 1.")
         return parsed
+
+    def _parse_weight_value(self, raw_value: str, label: str) -> float:
+        value = raw_value.strip()
+        if not value:
+            raise ValueError(f"{label} cannot be blank.")
+        try:
+            parsed = float(value)
+        except ValueError as exc:  # pragma: no cover - GUI validation
+            raise ValueError(f"{label} must be a number.") from exc
+        if parsed < 0.0:
+            raise ValueError(f"{label} must be non-negative.")
+        return parsed
+
+    def _current_qubo_weights(self) -> Tuple[float, float]:
+        node_weight = self._parse_weight_value(self.node_weight_var.get(), "QUBO node weight")
+        structure_weight = self._parse_weight_value(
+            self.structure_weight_var.get(),
+            "QUBO structure weight",
+        )
+        return node_weight, structure_weight
 
     def _open_node_editor(self) -> None:
         if self.node_info is None:
@@ -1002,12 +1153,21 @@ class DemoApp(ttk.Frame):
         )
         if not path:
             return
+        try:
+            node_weight, structure_weight = self._current_qubo_weights()
+        except ValueError as exc:
+            messagebox.showerror("Invalid QUBO weight", str(exc))
+            return
         saved_path = storage.save_experience(
             self.wiki_panel.model,
             self.arxiv_panel.model,
             self.node_info,
             self.structural_info,
             filename=Path(path),
+            qubo_weights={
+                "node_weight": node_weight,
+                "structure_weight": structure_weight,
+            },
         )
         messagebox.showinfo("Experience saved", f"Saved matrices and graphs to {saved_path}")
 
@@ -1031,6 +1191,7 @@ class DemoApp(ttk.Frame):
         arxiv_order = payload.get("arxiv_order", [])
         similarity_payload = payload.get("similarity", [])
         structural_payload = payload.get("structural_info", {})
+        qubo_weights_payload = cast(Optional[Dict[str, Any]], payload.get("qubo_weights")) or {}
 
         self.wiki_panel.set_model(wiki_graph)
         self.arxiv_panel.set_model(arxiv_graph)
@@ -1045,6 +1206,20 @@ class DemoApp(ttk.Frame):
             "arxiv_edges": structural_payload.get("arxiv_edges", []),
             "weights": weights,
         }
+
+        def _coerce_weight(value: Any, default: float) -> float:
+            try:
+                return float(value)
+            except (TypeError, ValueError):
+                return default
+
+        node_weight_value = _coerce_weight(qubo_weights_payload.get("node_weight"), QUBO_NODE_WEIGHT)
+        structure_weight_value = _coerce_weight(
+            qubo_weights_payload.get("structure_weight"),
+            QUBO_STRUCTURE_WEIGHT,
+        )
+        self.node_weight_var.set(f"{node_weight_value:.2f}")
+        self.structure_weight_var.set(f"{structure_weight_value:.2f}")
 
         self.node_info = {
             "wiki_nodes": wiki_nodes,

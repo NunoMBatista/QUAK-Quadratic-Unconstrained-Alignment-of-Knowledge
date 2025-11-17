@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from enum import Enum
 from typing import Dict, List, Optional, Sequence, Tuple, cast
 
 import dimod
@@ -40,14 +41,70 @@ from src.qubo_alignment import formulate
 from .graph_model import GraphModel, GraphNode
 
 
+class EmbeddingMode(Enum):
+    SCIBERT_ONLY = "SciBERT embeddings"
+    SCIBERT_PLUS_GAE = "SciBERT + GNN-GAEA"
+    GAE_ONLY = "GNN-GAEA only"
+
+    @property
+    def uses_scibert(self) -> bool:
+        return self in (EmbeddingMode.SCIBERT_ONLY, EmbeddingMode.SCIBERT_PLUS_GAE)
+
+    @property
+    def uses_gae(self) -> bool:
+        return self in (EmbeddingMode.SCIBERT_PLUS_GAE, EmbeddingMode.GAE_ONLY)
+
+    @classmethod
+    def default(cls) -> "EmbeddingMode":
+        if USE_GAE_FOR_ENTITY_EMBEDDINGS:
+            return cls.SCIBERT_PLUS_GAE if USE_SCIBERT_FEATURES else cls.GAE_ONLY
+        return cls.SCIBERT_ONLY
+
+    @classmethod
+    def from_value(cls, value: str) -> "EmbeddingMode":
+        for mode in cls:
+            if mode.value == value:
+                return mode
+        raise ValueError(f"Unknown embedding mode: {value}")
+
+
 @dataclass
 class AlignmentRow:
     wiki: str
     arxiv: str
     similarity: float
+    structure_score: Optional[float] = None
+    total_score: Optional[float] = None
 
-    def as_tuple(self) -> Tuple[str, str, str]:
+    def as_nn_tuple(self) -> Tuple[str, str, str]:
         return (self.wiki, self.arxiv, f"{self.similarity:.3f}")
+
+    def as_qubo_tuple(self) -> Tuple[str, str, str, str, str]:
+        structure_display = "-" if self.structure_score is None else f"{self.structure_score:.3f}"
+        total_display = "-" if self.total_score is None else f"{self.total_score:.3f}"
+        return (
+            self.wiki,
+            self.arxiv,
+            f"{self.similarity:.3f}",
+            structure_display,
+            total_display,
+        )
+
+
+@dataclass
+class UnalignedEntity:
+    graph: str
+    label: str
+    best_similarity: float
+    reason: str
+
+    def as_tuple(self) -> Tuple[str, str, str, str]:
+        return (
+            self.graph,
+            self.label,
+            f"{self.best_similarity:.3f}",
+            self.reason,
+        )
 
 
 @dataclass
@@ -56,6 +113,7 @@ class PipelineResult:
     qubo_alignments: List[AlignmentRow]
     qubo_energy: Optional[float]
     logs: List[str]
+    unaligned_entities: List[UnalignedEntity] = field(default_factory=list)
 
 
 class ManualPipelineRunner:
@@ -75,34 +133,57 @@ class ManualPipelineRunner:
         wiki_graph: GraphModel,
         arxiv_graph: GraphModel,
         *,
+        embedding_mode: Optional[EmbeddingMode] = None,
+        node_weight: Optional[float] = None,
+        structure_weight: Optional[float] = None,
         nn_threshold: Optional[float] = None,
         qubo_threshold: Optional[float] = None,
     ) -> PipelineResult:
-        node_info, structural_info, logs = self.prepare_inputs(wiki_graph, arxiv_graph)
+        mode = embedding_mode or EmbeddingMode.default()
+        node_info, structural_info, logs = self.prepare_inputs(
+            wiki_graph,
+            arxiv_graph,
+            embedding_mode=mode,
+        )
+        resolved_node_weight = node_weight if node_weight is not None else QUBO_NODE_WEIGHT
+        resolved_structure_weight = (
+            structure_weight if structure_weight is not None else QUBO_STRUCTURE_WEIGHT
+        )
         return self.solve_from_inputs(
             node_info,
             structural_info,
             logs,
+            node_weight=resolved_node_weight,
+            structure_weight=resolved_structure_weight,
             nn_threshold=nn_threshold,
             qubo_threshold=qubo_threshold,
         )
 
     def prepare_inputs(
-        self, wiki_graph: GraphModel, arxiv_graph: GraphModel
+        self,
+        wiki_graph: GraphModel,
+        arxiv_graph: GraphModel,
+        *,
+        embedding_mode: Optional[EmbeddingMode] = None,
     ) -> Tuple[Dict[str, object], Dict[str, object], List[str]]:
+        mode = embedding_mode or EmbeddingMode.default()
         logs: List[str] = []
         if not wiki_graph.nodes:
             raise ValueError("The Wiki graph has no nodes. Add at least one entity before running the pipeline.")
         if not arxiv_graph.nodes:
             raise ValueError("The arXiv graph has no nodes. Add at least one entity before running the pipeline.")
 
+        logs.append(f"Embedding mode: {mode.value}")
         logs.append("Building PyG datasets from handmade graphs...")
-        wiki_data, wiki_nodes, wiki_edges = self._build_pyg_dataset(wiki_graph)
-        arxiv_data, arxiv_nodes, arxiv_edges = self._build_pyg_dataset(arxiv_graph)
+        wiki_data, wiki_nodes, wiki_edges = self._build_pyg_dataset(wiki_graph, mode)
+        arxiv_data, arxiv_nodes, arxiv_edges = self._build_pyg_dataset(arxiv_graph, mode)
 
         logs.append("Training / preparing entity embeddings...")
         wiki_embeddings, arxiv_embeddings = self._generate_entity_embeddings(
-            wiki_data, arxiv_data, logs
+            wiki_data,
+            arxiv_data,
+            logs,
+            mode,
         )
 
         logs.append("Computing cosine similarity between entity embeddings...")
@@ -115,6 +196,7 @@ class ManualPipelineRunner:
             "wiki_nodes": wiki_nodes,
             "arxiv_nodes": arxiv_nodes,
             "similarity": similarity,
+            "embedding_mode": mode.value,
         }
         logs.append("Embedding artifacts prepared. Matrices ready for inspection.")
         return node_info, structural_info, logs
@@ -125,6 +207,8 @@ class ManualPipelineRunner:
         structural_info: Dict[str, object],
         logs: Optional[List[str]] = None,
         *,
+        node_weight: float = QUBO_NODE_WEIGHT,
+        structure_weight: float = QUBO_STRUCTURE_WEIGHT,
         nn_threshold: Optional[float] = None,
         qubo_threshold: Optional[float] = None,
     ) -> PipelineResult:
@@ -136,8 +220,8 @@ class ManualPipelineRunner:
         qubo_data = formulate.formulate(
             node_info,
             structural_info,
-            node_weight=QUBO_NODE_WEIGHT,
-            structural_weight=QUBO_STRUCTURE_WEIGHT,
+            node_weight=node_weight,
+            structural_weight=structure_weight,
             wiki_penalty=QUBO_WIKI_PENALTY,
             arxiv_penalty=QUBO_ARXIV_PENALTY,
             similarity_threshold=qubo_threshold,
@@ -152,23 +236,64 @@ class ManualPipelineRunner:
         record = sampleset.first  # type: ignore[assignment]
         sample = cast(Dict[int, int], getattr(record, "sample"))
         qubo_alignments = self._extract_alignments(
-            sample, qubo_data["reverse_index"], node_info
+            sample,
+            qubo_data["reverse_index"],
+            node_info,
+            qubo_data["components"],
+            node_weight,
         )
         qubo_energy = float(getattr(record, "energy"))
         log_buffer.append(f"QUBO energy: {qubo_energy:.4f} | alignments: {len(qubo_alignments)}")
+
+        wiki_best, arxiv_best = self._best_similarities(node_info)
+        unaligned_entities = self._deduplicate_unaligned(
+            self._collect_threshold_misses(
+                node_info,
+                nn_threshold,
+                "Nearest Neighbor",
+                wiki_best,
+                arxiv_best,
+            )
+            + self._collect_threshold_misses(
+                node_info,
+                qubo_threshold,
+                "QUBO",
+                wiki_best,
+                arxiv_best,
+            )
+            + self._collect_unmatched_nodes(
+                node_info,
+                nn_alignments,
+                "Nearest Neighbor",
+                wiki_best,
+                arxiv_best,
+                nn_threshold,
+            )
+            + self._collect_unmatched_nodes(
+                node_info,
+                qubo_alignments,
+                "QUBO",
+                wiki_best,
+                arxiv_best,
+                qubo_threshold,
+            )
+        )
 
         return PipelineResult(
             nn_alignments=nn_alignments,
             qubo_alignments=qubo_alignments,
             qubo_energy=qubo_energy,
             logs=log_buffer,
+            unaligned_entities=unaligned_entities,
         )
 
     # ------------------------------------------------------------------
     # Dataset prep
     # ------------------------------------------------------------------
     def _build_pyg_dataset(
-        self, graph: GraphModel
+        self,
+        graph: GraphModel,
+        mode: EmbeddingMode,
     ) -> Tuple[Data, List[GraphNode], List[Tuple[int, int, str]]]:
         nodes = sorted(graph.list_nodes(), key=lambda item: item.label.lower())
         node_lookup = {node.id: idx for idx, node in enumerate(nodes)}
@@ -195,7 +320,9 @@ class ManualPipelineRunner:
         )
         mp_edge_index, _ = add_self_loops(pos_edge_index, num_nodes=num_nodes)
 
-        if USE_SCIBERT_FEATURES:
+        if num_nodes == 0:
+            x = torch.empty((0, 0), dtype=torch.float32)
+        elif mode.uses_scibert:
             features: List[np.ndarray] = []
             for node in nodes:
                 text = node.label
@@ -206,9 +333,10 @@ class ManualPipelineRunner:
             stacked = np.stack(features, axis=0).astype(np.float32, copy=False)
             x = torch.from_numpy(stacked)
         else:
-            x = torch.eye(num_nodes)
+            x = torch.eye(num_nodes, dtype=torch.float32)
 
-        x = F.normalize(x, p=2, dim=1)
+        if x.numel() > 0:
+            x = F.normalize(x, p=2, dim=1)
 
         data = Data(x=x, edge_index=mp_edge_index)
         data.train_pos_edge_index = pos_edge_index
@@ -220,11 +348,12 @@ class ManualPipelineRunner:
         wiki_data: Data,
         arxiv_data: Data,
         logs: List[str],
+        mode: EmbeddingMode,
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         if wiki_data.x is None or arxiv_data.x is None:
             raise ValueError("Node feature tensors are missing; unable to run embeddings.")
 
-        use_gae = USE_GAE_FOR_ENTITY_EMBEDDINGS
+        use_gae = mode.uses_gae
         has_edges = (
             wiki_data.train_pos_edge_index.size(1) > 0
             and arxiv_data.train_pos_edge_index.size(1) > 0
@@ -260,7 +389,7 @@ class ManualPipelineRunner:
             wiki_embeddings = wiki_data.x
             arxiv_embeddings = arxiv_data.x
 
-        if USE_SCIBERT_FEATURES and use_gae:
+        if use_gae and mode is EmbeddingMode.SCIBERT_PLUS_GAE:
             wiki_embeddings = torch.cat([wiki_data.x, wiki_embeddings], dim=1)
             arxiv_embeddings = torch.cat([arxiv_data.x, arxiv_embeddings], dim=1)
 
@@ -374,25 +503,170 @@ class ManualPipelineRunner:
         sample: Dict[int, int],
         reverse_index: Dict[int, Tuple[int, int]],
         node_info: Dict[str, object],
+        components: Dict[str, Dict[Tuple[int, int], float]],
+        node_weight: float,
     ) -> List[AlignmentRow]:
         wiki_nodes: Sequence[GraphNode] = node_info["wiki_nodes"]  # type: ignore[assignment]
         arxiv_nodes: Sequence[GraphNode] = node_info["arxiv_nodes"]  # type: ignore[assignment]
         similarity: torch.Tensor = cast(torch.Tensor, node_info["similarity"])  # type: ignore[assignment]
+        structure_terms = components.get("structure", {})
 
         alignments: List[AlignmentRow] = []
         for var, value in sample.items():
             if not value:
                 continue
             wiki_idx, arxiv_idx = reverse_index[var]
+            sim_value = float(similarity[wiki_idx, arxiv_idx])
+            structure_score = self._structure_support(var, sample, structure_terms)
+            total_score = sim_value * node_weight + structure_score
             alignments.append(
                 AlignmentRow(
                     wiki=wiki_nodes[wiki_idx].label,
                     arxiv=arxiv_nodes[arxiv_idx].label,
-                    similarity=float(similarity[wiki_idx, arxiv_idx]),
+                    similarity=sim_value,
+                    structure_score=structure_score,
+                    total_score=total_score,
                 )
             )
         alignments.sort(key=lambda item: item.similarity, reverse=True)
         return alignments
+
+    # ------------------------------------------------------------------
+    @staticmethod
+    def _structure_support(
+        var: int,
+        sample: Dict[int, int],
+        structure_terms: Dict[Tuple[int, int], float],
+    ) -> float:
+        support = 0.0
+        for (left, right), coeff in structure_terms.items():
+            if left == var and sample.get(right, 0):
+                support += -float(coeff)
+            elif right == var and sample.get(left, 0):
+                support += -float(coeff)
+        return support
+
+    # ------------------------------------------------------------------
+    def _best_similarities(
+        self,
+        node_info: Dict[str, object],
+    ) -> Tuple[List[float], List[float]]:
+        wiki_nodes: Sequence[GraphNode] = node_info["wiki_nodes"]  # type: ignore[assignment]
+        arxiv_nodes: Sequence[GraphNode] = node_info["arxiv_nodes"]  # type: ignore[assignment]
+        similarity: torch.Tensor = cast(torch.Tensor, node_info["similarity"])  # type: ignore[assignment]
+
+        if similarity.size(1) == 0:
+            wiki_best = [0.0 for _ in wiki_nodes]
+        else:
+            wiki_best = [float(similarity[i, :].max().item()) for i in range(similarity.size(0))]
+
+        if similarity.size(0) == 0:
+            arxiv_best = [0.0 for _ in arxiv_nodes]
+        else:
+            arxiv_best = [float(similarity[:, j].max().item()) for j in range(similarity.size(1))]
+
+        return wiki_best, arxiv_best
+
+    def _collect_threshold_misses(
+        self,
+        node_info: Dict[str, object],
+        similarity_threshold: Optional[float],
+        solver_label: str,
+        wiki_best: List[float],
+        arxiv_best: List[float],
+    ) -> List[UnalignedEntity]:
+        if similarity_threshold is None:
+            return []
+        wiki_nodes: Sequence[GraphNode] = node_info["wiki_nodes"]  # type: ignore[assignment]
+        arxiv_nodes: Sequence[GraphNode] = node_info["arxiv_nodes"]  # type: ignore[assignment]
+
+        unaligned: List[UnalignedEntity] = []
+
+        for idx, node in enumerate(wiki_nodes):
+            best = wiki_best[idx]
+            if best < similarity_threshold:
+                unaligned.append(
+                    UnalignedEntity(
+                        graph="Wiki",
+                        label=node.label,
+                        best_similarity=best,
+                        reason=f"{solver_label} threshold {similarity_threshold:.2f}",
+                    )
+                )
+
+        for idx, node in enumerate(arxiv_nodes):
+            best = arxiv_best[idx]
+            if best < similarity_threshold:
+                unaligned.append(
+                    UnalignedEntity(
+                        graph="arXiv",
+                        label=node.label,
+                        best_similarity=best,
+                        reason=f"{solver_label} threshold {similarity_threshold:.2f}",
+                    )
+                )
+
+        return unaligned
+
+    # ------------------------------------------------------------------
+    def _collect_unmatched_nodes(
+        self,
+        node_info: Dict[str, object],
+        alignments: Sequence[AlignmentRow],
+        solver_label: str,
+        wiki_best: List[float],
+        arxiv_best: List[float],
+        threshold: Optional[float],
+    ) -> List[UnalignedEntity]:
+        wiki_nodes: Sequence[GraphNode] = node_info["wiki_nodes"]  # type: ignore[assignment]
+        arxiv_nodes: Sequence[GraphNode] = node_info["arxiv_nodes"]  # type: ignore[assignment]
+
+        matched_wiki = {row.wiki for row in alignments}
+        matched_arxiv = {row.arxiv for row in alignments}
+
+        unaligned: List[UnalignedEntity] = []
+        for idx, node in enumerate(wiki_nodes):
+            if node.label in matched_wiki:
+                continue
+            if threshold is not None and wiki_best[idx] < threshold:
+                continue
+            unaligned.append(
+                UnalignedEntity(
+                    graph="Wiki",
+                    label=node.label,
+                    best_similarity=wiki_best[idx],
+                    reason=f"{solver_label} solver unused",
+                )
+            )
+
+        for idx, node in enumerate(arxiv_nodes):
+            if node.label in matched_arxiv:
+                continue
+            if threshold is not None and arxiv_best[idx] < threshold:
+                continue
+            unaligned.append(
+                UnalignedEntity(
+                    graph="arXiv",
+                    label=node.label,
+                    best_similarity=arxiv_best[idx],
+                    reason=f"{solver_label} solver unused",
+                )
+            )
+
+        return unaligned
+
+    # ------------------------------------------------------------------
+    @staticmethod
+    def _deduplicate_unaligned(entries: List[UnalignedEntity]) -> List[UnalignedEntity]:
+        seen = set()
+        deduped: List[UnalignedEntity] = []
+        for entry in entries:
+            key = (entry.graph, entry.label, entry.reason)
+            if key in seen:
+                continue
+            seen.add(key)
+            deduped.append(entry)
+        return deduped
 
     # ------------------------------------------------------------------
     @staticmethod

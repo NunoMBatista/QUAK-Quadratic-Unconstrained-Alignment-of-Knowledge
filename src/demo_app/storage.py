@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from src.config import PROJECT_ROOT
 from .graph_model import GraphModel
@@ -61,6 +61,7 @@ def save_experience(
     node_info: Dict[str, Any],
     structural_info: Dict[str, Any],
     filename: str | Path | None = None,
+    qubo_weights: Optional[Dict[str, float]] = None,
 ) -> Path:
     EXPERIENCE_DIR.mkdir(parents=True, exist_ok=True)
     if filename is None:
@@ -105,6 +106,12 @@ def save_experience(
         },
     }
 
+    if qubo_weights is not None:
+        payload["qubo_weights"] = {
+            "node_weight": float(qubo_weights.get("node_weight", 0.0)),
+            "structure_weight": float(qubo_weights.get("structure_weight", 0.0)),
+        }
+
     with path.open("w", encoding="utf-8") as handle:
         json.dump(payload, handle, indent=2)
     return path
@@ -120,6 +127,7 @@ def load_experience(path: Path) -> Dict[str, Any]:
     arxiv_order = payload.get("arxiv_order", [])
     similarity = payload.get("similarity", [])
     structural_info = payload.get("structural_info", {})
+    qubo_weights = payload.get("qubo_weights")
 
     return {
         "wiki_graph": wiki_graph,
@@ -128,4 +136,5 @@ def load_experience(path: Path) -> Dict[str, Any]:
         "arxiv_order": arxiv_order,
         "similarity": similarity,
         "structural_info": structural_info,
+        "qubo_weights": qubo_weights,
     }
