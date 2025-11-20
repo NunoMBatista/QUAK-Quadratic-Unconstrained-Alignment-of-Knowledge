@@ -1,21 +1,21 @@
 # QUAK: Solving Knowledge Graph Alignment using Quantum Annealers
 
 ```
-                       -@@@@+        
-                     @.........#     
-                    -......#.....    
+                       -@@@@+  
+                     @.........#   
+                    -......#.....  
                    @......@@...##+:##  
                    @.........:#+.###   
               %#@   #.......*%#####  
-             -...%   #..........    
-             #... .#@#.......*#     
+             -...%   #..........  
+             #... .#@#.......*#   
             #.#................+#+   
             #@......  #..........-#  
             #@.+.......#...........@   
             @.@........%...........@   
              #.:#@#...............+  
               .#.................@   
-               .#%@@###**#####@@    
+               .#%@@###**#####@@  
                     :-=++=-:  
               ___  _   _   _    _  __ 
              / _ \| | | | / \  | |/ /
@@ -23,6 +23,10 @@
             | |_| | |_| / ___ \| . \ 
              \__\_\\___/_/   \_\_|\_\ 
 ```
+
+![Screenshot of the Tkinter demo app with graph editors and result panels](https://file+.vscode-resource.vscode-cdn.net/home/nuno/Documents/QUBO-KGA/figures/demo_app.png)
+
+![Alignment overview showing how QUBO re-ranks entity matches](figures/alignment_example.png)
 
 #### Objective:
 
