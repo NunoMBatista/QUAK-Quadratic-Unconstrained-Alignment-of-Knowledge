@@ -1,5 +1,29 @@
 # QUAK: Solving Knowledge Graph Alignment using Quantum Annealers
 
+```
+                       -@@@@+        
+                     @.........#     
+                    -......#.....    
+                   @......@@...##+:##  
+                   @.........:#+.###   
+              %#@   #.......*%#####  
+             -...%   #..........    
+             #... .#@#.......*#     
+            #.#................+#+   
+            #@......  #..........-#  
+            #@.+.......#...........@   
+            @.@........%...........@   
+             #.:#@#...............+  
+              .#.................@   
+               .#%@@###**#####@@    
+                    :-=++=-:  
+              ___  _   _   _    _  __ 
+             / _ \| | | | / \  | |/ /
+            | | | | | | |/ _ \ | ' / 
+            | |_| | |_| / ___ \| . \ 
+             \__\_\\___/_/   \_\_|\_\ 
+```
+
 #### Objective:
 
 Design a hybrid pipeline that aligns two Knowledge Graphs (KGs) by framing the difficult / ambiguous portions of the task as a global combinatorial optimization problem solvable on a quantum annealer through the QUBO framework. In practice, the system re-ranks or disambiguates candidate alignments that a classical algorithm proposes. However, for compact, handmade graphs we can just let the QUBO solve the entire alignment end-to-end.
