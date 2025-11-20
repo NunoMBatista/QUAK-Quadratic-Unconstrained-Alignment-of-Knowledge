@@ -504,7 +504,7 @@ class GraphPanel(ttk.Frame):
 
 
 class ResultsPanel(ttk.Frame):
-    def __init__(self, master: tk.Misc) -> None:
+    def __init__(self, master: tk.Misc, ascii_art: Optional[str] = None) -> None:
         super().__init__(master, padding=8, style="Retro.TFrame")
         ttk.Label(self, text="Alignment Results", font=app_font(14, "bold")).pack(anchor="w")
 
@@ -548,7 +548,7 @@ class ResultsPanel(ttk.Frame):
         ttk.Label(self, text="Pipeline Log").pack(anchor="w", pady=(8, 0))
         self.log_text = tk.Text(
             self,
-            height=10,
+            height=6,
             width=80,
             state="disabled",
             background=RETRO_CANVAS_BG,
@@ -566,6 +566,17 @@ class ResultsPanel(ttk.Frame):
             font=app_font(11, "italic"),
             foreground="#f97316",
         ).pack(anchor="w", pady=6)
+        if ascii_art:
+            art_frame = tk.Frame(self, bg=RETRO_BG, padx=6, pady=4, borderwidth=2, relief="sunken")
+            art_frame.pack(fill="x", anchor="e")
+            tk.Label(
+                art_frame,
+                text=ascii_art,
+                font=app_font(8),
+                justify="right",
+                bg=RETRO_BG,
+                fg="#000080",
+            ).pack(anchor="e")
 
     def _build_tree(
         self,
@@ -590,7 +601,7 @@ class ResultsPanel(ttk.Frame):
 
     def _build_unaligned_tree(self, parent: tk.Misc) -> ttk.Treeview:
         columns = ("graph", "entity", "best", "trigger")
-        tree = ttk.Treeview(parent, columns=columns, show="headings", height=10)
+        tree = ttk.Treeview(parent, columns=columns, show="headings", height=7)
         headings = ("Graph", "Entity", "Best sim", "Trigger")
         widths = (70, 160, 80, 140)
         for column, heading, width in zip(columns, headings, widths):
@@ -822,14 +833,21 @@ class DemoApp(ttk.Frame):
         self.pack(fill="both", expand=True)
         self.winfo_toplevel().title("Handmade KG Alignment Demo")
 
-        panels = ttk.Frame(self, style="Retro.TFrame")
+        layout = ttk.PanedWindow(self, orient="vertical")
+        layout.pack(fill="both", expand=True)
+        top_section = ttk.Frame(layout, style="Retro.TFrame")
+        bottom_section = ttk.Frame(layout, style="Retro.TFrame")
+        layout.add(top_section, weight=3)
+        layout.add(bottom_section, weight=2)
+
+        panels = ttk.Frame(top_section, style="Retro.TFrame")
         panels.pack(fill="both", padx=8, pady=8)
         self.wiki_panel = GraphPanel(panels, "Wiki Graph", "#38bdf8")
         self.arxiv_panel = GraphPanel(panels, "arXiv Graph", "#fcd34d")
         self.wiki_panel.pack(side="left", expand=True, fill="both")
         self.arxiv_panel.pack(side="left", expand=True, fill="both")
 
-        controls = ttk.Frame(self, style="Retro.TFrame")
+        controls = ttk.Frame(top_section, style="Retro.TFrame")
         controls.pack(fill="x", padx=8, pady=(0, 4))
         self.nn_threshold_var = tk.StringVar(value=f"{DEFAULT_SIMILARITY_THRESHOLD:.2f}")
         self.qubo_threshold_var = tk.StringVar(value=f"{DEFAULT_SIMILARITY_THRESHOLD:.2f}")
@@ -928,22 +946,8 @@ class DemoApp(ttk.Frame):
             command=self._load_experience,
         ).pack(side="left", padx=6)
 
-        self.results = ResultsPanel(self)
+        self.results = ResultsPanel(bottom_section, ascii_art=self._ascii_art)
         self.results.pack(fill="both", expand=True, padx=8, pady=(0, 8))
-
-        art_container = ttk.Frame(self, padding=(0, 0, 8, 8), style="Retro.TFrame")
-        art_container.pack(fill="x", side="bottom", anchor="e")
-        art_label = tk.Label(
-            art_container,
-            text=self._ascii_art,
-            font=app_font(8),
-            justify="right",
-            bg=RETRO_BG,
-            fg="#000080",
-            borderwidth=2,
-            relief="sunken",
-        )
-        art_label.pack(anchor="e")
 
     # ------------------------------------------------------------------
     def _current_embedding_mode(self) -> EmbeddingMode:

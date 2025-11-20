@@ -385,6 +385,8 @@ class ManualPipelineRunner:
             with torch.no_grad():
                 wiki_embeddings = joint_model.encode(wiki_data.x, wiki_data.edge_index)
                 arxiv_embeddings = joint_model.encode(arxiv_data.x, arxiv_data.edge_index)
+            wiki_embeddings = wiki_embeddings.to(wiki_data.x.device)
+            arxiv_embeddings = arxiv_embeddings.to(arxiv_data.x.device)
         else:
             wiki_embeddings = wiki_data.x
             arxiv_embeddings = arxiv_data.x

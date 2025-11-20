@@ -1,19 +1,18 @@
-# Hybrid GNN-QUBO for Knowledge Graph Alignment
-
-### Project Proposal
+# QUAK: Solving Knowledge Graph Alignment using Quantum Annealers
 
 #### Objective:
 
-Design a hybrid pipeline that aligns two Knowledge Graphs (KGs) by framing the task as a global combinatorial optimization problem, which is solvable on a quantum annealer through the QUBO framework.
+Design a hybrid pipeline that aligns two Knowledge Graphs (KGs) by framing the difficult / ambiguous portions of the task as a global combinatorial optimization problem solvable on a quantum annealer through the QUBO framework. In practice, the system re-ranks or disambiguates candidate alignments that a classical algorithm proposes. However, for compact, handmade graphs we can just let the QUBO solve the entire alignment end-to-end.
 
 #### Problem:
 
-Aligning KGs is difficult.
+Aligning KGs is difficult. (FACT!)
 
 Current GNN methods:
 
-- Require a large set of pre-aligned "seed" entities for supervised training (they are data-hungry).
-- Rely on a greedy nearest-neighbor search for alignment, which is fast but not guaranteed to find the best global solution and can get stuck in a local optimum.
+- Can become ambiguous when multiple entities share very similar embeddings.
+- Still rely on a greedy nearest-neighbor search for alignment, which is fast but not guaranteed to find the best global solution and can get stuck in a local optimum.
+- Sometimes, they use LLMs as re-rankers, but solving problems with LLMs is boring.
 
 #### Our Hypothesis:
 
@@ -37,7 +36,7 @@ A global optimization approach (QUBO) can find a more accurate and structurally-
 
 - Formulate the alignment task as a QUBO ($H_{total}=H_{node}+H_{structure}+H_{constraint}$). This finds the best "pattern match" between the two unaligned spaces.
 - $H_{node}$ (Linear): A weak hint. The similarity between the GAE entity embeddings from Phase 2.
-- $H_{structure}$ (Quadratic): The global pattern matcher. The similarity between the SciBERT relation embeddings (e.g., sim("builds", "produces")). This rewards preserving structural relationships.
+- $H_{structure}$ (Quadratic): The global pattern matcher. We currently instantiate it with the SciBERT-based semantic similarity of each node's neighborhood, but any structural signal can plug in here (for example, using already aligned nodes as anchors to bias new matches).
 - $H_{constraint}$ (Quadratic): A penalty to enforce a flexible "at-most-one" mapping. This is a critical design choice that allows entities to remain unaligned if no good match is found.
 
 $$
@@ -55,9 +54,9 @@ $$
 
 **4. Solve & Benchmark**
 
-- Method A (Ours): Solve the QUBO on a D-Wave quantum annealer.
+- Method A (Ours): Solve the QUBO on a D-Wave quantum annealer (or a simulator).
 - Method B (Baseline): Apply a greedy Nearest Neighbor search to the exact same GAE embeddings from Phase 2.
-- Evaluation: Compare the accuracy of both methods against a manually-created "ground truth" (F1-Score).
+- Evaluation: Use the included demo experience to visually compare the two alignment styles on toy examples, highlighting how the QUBO re-ranks ambiguous entities.
 
 #### Code Structure:
 
@@ -99,18 +98,21 @@ $$
 
 ```
 
-### LLM-based KG extraction
+### Quick Note on Our LLM-based KG Extraction
 
-The Groq-driven pipeline in `src/kg_construction/llm_based_pipeline.py` prompts a modern LLM to return JSON-formatted entities and triples and then writes the unpruned KGs. To enable it:
+If you want, you can use our LLM-based KG construction pipeline for your purposes. The Groq-driven pipeline in `src/kg_construction/llm_based_pipeline.py` prompts a modern LLM to return JSON-formatted entities and triples and then writes the unpruned KGs. To enable it:
 
 1. Duplicate the sample env file and add your Groq key:
-  ```bash
+
+```bash
   cp .env.example .env
   # edit .env and set GROQ_API_KEY
-  ```
+```
+
 2. Install the updated dependencies (`groq`, `python-dotenv`).
 3. Instantiate `LLMBasedPipeline` in your script or notebook:
-  ```python
+
+```python
   from src.kg_construction.fetch_data import fetch_wiki_data, fetch_arxiv_data
   from src.kg_construction.llm_based_pipeline import LLMBasedPipeline
 
@@ -118,6 +120,37 @@ The Groq-driven pipeline in `src/kg_construction/llm_based_pipeline.py` prompts 
   arxiv_data, _ = fetch_arxiv_data()
 
   LLMBasedPipeline().build_unpruned_kgs(wiki_data, arxiv_data)
-  ```
+```
 
 The pipeline persists entities and TTL files to the same locations used by the classical NLP pipeline, so downstream steps (pruning, embedding, alignment) continue to work unchanged.
+
+## Getting Started with the Full Pipeline
+
+1. Create and activate a Python environment and install the dependencies listed in `requirements.txt`.
+2. Copy `.env.example` to `.env` and add any API keys required by the Groq-powered KG builder.
+3. Download any required artifacts (pretrained SciBERT weights are pulled automatically, but the first run may take a few minutes).
+
+Once the environment is ready you can choose between the lightweight handmade demo and the full hypothetical pipeline described below.
+
+### Handmade KG Alignment Demo (Tkinter)
+
+The interactive demo lets you sketch two tiny graphs, generate embeddings, tweak the QUBO matrices, and compare nearest-neighbor vs QUBO alignments.
+
+```
+python3 -m src.demo_app.app
+```
+
+Features included in the UI:
+
+- Live editing of node/structural matrices (H_node and H_structure).
+- Threshold controls for both the greedy and QUBO solvers.
+- Experience save/load buttons so you can revisit a session later.
+- And more (probably).
+
+### Hypothetical Pipeline Notebook
+
+The notebook at `src/hypothetical_main.ipynb` walks through a scripted version of the end-to-end pipeline (data preparation → embeddings → QUBO solve). Launch it with your preferred notebook frontend:
+
+```
+jupyter notebook src/hypothetical_main.ipynb
+```
