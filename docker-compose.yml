@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    image: qubo-kga-demo
+    container_name: qubo_kga_gui
+    # Use the host network driver to simplify display connections
+    network_mode: host 
+    environment:
+      - DISPLAY=${DISPLAY}
+      - WAYLAND_DISPLAY=${WAYLAND_DISPLAY}
+      - XDG_RUNTIME_DIR=/tmp/runtime-dir
+      - QT_QPA_PLATFORM=xcb # Forces X11 backend for some libs, helpful for Tkinter
+      - HF_HOME=/app/.cache/huggingface # Set Hugging Face cache to a writable location
+    volumes:
+      # Mount X11 socket (Universal standard)
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # Mount Wayland socket (if it exists)
+      - ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY:-wayland-0}:/tmp/runtime-dir/${WAYLAND_DISPLAY:-wayland-0}
+      # Persist data
+      - ./hand_made_kgs:/app/hand_made_kgs
+      # Mount source code for live updates
+      - ./src:/app/src
+    # Run as the current user to avoid permission issues with the display sockets
+    user: "${USER_ID:-1000}:${GROUP_ID:-1000}"

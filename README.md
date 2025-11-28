@@ -155,7 +155,7 @@ The pipeline persists entities and TTL files to the same locations used by the c
 ## Getting Started with the Full Pipeline
 
 1. Create and activate a Python environment and install the dependencies listed in `requirements.txt`.
-2. Copy `.env.example` to `.env` and add any API keys required by the Groq-powered KG builder.
+2. Copy `.env.example` to `.env` and add the API key required by the Groq KG builder.
 3. Download any required artifacts (pretrained SciBERT weights are pulled automatically, but the first run may take a few minutes).
 
 Once the environment is ready you can choose between the lightweight handmade demo and the full hypothetical pipeline described below.
@@ -164,7 +164,15 @@ Once the environment is ready you can choose between the lightweight handmade de
 
 The interactive demo lets you sketch two tiny graphs, generate embeddings, tweak the QUBO matrices, and compare nearest-neighbor vs QUBO alignments.
 
+**Run with Docker (Recommended):**
+
+```bash
+./run_docker.sh
 ```
+
+**Run Locally:**
+
+```bash
 python3 -m src.demo_app.app
 ```
 
