@@ -506,9 +506,82 @@ class GraphPanel(ttk.Frame):
 class ResultsPanel(ttk.Frame):
     def __init__(self, master: tk.Misc, ascii_art: Optional[str] = None) -> None:
         super().__init__(master, padding=8, style="Retro.TFrame")
-        ttk.Label(self, text="Alignment Results", font=app_font(14, "bold")).pack(anchor="w")
 
-        tree_row = ttk.Frame(self, style="Retro.TFrame")
+        # Header with collapse toggle
+        header = ttk.Frame(self, style="Retro.TFrame")
+        header.pack(fill="x")
+        ttk.Label(header, text="Alignment Results", font=app_font(14, "bold")).pack(side="left", anchor="w")
+        # keep references for sash manipulation when collapsing
+        self._header = header
+        self._prev_sashpos: Optional[int] = None
+        self._collapsed = False
+        self._collapse_text = tk.StringVar(value="▾")
+
+        def _toggle() -> None:
+            self._collapsed = not self._collapsed
+            self._collapse_text.set("▸" if self._collapsed else "▾")
+            if self._collapsed:
+                # hide content
+                self._content_frame.pack_forget()
+                # try to locate a PanedWindow parent to adjust its sash so
+                # the bottom pane becomes as small as the header
+                try:
+                    parent = getattr(self, "master", None)
+                    grand = getattr(parent, "master", None)
+                    if isinstance(grand, ttk.PanedWindow):
+                        paned: ttk.PanedWindow = grand  # type: ignore[assignment]
+                        paned.update_idletasks()
+                        total_h = paned.winfo_height()
+                        header_h = self._header.winfo_height() or 24
+                        # enforce a minimum height for the collapsed bottom pane (header + some padding)
+                        min_h = header_h + 36
+                        try:
+                            paned.paneconfigure(parent, minsize=min_h)
+                        except Exception:
+                            pass
+                        # remember previous sash position (if any)
+                        try:
+                            self._prev_sashpos = paned.sashpos(0)
+                        except Exception:
+                            self._prev_sashpos = None
+                        newpos = max(0, total_h - min_h)
+                        try:
+                            paned.sashpos(0, newpos)
+                        except Exception:
+                            pass
+                    else:
+                        # fallback: try pack_configure to shrink
+                        try:
+                            self.pack_configure(fill="x", expand=False, side="bottom")
+                        except tk.TclError:
+                            pass
+                except Exception:
+                    pass
+            else:
+                # restore expanded content and sizing
+                self._content_frame.pack(fill="both", expand=True)
+                try:
+                    parent = getattr(self, "master", None)
+                    grand = getattr(parent, "master", None)
+                    if isinstance(grand, ttk.PanedWindow):
+                        try:
+                            # restore sash position if we have it
+                            if self._prev_sashpos is not None:
+                                grand.sashpos(0, self._prev_sashpos)
+                            # restore a reasonable minsize for the pane
+                            grand.paneconfigure(parent, minsize=80)
+                        except Exception:
+                            pass
+                except Exception:
+                    pass
+
+        retro_button(header, textvariable=self._collapse_text, command=_toggle).pack(side="right")
+
+        # Content goes into a frame that can be collapsed
+        self._content_frame = ttk.Frame(self, style="Retro.TFrame")
+        self._content_frame.pack(fill="both", expand=True)
+
+        tree_row = ttk.Frame(self._content_frame, style="Retro.TFrame")
         tree_row.pack(fill="x", pady=(0, 4))
 
         alignments_frame = ttk.Frame(tree_row, style="Retro.TFrame")
@@ -545,9 +618,9 @@ class ResultsPanel(ttk.Frame):
             background=RETRO_PANEL_BG,
         ).pack(anchor="w", pady=(4, 0))
 
-        ttk.Label(self, text="Pipeline Log").pack(anchor="w", pady=(8, 0))
+        ttk.Label(self._content_frame, text="Pipeline Log").pack(anchor="w", pady=(8, 0))
         self.log_text = tk.Text(
-            self,
+            self._content_frame,
             height=6,
             width=80,
             state="disabled",
@@ -561,13 +634,13 @@ class ResultsPanel(ttk.Frame):
 
         self.energy_var = tk.StringVar(value="QUBO energy: -")
         ttk.Label(
-            self,
+            self._content_frame,
             textvariable=self.energy_var,
             font=app_font(11, "italic"),
             foreground="#f97316",
         ).pack(anchor="w", pady=6)
         if ascii_art:
-            art_frame = tk.Frame(self, bg=RETRO_BG, padx=6, pady=4, borderwidth=2, relief="sunken")
+            art_frame = tk.Frame(self._content_frame, bg=RETRO_BG, padx=6, pady=4, borderwidth=2, relief="sunken")
             art_frame.pack(fill="x", anchor="e")
             tk.Label(
                 art_frame,
