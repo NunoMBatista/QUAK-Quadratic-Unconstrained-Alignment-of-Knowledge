@@ -14,7 +14,12 @@ import torch
 
 from . import storage
 from .graph_model import GraphModel, GraphNode
-from .manual_pipeline import EmbeddingMode, ManualPipelineRunner, PipelineResult
+from .manual_pipeline import EmbeddingMode, ManualPipelineRunner, PipelineResult, AlignmentRow
+from src.kg_construction.nlp_pipeline import NLPPipeline, RelationTriple
+from src.kg_construction.llm_based_pipeline import LLMBasedPipeline
+from . import storage
+import urllib.request
+from html import unescape
 from src.config import DEFAULT_SIMILARITY_THRESHOLD, QUBO_NODE_WEIGHT, QUBO_STRUCTURE_WEIGHT
 from src.quak import QUAK_ASCII_MASCOT, QUAK_WORDMARK
 
@@ -906,6 +911,80 @@ class DemoApp(ttk.Frame):
         self.pack(fill="both", expand=True)
         self.winfo_toplevel().title("Handmade KG Alignment Demo")
 
+        # --- Knowledge Input collapsible panel (top) ---
+        self._ki_collapsed = False
+        ki_header = ttk.Frame(self, style="Retro.TFrame")
+        ki_header.pack(fill="x", padx=8, pady=(8, 0))
+        ttk.Label(ki_header, text="Knowledge Input", font=app_font(12, "bold")).pack(side="left")
+        self._ki_toggle_text = tk.StringVar(value="▾")
+
+        def _ki_toggle() -> None:
+            self._ki_collapsed = not self._ki_collapsed
+            self._ki_toggle_text.set("▸" if self._ki_collapsed else "▾")
+            if self._ki_collapsed:
+                self._ki_content.pack_forget()
+            else:
+                self._ki_content.pack(fill="x", padx=8, pady=(0, 4))
+
+        retro_button(ki_header, textvariable=self._ki_toggle_text, command=_ki_toggle).pack(side="right")
+
+        self._ki_content = ttk.Frame(self, style="Retro.TFrame")
+        self._ki_content.pack(fill="x", padx=8, pady=(0, 4))
+
+        # mode selector
+        mode_row = ttk.Frame(self._ki_content, style="Retro.TFrame")
+        mode_row.pack(fill="x", pady=(6, 4))
+        self._ki_mode = tk.StringVar(value="manual")
+        ttk.Radiobutton(mode_row, text="Manual mode", value="manual", variable=self._ki_mode, command=lambda: self._ki_switch_mode()).pack(side="left")
+        ttk.Radiobutton(mode_row, text="Crawl mode", value="crawl", variable=self._ki_mode, command=lambda: self._ki_switch_mode()).pack(side="left", padx=(8, 0))
+
+        # manual mode widgets
+        self._ki_manual_frame = ttk.Frame(self._ki_content, style="Retro.TFrame")
+        ttk.Label(self._ki_manual_frame, text="Wiki text:").pack(anchor="w")
+        self._ki_manual_wiki = tk.Text(self._ki_manual_frame, height=4, background=RETRO_CANVAS_BG)
+        self._ki_manual_wiki.pack(fill="x", pady=(0, 4))
+        ttk.Label(self._ki_manual_frame, text="arXiv text:").pack(anchor="w")
+        self._ki_manual_arxiv = tk.Text(self._ki_manual_frame, height=4, background=RETRO_CANVAS_BG)
+        self._ki_manual_arxiv.pack(fill="x", pady=(0, 4))
+
+        # crawl mode widgets
+        self._ki_crawl_frame = ttk.Frame(self._ki_content, style="Retro.TFrame")
+        crawl_row = ttk.Frame(self._ki_crawl_frame, style="Retro.TFrame")
+        crawl_row.pack(fill="x")
+        ttk.Label(crawl_row, text="Wikipedia URL:").grid(row=0, column=0, sticky="w")
+        self._ki_wiki_url = ttk.Entry(crawl_row, width=64)
+        self._ki_wiki_url.grid(row=0, column=1, sticky="w", padx=(6, 0))
+        ttk.Label(crawl_row, text="arXiv URL:").grid(row=1, column=0, sticky="w")
+        self._ki_arxiv_url = ttk.Entry(crawl_row, width=64)
+        self._ki_arxiv_url.grid(row=1, column=1, sticky="w", padx=(6, 0))
+        fetch_row = ttk.Frame(self._ki_crawl_frame, style="Retro.TFrame")
+        fetch_row.pack(fill="x", pady=(6, 0))
+        retro_button(fetch_row, text="Fetch", command=self._ki_fetch).pack(side="left")
+        ttk.Label(fetch_row, text="(fetched text will appear below for editing)").pack(side="left", padx=(8, 0))
+
+        ttk.Label(self._ki_crawl_frame, text="Fetched / editable Wiki text:").pack(anchor="w", pady=(6, 0))
+        self._ki_crawl_wiki_text = tk.Text(self._ki_crawl_frame, height=4, background=RETRO_CANVAS_BG)
+        self._ki_crawl_wiki_text.pack(fill="x", pady=(0, 4))
+        ttk.Label(self._ki_crawl_frame, text="Fetched / editable arXiv text:").pack(anchor="w", pady=(6, 0))
+        self._ki_crawl_arxiv_text = tk.Text(self._ki_crawl_frame, height=4, background=RETRO_CANVAS_BG)
+        self._ki_crawl_arxiv_text.pack(fill="x", pady=(0, 4))
+
+        # action buttons
+        action_row = ttk.Frame(self._ki_content, style="Retro.TFrame")
+        action_row.pack(fill="x", pady=(6, 4))
+        self._ki_use_llm = tk.BooleanVar(value=False)
+        ttk.Checkbutton(
+            action_row,
+            text="Use LLM extraction (Groq)",
+            variable=self._ki_use_llm,
+        ).pack(side="left", padx=(0, 8))
+        retro_button(action_row, text="Create Graphs", command=self._ki_create_graphs).pack(side="left")
+        retro_button(action_row, text="Save Graphs", command=self._ki_save_graphs).pack(side="left", padx=6)
+        retro_button(action_row, text="Display Graphs", command=self._ki_display_graphs).pack(side="left", padx=6)
+
+        # initialize in manual mode
+        self._ki_manual_frame.pack(fill="x")
+
         layout = ttk.PanedWindow(self, orient="vertical")
         layout.pack(fill="both", expand=True)
         top_section = ttk.Frame(layout, style="Retro.TFrame")
@@ -1041,6 +1120,212 @@ class DemoApp(ttk.Frame):
                 "Embedding mode changed. Run 'Generate Embeddings' to rebuild matrices.",
             ])
         self.status_var.set("Embedding mode changed. Regenerate embeddings before running alignment.")
+
+    # ---------------- Knowledge Input helpers ----------------
+    def _ki_switch_mode(self) -> None:
+        mode = self._ki_mode.get()
+        if mode == "manual":
+            self._ki_crawl_frame.pack_forget()
+            self._ki_manual_frame.pack(fill="x")
+        else:
+            self._ki_manual_frame.pack_forget()
+            self._ki_crawl_frame.pack(fill="x")
+
+    def _ki_fetch(self) -> None:
+        # fetch both URLs (best-effort) and place plain text in editable boxes
+        wiki_url = self._ki_wiki_url.get().strip()
+        arxiv_url = self._ki_arxiv_url.get().strip()
+
+        def _simple_fetch(url: str) -> str:
+            if not url:
+                return ""
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": "python-urllib/3"})
+                with urllib.request.urlopen(req, timeout=15) as resp:
+                    raw = resp.read().decode(errors="ignore")
+                # strip HTML tags naively
+                text = unescape(raw)
+                import re
+
+                text = re.sub(r"<script.*?</script>", "", text, flags=re.S | re.I)
+                text = re.sub(r"<style.*?</style>", "", text, flags=re.S | re.I)
+                text = re.sub(r"<[^>]+>", "\n", text)
+                # collapse whitespace
+                text = re.sub(r"\n{2,}", "\n\n", text)
+                text = text.strip()
+                return text
+            except Exception as exc:
+                messagebox.showerror("Fetch failed", f"Failed to fetch {url}: {exc}")
+                return ""
+
+        # run in background thread
+        def task() -> None:
+            wiki_text = _simple_fetch(wiki_url) if wiki_url else ""
+            arxiv_text = _simple_fetch(arxiv_url) if arxiv_url else ""
+            self.after(0, lambda: self._ki_crawl_wiki_text.delete("1.0", tk.END) or self._ki_crawl_wiki_text.insert(tk.END, wiki_text))
+            self.after(0, lambda: self._ki_crawl_arxiv_text.delete("1.0", tk.END) or self._ki_crawl_arxiv_text.insert(tk.END, arxiv_text))
+
+        threading.Thread(target=task, daemon=True).start()
+
+    def _ki_create_graphs(self) -> None:
+        # take text from the active mode and create two GraphModel objects
+        if self._ki_mode.get() == "manual":
+            wiki_text = self._ki_manual_wiki.get("1.0", tk.END).strip()
+            arxiv_text = self._ki_manual_arxiv.get("1.0", tk.END).strip()
+        else:
+            wiki_text = self._ki_crawl_wiki_text.get("1.0", tk.END).strip()
+            arxiv_text = self._ki_crawl_arxiv_text.get("1.0", tk.END).strip()
+
+        if not wiki_text and not arxiv_text:
+            messagebox.showinfo("No input", "Provide some text for Wiki and/or arXiv before creating graphs.")
+            return
+
+        use_llm = getattr(self, "_ki_use_llm", tk.BooleanVar(value=False)).get()
+
+        def _assign_positions(model: GraphModel) -> None:
+            nodes = model.list_nodes()
+            for i, node in enumerate(nodes):
+                x = random.randint(NODE_RADIUS + 10, CANVAS_WIDTH - NODE_RADIUS - 10)
+                y = int((i + 1) * (CANVAS_HEIGHT / max(1, len(nodes))))
+                node.position = (x, min(max(y, NODE_RADIUS), CANVAS_HEIGHT - NODE_RADIUS))
+
+        def _build_graph_from_nlp(text: str, name: str, pipeline: NLPPipeline) -> GraphModel:
+            model = GraphModel(name)
+            if not text.strip():
+                return model
+            try:
+                triples, entities = pipeline.extract_triples(text, return_entities=True)
+            except Exception:
+                triples = pipeline.extract_triples(text)
+                entities = []
+
+            created: Dict[str, str] = {}
+            if entities:
+                for ent in entities:
+                    key = ent.strip()
+                    if not key:
+                        continue
+                    node = model.add_node(key)
+                    created[key] = node.id
+
+            for t in triples:
+                subj = t.subject.strip()
+                obj = t.object.strip()
+                if subj and subj not in created:
+                    node = model.add_node(subj)
+                    created[subj] = node.id
+                if obj and obj not in created:
+                    node = model.add_node(obj)
+                    created[obj] = node.id
+                if subj in created and obj in created:
+                    rel = t.relation if hasattr(t, "relation") else getattr(t, "relation", "related_to")
+                    model.add_edge(created[subj], created[obj], rel)
+
+            _assign_positions(model)
+            return model
+
+        def _build_graph_from_llm(entities, triples, name: str) -> GraphModel:
+            model = GraphModel(name)
+            created: Dict[str, str] = {}
+            for ent in (entities or []):
+                nm = getattr(ent, "name", str(ent)).strip()
+                if not nm:
+                    continue
+                node = model.add_node(nm)
+                created[nm] = node.id
+
+            for t in (triples or []):
+                subj = getattr(t, "subject", str(t.get("subject") if isinstance(t, dict) else "")).strip()
+                obj = getattr(t, "object", str(t.get("object") if isinstance(t, dict) else "")).strip()
+                rel = getattr(t, "relation", str(t.get("relation") if isinstance(t, dict) else "related_to")).strip()
+                if subj and subj not in created:
+                    node = model.add_node(subj)
+                    created[subj] = node.id
+                if obj and obj not in created:
+                    node = model.add_node(obj)
+                    created[obj] = node.id
+                if subj in created and obj in created:
+                    model.add_edge(created[subj], created[obj], rel or "related_to")
+
+            _assign_positions(model)
+            return model
+
+        def task() -> None:
+            nlp_pipeline = NLPPipeline()
+            wiki_graph = GraphModel("Wiki Graph")
+            arxiv_graph = GraphModel("arXiv Graph")
+
+            if use_llm:
+                try:
+                    llm = LLMBasedPipeline()
+                except Exception as exc:
+                    # LLM unavailable; warn and fall back to NLP pipeline
+                    self.after(0, lambda e=exc: messagebox.showwarning("LLM unavailable", f"LLM initialization failed; falling back to NLPPipeline. ({e})"))
+                    use_local_llm = False
+                else:
+                    use_local_llm = True
+
+                if use_local_llm:
+                    try:
+                        if wiki_text:
+                            wiki_ex = llm._process_corpus("wiki", [wiki_text])
+                            wiki_entities, wiki_triples = llm._canonicalize_corpus("wiki", wiki_ex)
+                            wiki_graph = _build_graph_from_llm(wiki_entities, wiki_triples, "Wiki Graph")
+                        if arxiv_text:
+                            arxiv_ex = llm._process_corpus("arxiv", [arxiv_text])
+                            arxiv_entities, arxiv_triples = llm._canonicalize_corpus("arxiv", arxiv_ex)
+                            arxiv_graph = _build_graph_from_llm(arxiv_entities, arxiv_triples, "arXiv Graph")
+                    except Exception as exc:
+                        # If LLM extraction fails mid-way, warn and fall back to NLPPipeline for the remaining work
+                        self.after(0, lambda e=exc: messagebox.showwarning("LLM failed", f"LLM extraction failed; falling back to NLPPipeline. ({e})"))
+                        try:
+                            if not wiki_graph.list_nodes() and wiki_text:
+                                wiki_graph = _build_graph_from_nlp(wiki_text, "Wiki Graph", nlp_pipeline)
+                            if not arxiv_graph.list_nodes() and arxiv_text:
+                                arxiv_graph = _build_graph_from_nlp(arxiv_text, "arXiv Graph", nlp_pipeline)
+                        except Exception as exc2:
+                            self.after(0, lambda e=exc2: messagebox.showerror("Failed", str(e)))
+                            return
+
+            # if not using LLM or fallback occurred, use NLPPipeline
+            if not use_llm or (use_llm and not 'use_local_llm' in locals()) or (use_llm and 'use_local_llm' in locals() and not use_local_llm):
+                try:
+                    if wiki_text:
+                        wiki_graph = _build_graph_from_nlp(wiki_text, "Wiki Graph", nlp_pipeline)
+                    if arxiv_text:
+                        arxiv_graph = _build_graph_from_nlp(arxiv_text, "arXiv Graph", nlp_pipeline)
+                except Exception as exc:
+                    self.after(0, lambda: messagebox.showerror("Failed", str(exc)))
+                    return
+
+            # store graphs on main thread
+            self.after(0, lambda: self._on_graphs_created(wiki_graph, arxiv_graph))
+
+        threading.Thread(target=task, daemon=True).start()
+
+    def _on_graphs_created(self, wiki_graph: GraphModel, arxiv_graph: GraphModel) -> None:
+        # set as current models but don't overwrite user's panels until they ask
+        self._ki_last_wiki = wiki_graph
+        self._ki_last_arxiv = arxiv_graph
+        messagebox.showinfo("Graphs created", "Knowledge graphs created. Use 'Display Graphs' to show them in the panels, or 'Save Graphs' to persist them.")
+
+    def _ki_save_graphs(self) -> None:
+        if not getattr(self, "_ki_last_wiki", None) and not getattr(self, "_ki_last_arxiv", None):
+            messagebox.showinfo("Nothing to save", "Create graphs first before attempting to save them.")
+            return
+        if getattr(self, "_ki_last_wiki", None):
+            path = storage.save_graph(self._ki_last_wiki)
+            messagebox.showinfo("Saved", f"Saved Wiki graph to {path}")
+        if getattr(self, "_ki_last_arxiv", None):
+            path = storage.save_graph(self._ki_last_arxiv)
+            messagebox.showinfo("Saved", f"Saved arXiv graph to {path}")
+
+    def _ki_display_graphs(self) -> None:
+        if getattr(self, "_ki_last_wiki", None):
+            self.wiki_panel.set_model(self._ki_last_wiki)
+        if getattr(self, "_ki_last_arxiv", None):
+            self.arxiv_panel.set_model(self._ki_last_arxiv)
+        messagebox.showinfo("Displayed", "Displayed created graphs in the Wiki and arXiv panels.")
 
     # ------------------------------------------------------------------
     def _prepare_embeddings(self) -> None:
