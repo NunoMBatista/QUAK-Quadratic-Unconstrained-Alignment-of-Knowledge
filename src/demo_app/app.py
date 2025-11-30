@@ -16,6 +16,7 @@ from . import storage
 from .graph_model import GraphModel, GraphNode
 from .manual_pipeline import EmbeddingMode, ManualPipelineRunner, PipelineResult, AlignmentRow
 from src.kg_construction.nlp_pipeline import NLPPipeline, RelationTriple
+from src.kg_construction.fetch_data import fetch_wiki_data, fetch_arxiv_data
 from src.kg_construction.llm_based_pipeline import LLMBasedPipeline
 from . import storage
 import urllib.request
@@ -1155,38 +1156,100 @@ class DemoApp(ttk.Frame):
             self._ki_crawl_frame.pack(fill="x")
 
     def _ki_fetch(self) -> None:
-        # fetch both URLs (best-effort) and place plain text in editable boxes
+        # Use the project fetch utilities to obtain wiki and arXiv summaries
+        # Prefer explicit URLs/identifiers entered by the user in the crawl fields.
         wiki_url = self._ki_wiki_url.get().strip()
         arxiv_url = self._ki_arxiv_url.get().strip()
 
-        def _simple_fetch(url: str) -> str:
-            if not url:
-                return ""
-            try:
-                req = urllib.request.Request(url, headers={"User-Agent": "python-urllib/3"})
-                with urllib.request.urlopen(req, timeout=15) as resp:
-                    raw = resp.read().decode(errors="ignore")
-                # strip HTML tags naively
-                text = unescape(raw)
-                import re
+        def _parse_wiki_title(url_or_title: str) -> Optional[str]:
+            if not url_or_title:
+                return None
+            from urllib.parse import urlparse, unquote
 
-                text = re.sub(r"<script.*?</script>", "", text, flags=re.S | re.I)
-                text = re.sub(r"<style.*?</style>", "", text, flags=re.S | re.I)
-                text = re.sub(r"<[^>]+>", "\n", text)
-                # collapse whitespace
-                text = re.sub(r"\n{2,}", "\n\n", text)
-                text = text.strip()
-                return text
-            except Exception as exc:
-                messagebox.showerror("Fetch failed", f"Failed to fetch {url}: {exc}")
-                return ""
+            if "://" in url_or_title:
+                try:
+                    p = urlparse(url_or_title)
+                    # expect /wiki/Title
+                    if "/wiki/" in p.path:
+                        raw = p.path.split("/wiki/", 1)[-1]
+                        return unquote(raw).replace("_", " ")
+                    # otherwise use last path segment
+                    seg = p.path.rstrip("/").split("/")[-1]
+                    return unquote(seg).replace("_", " ") if seg else None
+                except Exception:
+                    return url_or_title
+            # treat as direct title
+            return url_or_title
 
-        # run in background thread
+        def _parse_arxiv_id(url_or_id: str) -> Optional[str]:
+            if not url_or_id:
+                return None
+            from urllib.parse import urlparse
+            import re
+
+            if "://" in url_or_id:
+                try:
+                    p = urlparse(url_or_id)
+                    # look for /abs/{id}
+                    if "/abs/" in p.path:
+                        return p.path.split("/abs/", 1)[-1].strip()
+                    # sometimes PDF links end with id.pdf
+                    seg = p.path.rstrip("/").split("/")[-1]
+                    m = re.search(r"(\d{4}\.\d{4,5}(v\d+)?|[a-z\-]+/\d+)(?:\.pdf)?$", seg)
+                    if m:
+                        return m.group(1)
+                except Exception:
+                    return url_or_id
+            # treat as direct id
+            return url_or_id
+
         def task() -> None:
-            wiki_text = _simple_fetch(wiki_url) if wiki_url else ""
-            arxiv_text = _simple_fetch(arxiv_url) if arxiv_url else ""
-            self.after(0, lambda: self._ki_crawl_wiki_text.delete("1.0", tk.END) or self._ki_crawl_wiki_text.insert(tk.END, wiki_text))
-            self.after(0, lambda: self._ki_crawl_arxiv_text.delete("1.0", tk.END) or self._ki_crawl_arxiv_text.insert(tk.END, arxiv_text))
+            try:
+                # If user provided explicit wiki/arxiv inputs, prefer them
+                wiki_titles_param = None
+                arxiv_ids_param = None
+                if wiki_url:
+                    title = _parse_wiki_title(wiki_url)
+                    if title:
+                        wiki_titles_param = [title]
+                if arxiv_url:
+                    aid = _parse_arxiv_id(arxiv_url)
+                    if aid:
+                        arxiv_ids_param = [aid]
+
+                try:
+                    wiki_summaries, wiki_titles = fetch_wiki_data(wiki_titles_param)
+                except Exception as exc_w:
+                    wiki_summaries, wiki_titles = [], []
+                    self.after(0, lambda e=exc_w: messagebox.showwarning("Wiki fetch failed", f"Wikipedia fetch failed: {e}"))
+
+                try:
+                    arxiv_abstracts, arxiv_ids = fetch_arxiv_data(arxiv_ids_param)
+                except Exception as exc_a:
+                    arxiv_abstracts, arxiv_ids = [], []
+                    self.after(0, lambda e=exc_a: messagebox.showwarning("arXiv fetch failed", f"arXiv fetch failed: {e}"))
+
+                # Format the fetched wiki text: include title headers
+                wiki_blob = "\n\n".join(
+                    (f"Title: {t}\n\n{s}" if t else s)
+                    for s, t in zip(wiki_summaries, wiki_titles)
+                )
+                if not wiki_blob and wiki_summaries:
+                    wiki_blob = "\n\n".join(wiki_summaries)
+
+                # Format the arXiv text: include IDs where available
+                arxiv_blob = "\n\n".join(
+                    (f"ArXiv ID: {i}\n\n{a}" if i else a)
+                    for a, i in zip(arxiv_abstracts, arxiv_ids)
+                )
+                if not arxiv_blob and arxiv_abstracts:
+                    arxiv_blob = "\n\n".join(arxiv_abstracts)
+
+                # Update UI on main thread
+                self.after(0, lambda: self._ki_crawl_wiki_text.delete("1.0", tk.END) or self._ki_crawl_wiki_text.insert(tk.END, wiki_blob))
+                self.after(0, lambda: self._ki_crawl_arxiv_text.delete("1.0", tk.END) or self._ki_crawl_arxiv_text.insert(tk.END, arxiv_blob))
+            except Exception as exc:
+                self.after(0, lambda: messagebox.showerror("Fetch failed", str(exc)))
 
         threading.Thread(target=task, daemon=True).start()
 

@@ -74,7 +74,7 @@ def _next_file_index(directory: Path) -> int:
     return max_idx + 1
 
 
-def fetch_wiki_data() -> Tuple[List[str], List[str]]:
+def fetch_wiki_data(titles: Optional[List[str]] = None) -> Tuple[List[str], List[str]]:
     """
     fetch a list of Wikipedia page summaries based on a query.
     
@@ -85,10 +85,9 @@ def fetch_wiki_data() -> Tuple[List[str], List[str]]:
     
     Parameters
     ----------
-    query : str
-        The search query for Wikipedia.
-    num_articles : int
-        The number of articles to fetch.
+    titles : Optional[list[str]]
+        Optional explicit list of Wikipedia page titles to fetch. When provided,
+        this list will be used instead of the configured `WIKI_PAGE_TITLES`.
         
     Returns
     -------
@@ -100,7 +99,10 @@ def fetch_wiki_data() -> Tuple[List[str], List[str]]:
     cached_map = {title: summary for title, summary in cached_entries}
 
     expected_titles: Optional[List[str]] = None
-    if QUERY_MODE == "fetch":
+    # honor an explicit list of titles provided by the caller
+    if titles is not None:
+        expected_titles = titles[:NUM_ARTICLES]
+    elif QUERY_MODE == "fetch":
         expected_titles = WIKI_PAGE_TITLES[:NUM_ARTICLES]
 
     missing_titles: List[str] = []
@@ -154,7 +156,7 @@ def fetch_wiki_data() -> Tuple[List[str], List[str]]:
     return summaries, titles
 
 
-def fetch_arxiv_data() -> Tuple[List[str], List[str]]:
+def fetch_arxiv_data(ids: Optional[List[str]] = None) -> Tuple[List[str], List[str]]:
     """
     fetch a list of arXiv paper abstracts based on a query.
     
@@ -165,10 +167,9 @@ def fetch_arxiv_data() -> Tuple[List[str], List[str]]:
     
     Parameters
     ----------
-    query : str
-        The search query for arXiv.
-    num_articles : int
-        The number of articles to fetch.
+    ids : Optional[list[str]]
+        Optional explicit list of arXiv identifiers to fetch. When provided,
+        this list will be used instead of the configured `ARXIV_PAPER_IDS`.
 
     Returns
     -------
@@ -180,7 +181,10 @@ def fetch_arxiv_data() -> Tuple[List[str], List[str]]:
     cached_map = {paper_id: summary for paper_id, summary in cached_entries}
 
     expected_ids: Optional[List[str]] = None
-    if QUERY_MODE == "fetch":
+    # honor an explicit list of ids provided by the caller
+    if ids is not None:
+        expected_ids = ids[:NUM_ARTICLES]
+    elif QUERY_MODE == "fetch":
         expected_ids = ARXIV_PAPER_IDS[:NUM_ARTICLES]
 
     missing_ids: List[str] = []
