@@ -924,7 +924,28 @@ class DemoApp(ttk.Frame):
             if self._ki_collapsed:
                 self._ki_content.pack_forget()
             else:
-                self._ki_content.pack(fill="x", padx=8, pady=(0, 4))
+                # Attempt to re-pack the content above the main paned window
+                if hasattr(self, "_main_paned"):
+                    try:
+                        self._ki_content.pack(fill="x", padx=8, pady=(0, 4), before=self._main_paned)
+                    except Exception:
+                        self._ki_content.pack(fill="x", padx=8, pady=(0, 4))
+                    # ensure the paned sash leaves room for the bottom pane
+                    try:
+                        paned = self._main_paned
+                        paned.update_idletasks()
+                        total_h = paned.winfo_height() or 0
+                        # keep at least this height for the bottom pane
+                        min_bottom = 160
+                        desired_sash = max(80, int(max(0, total_h) - min_bottom))
+                        try:
+                            paned.sashpos(0, desired_sash)
+                        except Exception:
+                            pass
+                    except Exception:
+                        pass
+                else:
+                    self._ki_content.pack(fill="x", padx=8, pady=(0, 4))
 
         retro_button(ki_header, textvariable=self._ki_toggle_text, command=_ki_toggle).pack(side="right")
 
@@ -986,6 +1007,8 @@ class DemoApp(ttk.Frame):
         self._ki_manual_frame.pack(fill="x")
 
         layout = ttk.PanedWindow(self, orient="vertical")
+        # keep a reference so we can re-pack the Knowledge Input above it after collapse
+        self._main_paned = layout
         layout.pack(fill="both", expand=True)
         top_section = ttk.Frame(layout, style="Retro.TFrame")
         bottom_section = ttk.Frame(layout, style="Retro.TFrame")
@@ -1260,8 +1283,9 @@ class DemoApp(ttk.Frame):
                     llm = LLMBasedPipeline()
                 except Exception as exc:
                     # LLM unavailable; warn and fall back to NLP pipeline
-                    self.after(0, lambda e=exc: messagebox.showwarning("LLM unavailable", f"LLM initialization failed; falling back to NLPPipeline. ({e})"))
+                    self.after(0, lambda e=exc: messagebox.showwarning("LLM unavailable", f"LLM initialization failed; ({e})"))
                     use_local_llm = False
+                    return;
                 else:
                     use_local_llm = True
 
@@ -1276,16 +1300,9 @@ class DemoApp(ttk.Frame):
                             arxiv_entities, arxiv_triples = llm._canonicalize_corpus("arxiv", arxiv_ex)
                             arxiv_graph = _build_graph_from_llm(arxiv_entities, arxiv_triples, "arXiv Graph")
                     except Exception as exc:
-                        # If LLM extraction fails mid-way, warn and fall back to NLPPipeline for the remaining work
-                        self.after(0, lambda e=exc: messagebox.showwarning("LLM failed", f"LLM extraction failed; falling back to NLPPipeline. ({e})"))
-                        try:
-                            if not wiki_graph.list_nodes() and wiki_text:
-                                wiki_graph = _build_graph_from_nlp(wiki_text, "Wiki Graph", nlp_pipeline)
-                            if not arxiv_graph.list_nodes() and arxiv_text:
-                                arxiv_graph = _build_graph_from_nlp(arxiv_text, "arXiv Graph", nlp_pipeline)
-                        except Exception as exc2:
-                            self.after(0, lambda e=exc2: messagebox.showerror("Failed", str(e)))
-                            return
+                        # If LLM extraction fails mid-way, warn the user, and halt the graph generation, don't fall back
+                        self.after(0, lambda e=exc: messagebox.showerror("LLM extraction failed", f"LLM-based graph extraction failed: {e}"))
+                        return
 
             # if not using LLM or fallback occurred, use NLPPipeline
             if not use_llm or (use_llm and not 'use_local_llm' in locals()) or (use_llm and 'use_local_llm' in locals() and not use_local_llm):
