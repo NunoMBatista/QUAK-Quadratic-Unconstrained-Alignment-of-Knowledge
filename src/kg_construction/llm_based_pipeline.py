@@ -370,6 +370,7 @@ class LLMBasedPipeline:
 				{"role": "system", "content": system_prompt},
 				{"role": "user", "content": user_prompt},
 			],
+			"temperature": 0.0,
 		}
 		if response_format is not None:
 			params["response_format"] = response_format
