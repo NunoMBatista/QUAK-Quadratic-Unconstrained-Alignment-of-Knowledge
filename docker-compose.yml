@@ -20,5 +20,7 @@ services:
       - ./hand_made_kgs:/app/hand_made_kgs
       # Mount source code for live updates
       - ./src:/app/src
+      # Mount local .env into the container so it can be edited without rebuilding
+      - ./.env:/app/.env:rw
     # Run as the current user to avoid permission issues with the display sockets
     user: "${USER_ID:-1000}:${GROUP_ID:-1000}"
